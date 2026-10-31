@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Book {{ tour.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <a href="{% url 'tour_detail' tour.id %}" class="inline-flex items-center text-green-600 hover:underline mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to {{ tour.name }}
+    </a>
+    
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Book Your Tour</h2>
+        <p class="text-gray-600 mb-6">
+            Price: <strong class="text-green-600 text-lg">₭{{ tour.price_per_person | intcomma }} / person</strong>
+            <span class="text-sm text-gray-500 ml-2">• Departs {{ tour.departure_time|time:"H:i" }}</span>
+        </p>
+
+        <form method="POST" id="tourBookingForm">
+            {% csrf_token %}
+            
+            <!-- Tour Date -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Tour Date <span class="text-red-500">*</span></label>
+                {{ form.booking_date }}
+                {% if form.booking_date.errors %}<p class="text-red-500 text-sm mt-1">{{ form.booking_date.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Number of People -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Number of People <span class="text-red-500">*</span></label>
+                {{ form.number_of_people }}
+                <p class="text-sm text-gray-500 mt-1">Maximum {{ tour.max_capacity }} people per tour</p>
+                {% if form.number_of_people.errors %}<p class="text-red-500 text-sm mt-1">{{ form.number_of_people.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-200 my-8"></div>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Pickup Arrangements
+            </h3>
+
+            <!-- Pickup Option -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-3">How will you get to the tour? <span class="text-red-500">*</span></label>
+                <div class="space-y-3">
+                    {% for radio in form.pickup_option %}
+                        <label class="flex items-start gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-500 transition">
+                            {{ radio.tag }}
+                            <div class="flex-1">
+                                <p class="font-semibold text-gray-900">{{ radio.choice_label }}</p>
+                            </div>
+                        </label>
+                    {% endfor %}
+                </div>
+                {% if form.pickup_option.errors %}<p class="text-red-500 text-sm mt-1">{{ form.pickup_option.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Pickup Location -->
+            <div class="mb-6" id="pickupLocationContainer">
+                <label class="block text-gray-700 font-bold mb-2">
+                    📍 Your Pickup Location <span class="text-red-500" id="pickupRequiredStar">*</span>
+                </label>
+                {{ form.pickup_location }}
+                <p class="text-sm text-gray-500 mt-1">Please include your guesthouse name and any helpful landmarks.</p>
+                {% if form.pickup_location.errors %}<p class="text-red-500 text-sm mt-1">{{ form.pickup_location.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Guest Phone -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">
+                    📱 Your Phone Number (for WhatsApp)
+                </label>
+                {{ form.guest_phone }}
+                <p class="text-sm text-gray-500 mt-1">So our driver/guide can contact you on the day of the tour.</p>
+                {% if form.guest_phone.errors %}<p class="text-red-500 text-sm mt-1">{{ form.guest_phone.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Payment Notice -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p class="text-sm text-blue-800 flex items-start gap-2">
+                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Final payment will be collected in <strong>Lao Kip (LAK)</strong> based on the official daily BCEL/LDB exchange rate on the day of your tour.</span>
+                </p>
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-4 rounded-lg hover:bg-green-700 transition shadow-md text-lg flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Confirm Booking (Pay Cash on Arrival)
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    input[type="date"], input[type="number"], input[type="text"], input[type="tel"], select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.2s;
+        background-color: #ffffff;
+    }
+    input:focus, select:focus {
+        border-color: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+    }
+</style>
+
+<script>
+    function togglePickupLocation() {
+        const radios = document.getElementsByName('pickup_option');
+        let selectedValue = 'vehicle';
+        for (const radio of radios) {
+            if (radio.checked) {
+                selectedValue = radio.value;
+                break;
+            }
+        }
+
+        const container = document.getElementById('pickupLocationContainer');
+        const input = document.getElementById('id_pickup_location'); // Django's default ID
+        const star = document.getElementById('pickupRequiredStar');
+
+        if (selectedValue === 'vehicle') {
+            container.style.display = 'block';
+            input.setAttribute('required', 'required');
+            star.style.display = 'inline';
+        } else {
+            container.style.display = 'none';
+            input.removeAttribute('required');
+            input.value = ''; // ✅ Crucial: Clear the value so it doesn't submit
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize toggle state on page load
+        togglePickupLocation();
+        
+        // Add event listeners to radio buttons
+        const radios = document.getElementsByName('pickup_option');
+        for (const radio of radios) {
+            radio.addEventListener('change', togglePickupLocation);
+        }
+        
+        // Set min date for booking
+        const dateInput = document.querySelector('input[name="booking_date"]');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+    });
+</script>
+{% endblock %}

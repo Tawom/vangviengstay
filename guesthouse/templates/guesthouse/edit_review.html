@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Review - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Edit Your Review</h2>
+        <p class="text-gray-600 mb-6">Update your review for <strong>{{ booking.guesthouse.name }}</strong></p>
+
+        <form method="POST" id="review-form">
+            {% csrf_token %}
+            
+            <!-- Interactive Star Rating -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Rating <span class="text-red-500">*</span></label>
+                <div class="flex gap-2 text-4xl cursor-pointer select-none" id="star-container">
+                    <span class="star text-gray-300 hover:text-yellow-400 transition" data-value="1">★</span>
+                    <span class="star text-gray-300 hover:text-yellow-400 transition" data-value="2">★</span>
+                    <span class="star text-gray-300 hover:text-yellow-400 transition" data-value="3">★</span>
+                    <span class="star text-gray-300 hover:text-yellow-400 transition" data-value="4">★</span>
+                    <span class="star text-gray-300 hover:text-yellow-400 transition" data-value="5">★</span>
+                </div>
+                <input type="hidden" name="rating" id="id_rating" value="{{ review.rating }}" required>
+                <p id="rating-text" class="text-sm text-gray-500 mt-2">Click a star to rate</p>
+                
+                {% if form.rating.errors %}
+                    <p class="text-sm text-red-500 mt-1">{{ form.rating.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Comment Field -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Your Review</label>
+                {{ form.comment }}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4">
+                <a href="{% url 'guesthouse_bookings_dashboard' %}" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition font-semibold">Cancel</a>
+                <button type="submit" class="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md">Update Review</button>
+            </div>
+        </form>
+
+        <!-- Delete Button -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="{% url 'delete_guesthouse_review' booking.id %}" class="block text-center text-red-600 hover:text-red-700 font-semibold text-sm">
+                🗑️ Delete this review permanently
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Star Rating Logic (same as submit_review.html) -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('id_rating');
+        const ratingText = document.getElementById('rating-text');
+        const texts = ['Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+
+        const initialValue = ratingInput.value;
+        if (initialValue) {
+            updateStars(initialValue);
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                ratingInput.value = value;
+                updateStars(value);
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                const value = this.getAttribute('data-value');
+                highlightStars(value);
+            });
+        });
+
+        document.getElementById('star-container').addEventListener('mouseleave', function() {
+            updateStars(ratingInput.value);
+        });
+
+        function updateStars(value) {
+            highlightStars(value);
+            if (value) {
+                ratingText.textContent = texts[value - 1] + ` (${value}/5)`;
+                ratingText.classList.add('text-yellow-600', 'font-semibold');
+            } else {
+                ratingText.textContent = 'Click a star to rate';
+                ratingText.classList.remove('text-yellow-600', 'font-semibold');
+            }
+        }
+
+        function highlightStars(value) {
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') <= value) {
+                    s.classList.remove('text-gray-300');
+                    s.classList.add('text-yellow-400');
+                } else {
+                    s.classList.remove('text-yellow-400');
+                    s.classList.add('text-gray-300');
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

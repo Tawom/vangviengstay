@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-12">
+    <a href="{% url 'owner_dashboard' %}" class="inline-flex items-center text-gray-600 hover:text-orange-600 mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to Dashboard
+    </a>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ title }}</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Basic Information -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">Basic Information</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="{{ form.name.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Motorbike Name <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.name }}
+                        {% if form.name.help_text %}<p class="text-xs text-gray-500 mt-1">{{ form.name.help_text }}</p>{% endif %}
+                        {% if form.name.errors %}<p class="text-red-600 text-sm mt-1">{{ form.name.errors.0 }}</p>{% endif %}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="{{ form.category.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Category <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.category }}
+                            {% if form.category.errors %}<p class="text-red-600 text-sm mt-1">{{ form.category.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label for="{{ form.engine_cc.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Engine Size (cc) <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.engine_cc }}
+                            {% if form.engine_cc.help_text %}<p class="text-xs text-gray-500 mt-1">{{ form.engine_cc.help_text }}</p>{% endif %}
+                            {% if form.engine_cc.errors %}<p class="text-red-600 text-sm mt-1">{{ form.engine_cc.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">Pricing</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="{{ form.price_per_day.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Price per Day (₭) <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.price_per_day }}
+                        {% if form.price_per_day.help_text %}<p class="text-xs text-gray-500 mt-1">{{ form.price_per_day.help_text }}</p>{% endif %}
+                        {% if form.price_per_day.errors %}<p class="text-red-600 text-sm mt-1">{{ form.price_per_day.errors.0 }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.deposit_amount.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Security Deposit (₭) <span class="text-red-500">*</span>
+                        </label>
+                        {{ form.deposit_amount }}
+                        {% if form.deposit_amount.help_text %}<p class="text-xs text-gray-500 mt-1">{{ form.deposit_amount.help_text }}</p>{% endif %}
+                        {% if form.deposit_amount.errors %}<p class="text-red-600 text-sm mt-1">{{ form.deposit_amount.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description & Image -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">Description & Media</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="{{ form.description.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Description
+                        </label>
+                        {{ form.description }}
+                        <p class="text-xs text-gray-500 mt-1">Tell guests about the motorbike's condition, features, and what makes it special.</p>
+                        {% if form.description.errors %}<p class="text-red-600 text-sm mt-1">{{ form.description.errors.0 }}</p>{% endif %}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.image_url.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Image URL
+                        </label>
+                        {{ form.image_url }}
+                        <p class="text-xs text-gray-500 mt-1">Paste a direct link to an image (e.g., from Imgur, Google Drive, etc.)</p>
+                        {% if form.image_url.errors %}<p class="text-red-600 text-sm mt-1">{{ form.image_url.errors.0 }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🗺️ Location & Pickup Details -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Pickup Location
+                </h2>
+                
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+                    <p class="text-sm text-orange-800">
+                        <strong>💡 Tip:</strong> You can find coordinates by right-clicking on <a href="https://maps.google.com" target="_blank" class="underline font-semibold">Google Maps</a> and copying the latitude/longitude.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="{{ form.pickup_address.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Pickup Address
+                        </label>
+                        {{ form.pickup_address }}
+                        <p class="text-xs text-gray-500 mt-1">Full address or landmark description (e.g., "Near the night market, Vang Vieng")</p>
+                        {% if form.pickup_address.errors %}<p class="text-red-600 text-sm mt-1">{{ form.pickup_address.errors.0 }}</p>{% endif %}
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="{{ form.latitude.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Latitude
+                            </label>
+                            {{ form.latitude }}
+                            <p class="text-xs text-gray-500 mt-1">e.g., 18.929700 (Vang Vieng center)</p>
+                            {% if form.latitude.errors %}<p class="text-red-600 text-sm mt-1">{{ form.latitude.errors.0 }}</p>{% endif %}
+                        </div>
+                        <div>
+                            <label for="{{ form.longitude.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Longitude
+                            </label>
+                            {{ form.longitude }}
+                            <p class="text-xs text-gray-500 mt-1">e.g., 102.446700 (Vang Vieng center)</p>
+                            {% if form.longitude.errors %}<p class="text-red-600 text-sm mt-1">{{ form.longitude.errors.0 }}</p>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">Status</h2>
+                
+                <div class="flex items-center gap-3">
+                    {{ form.is_active }}
+                    <label for="{{ form.is_active.id_for_label }}" class="text-sm font-semibold text-gray-700">
+                        Publish this motorbike (Visible to guests)
+                    </label>
+                </div>
+                {% if form.is_active.errors %}<p class="text-red-600 text-sm mt-1">{{ form.is_active.errors.0 }}</p>{% endif %}
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="mt-8 flex gap-4">
+                <button type="submit" class="flex-1 bg-orange-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-700 transition shadow-md">
+                    Save Motorbike
+                </button>
+                <a href="{% url 'owner_dashboard' %}" class="flex-1 text-center bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    form input[type="text"], form input[type="number"], form input[type="url"], form textarea, form select {
+        width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem;
+        font-size: 1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; background-color: #ffffff;
+    }
+    form input:focus, form textarea:focus, form select:focus {
+        border-color: #ea580c; box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+    }
+    form input[type="checkbox"] { width: auto; margin-right: 0.5rem; }
+</style>
+{% endblock %}

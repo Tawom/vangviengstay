@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Bookings: {{ guesthouse.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <a href="{% url 'owner_dashboard' %}" class="text-sm text-gray-500 hover:text-blue-600 mb-2 inline-flex items-center gap-1">
+                ← Back to Dashboard
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">{{ guesthouse.name }}</h1>
+            <p class="text-gray-600">Manage bookings, check-ins, and cash collections for this property.</p>
+        </div>
+    </div>
+
+    <!-- Today's Arrivals -->
+    {% if today_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                Arriving Today
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in today_bookings %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-green-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.guest.username|title }}</h3>
+                                <p class="text-sm text-gray-500">Ref: VV-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <div class="flex flex-col gap-1 text-right">
+                                <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-green-100 text-green-800">
+                                    ✓ Confirmed
+                                </span>
+                                <span class="px-2 py-1 text-xs font-bold rounded-full bg-yellow-100 text-yellow-800">
+                                    💵 Cash on Arrival
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Host Policy Reminder -->
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+                            <p class="text-xs text-red-700 font-semibold flex items-start gap-2">
+                                <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                                Policy: If guest is >15 mins late with no call/message, you have the right to revoke this booking and mark as "No-Show".
+                            </p>
+                        </div>
+
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</p>
+                            <p>💰 Total: <span class="font-semibold text-gray-900">${{ booking.total_price }}</span> (Collect Cash)</p>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2">
+                            {% if not booking.checked_in %}
+                                <form method="POST" action="{% url 'check_in_guest' booking.id %}" class="flex-1">
+                                    {% csrf_token %}
+                                    <button type="submit" class="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        Mark Checked In & Paid
+                                    </button>
+                                </form>
+                                
+                                <a href="/admin/guesthouse/booking/{{ booking.id }}/change/" target="_blank" 
+                                   class="flex-1 bg-red-100 text-red-700 font-semibold py-2 px-4 rounded-lg hover:bg-red-200 transition flex items-center justify-center gap-2 text-center text-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                    Revoke (Admin)
+                                </a>
+                            {% else %}
+                                <button disabled class="w-full bg-gray-100 text-gray-500 font-semibold py-2 px-4 rounded-lg cursor-not-allowed flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Already Checked In
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Upcoming Bookings -->
+    {% if upcoming_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Upcoming Arrivals</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in upcoming_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">${{ booking.total_price }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-yellow-100 text-yellow-800">💵 Cash on Arrival</span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Past Bookings -->
+    {% if past_bookings %}
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Past Stays</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-75">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Checked In</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in past_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">${{ booking.total_price }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {% if booking.checked_in %}
+                                        <span class="text-green-600 font-semibold text-sm">✓ Yes (Paid)</span>
+                                    {% else %}
+                                        <span class="text-red-500 font-semibold text-sm">✗ No (No-Show/Cancelled)</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not today_bookings and not upcoming_bookings and not past_bookings %}
+        <div class="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
+            <p class="text-gray-500 text-lg">No bookings found for this guesthouse yet.</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

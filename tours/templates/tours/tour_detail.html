@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}{{ tour.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+    
+    <!-- Back to Home Link -->
+    <a href="{% url 'tour_list' %}" class="inline-flex items-center text-green-600 hover:underline mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to all tours
+    </a>
+
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+        {% if tour.main_image_url %}
+            <img src="{{ tour.main_image_url }}" alt="{{ tour.name }}" class="w-full h-80 object-cover">
+        {% endif %}
+        
+        <div class="p-8">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
+                <div class="flex-1">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ tour.name }}</h1>
+                    
+                    <!-- ✅ NEW: Tour Operator Badge -->
+                    <div class="inline-flex items-center gap-2 bg-green-50 text-green-700 border border-green-200 font-semibold px-4 py-2 rounded-lg mb-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        Operated by: <strong>{{ tour.operator_name }}</strong>
+                    </div>
+                    
+                    <!-- Prominent Map Link on Detail Page -->
+                    {% if tour.latitude and tour.longitude %}
+                        <a href="https://www.google.com/maps?q={{ tour.latitude }},{{ tour.longitude }}" 
+                           target="_blank" 
+                           class="inline-flex items-center gap-2 bg-green-50 text-green-700 border border-green-200 font-semibold px-4 py-2 rounded-lg hover:bg-green-100 transition mb-3 w-fit">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                            </svg>
+                            Open Tour Office in Google Maps
+                        </a>
+                    {% else %}
+                        <p class="text-sm text-gray-500 italic mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Exact office map location will be provided upon booking confirmation.
+                        </p>
+                    {% endif %}
+
+                    <div class="flex flex-wrap items-center gap-4 text-gray-500">
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ tour.duration_hours }} hours
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            Departs daily at {{ tour.departure_time|time:"H:i" }}
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            Max {{ tour.max_capacity }} people
+                        </p>
+                    </div>
+                </div>
+                <div class="text-left md:text-right flex-shrink-0">
+                    <span class="text-3xl font-bold text-green-600">₭{{ tour.price_per_person|intcomma }}</span>
+                    <span class="text-gray-500"> / person</span>
+                </div>
+            </div>
+
+            <!-- ✅ UPDATED: Added |safe filter and changed <p> to <div> to render rich HTML content -->
+            <div class="text-gray-700 leading-relaxed mb-8">
+                {{ tour.description|safe }}
+            </div>
+
+            <!-- Availability Calendar -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+                <h3 class="text-xl font-bold mb-4 text-center text-gray-900">Tour Availability (Next 30 Days)</h3>
+                
+                <div class="flex flex-wrap gap-2 justify-center mb-6">
+                    {% for day in availability %}
+                        <div class="w-14 h-16 flex flex-col items-center justify-center rounded-lg text-white font-bold {% if day.is_available %}bg-green-500{% else %}bg-red-500 cursor-not-allowed{% endif %}" 
+                             title="{{ day.available_spots }} spots available">
+                            <span class="text-xs opacity-90">{{ day.day_name }}</span>
+                            <span class="text-lg">{{ day.day_num }}</span>
+                            <span class="text-xs opacity-90">
+                                {% if day.is_available %}
+                                    {{ day.available_spots }} left
+                                {% else %}
+                                    Full
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'create_tour_booking' tour.id %}" class="inline-block bg-green-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-green-700 transition shadow-md">
+                        Book This Tour
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="border-t border-gray-200 pt-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Guest Reviews</h3>
+                    {% if tour.review_count > 0 %}
+                        <span class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded-full">
+                            {{ tour.average_rating }} ★ ({{ tour.review_count }} reviews)
+                        </span>
+                    {% endif %}
+                </div>
+
+                {% if tour.reviews.all %}
+                    <div class="space-y-6">
+                        {% for review in tour.reviews.all %}
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                                            {{ review.guest.username|first|upper }}
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">{{ review.guest.username }}</p>
+                                            <p class="text-xs text-gray-500">{{ review.created_at|date:"F d, Y" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-yellow-400 text-lg">
+                                        {% with ''|center:review.rating as range %}
+                                            {% for _ in range %}★{% endfor %}
+                                        {% endwith %}
+                                        {% with ''|center:5|slice:review.rating as empty_range %}
+                                            {% for _ in empty_range %}☆{% endfor %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                {% if review.comment %}
+                                    <p class="text-gray-700 leading-relaxed">{{ review.comment }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-gray-500 italic">No reviews yet. Be the first to review this tour!</p>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Rent {{ motorbike.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <a href="{% url 'motorbike_detail' motorbike.id %}" class="inline-flex items-center text-orange-600 hover:underline mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to {{ motorbike.name }}
+    </a>
+    
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Rent {{ motorbike.name }}</h2>
+        <p class="text-gray-600 mb-6">
+            Price: <strong class="text-orange-600 text-lg">₭{{ motorbike.price_per_day | intcomma }} / day</strong>
+            <span class="text-sm text-gray-500 ml-2">• Deposit: ₭{{ motorbike.deposit_amount | intcomma }}</span>
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Rental Dates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">Pickup Date <span class="text-red-500">*</span></label>
+                    <input type="date" name="start_date" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">Return Date <span class="text-red-500">*</span></label>
+                    <input type="date" name="end_date" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition">
+                </div>
+            </div>
+
+            <!-- Guest Phone -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">
+                    📱 Your Phone Number (for WhatsApp) <span class="text-red-500">*</span>
+                </label>
+                <input type="tel" name="guest_phone" required
+                       placeholder="+856 20 XXXX XXXX"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition">
+                <p class="text-sm text-gray-500 mt-1">So we can coordinate pickup/drop-off.</p>
+            </div>
+
+            <!-- Passport Number (Optional) -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">
+                    🛂 Passport Number (Optional)
+                </label>
+                <input type="text" name="passport_number" 
+                       placeholder="For deposit record"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition">
+                <p class="text-sm text-gray-500 mt-1">You'll need to leave your original passport OR this number as collateral.</p>
+            </div>
+
+            <!-- Payment Notice -->
+            <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                <p class="text-sm text-orange-800 flex items-start gap-2">
+                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Payment of the rental fee and deposit will be collected in <strong>cash (Lao Kip)</strong> at pickup. The deposit will be fully refunded when you return the motorbike.</span>
+                </p>
+            </div>
+
+            <button type="submit" class="w-full bg-orange-600 text-white font-bold py-4 rounded-lg hover:bg-orange-700 transition shadow-md text-lg flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Confirm Rental (Pay Cash on Pickup)
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    input[type="date"], input[type="text"], input[type="tel"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.2s;
+        background-color: #ffffff;
+    }
+    input:focus {
+        border-color: #ea580c;
+        box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const startInput = document.querySelector('input[name="start_date"]');
+        const endInput = document.querySelector('input[name="end_date"]');
+        const today = new Date().toISOString().split('T')[0];
+        
+        if (startInput) startInput.setAttribute('min', today);
+        if (endInput) endInput.setAttribute('min', today);
+        
+        if (startInput && endInput) {
+            startInput.addEventListener('change', function() {
+                endInput.setAttribute('min', this.value);
+                if (endInput.value && endInput.value < this.value) {
+                    endInput.value = '';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

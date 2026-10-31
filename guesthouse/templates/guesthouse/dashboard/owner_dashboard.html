@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Owner Dashboard - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Owner Dashboard</h1>
+            <p class="text-gray-600">Welcome back, {{ request.user.username|title }}! Manage your properties below.</p>
+        </div>
+        <a href="{% url 'owner_guesthouse_add' %}" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition flex items-center gap-2 shadow-md">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Add New Property
+        </a>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <p class="text-sm text-gray-500 font-semibold uppercase">Total Properties</p>
+            <p class="text-3xl font-bold text-gray-900 mt-2">{{ total_properties }}</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <p class="text-sm text-gray-500 font-semibold uppercase">Active & Visible</p>
+            <p class="text-3xl font-bold text-green-600 mt-2">{{ active_properties }}</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+            <p class="text-sm text-gray-500 font-semibold uppercase">Account Status</p>
+            <p class="text-3xl font-bold text-blue-600 mt-2">Verified</p>
+        </div>
+    </div>
+
+    <!-- Properties List -->
+    <h2 class="text-xl font-bold text-gray-900 mb-4">My Properties</h2>
+    
+    {% if my_guesthouses %}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Property Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price/Night</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for gh in my_guesthouses %}
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ gh.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ gh.city }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">${{ gh.price_per_night }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {% if gh.is_active %}
+                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-green-100 text-green-800">Active</span>
+                                {% else %}
+                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-gray-100 text-gray-600">Hidden</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <a href="{% url 'owner_guesthouse_bookings' gh.id %}" class="text-blue-600 hover:text-blue-900 font-semibold px-3 py-1 rounded hover:bg-blue-50 transition">Bookings</a>
+                                    <a href="{% url 'owner_guesthouse_edit' gh.id %}" class="text-amber-600 hover:text-amber-900 font-semibold px-3 py-1 rounded hover:bg-amber-50 transition">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center py-12 bg-white rounded-xl border border-gray-200 border-dashed">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            <p class="text-gray-500 text-lg mb-4">You haven't added any properties yet.</p>
+            <a href="{% url 'owner_guesthouse_add' %}" class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                Add Your First Property
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

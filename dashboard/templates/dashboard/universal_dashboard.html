@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block title %}My Dashboard - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">My Dashboard</h1>
+        <p class="text-gray-600">Welcome back, {{ request.user.username|title }}! Here's an overview of all your bookings.</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <p class="text-xs text-gray-500 font-semibold uppercase">Total Bookings</p>
+            <p class="text-2xl font-bold text-gray-900 mt-1">{{ total_bookings }}</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-blue-200">
+            <p class="text-xs text-blue-600 font-semibold uppercase">Guesthouse</p>
+            <p class="text-2xl font-bold text-blue-700 mt-1">{{ guesthouse_upcoming|length }}</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-green-200">
+            <p class="text-xs text-green-600 font-semibold uppercase">Tours</p>
+            <p class="text-2xl font-bold text-green-700 mt-1">{{ tour_upcoming|length }}</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-amber-200">
+            <p class="text-xs text-amber-600 font-semibold uppercase">Guides</p>
+            <p class="text-2xl font-bold text-amber-700 mt-1">{{ guide_upcoming|length }}</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-orange-200">
+            <p class="text-xs text-orange-600 font-semibold uppercase">Motorbikes</p>
+            <p class="text-2xl font-bold text-orange-700 mt-1">{{ motorbike_upcoming|length }}</p>
+        </div>
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-purple-200">
+            <p class="text-xs text-purple-600 font-semibold uppercase">Buggy Cars</p>
+            <p class="text-2xl font-bold text-purple-700 mt-1">{{ buggy_upcoming|length }}</p>
+        </div>
+    </div>
+
+    <!-- Upcoming Guesthouse Stays -->
+    {% if guesthouse_upcoming %}
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    Upcoming Guesthouse Stays
+                </h2>
+                <a href="{% url 'guesthouse_bookings_dashboard' %}" class="text-blue-600 hover:text-blue-800 text-sm font-semibold">View All →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in guesthouse_upcoming|slice:":3" %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.guesthouse.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: VV-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</p>
+                            <p>🛏️ Room: <span class="font-semibold text-gray-900 capitalize">{{ booking.get_room_type_display }}</span></p>
+                        </div>
+                        <a href="{% url 'booking_confirmation' booking.id %}" class="block text-center bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                            View Voucher
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Upcoming Tours -->
+    {% if tour_upcoming %}
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    Upcoming Tours
+                </h2>
+                <a href="{% url 'tour_bookings_dashboard' %}" class="text-green-600 hover:text-green-800 text-sm font-semibold">View All →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in tour_upcoming|slice:":3" %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-green-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.tour.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: TV-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.booking_date|date:"M d, Y" }}</p>
+                            <p>⏰ Departs: {{ booking.tour.departure_time|time:"H:i" }}</p>
+                            <p>👥 {{ booking.number_of_people }} {{ booking.number_of_people|pluralize:"person,people" }}</p>
+                        </div>
+                        <a href="{% url 'tour_booking_confirmation' booking.id %}" class="block text-center bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                            View Voucher
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Upcoming Guide Bookings -->
+    {% if guide_upcoming %}
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                    Upcoming Guide Bookings
+                </h2>
+                <a href="{% url 'guide_bookings_dashboard' %}" class="text-amber-600 hover:text-amber-800 text-sm font-semibold">View All →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in guide_upcoming|slice:":3" %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-amber-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.guide.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: VG-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.booking_date|date:"M d, Y" }}</p>
+                            <p>⏰ Start: {{ booking.start_time|time:"H:i" }}</p>
+                            <p>⏱️ Duration: {{ booking.duration_hours }} hours</p>
+                        </div>
+                        <a href="{% url 'guide_booking_confirmation' booking.id %}" class="block text-center bg-amber-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-amber-700 transition">
+                            View Voucher
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Upcoming Motorbike Rentals -->
+    {% if motorbike_upcoming %}
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    Upcoming Motorbike Rentals
+                </h2>
+                <a href="{% url 'motorbike_bookings_dashboard' %}" class="text-orange-600 hover:text-orange-800 text-sm font-semibold">View All →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in motorbike_upcoming|slice:":3" %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-orange-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.motorbike.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: MB-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</p>
+                            <p>🏍️ {{ booking.motorbike.get_category_display }}</p>
+                        </div>
+                        <a href="{% url 'motorbike_booking_confirmation' booking.id %}" class="block text-center bg-orange-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-orange-700 transition">
+                            View Voucher
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- ✅ NEW: Upcoming Buggy Car Rentals -->
+    {% if buggy_upcoming %}
+        <div class="mb-10">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Upcoming Buggy Car Rentals
+                </h2>
+                <a href="{% url 'buggy_bookings_dashboard' %}" class="text-purple-600 hover:text-purple-800 text-sm font-semibold">View All →</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in buggy_upcoming|slice:":3" %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.buggy_car.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: BG-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.booking_date|date:"M d, Y" }}</p>
+                            <p>⏰ Start: {{ booking.start_time|time:"H:i" }}</p>
+                            <p>⏱️ {{ booking.duration_hours }} Hours</p>
+                        </div>
+                        <a href="{% url 'buggy_booking_confirmation' booking.id %}" class="block text-center bg-purple-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                            View Voucher
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Empty State -->
+    {% if not guesthouse_upcoming and not tour_upcoming and not guide_upcoming and not motorbike_upcoming and not buggy_upcoming %}
+        <div class="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+            <p class="text-gray-500 text-lg mb-4">You don't have any upcoming bookings yet.</p>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="{% url 'guesthouse_list' %}" class="inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">
+                    Browse Guesthouses
+                </a>
+                <a href="{% url 'tour_list' %}" class="inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">
+                    Explore Tours
+                </a>
+                <a href="{% url 'guide_list' %}" class="inline-block bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-amber-700 transition">
+                    Find a Guide
+                </a>
+                <a href="{% url 'motorbike_list' %}" class="inline-block bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-orange-700 transition">
+                    Rent a Motorbike
+                </a>
+                <a href="{% url 'buggy_list' %}" class="inline-block bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition">
+                    Rent a Buggy Car
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

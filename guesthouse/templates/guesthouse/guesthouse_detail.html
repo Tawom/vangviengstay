@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}{{ guesthouse.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+    
+    <!-- Back to Home Link -->
+    <a href="{% url 'guesthouse_list' %}" class="inline-flex items-center text-blue-600 hover:underline mb-6">
+        ← Back to all guesthouses
+    </a>
+
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        {% if guesthouse.main_image_url %}
+            <img src="{{ guesthouse.main_image_url }}" alt="{{ guesthouse.name }}" class="w-full h-80 object-cover">
+        {% endif %}
+        
+        <div class="p-8">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">{{ guesthouse.name }}</h1>
+                    <p class="text-gray-500 mt-1 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        {{ guesthouse.city }} | {{ guesthouse.address }}
+                    </p>
+                </div>
+                <div class="text-left md:text-right">
+                    <!-- Updated to LAK -->
+                    <span class="text-3xl font-bold text-blue-600">₭{{ guesthouse.price_per_night | intcomma }}</span>
+                    <!-- <span class="text-3xl font-bold text-blue-600">${{ guesthouse.price_per_night | intcomma }}</span> -->
+                    <span class="text-gray-500"> / night</span>
+                </div>
+            </div>
+
+            <p class="text-gray-700 leading-relaxed mb-8">{{ guesthouse.description }}</p>
+
+            <!-- Availability Calendar -->
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+                <h3 class="text-xl font-bold mb-4 text-center">Room Availability (Next 30 Days)</h3>
+                
+                <div class="flex flex-wrap gap-2 justify-center mb-6">
+                    {% for day in availability %}
+                        <div class="w-14 h-14 flex flex-col items-center justify-center rounded-lg text-white font-bold {% if day.is_available %}bg-green-500{% else %}bg-red-500 cursor-not-allowed{% endif %}">
+                            <span class="text-xs opacity-90">{{ day.day_name }}</span>
+                            <span class="text-lg">{{ day.day_num }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'create_booking' guesthouse.id %}" class="inline-block bg-blue-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-blue-700 transition shadow-md">
+                        Book This Room
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reviews Section (Properly integrated inside the block) -->
+            <div class="border-t border-gray-200 pt-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Guest Reviews</h3>
+                    {% if guesthouse.review_count > 0 %}
+                        <span class="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded-full">
+                            {{ guesthouse.average_rating }} ★ ({{ guesthouse.review_count }} reviews)
+                        </span>
+                    {% endif %}
+                </div>
+
+                {% if guesthouse.reviews.all %}
+                    <div class="space-y-6">
+                        {% for review in guesthouse.reviews.all %}
+                            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                                            {{ review.guest.username|first|upper }}
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">{{ review.guest.username }}</p>
+                                            <p class="text-xs text-gray-500">{{ review.created_at|date:"F d, Y" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-yellow-400 text-lg">
+                                        <!-- Django trick to loop 'rating' times to show stars -->
+                                        {% with ''|center:review.rating as range %}
+                                            {% for _ in range %}★{% endfor %}
+                                        {% endwith %}
+                                        {% with ''|center:5|slice:review.rating as empty_range %}
+                                            {% for _ in empty_range %}☆{% endfor %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                {% if review.comment %}
+                                    <p class="text-gray-700 leading-relaxed">{{ review.comment }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-gray-500 italic">No reviews yet. Be the first to review this guesthouse!</p>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

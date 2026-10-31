@@ -1,0 +1,69 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables (CRITICAL - keeps secrets out of Git)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Database files
+db.sqlite3
+db.sqlite3-journal
+
+# Static and media files (generated on server)
+staticfiles/
+media/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+logs/
+
+# Django specific
+*.pot
+*.mo
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Mypy
+.mypy_cache/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid

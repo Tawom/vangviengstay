@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}My Buggy Bookings - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">My Buggy Bookings</h1>
+        <p class="text-gray-600">Manage your upcoming and past buggy car rentals.</p>
+    </div>
+
+    {% if upcoming_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                Upcoming Buggy Bookings
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in upcoming_bookings %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.buggy_car.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: BG-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.booking_date|date:"M d, Y" }}</p>
+                            <p>⏰ Start: {{ booking.start_time|time:"H:i" }}</p>
+                            <p>⏱️ {{ booking.duration_hours }} Hours</p>
+                            <p>💰 Total: <span class="font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</span></p>
+                        </div>
+                        
+                        <div class="flex gap-2 mt-4">
+                            <a href="{% url 'buggy_booking_confirmation' booking.id %}" class="flex-1 text-center bg-purple-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                                View Voucher
+                            </a>
+                            <a href="{% url 'cancel_buggy_booking' booking.id %}" class="flex-1 text-center bg-red-100 text-red-700 text-sm font-semibold py-2 px-4 rounded-lg hover:bg-red-200 transition">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if cancelled_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                Cancelled Bookings
+            </h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-80">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Buggy</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Original Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in cancelled_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.buggy_car.name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-red-100 text-red-800">Cancelled</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <a href="{% url 'buggy_booking_confirmation' booking.id %}" class="text-gray-600 hover:text-purple-600 font-semibold">View Receipt</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if past_bookings %}
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Past Buggy Bookings</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-75">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Buggy</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in past_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.buggy_car.name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.duration_hours }} hours</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">₭{{ booking.total_price|intcomma }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not upcoming_bookings and not cancelled_bookings and not past_bookings %}
+        <div class="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
+            <p class="text-gray-500 text-lg mb-4">You don't have any buggy bookings yet.</p>
+            <a href="{% url 'buggy_list' %}" class="inline-block bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition">
+                Browse Buggy Cars
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

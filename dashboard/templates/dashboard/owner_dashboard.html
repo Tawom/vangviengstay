@@ -1,0 +1,521 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Owner Dashboard - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Owner Dashboard</h1>
+        <p class="text-gray-600">Welcome back, {{ request.user.username|title }}! Here's your business overview.</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <!-- Total Properties -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Properties</h3>
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">{{ total_properties }}</p>
+            <p class="text-sm text-gray-500 mt-1">{{ active_properties }} currently active</p>
+        </div>
+
+        <!-- Pending Requests -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pending Requests</h3>
+                <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">
+                {{ pending_bookings|length|add:pending_tour_bookings|length|add:pending_motorbike_bookings|length|add:pending_guide_bookings|length|add:pending_buggy_bookings|length }}
+            </p>
+            <p class="text-sm text-gray-500 mt-1">Awaiting your approval</p>
+        </div>
+
+        <!-- Total Revenue -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">Total Revenue</h3>
+                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">₭{{ total_revenue|intcomma }}</p>
+            <p class="text-sm text-gray-500 mt-1">From confirmed bookings</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex flex-col justify-center gap-3">
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Quick Actions</h3>
+            <a href="{% url 'owner_guesthouse_add' %}" class="block w-full text-center bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition shadow-sm text-sm">+ Add Guesthouse</a>
+            <a href="{% url 'owner_tour_add' %}" class="block w-full text-center bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition shadow-sm text-sm">+ Add Tour</a>
+            <a href="{% url 'owner_motorbike_add' %}" class="block w-full text-center bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-orange-700 transition shadow-sm text-sm">+ Add Motorbike</a>
+            <a href="{% url 'owner_guide_add' %}" class="block w-full text-center bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-700 transition shadow-sm text-sm">+ Add Guide</a>
+            <a href="{% url 'owner_buggy_add' %}" class="block w-full text-center bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition shadow-sm text-sm">+ Add Buggy Car</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PENDING GUESTHOUSE REQUESTS                -->
+    <!-- ========================================== -->
+    {% if pending_bookings %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Pending Guesthouse Requests
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Property</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_bookings %}
+                        <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.guesthouse.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <form method="POST" action="{% url 'approve_booking' booking.id %}" class="inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                    </form>
+                                    <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                                </div>
+                                <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                    <form method="POST" action="{% url 'decline_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <p class="text-sm font-bold text-red-900 mb-2">Reason for declining:</p>
+                                        <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none bg-white">
+                                            <option value="">-- Select a reason --</option>
+                                            <option value="The requested dates are no longer available.">Dates no longer available</option>
+                                            <option value="The property is fully booked for the requested dates.">Property fully booked</option>
+                                            <option value="The property is temporarily unavailable due to maintenance.">Maintenance issue</option>
+                                            <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                            <option value="__custom__">Other (please specify)</option>
+                                        </select>
+                                        <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain the reason..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"></textarea>
+                                        <div class="flex gap-2 justify-end">
+                                            <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                            <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ========================================== -->
+    <!-- PENDING TOUR REQUESTS                      -->
+    <!-- ========================================== -->
+    {% if pending_tour_bookings %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Pending Tour Requests
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tour</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_tour_bookings %}
+                        <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                            <!-- ✅ Updated to show Operator Name + Tour Name -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.tour.operator_name }} - {{ booking.tour.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <form method="POST" action="{% url 'approve_tour_booking' booking.id %}" class="inline">{% csrf_token %}
+                                        <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                    </form>
+                                    <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                                </div>
+                                <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                    <form method="POST" action="{% url 'decline_tour_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <p class="text-sm font-bold text-red-900 mb-2">Reason for declining:</p>
+                                        <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none bg-white">
+                                            <option value="">-- Select a reason --</option>
+                                            <option value="The requested date is no longer available.">Date no longer available</option>
+                                            <option value="The tour is fully booked for the requested date.">Tour fully booked</option>
+                                            <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                            <option value="__custom__">Other (please specify)</option>
+                                        </select>
+                                        <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"></textarea>
+                                        <div class="flex gap-2 justify-end">
+                                            <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                            <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ========================================== -->
+    <!-- PENDING MOTORBIKE REQUESTS                 -->
+    <!-- ========================================== -->
+    {% if pending_motorbike_bookings %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Pending Motorbike Requests
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Motorbike</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_motorbike_bookings %}
+                        <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.motorbike.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <form method="POST" action="{% url 'approve_motorbike_booking' booking.id %}" class="inline">{% csrf_token %}
+                                        <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                    </form>
+                                    <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                                </div>
+                                <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                    <form method="POST" action="{% url 'decline_motorbike_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <p class="text-sm font-bold text-red-900 mb-2">Reason for declining:</p>
+                                        <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none bg-white">
+                                            <option value="">-- Select a reason --</option>
+                                            <option value="The requested dates are no longer available.">Dates no longer available</option>
+                                            <option value="The motorbike is currently undergoing maintenance.">Maintenance issue</option>
+                                            <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                            <option value="__custom__">Other (please specify)</option>
+                                        </select>
+                                        <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"></textarea>
+                                        <div class="flex gap-2 justify-end">
+                                            <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                            <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ========================================== -->
+    <!-- PENDING GUIDE REQUESTS                     -->
+    <!-- ========================================== -->
+    {% if pending_guide_bookings %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            Pending Guide Requests
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guide</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_guide_bookings %}
+                        <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.guide.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }} at {{ booking.start_time|time:"H:i" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.duration_hours }} hours</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <form method="POST" action="{% url 'approve_guide_booking' booking.id %}" class="inline">{% csrf_token %}
+                                        <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                    </form>
+                                    <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                                </div>
+                                <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                    <form method="POST" action="{% url 'decline_guide_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <p class="text-sm font-bold text-red-900 mb-2">Reason for declining:</p>
+                                        <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none bg-white">
+                                            <option value="">-- Select a reason --</option>
+                                            <option value="The guide is unavailable on the requested date.">Guide unavailable</option>
+                                            <option value="The requested time slot is no longer available.">Time slot unavailable</option>
+                                            <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                            <option value="__custom__">Other (please specify)</option>
+                                        </select>
+                                        <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"></textarea>
+                                        <div class="flex gap-2 justify-end">
+                                            <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                            <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ========================================== -->
+    <!-- PENDING BUGGY REQUESTS                     -->
+    <!-- ========================================== -->
+    {% if pending_buggy_bookings %}
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+            Pending Buggy Car Requests
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Buggy Car</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Time</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_buggy_bookings %}
+                        <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.buggy_car.name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }} at {{ booking.start_time|time:"H:i" }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.duration_hours }} hours</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₭{{ booking.total_price|intcomma }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end gap-2">
+                                    <form method="POST" action="{% url 'approve_buggy_booking' booking.id %}" class="inline">{% csrf_token %}
+                                        <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                    </form>
+                                    <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                                </div>
+                                <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                    <form method="POST" action="{% url 'decline_buggy_booking' booking.id %}">
+                                        {% csrf_token %}
+                                        <p class="text-sm font-bold text-red-900 mb-2">Reason for declining:</p>
+                                        <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none bg-white">
+                                            <option value="">-- Select a reason --</option>
+                                            <option value="The buggy is unavailable on the requested date.">Buggy unavailable</option>
+                                            <option value="The requested time slot is no longer available.">Time slot unavailable</option>
+                                            <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                            <option value="__custom__">Other (please specify)</option>
+                                        </select>
+                                        <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"></textarea>
+                                        <div class="flex gap-2 justify-end">
+                                            <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                            <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ========================================== -->
+    <!-- MY PROPERTIES SECTION                      -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        
+        <!-- My Guesthouses -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                My Guesthouses
+            </h2>
+            {% if my_guesthouses %}
+                <div class="space-y-4">
+                    {% for guesthouse in my_guesthouses %}
+                        <div class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-base font-bold text-gray-900">{{ guesthouse.name }}</h3>
+                                <span class="px-2 py-0.5 text-xs font-bold rounded-full {% if guesthouse.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">{% if guesthouse.is_active %}Active{% else %}Inactive{% endif %}</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">{{ guesthouse.city }}</p>
+                            <a href="{% url 'owner_guesthouse_edit' guesthouse.id %}" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition text-sm">Edit</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-xl shadow-md p-6 text-center border border-gray-100">
+                    <p class="text-gray-500 mb-3 text-sm">No guesthouses yet.</p>
+                    <a href="{% url 'owner_guesthouse_add' %}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition text-sm">Add Guesthouse</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- My Tours -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                My Tours
+            </h2>
+            {% if my_tours %}
+                <div class="space-y-4">
+                    {% for tour in my_tours %}
+                        <div class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-base font-bold text-gray-900">{{ tour.name }}</h3>
+                                <span class="px-2 py-0.5 text-xs font-bold rounded-full {% if tour.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">{% if tour.is_active %}Active{% else %}Inactive{% endif %}</span>
+                            </div>
+                            <!-- ✅ Updated to show Operator Name -->
+                            <p class="text-sm text-gray-600 mb-3">{{ tour.operator_name }} • {{ tour.duration_hours }} hrs • ₭{{ tour.price_per_person|intcomma }}/person</p>
+                            <a href="{% url 'owner_tour_edit' tour.id %}" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition text-sm">Edit</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-xl shadow-md p-6 text-center border border-gray-100">
+                    <p class="text-gray-500 mb-3 text-sm">No tours yet.</p>
+                    <a href="{% url 'owner_tour_add' %}" class="inline-block bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition text-sm">Add Tour</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- My Motorbikes -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                My Motorbikes
+            </h2>
+            {% if my_motorbikes %}
+                <div class="space-y-4">
+                    {% for motorbike in my_motorbikes %}
+                        <div class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-base font-bold text-gray-900">{{ motorbike.name }}</h3>
+                                <span class="px-2 py-0.5 text-xs font-bold rounded-full {% if motorbike.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">{% if motorbike.is_active %}Active{% else %}Inactive{% endif %}</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">{{ motorbike.get_category_display }} • ₭{{ motorbike.price_per_day|intcomma }}/day</p>
+                            <a href="{% url 'owner_motorbike_edit' motorbike.id %}" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition text-sm">Edit</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-xl shadow-md p-6 text-center border border-gray-100">
+                    <p class="text-gray-500 mb-3 text-sm">No motorbikes yet.</p>
+                    <a href="{% url 'owner_motorbike_add' %}" class="inline-block bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-orange-700 transition text-sm">Add Motorbike</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- My Guides -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                My Guides
+            </h2>
+            {% if my_guides %}
+                <div class="space-y-4">
+                    {% for guide in my_guides %}
+                        <div class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-base font-bold text-gray-900">{{ guide.name }}</h3>
+                                <span class="px-2 py-0.5 text-xs font-bold rounded-full {% if guide.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">{% if guide.is_active %}Active{% else %}Inactive{% endif %}</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{ guide.expertise }}</p>
+                            <a href="{% url 'owner_guide_edit' guide.id %}" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition text-sm">Edit</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-xl shadow-md p-6 text-center border border-gray-100">
+                    <p class="text-gray-500 mb-3 text-sm">No guides yet.</p>
+                    <a href="{% url 'owner_guide_add' %}" class="inline-block bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-amber-700 transition text-sm">Add Guide</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- My Buggy Cars -->
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                My Buggy Cars
+            </h2>
+            {% if my_buggies %}
+                <div class="space-y-4">
+                    {% for buggy in my_buggies %}
+                        <div class="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-base font-bold text-gray-900">{{ buggy.name }}</h3>
+                                <span class="px-2 py-0.5 text-xs font-bold rounded-full {% if buggy.is_active %}bg-green-100 text-green-800{% else %}bg-gray-100 text-gray-600{% endif %}">{% if buggy.is_active %}Active{% else %}Inactive{% endif %}</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">{{ buggy.get_size_display }} • From ₭{{ buggy.price_2_hours|intcomma }}/2hrs</p>
+                            <a href="{% url 'owner_buggy_edit' buggy.id %}" class="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition text-sm">Edit</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white rounded-xl shadow-md p-6 text-center border border-gray-100">
+                    <p class="text-gray-500 mb-3 text-sm">No buggy cars yet.</p>
+                    <a href="{% url 'owner_buggy_add' %}" class="inline-block bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition text-sm">Add Buggy Car</a>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

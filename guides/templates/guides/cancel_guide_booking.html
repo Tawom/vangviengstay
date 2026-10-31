@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancel Guide Booking - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Cancel Booking?</h2>
+        <p class="text-gray-600 mb-6">
+            Are you sure you want to cancel your booking with <strong>{{ booking.guide.name }}</strong> on {{ booking.booking_date|date:"F d, Y" }}? 
+            <br><span class="text-sm text-gray-500">This action cannot be undone, and your spot will be released immediately.</span>
+        </p>
+
+        <form method="POST" class="flex flex-col sm:flex-row gap-4 justify-center">
+            {% csrf_token %}
+            <a href="{% url 'guide_booking_confirmation' booking.id %}" class="flex-1 sm:flex-none bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 transition">
+                Keep Booking
+            </a>
+            <button type="submit" class="flex-1 sm:flex-none bg-red-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-red-700 transition shadow-md">
+                Yes, Cancel Booking
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

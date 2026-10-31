@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}Bookings: {{ motorbike.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    <a href="{% url 'owner_dashboard' %}" class="inline-flex items-center text-gray-600 hover:text-orange-600 mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to Owner Dashboard
+    </a>
+
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">{{ motorbike.name }}</h1>
+        <p class="text-gray-600">Manage all bookings for this motorbike.</p>
+    </div>
+
+    <!-- Pending Bookings -->
+    {% if pending_bookings %}
+    <div class="mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+            Pending Approval
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dates</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in pending_bookings %}
+                    <tr x-data="{ showDecline: false, reason: '', customReason: '' }">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">₭{{ booking.total_price }}</td>
+                        <td class="px-6 py-4 text-right text-sm font-medium">
+                            <div class="flex justify-end gap-2">
+                                <form method="POST" action="{% url 'approve_motorbike_booking' booking.id %}" class="inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="text-green-600 hover:text-green-900 font-semibold px-3 py-1.5 rounded hover:bg-green-50 transition border border-green-200">✓ Approve</button>
+                                </form>
+                                <button @click="showDecline = !showDecline" class="text-red-600 hover:text-red-900 font-semibold px-3 py-1.5 rounded hover:bg-red-50 transition border border-red-200">✕ Decline</button>
+                            </div>
+                            <!-- Inline Decline Form -->
+                            <div x-show="showDecline" x-transition class="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg text-left" style="display: none;">
+                                <form method="POST" action="{% url 'decline_motorbike_booking' booking.id %}">
+                                    {% csrf_token %}
+                                    <select x-model="reason" name="reason" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 outline-none bg-white">
+                                        <option value="">-- Select a reason --</option>
+                                        <option value="The requested dates are no longer available.">Dates no longer available</option>
+                                        <option value="The motorbike is currently undergoing maintenance.">Maintenance issue</option>
+                                        <option value="We are unable to accommodate your request at this time.">Unable to accommodate</option>
+                                        <option value="__custom__">Other (please specify)</option>
+                                    </select>
+                                    <textarea x-show="reason === '__custom__'" x-model="customReason" name="custom_reason" placeholder="Please explain..." rows="2" class="w-full px-3 py-2 border border-red-300 rounded-lg text-sm mb-2 focus:ring-2 focus:ring-red-400 outline-none"></textarea>
+                                    <div class="flex gap-2 justify-end">
+                                        <button type="button" @click="showDecline = false" class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-100 rounded transition">Cancel</button>
+                                        <button type="submit" @click="if(reason === '__custom__') { $el.closest('form').querySelector('[name=reason]').value = customReason; }" class="px-4 py-1.5 text-sm bg-red-600 text-white font-semibold rounded hover:bg-red-700 transition">Confirm Decline</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Upcoming Confirmed Bookings -->
+    {% if upcoming_bookings %}
+    <div class="mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            Confirmed Upcoming Rentals
+        </h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Guest</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dates</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for booking in upcoming_bookings %}
+                    <tr>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ booking.guest_phone }}</td>
+                        <td class="px-6 py-4 text-sm">
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-green-100 text-green-800">Confirmed</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

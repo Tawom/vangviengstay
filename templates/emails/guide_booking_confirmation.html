@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Booking Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f3f4f6;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f3f4f6; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #f59e0b, #ea580c); padding: 30px; text-align: center;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: bold;">Guide Booking Confirmed!</h1>
+                            <p style="color: #fef3c7; margin: 10px 0 0 0; font-size: 14px;">Vang Vieng Stay</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <p style="color: #1f2937; font-size: 18px; margin: 0 0 20px 0;">
+                                Hi {{ booking.guest.username|title }},
+                            </p>
+                            <p style="color: #4b5563; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+                                Great news! Your local guide <strong>{{ booking.guide.name }}</strong> is confirmed and ready to show you the best of Vang Vieng.
+                            </p>
+                            
+                            <!-- Guide Info -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #92400e; font-size: 14px; margin: 0 0 8px 0; font-weight: bold;">YOUR GUIDE</p>
+                                        <p style="color: #1f2937; font-size: 20px; margin: 0; font-weight: bold;">{{ booking.guide.name }}</p>
+                                        <p style="color: #78350f; font-size: 14px; margin: 4px 0 0 0;">🇱🇦 Lao • 🇬🇧 English</p>
+                                        {% if booking.guide.contact_number %}
+                                            <p style="color: #065f46; font-size: 14px; margin: 8px 0 0 0; font-weight: bold;">📱 WhatsApp: {{ booking.guide.contact_number }}</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Booking Details -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <h3 style="color: #1f2937; font-size: 16px; margin: 0 0 15px 0;">Booking Details</h3>
+                                        <table width="100%" cellpadding="8" cellspacing="0">
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px; width: 140px;">Reference:</td>
+                                                <td style="color: #1f2937; font-size: 14px; font-weight: bold;">{{ booking_reference }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px;">Date:</td>
+                                                <td style="color: #1f2937; font-size: 14px;">{{ booking.booking_date|date:"l, F d, Y" }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px;">Start Time:</td>
+                                                <td style="color: #1f2937; font-size: 14px;">{{ booking.start_time|time:"H:i" }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px;">Duration:</td>
+                                                <td style="color: #1f2937; font-size: 14px;">{{ booking.duration_hours }} hours</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px;">Total Price:</td>
+                                                <!-- Updated to LAK -->
+                                                <td style="color: #d97706; font-size: 16px; font-weight: bold;">₭{{ booking.total_price }}</td>
+                                                <!-- <td style="color: #d97706; font-size: 16px; font-weight: bold;">${{ booking.total_price }}</td> -->
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #6b7280; font-size: 14px;">Status:</td>
+                                                <td style="color: #10b981; font-size: 14px; font-weight: bold; text-transform: uppercase;">Confirmed</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Meeting Location -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #92400e; font-size: 14px; margin: 0 0 8px 0; font-weight: bold;">📍 MEETING POINT</p>
+                                        <p style="color: #78350f; font-size: 16px; margin: 0; font-weight: bold;">{{ booking.meeting_location }}</p>
+                                        {% if booking.guest_phone %}
+                                            <p style="color: #78350f; font-size: 14px; margin: 8px 0 0 0;">📱 Your phone: {{ booking.guest_phone }}</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Late Policy Warning -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #991b1b; font-size: 14px; margin: 0 0 8px 0; font-weight: bold;">⚠️ IMPORTANT: LATE ARRIVAL POLICY</p>
+                                        <p style="color: #7f1d1d; font-size: 14px; line-height: 1.5; margin: 0;">
+                                            Your guide will wait at the meeting point for a maximum of 15 minutes. If you are running late, you <strong>MUST</strong> call or WhatsApp them immediately. Bookings will be <strong>immediately revoked</strong> and marked as a "No-Show" without prior notice.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Payment & Arrival Instructions -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #92400e; font-size: 14px; margin: 0 0 8px 0; font-weight: bold;">💵 PAYMENT & ARRIVAL INSTRUCTIONS</p>
+                                        <p style="color: #78350f; font-size: 14px; line-height: 1.5; margin: 0;">
+                                            <!-- Please present this email (or a screenshot) along with a valid photo ID at the meeting point. <strong>Payment of ${{ booking.total_price }} will be collected in cash (USD or Lao Kip) by your guide at the start of the tour.</strong> -->
+                                            Please present this email (or a screenshot) along with a valid photo ID at the meeting point. <strong>Payment of ₭{{ booking.total_price }} will be collected in cash by your guide at the start of the tour.</strong>
+                                        </p>
+                                        <!-- Exchange Rate Note -->
+                                        <p style="color: #78350f; font-size: 13px; line-height: 1.5; margin: 10px 0 0 0; border-top: 1px solid #fde68a; padding-top: 10px;">
+                                            💱 <strong>Exchange Rate Note:</strong> Payment will be collected in Lao Kip (LAK). The exchange rate applied will be the official daily rate of the Bank of the Lao P.D.R. (BCEL/LDB) on the day of your tour.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- WhatsApp Tip -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ecfdf5; border-left: 4px solid #10b981; border-radius: 4px; padding: 15px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #065f46; font-size: 14px; margin: 0 0 8px 0; font-weight: bold;">💡 PRO TIP</p>
+                                        <p style="color: #064e3b; font-size: 14px; line-height: 1.5; margin: 0;">
+                                            On the day of your tour, open Google Maps on your phone, tap the blue dot (your location), and share your live location with your guide via WhatsApp. This helps them find you instantly!
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- View Voucher Button -->
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" style="padding: 20px 0;">
+                                        <a href="{{ voucher_url }}" style="display: inline-block; background-color: #d97706; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                                            View Full Voucher
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                            <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;">
+                                Questions? Contact us at <a href="mailto:support@vangviengstay.com" style="color: #d97706; text-decoration: none;">support@vangviengstay.com</a>
+                            </p>
+                            <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+                                &copy; 2026 Vang Vieng Stay. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

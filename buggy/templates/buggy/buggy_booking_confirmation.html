@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}
+    {% if booking.status == 'cancelled' %}
+        Buggy Booking Cancelled - Vang Vieng Stay
+    {% elif booking.status == 'pending' %}
+        Buggy Request Pending - Vang Vieng Stay
+    {% else %}
+        Buggy Booking Confirmed - Vang Vieng Stay
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-12">
+    
+    {% if booking.status == 'cancelled' %}
+        <!-- CANCELLED STATE -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">Buggy Booking Cancelled</h1>
+            <p class="text-gray-600 mt-2">This buggy reservation has been cancelled.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden opacity-75">
+            <div class="bg-red-600 text-white p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold">Cancelled Voucher</h2>
+                    <p class="text-red-100 text-sm mt-1">Vang Vieng Stay</p>
+                </div>
+                <div class="text-left sm:text-right">
+                    <p class="text-sm text-red-100 uppercase tracking-wide">Reference Number</p>
+                    <p class="text-2xl font-mono font-bold tracking-wider text-white">BG-{{ booking.id|stringformat:"04d" }}</p>
+                </div>
+            </div>
+            <div class="p-6 sm:p-8 text-center">
+                <p class="text-gray-600 mb-4">For your records, this booking was for:</p>
+                <p class="text-xl font-bold text-gray-900">{{ booking.buggy_car.name }}</p>
+                <p class="text-gray-600">{{ booking.booking_date|date:"M d, Y" }} at {{ booking.start_time|time:"H:i" }}</p>
+                <p class="text-sm text-gray-500 mt-2">Duration: {{ booking.duration_hours }} hours</p>
+                <div class="mt-8">
+                    <a href="{% url 'buggy_list' %}" class="inline-block bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 transition">Back to Buggy Cars</a>
+                </div>
+            </div>
+        </div>
+
+    {% elif booking.status == 'pending' %}
+        <!-- PENDING STATE -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">Buggy Request Received</h1>
+            <p class="text-gray-600 mt-2">Your buggy booking request is pending verification.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden" id="voucher">
+            <div class="bg-purple-600 text-white p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center gap-2">Buggy Request (Pending)</h2>
+                    <p class="text-purple-100 text-sm mt-1">Vang Vieng Stay</p>
+                </div>
+                <div class="text-left sm:text-right">
+                    <p class="text-sm text-purple-100 uppercase tracking-wide">Reference Number</p>
+                    <p class="text-2xl font-mono font-bold tracking-wider text-white">BG-{{ booking.id|stringformat:"04d" }}</p>
+                </div>
+            </div>
+
+            <div class="p-6 sm:p-8">
+                <div class="bg-purple-50 border-l-4 border-purple-400 p-4 rounded-r-lg mb-6">
+                    <p class="text-sm text-purple-800 flex items-start gap-2">
+                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong>Status: Pending Verification</strong> — The owner is reviewing your request.</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Guest Details</h3>
+                        <p class="text-lg font-semibold text-gray-900">{{ booking.guest.username|title }}</p>
+                        <p class="text-gray-600 mt-1">Status: <span class="inline-block bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wide">Pending</span></p>
+                    </div>
+                    <div class="md:text-right">
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Buggy Car</h3>
+                        <p class="text-lg font-semibold text-gray-900">{{ booking.buggy_car.name }}</p>
+                        <p class="text-gray-600 mt-1">{{ booking.buggy_car.get_size_display }}</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-gray-50 p-5 rounded-lg text-center border border-gray-100">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Date</p>
+                        <p class="text-xl font-bold text-gray-900">{{ booking.booking_date|date:"M d, Y" }}</p>
+                    </div>
+                    <div class="bg-gray-50 p-5 rounded-lg text-center border border-gray-100">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Duration</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ booking.duration_hours }} <span class="text-sm font-normal text-gray-500">Hours</span></p>
+                    </div>
+                    <div class="bg-purple-50 p-5 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">Total Price</p>
+                        <p class="text-2xl font-bold text-purple-700">₭{{ booking.total_price|intcomma }}</p>
+                        <p class="text-sm text-purple-600 mt-1">Pay on Pickup</p>
+                    </div>
+                </div>
+
+                <!-- ✅ DYNAMIC "WHAT HAPPENS NEXT?" SECTION -->
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-lg">
+                    <p class="text-sm text-blue-900 font-bold mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        WHAT HAPPENS NEXT?
+                    </p>
+                    <ol class="text-blue-800 text-sm leading-relaxed space-y-1 list-decimal list-inside">
+                        <li>The owner will verify buggy availability shortly.</li>
+                        
+                        {% if booking.guest.email and booking.guest.profile.phone_number %}
+                            <li>Once approved, you'll receive a <strong>confirmation email</strong> at <strong class="text-blue-900">{{ booking.guest.email }}</strong> and a <strong>WhatsApp notification</strong> to <strong class="text-blue-900">{{ booking.guest.profile.phone_number }}</strong> with your final voucher.</li>
+                        {% elif booking.guest.email %}
+                            <li>Once approved, you'll receive a <strong>confirmation email</strong> at <strong class="text-blue-900">{{ booking.guest.email }}</strong> with your final voucher.</li>
+                        {% elif booking.guest.profile.phone_number %}
+                            <li>Once approved, you'll receive a <strong>WhatsApp notification</strong> to <strong class="text-blue-900">{{ booking.guest.profile.phone_number }}</strong> with your final voucher.</li>
+                        {% else %}
+                            <li>Once approved, you'll receive a <strong>confirmation</strong> with your final voucher.</li>
+                        {% endif %}
+                        
+                        <li>Your buggy will be officially reserved at that point.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 px-6 py-6 sm:px-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="{% url 'buggy_list' %}" class="text-gray-600 hover:text-purple-600 font-medium transition flex items-center gap-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Buggy Cars
+                    </a>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="{% url 'cancel_buggy_booking' booking.id %}" class="flex items-center justify-center gap-2 bg-white text-red-600 border border-red-200 px-6 py-3 rounded-lg hover:bg-red-50 transition font-semibold">
+                            Cancel Request
+                        </a>
+                        <button onclick="window.print()" class="flex items-center justify-center gap-2 bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition font-semibold shadow-md">
+                            Print Request
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <!-- CONFIRMED STATE -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900">Buggy Booking Confirmed!</h1>
+            <p class="text-gray-600 mt-2">Your buggy reservation has been successfully secured.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden" id="voucher">
+            <div class="bg-green-600 text-white p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold">Buggy Voucher</h2>
+                    <p class="text-green-100 text-sm mt-1">Vang Vieng Stay</p>
+                </div>
+                <div class="text-left sm:text-right">
+                    <p class="text-sm text-green-100 uppercase tracking-wide">Reference Number</p>
+                    <p class="text-2xl font-mono font-bold tracking-wider text-white">BG-{{ booking.id|stringformat:"04d" }}</p>
+                </div>
+            </div>
+
+            <div class="p-6 sm:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Guest Details</h3>
+                        <p class="text-lg font-semibold text-gray-900">{{ booking.guest.username|title }}</p>
+                        <p class="text-gray-600 mt-1">Status: <span class="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wide">Confirmed</span></p>
+                    </div>
+                    <div class="md:text-right">
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Buggy Car</h3>
+                        <p class="text-lg font-semibold text-gray-900">{{ booking.buggy_car.name }}</p>
+                        <p class="text-gray-600 mt-1">{{ booking.buggy_car.get_size_display }}</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-gray-50 p-5 rounded-lg text-center border border-gray-100">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Date</p>
+                        <p class="text-xl font-bold text-gray-900">{{ booking.booking_date|date:"M d, Y" }}</p>
+                    </div>
+                    <div class="bg-gray-50 p-5 rounded-lg text-center border border-gray-100">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Start Time</p>
+                        <p class="text-xl font-bold text-gray-900">{{ booking.start_time|time:"H:i" }}</p>
+                    </div>
+                    <div class="bg-green-50 p-5 rounded-lg text-center border border-green-100">
+                        <p class="text-xs text-green-600 uppercase tracking-wide mb-1">Total Price</p>
+                        <p class="text-2xl font-bold text-green-700">₭{{ booking.total_price|intcomma }}</p>
+                        <p class="text-sm text-green-600 mt-1">Pay on Pickup</p>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-5 rounded-r-lg mb-6">
+                    <p class="text-sm text-green-900 font-bold mb-2">📱 Your Contact: {{ booking.guest_phone }}</p>
+                    {% if booking.passport_number %}
+                        <p class="text-sm text-green-900 font-bold">🛂 Passport: {{ booking.passport_number }}</p>
+                    {% endif %}
+                    <p class="text-sm text-green-800 mt-3">🔒 Security Deposit: ₭{{ booking.deposit_amount|intcomma }} (payable on pickup)</p>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-lg mb-8">
+                    <p class="text-sm text-blue-800">
+                        Please present this voucher to the owner at pickup. 
+                        <strong>Payment of ₭{{ booking.total_price|intcomma }} and deposit of ₭{{ booking.deposit_amount|intcomma }} will be collected in cash.</strong>
+                    </p>
+                </div>
+
+                <!-- ✅ WHATSAPP SHARE SECTION -->
+                <div class="mt-8 bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+                    <h3 class="text-lg font-bold text-green-800 mb-2 flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Share Voucher via WhatsApp
+                    </h3>
+                    <p class="text-sm text-green-700 mb-4">
+                        Tap below to instantly share your confirmed buggy car rental details with the owner (or save it to your own chat).
+                    </p>
+                    
+                    <a href="https://wa.me/?text=Hello!%20I%20have%20a%20confirmed%20buggy%20car%20rental%20booking%20on%20Vang%20Vieng%20Stay.%0A%0A📌%20Reference:%20BG-{{ booking.id|stringformat:'04d' }}%0A🏎️%20Buggy:%20{{ booking.buggy_car.name }}%0A📅%20Date:%20{{ booking.booking_date|date:'M d, Y' }}%0A⏰%20Start%20Time:%20{{ booking.start_time|time:'H:i' }}%0A⏱️%20Duration:%20{{ booking.duration_hours }}%20hours%0A👤%20Renter:%20{{ booking.guest.username }}%0A%0APlease%20verify%20my%20booking.%20Thank%20you!" 
+                       target="_blank"
+                       class="inline-flex items-center gap-2 bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition shadow-md">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Open WhatsApp with Voucher
+                    </a>
+                    <p class="text-xs text-green-600 mt-3">
+                        💡 Tip: Leaving the number blank lets you choose the owner from your contacts, or send it to yourself to save.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="bg-gray-50 px-6 py-6 sm:px-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="{% url 'buggy_list' %}" class="text-gray-600 hover:text-green-600 font-medium transition flex items-center gap-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Buggy Cars
+                    </a>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="{% url 'cancel_buggy_booking' booking.id %}" class="flex items-center justify-center gap-2 bg-white text-red-600 border border-red-200 px-6 py-3 rounded-lg hover:bg-red-50 transition font-semibold">
+                            Cancel Booking
+                        </a>
+                        <button onclick="window.print()" class="flex items-center justify-center gap-2 bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition font-semibold shadow-md">
+                            Print / PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    @media print {
+        nav, footer, .no-print { display: none !important; }
+        body { background: white !important; margin: 0 !important; padding: 0 !important; }
+    }
+</style>
+{% endblock %}

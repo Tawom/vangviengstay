@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancel Tour Booking - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+        
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">
+            {% if booking.status == 'pending' %}Cancel this Tour Booking?{% else %}Request a Refund?{% endif %}
+        </h1>
+        
+        <p class="text-gray-600 mb-8">
+            {% if booking.status == 'pending' %}
+                Are you sure you want to cancel your tour <strong>{{ booking.tour.name }}</strong> on {{ booking.booking_date|date:"M d, Y" }}? The spots will be immediately released.
+            {% else %}
+                Are you sure you want to request a refund for <strong>{{ booking.tour.name }}</strong>? The tour operator will be notified and will process your refund within 3-5 business days.
+            {% endif %}
+        </p>
+
+        <div class="flex justify-center gap-4">
+            <a href="{% url 'tour_booking_confirmation' booking.id %}" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition font-semibold">
+                Go Back
+            </a>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md">
+                    {% if booking.status == 'pending' %}Yes, Cancel Booking{% else %}Yes, Request Refund{% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

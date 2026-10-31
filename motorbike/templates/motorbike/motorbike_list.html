@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Motorbikes for Rent - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Motorbikes for Rent</h1>
+        <p class="text-gray-600">Explore our fleet of well-maintained motorbikes for your Vang Vieng adventure.</p>
+    </div>
+
+    <!-- Motorbike Grid -->
+    {% if motorbikes %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for motorbike in motorbikes %}
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition flex flex-col">
+                    
+                    <!-- Image -->
+                    {% if motorbike.image_url %}
+                        <div class="h-48 bg-gray-100 overflow-hidden">
+                            <img src="{{ motorbike.image_url }}" alt="{{ motorbike.name }}" class="w-full h-full object-cover">
+                        </div>
+                    {% else %}
+                        <div class="h-48 bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                    {% endif %}
+
+                    <!-- Content -->
+                    <div class="p-5 flex flex-col flex-grow">
+                        
+                        <!-- Title & Category -->
+                        <div class="mb-3">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">{{ motorbike.name }}</h3>
+                            <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">
+                                {{ motorbike.get_category_display }}
+                            </span>
+                        </div>
+
+                        <!-- Key Specs -->
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <span class="text-gray-400">🏍️</span>
+                                <span>Engine: <strong class="text-gray-900">{{ motorbike.engine_cc }}cc</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-gray-400">⏰</span>
+                                <span>Rental Type: <strong class="text-gray-900">Daily</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-gray-400">💰</span>
+                                <span>Deposit: <strong class="text-gray-900">₭{{ motorbike.deposit_amount|intcomma}}</strong></span>
+                            </div>
+                            {% if motorbike.pickup_address %}
+                                <div class="flex items-start gap-2">
+                                    <span class="text-gray-400">📍</span>
+                                    <span>Pickup: <strong class="text-gray-900">{{ motorbike.pickup_address }}</strong></span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Description -->
+                        {% if motorbike.description %}
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ motorbike.description }}</p>
+                        {% endif %}
+
+                        <!-- Price & Button (pushed to bottom for uniform cards) -->
+                        <div class="mt-auto">
+                            <div class="border-t border-gray-200 pt-4 mb-4">
+                                <p class="text-2xl font-bold text-orange-600">
+                                    ₭{{ motorbike.price_per_day|intcomma }}
+                                    <span class="text-sm font-normal text-gray-500">/ day</span>
+                                </p>
+                            </div>
+
+                            <a href="{% url 'motorbike_detail' motorbike.id %}" class="block w-full text-center bg-orange-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-orange-700 transition">
+                                View Details & Rent
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-16 bg-white rounded-xl shadow-md border border-gray-200">
+            <svg class="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <p class="text-gray-500 text-lg mb-4">No motorbikes available at the moment.</p>
+            <p class="text-gray-400 text-sm">Please check back later or contact us for more information.</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

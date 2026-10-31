@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Book {{ guide.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <a href="{% url 'guide_detail' guide.id %}" class="inline-flex items-center text-amber-600 hover:underline mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to guide profile
+    </a>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Book {{ guide.name }}</h2>
+        <p class="text-gray-600 mb-6">Tell us when and where to meet you.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Date</label>
+                <input type="date" name="booking_date" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Start Time</label>
+                <input type="time" name="start_time" required 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Duration</label>
+                <select name="duration_hours" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition bg-white">
+                    <option value="2">2 Hours (Short trip / Cafe hopping)</option>
+                    <option value="3">3 Hours (Half-day light)</option>
+                    <option value="4" selected>4 Hours (Standard Half-Day)</option>
+                    <option value="6">6 Hours (Extended Half-Day)</option>
+                    <option value="8">8 Hours (Full-Day Adventure)</option>
+                </select>
+            </div>
+
+            <!-- Meeting Location -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">
+                    📍 Where should the guide meet you? <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="meeting_location" required
+                       placeholder="e.g., Vang Vieng Central Lodge, or near the bus station"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition">
+                <p class="text-sm text-gray-500 mt-1">Your guide will meet you here. You can share a live location via WhatsApp later.</p>
+            </div>
+
+            <!-- Guest Phone for WhatsApp -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">
+                    📱 Your Phone Number (for WhatsApp)
+                </label>
+                <input type="tel" name="guest_phone" 
+                       placeholder="+856 20 XXXX XXXX"
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition">
+                <p class="text-sm text-gray-500 mt-1">Optional, but helps your guide contact you on the day.</p>
+            </div>
+
+            <!-- Payment Notice (Updated: Removed exchange rate mention since price is already in LAK) -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p class="text-sm text-blue-800 flex items-start gap-2">
+                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <!-- <span>Prices are displayed in USD for reference. Final payment will be collected in <strong>Lao Kip (LAK)</strong> based on the official daily BCEL/LDB exchange rate on the day of your booking.</span> -->
+                    <span>Final payment will be collected in <strong>cash (Lao Kip)</strong> at the meeting point.</span>
+                </p>
+            </div>
+
+            <button type="submit" class="w-full bg-amber-600 text-white font-bold py-4 rounded-lg hover:bg-amber-700 transition shadow-md text-lg flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Confirm Booking (Pay Cash at Meeting Point)
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.querySelector('input[name="booking_date"]');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    });
+</script>
+{% endblock %}

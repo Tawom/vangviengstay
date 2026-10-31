@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            Choose how you want to register with Vang Vieng Stay
+        </p>
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
+        <!-- Email Signup Card -->
+        <a href="{% url 'signup_email' %}" class="block group">
+            <div class="bg-white rounded-xl shadow-md p-6 border-2 border-transparent group-hover:border-blue-500 transition-all duration-200 flex items-center gap-4">
+                <div class="flex-shrink-0 bg-blue-100 p-3 rounded-full group-hover:bg-blue-500 transition-colors">
+                    <svg class="w-8 h-8 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600">Sign up with Email</h3>
+                    <p class="text-sm text-gray-500">Best for receiving booking confirmations and vouchers.</p>
+                </div>
+                <svg class="w-6 h-6 text-gray-400 ml-auto group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </div>
+        </a>
+
+        <!-- Phone Signup Card -->
+        <a href="{% url 'signup_phone' %}" class="block group">
+            <div class="bg-white rounded-xl shadow-md p-6 border-2 border-transparent group-hover:border-green-500 transition-all duration-200 flex items-center gap-4">
+                <div class="flex-shrink-0 bg-green-100 p-3 rounded-full group-hover:bg-green-500 transition-colors">
+                    <svg class="w-8 h-8 text-green-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 group-hover:text-green-600">Sign up with Phone</h3>
+                    <p class="text-sm text-gray-500">Fast registration with OTP verification (Recommended for Laos).</p>
+                </div>
+                <svg class="w-6 h-6 text-gray-400 ml-auto group-hover:text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </div>
+        </a>
+
+        <div class="text-center mt-6">
+            <p class="text-sm text-gray-600">
+                Already have an account? 
+                <!-- ✅ FIXED: Changed 'user_login' to 'login' -->
+                <a href="{% url 'login' %}" class="font-medium text-blue-600 hover:text-blue-500">Log in here</a>
+            </p>
+            <a href="{% url 'guesthouse_list' %}" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mt-4">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

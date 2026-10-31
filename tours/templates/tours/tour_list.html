@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Tours & Activities - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Advanced Search -->
+<div class="bg-gradient-to-br from-green-600 to-emerald-700 text-white py-16 relative overflow-hidden">
+    <!-- Decorative background pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100">
+            <path d="M20 20 L30 10 L40 20 L30 30 Z" />
+            <path d="M60 30 L70 20 L80 30 L70 40 Z" />
+            <path d="M40 60 L50 50 L60 60 L50 70 Z" />
+            <path d="M80 70 L90 60 L100 70 L90 80 Z" />
+            <path d="M10 70 L20 60 L30 70 L20 80 Z" />
+        </svg>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <h1 class="text-4xl md:text-5xl font-bold mb-3 text-center">Unforgettable Tours & Activities</h1>
+        <p class="text-green-100 mb-10 text-center text-lg">Discover the best experiences in Vang Vieng</p>
+        
+        <!-- Advanced Search Widget -->
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-5xl mx-auto">
+            <form method="GET" action="{% url 'tour_list' %}" class="space-y-6">
+                
+                <!-- Row 1: Date & Duration -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
+                            Tour Date
+                        </label>
+                        <input type="date" name="tour_date" value="{{ tour_date|default:'' }}" 
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
+                            Duration
+                        </label>
+                        <select name="duration" 
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800 bg-white">
+                            <option value="">Any Duration</option>
+                            <option value="4" {% if duration_filter == '4' %}selected{% endif %}>Half-Day (Less than 4 hours)</option>
+                            <option value="8" {% if duration_filter == '8' %}selected{% endif %}>Full-Day (4-8 hours)</option>
+                            <option value="12" {% if duration_filter == '12' %}selected{% endif %}>Multi-Day (More than 8 hours)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Row 2: Price Range & Group Size -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Price Range -->
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
+                            Price per Person
+                        </label>
+                        <div class="flex gap-2 items-center">
+                            <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min" min="0"
+                                   class="w-full px-3 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800">
+                            <span class="text-gray-400">-</span>
+                            <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max" min="0"
+                                   class="w-full px-3 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800">
+                        </div>
+                    </div>
+                    
+                    <!-- Group Size -->
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
+                            Group Size
+                        </label>
+                        <select name="max_guests" 
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800 bg-white">
+                            <option value="">Any Size</option>
+                            <option value="2" {% if max_guests == '2' %}selected{% endif %}>Up to 2 people</option>
+                            <option value="4" {% if max_guests == '4' %}selected{% endif %}>Up to 4 people</option>
+                            <option value="6" {% if max_guests == '6' %}selected{% endif %}>Up to 6 people</option>
+                            <option value="10" {% if max_guests == '10' %}selected{% endif %}>Up to 10 people</option>
+                            <option value="15" {% if max_guests == '15' %}selected{% endif %}>Up to 15+ people</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Row 3: Search Text + Button -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                    <div class="md:col-span-9">
+                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
+                            Search by Name, Operator, or Keyword
+                        </label>
+                        <input type="text" name="search" value="{{ search_query }}" 
+                               placeholder="e.g., Jacky Adventure, Kayaking, Cave, Hot Air Balloon..."
+                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition text-gray-800">
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" 
+                                class="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Active Filters Display -->
+                {% if search_query or tour_date or duration_filter or min_price or max_price or max_guests %}
+                    <div class="pt-4 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            <span class="text-sm text-gray-600 font-semibold">Active Filters:</span>
+                            {% if search_query %}
+                                <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Search: "{{ search_query }}"
+                                    <a href="{% url 'tour_list' %}?tour_date={{ tour_date }}&duration={{ duration_filter }}&max_guests={{ max_guests }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-green-900">✕</a>
+                                </span>
+                            {% endif %}
+                            {% if tour_date %}
+                                <span class="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Date: {{ tour_date }}
+                                    <a href="{% url 'tour_list' %}?search={{ search_query }}&duration={{ duration_filter }}&max_guests={{ max_guests }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-blue-900">✕</a>
+                                </span>
+                            {% endif %}
+                            {% if duration_filter %}
+                                <span class="inline-flex items-center gap-1 bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                    {% if duration_filter == '4' %}Half-Day{% elif duration_filter == '8' %}Full-Day{% else %}Multi-Day{% endif %}
+                                    <a href="{% url 'tour_list' %}?search={{ search_query }}&tour_date={{ tour_date }}&max_guests={{ max_guests }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-purple-900">✕</a>
+                                </span>
+                            {% endif %}
+                            {% if max_guests %}
+                                <span class="inline-flex items-center gap-1 bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                    Up to {{ max_guests }} people
+                                    <a href="{% url 'tour_list' %}?search={{ search_query }}&tour_date={{ tour_date }}&duration={{ duration_filter }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-orange-900">✕</a>
+                                </span>
+                            {% endif %}
+                            <a href="{% url 'tour_list' %}" class="text-sm text-red-600 hover:text-red-800 font-semibold ml-auto">
+                                Clear All Filters
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Results Section -->
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">
+            {% if tours %}
+                {{ tours|length }} {{ tours|length|pluralize:"Tour,Tours" }} Found
+            {% else %}
+                No Results
+            {% endif %}
+        </h2>
+    </div>
+    
+    {% if tours %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for tour in tours %}
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col">
+                    <!-- Image -->
+                    <div class="h-56 bg-gray-200 relative overflow-hidden">
+                        {% if tour.main_image_url %}
+                            <img src="{{ tour.main_image_url }}" alt="{{ tour.name }}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        {% else %}
+                            <div class="flex items-center justify-center h-full text-gray-400">
+                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Price Badge -->
+                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                            ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/person</span>
+                        </div>
+                        
+                        <!-- Duration Badge -->
+                        <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ tour.duration_hours }}h
+                        </div>
+                        
+                        <!-- Rating Badge (if reviews exist) -->
+                        {% if tour.review_count > 0 %}
+                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
+                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                {{ tour.average_rating }}
+                                <span class="text-gray-500 text-xs">({{ tour.review_count }})</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-1 text-gray-900 group-hover:text-green-600 transition">
+                            {{ tour.name }}
+                        </h3>
+                        
+                        <!-- ✅ NEW: Tour Operator Name Badge -->
+                        <p class="text-sm text-green-600 font-semibold mb-3 flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            {{ tour.operator_name }}
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-3 text-sm text-gray-500 mb-3">
+                            <p class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Departs {{ tour.departure_time|time:"H:i" }}
+                            </p>
+                            <p class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                Max {{ tour.max_capacity }}
+                            </p>
+                        </div>
+        
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
+                            {{ tour.description|striptags|truncatewords:25 }}
+                        </p>
+
+                        <!-- Map Link -->
+                        <div class="mb-4">
+                            {% if tour.latitude and tour.longitude %}
+                                <a href="https://www.google.com/maps?q={{ tour.latitude }},{{ tour.longitude }}" 
+                                   target="_blank" 
+                                   class="inline-flex items-center gap-1 text-sm text-green-600 hover:text-green-800 font-medium bg-green-50 px-3 py-2 rounded-lg hover:bg-green-100 transition w-fit">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    View Office on Map
+                                </a>
+                            {% else %}
+                                <span class="text-sm text-gray-400 italic flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Map pending
+                                </span>
+                            {% endif %}
+                        </div>
+                        
+                        <a href="{% url 'tour_detail' tour.id %}" 
+                           class="block w-full text-center bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition mt-auto">
+                            View Details & Book
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-16 bg-white rounded-xl shadow-md">
+            <svg class="w-24 h-24 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">No tours found</h3>
+            <p class="text-gray-600 mb-6">Try adjusting your search filters or dates</p>
+            <a href="{% url 'tour_list' %}" class="inline-block bg-green-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                Clear All Filters
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript for Date Validation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tourDateInput = document.querySelector('input[name="tour_date"]');
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        if (tourDateInput) {
+            tourDateInput.setAttribute('min', today);
+        }
+    });
+</script>
+{% endblock %}

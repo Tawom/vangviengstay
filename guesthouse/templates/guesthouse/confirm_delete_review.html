@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Review - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+        </div>
+        
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Delete Your Review?</h1>
+        <p class="text-gray-600 mb-8">
+            Are you sure you want to permanently delete your review for <strong>{{ booking.guesthouse.name }}</strong>? This action cannot be undone.
+        </p>
+
+        <div class="flex justify-center gap-4">
+            <a href="{% url 'edit_guesthouse_review' booking.id %}" class="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition font-semibold">
+                Go Back
+            </a>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold shadow-md">
+                    Yes, Delete Permanently
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

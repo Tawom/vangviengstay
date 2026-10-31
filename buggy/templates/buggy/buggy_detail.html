@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}{{ buggy.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    
+    <a href="{% url 'buggy_list' %}" class="inline-flex items-center text-gray-600 hover:text-purple-600 mb-6 font-medium">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to Buggy Cars
+    </a>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-6">
+            
+            {% if buggy.image_url %}
+                <div class="rounded-xl overflow-hidden shadow-lg">
+                    <img src="{{ buggy.image_url }}" alt="{{ buggy.name }}" class="w-full h-96 object-cover">
+                </div>
+            {% else %}
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 h-96 flex items-center justify-center">
+                    <svg class="w-32 h-32 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+            {% endif %}
+
+            <div>
+                <div class="flex items-start justify-between mb-2">
+                    <h1 class="text-3xl font-bold text-gray-900">{{ buggy.name }}</h1>
+                    <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-purple-100 text-purple-800">
+                        {{ buggy.get_size_display }}
+                    </span>
+                </div>
+                
+                {% if buggy.pickup_address %}
+                    <p class="text-gray-600 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        {{ buggy.pickup_address }}
+                    </p>
+                {% endif %}
+            </div>
+
+            {% if buggy.description %}
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                    <h2 class="text-xl font-bold text-gray-900 mb-3">About this Buggy</h2>
+                    <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ buggy.description }}</p>
+                </div>
+            {% endif %}
+
+            <!-- Hourly Pricing Table -->
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Rental Rates</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div class="bg-purple-50 p-4 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">2 Hours</p>
+                        <p class="text-lg font-bold text-purple-700">₭{{ buggy.price_2_hours|intcomma }}</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">3 Hours</p>
+                        <p class="text-lg font-bold text-purple-700">₭{{ buggy.price_3_hours|intcomma }}</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">4 Hours</p>
+                        <p class="text-lg font-bold text-purple-700">₭{{ buggy.price_4_hours|intcomma }}</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">5 Hours</p>
+                        <p class="text-lg font-bold text-purple-700">₭{{ buggy.price_5_hours|intcomma }}</p>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg text-center border border-purple-100">
+                        <p class="text-xs text-purple-600 uppercase tracking-wide mb-1">6 Hours</p>
+                        <p class="text-lg font-bold text-purple-700">₭{{ buggy.price_6_hours|intcomma }}</p>
+                    </div>
+                    <div class="bg-purple-100 p-4 rounded-lg text-center border-2 border-purple-300">
+                        <p class="text-xs text-purple-800 uppercase tracking-wide mb-1 font-bold">Full Day</p>
+                        <p class="text-lg font-bold text-purple-900">₭{{ buggy.price_full_day|intcomma }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            {% if buggy.latitude and buggy.longitude %}
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Pickup Location
+                    </h2>
+                    
+                    <!-- ✅ UPDATED: Added data-* attributes to pass data cleanly to JavaScript -->
+                    <div id="map" class="w-full h-80 rounded-lg border border-gray-200"
+                         data-lat="{{ buggy.latitude }}"
+                         data-lng="{{ buggy.longitude }}"
+                         data-name="{{ buggy.name }}"
+                         data-address="{{ buggy.pickup_address|default:'Pickup location' }}">
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Column: Booking Card -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-100 sticky top-6">
+                
+                <div class="mb-6">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Starting from</p>
+                    <p class="text-3xl font-bold text-purple-600">
+                        ₭{{ buggy.price_2_hours|intcomma }}
+                        <span class="text-base font-normal text-gray-500">/ 2 hrs</span>
+                    </p>
+                    <p class="text-sm text-gray-600 mt-1">
+                        🔒 Deposit: <strong class="text-gray-900">₭{{ buggy.deposit_amount|intcomma }}</strong>
+                    </p>
+                </div>
+
+                <div class="space-y-3 mb-6 pb-6 border-b border-gray-200">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Size</span>
+                        <span class="font-semibold text-gray-900">{{ buggy.get_size_display }}</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Rental Duration</span>
+                        <span class="font-semibold text-gray-900">2 - 6 Hours or Full Day</span>
+                    </div>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'create_buggy_booking' buggy.id %}" class="block w-full text-center bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition shadow-md">
+                        Book This Buggy
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="block w-full text-center bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition shadow-md">
+                        Login to Book
+                    </a>
+                {% endif %}
+
+                <p class="text-xs text-gray-500 text-center mt-3">
+                    You won't be charged yet. The owner will verify availability first.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Leaflet Map (only loads if coordinates exist) -->
+{% if buggy.latitude and buggy.longitude %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ✅ UPDATED: Read data cleanly from the HTML div attributes
+            const mapDiv = document.getElementById('map');
+            const lat = parseFloat(mapDiv.dataset.lat);
+            const lng = parseFloat(mapDiv.dataset.lng);
+            const name = mapDiv.dataset.name;
+            const address = mapDiv.dataset.address;
+            
+            const map = L.map('map').setView([lat, lng], 15);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // ✅ UPDATED: Use JavaScript template literals (backticks) for the popup
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup(`<strong>${name}</strong><br>${address}`)
+                .openPopup();
+        });
+    </script>
+{% endif %}
+{% endblock %}

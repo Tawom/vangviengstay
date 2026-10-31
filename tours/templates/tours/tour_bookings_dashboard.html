@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}My Tour Bookings - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">My Tour Bookings</h1>
+        <p class="text-gray-600">Manage your upcoming and past tour bookings.</p>
+    </div>
+
+    <!-- Upcoming Bookings -->
+    {% if upcoming_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                Upcoming Tour Bookings
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in upcoming_bookings %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-green-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.tour.name }}</h3>
+                                <p class="text-sm text-gray-500">Ref: TV-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full {% if booking.status == 'pending' %}bg-amber-100 text-amber-800{% else %}bg-green-100 text-green-800{% endif %}">
+                                {% if booking.status == 'pending' %}⏳ Pending{% else %}✓ Confirmed{% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>📅 {{ booking.booking_date|date:"M d, Y" }}</p>
+                            <p>⏰ Departs: {{ booking.tour.departure_time|time:"H:i" }}</p>
+                            <p>👥 {{ booking.number_of_people }} {{ booking.number_of_people|pluralize:"person,people" }}</p>
+                            <p>💰 Total: <span class="font-semibold text-gray-900">₭{{ booking.total_price | intcomma }}</span></p>
+                        </div>
+                        
+                        <div class="flex gap-2 mt-4">
+                            <a href="{% url 'tour_booking_confirmation' booking.id %}" class="flex-1 text-center bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                                View Voucher
+                            </a>
+                            <a href="{% url 'cancel_tour_booking' booking.id %}" class="flex-1 text-center bg-red-100 text-red-700 text-sm font-semibold py-2 px-4 rounded-lg hover:bg-red-200 transition">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Cancelled Bookings -->
+    {% if cancelled_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                Cancelled Bookings
+            </h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-80">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tour</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Original Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in cancelled_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.tour.name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full bg-red-100 text-red-800">Cancelled</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <a href="{% url 'tour_booking_confirmation' booking.id %}" class="text-gray-600 hover:text-green-600 font-semibold">
+                                        View Receipt
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Past Bookings -->
+    {% if past_bookings %}
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Past Tour Bookings</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-75">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tour</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Participants</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in past_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.tour.name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.number_of_people }} {{ booking.number_of_people|pluralize:"person,people" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">₭{{ booking.total_price | intcomma }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Empty State -->
+    {% if not upcoming_bookings and not cancelled_bookings and not past_bookings %}
+        <div class="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
+            <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+            <p class="text-gray-500 text-lg mb-4">You don't have any tour bookings yet.</p>
+            <a href="{% url 'tour_list' %}" class="inline-block bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition">
+                Browse Tours
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

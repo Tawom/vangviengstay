@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Motorbike Request Received - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-16 text-center">
+    <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-6">
+        <svg class="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+    </div>
+    
+    <h1 class="text-3xl font-bold text-gray-900 mb-4">Motorbike Rental Request Received!</h1>
+    <p class="text-gray-600 text-lg mb-8">
+        Thank you, {{ booking.guest.username|title }}. We have received your request for the <strong>{{ booking.motorbike.name }}</strong>.
+    </p>
+
+    <!-- ✅ Dynamic "What happens next?" section with email/phone logic -->
+    <div class="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-8 text-left">
+        <h3 class="font-bold text-orange-900 mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            What happens next?
+        </h3>
+        <ol class="text-orange-800 space-y-3 list-decimal list-inside">
+            <li>The owner is currently verifying the motorbike's availability for your requested rental period.</li>
+            
+            {% if booking.guest.email and booking.guest.profile.phone_number %}
+                <li>You will receive a <strong>final confirmation email</strong> at <strong class="text-orange-900">{{ booking.guest.email }}</strong> and a <strong>WhatsApp notification</strong> to <strong class="text-orange-900">{{ booking.guest.profile.phone_number }}</strong> shortly with your official rental voucher.</li>
+            {% elif booking.guest.email %}
+                <li>You will receive a <strong>final confirmation email</strong> at <strong class="text-orange-900">{{ booking.guest.email }}</strong> shortly with your official rental voucher.</li>
+            {% elif booking.guest.profile.phone_number %}
+                <li>You will receive a <strong>WhatsApp notification</strong> to <strong class="text-orange-900">{{ booking.guest.profile.phone_number }}</strong> shortly with your official rental voucher.</li>
+            {% else %}
+                <li>You will receive a <strong>final confirmation</strong> shortly with your official rental voucher.</li>
+            {% endif %}
+            
+            <li>Once confirmed, your motorbike will be officially reserved, and you can arrange pickup details with the owner.</li>
+        </ol>
+    </div>
+
+    <!-- ✅ Contact info display -->
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-8 text-sm">
+        <p class="text-gray-600">
+            <strong>Your contact on file:</strong>
+            {% if booking.guest.email %}
+                <span class="text-gray-900">{{ booking.guest.email }}</span>
+            {% endif %}
+            {% if booking.guest.email and booking.guest.profile.phone_number %}
+                <span class="text-gray-400 mx-2">|</span>
+            {% endif %}
+            {% if booking.guest.profile.phone_number %}
+                <span class="text-gray-900">{{ booking.guest.profile.phone_number }}</span>
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="{% url 'motorbike_list' %}" class="inline-block bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-lg hover:bg-gray-300 transition">
+            Continue Browsing
+        </a>
+        <a href="{% url 'motorbike_bookings_dashboard' %}" class="inline-block bg-orange-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-orange-700 transition">
+            View My Requests
+        </a>
+    </div>
+</div>
+{% endblock %}

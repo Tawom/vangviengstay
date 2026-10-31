@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Bookings: {{ tour.name }} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <a href="{% url 'owner_dashboard' %}" class="text-sm text-gray-500 hover:text-blue-600 mb-2 inline-flex items-center gap-1">
+                ← Back to Dashboard
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">{{ tour.name }}</h1>
+            <p class="text-gray-600">Manage bookings and attendance for this tour.</p>
+        </div>
+    </div>
+
+    <!-- Today's Departures -->
+    {% if today_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
+                Departing Today ({{ tour.departure_time|time:"H:i" }})
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for booking in today_bookings %}
+                    <div class="bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900">{{ booking.guest.username|title }}</h3>
+                                <p class="text-sm text-gray-500">Ref: TV-{{ booking.id|stringformat:"04d" }}</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs font-bold uppercase rounded-full 
+                                {% if booking.attended %}bg-gray-100 text-gray-600{% else %}bg-yellow-100 text-yellow-800{% endif %}">
+                                {% if booking.attended %}Attended{% else %}Pending{% endif %}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-600 mb-4 space-y-1">
+                            <p>👥 {{ booking.number_of_people }} {{ booking.number_of_people|pluralize:"person,people" }}</p>
+                            <p>💰 Total: <span class="font-semibold text-gray-900">${{ booking.total_price }}</span></p>
+                            <p>💳 Status: <span class="capitalize">{{ booking.status }}</span></p>
+                        </div>
+                        
+                        {% if not booking.attended %}
+                            <form method="POST" action="{% url 'mark_attended' booking.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Mark as Attended
+                                </button>
+                            </form>
+                        {% else %}
+                            <button disabled class="w-full bg-gray-100 text-gray-500 font-semibold py-2 px-4 rounded-lg cursor-not-allowed flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Already Attended
+                            </button>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Upcoming Bookings -->
+    {% if upcoming_bookings %}
+        <div class="mb-10">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Upcoming Departures</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">People</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in upcoming_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ booking.number_of_people }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">${{ booking.total_price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Past Bookings -->
+    {% if past_bookings %}
+        <div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Past Tours</h2>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 opacity-75">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">People</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attended</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for booking in past_bookings %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ booking.guest.username|title }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ booking.booking_date|date:"M d, Y" }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ booking.number_of_people }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {% if booking.attended %}
+                                        <span class="text-green-600 font-semibold text-sm">✓ Yes</span>
+                                    {% else %}
+                                        <span class="text-red-500 font-semibold text-sm">✗ No</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if not today_bookings and not upcoming_bookings and not past_bookings %}
+        <div class="text-center py-12 bg-white rounded-xl shadow-md border border-gray-200">
+            <p class="text-gray-500 text-lg">No bookings found for this tour yet.</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
