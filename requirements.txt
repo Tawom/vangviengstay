@@ -1,4 +1,12 @@
 asgiref==3.12.1
+certifi==2026.10.23
+charset-normalizer==3.5.2
 django==6.1.2
+django-anymail==15.2
+idna==3.20
 python-dotenv==1.2.4
+requests==2.34.2
+resend==2.50.1
 sqlparse==0.6.0
+typing-extensions==4.16.0
+urllib3==2.8.0

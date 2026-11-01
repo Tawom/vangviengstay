@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'motorbike',
     'buggy',
     'accounts',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -134,18 +135,14 @@ ADMIN_SITE_TITLE = "Vang Vieng Stay Admin"
 # ==========================================
 # EMAIL CONFIGURATION
 # ==========================================
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
-        'OPTIONS': {
-            'host': os.getenv('EMAIL_HOST', 'smtp.resend.com'),
-            'port': int(os.getenv('EMAIL_PORT', '587')),
-            'username': os.getenv('EMAIL_USER', 'resend'),
-            'password': os.getenv('EMAIL_PASSWORD', ''),  # Loaded securely from .env
-            'use_tls': os.getenv('EMAIL_USE_TLS', 'True') == 'True',
-        }
-    }
+
+# ==========================================
+# EMAIL CONFIGURATION (Using Resend HTTP API)
+# ==========================================
+ANYMAIL = {
+    "RESEND_API_KEY": os.getenv("RESEND_API_KEY", ""),
 }
 
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Vang Vieng Stay <onboarding@resend.dev>')
-SITE_URL = os.getenv('SITE_URL', 'http://localhost:8000')
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Vang Vieng Stay <onboarding@resend.dev>")
+SITE_URL = os.getenv("SITE_URL", "http://localhost:8000")
