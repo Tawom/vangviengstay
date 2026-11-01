@@ -185,7 +185,18 @@ def create_tour_booking(request, tour_id):
                 booking_reference = f"TV-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'tour')
                 
-                messages.success(request, 'Tour booking request received! The operator is verifying availability. You will receive a final confirmation email shortly.')
+                if booking.guest_phone:
+                    messages.success(
+                        request,
+                        f'Tour booking request received! The operator is verifying availability. '
+                        f'You will receive a final confirmation via WhatsApp to {booking.guest_phone} shortly.'
+                    )
+                else:
+                    messages.success(
+                        request,
+                        'Tour booking request received! The operator is verifying availability. '
+                        'You will receive a final confirmation email shortly.'
+                    )
                 return redirect('tour_booking_request_received', booking_id=booking.id)
             except ValidationError as e:
                 form.add_error('pickup_location', e.messages[0])
@@ -193,7 +204,6 @@ def create_tour_booking(request, tour_id):
         form = TourBookingForm()
     
     return render(request, 'tours/book_tour.html', {'form': form, 'tour': tour})
-
 
 @login_required
 def tour_booking_request_received(request, booking_id):
@@ -374,7 +384,6 @@ def approve_tour_booking(request, booking_id):
         
     return redirect('owner_dashboard')
 
-
 @login_required
 def decline_tour_booking(request, booking_id):
     """Owner declines a pending tour booking with a reason."""
@@ -392,26 +401,14 @@ def decline_tour_booking(request, booking_id):
             booking_reference = f"TV-{booking.id:04d}"
             send_booking_declined_email(booking, booking_reference, 'tour', reason)
             
-            if booking.guest_phone:
-                    messages.success(
-                        request,
-                        f'Tour booking request received! The operator is verifying availability. '
-                        f'You will receive a final confirmation via WhatsApp to {booking.guest_phone} shortly.'
-                    )
-            else:
-                    messages.success(
-                        request,
-                        'Tour booking request received! The operator is verifying availability. '
-                        'You will receive a final confirmation email shortly.'
-                    )
-            return redirect('tour_booking_request_received', booking_id=booking.id)
+            messages.success(request, f'Tour booking for {booking.guest.username} has been declined and they have been notified.')
+            return redirect('owner_dashboard')
         else:
             messages.info(request, 'This booking cannot be declined.')
         
         return redirect('owner_dashboard')
     
     return redirect('owner_dashboard')
-
 
 @login_required
 def owner_tour_add(request):
