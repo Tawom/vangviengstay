@@ -14,7 +14,7 @@ from advisor.email_utils import (
     send_booking_request_email, 
     send_booking_declined_email
 )
-
+from advisor.utils import get_booking_confirmation_message  
 
 # ==========================================
 # 1. MOTORBIKE LISTING & DETAIL VIEWS
@@ -153,7 +153,8 @@ def create_motorbike_booking(request, motorbike_id):
                 booking_reference = f"MB-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'motorbike')
                 
-                messages.success(request, 'Motorbike rental request received! The owner is verifying availability. You will receive a final confirmation email shortly.')
+                # Dynamic confirmation message based on phone number
+                messages.success(request, get_booking_confirmation_message(booking, "Motorbike rental"))
                 
                 return redirect('motorbike_booking_request_received', booking_id=booking.id)
             except ValidationError as e:
@@ -162,7 +163,6 @@ def create_motorbike_booking(request, motorbike_id):
         form = MotorbikeBookingForm()
     
     return render(request, 'motorbike/book_motorbike.html', {'form': form, 'motorbike': motorbike})
-
 
 @login_required
 def motorbike_booking_request_received(request, booking_id):
