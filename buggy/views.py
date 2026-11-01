@@ -14,7 +14,7 @@ from advisor.email_utils import (
     send_booking_request_email,
     send_booking_declined_email
 )
-
+from advisor.utils import get_booking_confirmation_message
 
 # ==========================================
 # 1. BUGGY CAR LISTING & DETAIL VIEWS
@@ -85,7 +85,6 @@ def buggy_detail(request, buggy_id):
 # 2. BUGGY CAR BOOKING VIEWS (REQUEST & VERIFY)
 # ==========================================
 
-@login_required
 def create_buggy_booking(request, buggy_id):
     """Handles the buggy booking form - saves as PENDING for owner verification."""
     buggy = get_object_or_404(BuggyCar, id=buggy_id, is_active=True)
@@ -105,7 +104,9 @@ def create_buggy_booking(request, buggy_id):
                 booking_reference = f"BG-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'buggy')
                 
-                messages.success(request, 'Buggy car booking request received! The owner is verifying availability.')
+                # Dynamic confirmation message based on phone number
+                messages.success(request, get_booking_confirmation_message(booking, "Buggy car booking"))
+                
                 return redirect('buggy_booking_request_received', booking_id=booking.id)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
@@ -113,7 +114,6 @@ def create_buggy_booking(request, buggy_id):
         form = BuggyCarBookingForm()
     
     return render(request, 'buggy/book_buggy.html', {'form': form, 'buggy': buggy})
-
 
 @login_required
 def buggy_booking_request_received(request, booking_id):
