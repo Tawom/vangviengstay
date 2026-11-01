@@ -392,7 +392,19 @@ def decline_tour_booking(request, booking_id):
             booking_reference = f"TV-{booking.id:04d}"
             send_booking_declined_email(booking, booking_reference, 'tour', reason)
             
-            messages.success(request, f'Tour booking for {booking.guest.username} has been declined. The guest has been notified.')
+            if booking.guest_phone:
+                    messages.success(
+                        request,
+                        f'Tour booking request received! The operator is verifying availability. '
+                        f'You will receive a final confirmation via WhatsApp to {booking.guest_phone} shortly.'
+                    )
+            else:
+                    messages.success(
+                        request,
+                        'Tour booking request received! The operator is verifying availability. '
+                        'You will receive a final confirmation email shortly.'
+                    )
+            return redirect('tour_booking_request_received', booking_id=booking.id)
         else:
             messages.info(request, 'This booking cannot be declined.')
         
