@@ -15,7 +15,7 @@ from advisor.email_utils import (
     send_booking_request_email,
     send_booking_declined_email
 )
-
+from advisor.utils import get_booking_confirmation_message
 from .forms import (
     BookingForm, 
     GuesthouseReviewForm, 
@@ -182,7 +182,7 @@ def create_booking(request, guesthouse_id):
                 booking_reference = f"VV-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'guesthouse')
                 
-                messages.success(request, 'Booking request received! The owner is verifying availability. You will receive a final confirmation email shortly.')
+                messages.success(request, get_booking_confirmation_message(booking, "Booking"))
                 return redirect('booking_request_received', booking_id=booking.id)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
