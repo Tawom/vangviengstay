@@ -15,7 +15,7 @@ from advisor.email_utils import (
     send_booking_request_email, 
     send_booking_declined_email
 )
-
+from advisor.utils import get_booking_confirmation_message
 
 # ==========================================
 # 1. GUIDE LISTING & DETAIL VIEWS
@@ -73,7 +73,8 @@ def create_guide_booking(request, guide_id):
                 booking_reference = f"VG-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'guide')
                 
-                messages.success(request, 'Guide booking request received! The guide is verifying availability. You will receive a final confirmation email shortly.')
+                # ✅ Dynamic confirmation message based on phone number
+                messages.success(request, get_booking_confirmation_message(booking, "Guide booking"))
                 
                 # ✅ Redirect to the new "Request Received" page
                 return redirect('guide_booking_request_received', booking_id=booking.id)
@@ -83,7 +84,6 @@ def create_guide_booking(request, guide_id):
         form = GuideBookingForm()
     
     return render(request, 'guides/book_guide.html', {'form': form, 'guide': guide})
-
 
 @login_required
 def guide_booking_request_received(request, booking_id):
