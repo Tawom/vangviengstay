@@ -4,7 +4,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from .services import get_ai_response
-from .models import Conversation
 
 @csrf_exempt
 @require_POST
@@ -17,22 +16,21 @@ def chat_api(request):
         if not user_message:
             return JsonResponse({'error': 'Message is required'}, status=400)
         
+        # Get AI response (this now uses MongoDB Atlas)
         bot_response, relevant_docs = get_ai_response(user_message)
         
-        # Save conversation
-        Conversation.objects.create(
-            session_id=session_id,
-            user_message=user_message,
-            bot_response=bot_response,
-            relevant_docs=[doc.id for doc in relevant_docs]
-        )
+        # Optional: Save conversation to MongoDB (commented out for now to avoid errors)
+        # We can add this later if needed
         
         return JsonResponse({
             'response': bot_response,
-            'sources': [doc.title for doc in relevant_docs]
+            'sources': [doc.title for doc in relevant_docs] if relevant_docs else []
         })
     
     except Exception as e:
         print("❌ CRITICAL ERROR IN CHAT_API:")
-        traceback.print_exc() # This will print the EXACT line causing the error
-        return JsonResponse({'error': 'An internal error occurred'}, status=500)
+        traceback.print_exc()
+        return JsonResponse({
+            'error': 'Sorry, an error occurred. Please try again.',
+            'details': str(e)
+        }, status=500)

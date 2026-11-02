@@ -1,52 +1,33 @@
 import requests
 from django.conf import settings
-from django.db import connection
-from django.db.models import Q
-from .models import PolicyDocument
+from .mongodb_service import vector_search
 
 OLLAMA_BASE_URL = "http://127.0.0.1:11434"
 
 def get_embedding(text):
-    """Get embedding from local Ollama. Returns None if unavailable."""
+    """Get embedding from local Ollama"""
     try:
         response = requests.post(
             f"{OLLAMA_BASE_URL}/api/embed",
             json={"model": "nomic-embed-text", "input": text},
-            timeout=5
+            timeout=10
         )
         response.raise_for_status()
         return response.json().get('embeddings', [None])[0]
-    except Exception:
+    except Exception as e:
+        print(f"⚠️ Ollama embedding error: {e}")
         return None
 
 def search_relevant_docs(query, top_k=3):
-    """
-    Smart Search: 
-    - Uses Vector Search ONLY on PostgreSQL (Production)
-    - Uses safe Keyword Search on SQLite (Local Mac)
-    """
-    try:
-        # 1. Check if we are on PostgreSQL. If not, skip to fallback.
-        if connection.vendor == 'postgresql':
-            from pgvector.django import CosineDistance
-            query_embedding = get_embedding(query)
-            
-            if query_embedding:
-                # Evaluate immediately to a list to avoid lazy QuerySet issues
-                return list(PolicyDocument.objects.annotate(
-                    distance=CosineDistance('embedding', query_embedding)
-                ).order_by('distance')[:top_k])
-    except Exception as e:
-        print(f"⚠️ Vector search skipped: {e}")
-
-    # 2. Fallback: Safe keyword search (Works perfectly on SQLite and as a backup)
-    return list(PolicyDocument.objects.filter(
-        Q(title__icontains=query) | Q(content__icontains=query)
-    ).distinct()[:top_k])
+    """Find most relevant policy documents using MongoDB Vector Search"""
+    query_embedding = get_embedding(query)
+    if not query_embedding:
+        return []
+    
+    return vector_search(query_embedding, top_k)
 
 def generate_response(query, relevant_docs):
     """Generate response using DeepSeek Chat API"""
-    # relevant_docs is now a list of objects
     context = "\n\n".join([f"{doc.title}:\n{doc.content}" for doc in relevant_docs])
     
     try:
@@ -79,13 +60,30 @@ def generate_response(query, relevant_docs):
         print(f"❌ DeepSeek API Error: {e}")
         return "I'm sorry, I'm having trouble connecting right now. Please contact us directly."
 
+# Below this threshold, send every document to DeepSeek (no search needed).
+# Above it, use vector search (requires local Ollama).
+FULL_CONTEXT_LIMIT = 25
+
+
 def get_ai_response(query):
-    """Main function to get AI response"""
-    relevant_docs = search_relevant_docs(query)
-    
-    # Check if list is empty
-    if not relevant_docs:
-        return "I don't have information about that specific topic. Please contact us directly via WhatsApp or email.", []
-    
+    """
+    Small knowledge base -> send all docs (works on server, read-only).
+    Large knowledge base -> vector search (requires Ollama, i.e. your Mac).
+    """
+    from .mongodb_service import get_all_policies
+
+    all_docs = get_all_policies()
+
+    if not all_docs:
+        return ("I don't have any policy information loaded yet. "
+                "Please contact us directly via WhatsApp or email."), []
+
+    if len(all_docs) <= FULL_CONTEXT_LIMIT:
+        relevant_docs = all_docs
+    else:
+        relevant_docs = search_relevant_docs(query, top_k=4)
+        if not relevant_docs:
+            relevant_docs = all_docs[:4]  # safe fallback, never dead-end
+
     response = generate_response(query, relevant_docs)
     return response, relevant_docs

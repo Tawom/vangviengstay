@@ -150,3 +150,7 @@ ANYMAIL = {
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Vang Vieng Stay <onboarding@resend.dev>")
 SITE_URL = os.getenv("SITE_URL", "http://localhost:8000")
+
+# MongoDB Atlas Configuration
+MONGODB_URI = os.getenv('MONGODB_URI')
+MONGODB_DB_NAME = os.getenv('MONGODB_DB_NAME', 'vangviengstay')
