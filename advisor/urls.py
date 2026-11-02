@@ -50,5 +50,6 @@ urlpatterns = [
 
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
+    path('ai-assistant/', include('ai_assistant.urls')),
     
 ]

@@ -8,6 +8,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# AI Assistant Configuration
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'buggy',
     'accounts',
     'anymail',
+    'ai_assistant',
 ]
 
 MIDDLEWARE = [
