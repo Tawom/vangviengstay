@@ -113,8 +113,8 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Added for production collectstatic
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'  # Changed from 'staticfiles' to match Nginx
 
 # Media files (User uploads)
 MEDIA_URL = '/media/'
