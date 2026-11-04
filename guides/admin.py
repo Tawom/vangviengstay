@@ -32,11 +32,10 @@ class GuideAdmin(admin.ModelAdmin):
 
 
 # ============================================================
-# 2. GUIDE BOOKING ADMIN (Enhanced with Reports & Actions)
+# 2. GUIDE BOOKING ADMIN (Bulletproof & Enhanced)
 # ============================================================
 @admin.register(GuideBooking)
 class GuideBookingAdmin(admin.ModelAdmin):
-    # 1. Columns to display (enhanced with reference & badges)
     list_display = (
         'booking_reference',
         'guest_info',
@@ -49,7 +48,6 @@ class GuideBookingAdmin(admin.ModelAdmin):
         'created_at',
     )
     
-    # 2. Sidebar Filters (Crucial for Daily/Weekly/Monthly reports)
     list_filter = (
         'status',
         'booking_date',
@@ -57,24 +55,17 @@ class GuideBookingAdmin(admin.ModelAdmin):
         'guide__languages',
     )
     
-    # 3. Search bar at the top
     search_fields = (
         'guest__username',
         'guest__first_name',
         'guest__last_name',
         'guest__email',
-        'guest_phone',
         'guide__name',
         'guide__expertise',
     )
     
-    # 4. Default sort order (newest first)
     ordering = ('-booking_date', '-id')
-    
-    # 5. Read-only fields
     readonly_fields = ('total_price', 'created_at')
-    
-    # 6. Custom Admin Actions (Reports + Bulk Status Updates)
     actions = ['export_to_csv', 'mark_as_confirmed', 'mark_as_declined']
 
     # ----------------------------------------------------------
@@ -87,10 +78,14 @@ class GuideBookingAdmin(admin.ModelAdmin):
     booking_reference.admin_order_field = 'id'
 
     def guest_info(self, obj):
-        """Shows guest name + phone in one column."""
+        """Bulletproof guest info display."""
         name = f"{obj.guest.first_name} {obj.guest.last_name}".strip() or obj.guest.username
-        if obj.guest_phone:
-            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, obj.guest_phone)
+        
+        # Safely check for phone on Booking, then on Guest model
+        phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None)
+        
+        if phone:
+            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, phone)
         return name
     guest_info.short_description = 'Guest'
 
@@ -100,20 +95,18 @@ class GuideBookingAdmin(admin.ModelAdmin):
     guide_name.admin_order_field = 'guide__name'
 
     def duration_display(self, obj):
-        """Shows booking duration in hours."""
         if obj.duration_hours:
             return f"{obj.duration_hours} hour{'s' if obj.duration_hours != 1 else ''}"
         return 'N/A'
     duration_display.short_description = 'Duration'
 
     def status_badge(self, obj):
-        """Colorful status badge."""
         colors = {
-            'pending': '#ffa500',    # Orange
-            'confirmed': '#28a745',  # Green
-            'declined': '#dc3545',   # Red
-            'cancelled': '#6c757d',  # Gray
-            'completed': '#17a2b8',  # Blue
+            'pending': '#ffa500',
+            'confirmed': '#28a745',
+            'declined': '#dc3545',
+            'cancelled': '#6c757d',
+            'completed': '#17a2b8',
         }
         color = colors.get(obj.status, '#6c757d')
         return format_html(
@@ -126,31 +119,31 @@ class GuideBookingAdmin(admin.ModelAdmin):
     status_badge.admin_order_field = 'status'
 
     # ----------------------------------------------------------
-    # Custom Actions (Using .short_description attributes)
+    # Custom Actions
     # ----------------------------------------------------------
 
     def export_to_csv(self, request, queryset):
-        """Generates a CSV report of selected bookings."""
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="guide_booking_report.csv"'
         
         writer = csv.writer(response)
-        
-        # CSV Header
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
             'Guide', 'Languages', 'Booking Date', 'Start Time',
             'Duration (Hours)', 'Total Price', 'Status', 'Created At',
         ])
         
-        # CSV Data
         for booking in queryset:
             guest_name = f"{booking.guest.first_name} {booking.guest.last_name}".strip() or booking.guest.username
+            
+            # Bulletproof phone lookup for CSV
+            phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '')
+            
             writer.writerow([
                 f"GD-{booking.id:04d}",
                 guest_name,
                 booking.guest.email,
-                booking.guest_phone or '',
+                phone,
                 booking.guide.name,
                 booking.guide.languages,
                 booking.booking_date.strftime('%Y-%m-%d') if booking.booking_date else 'N/A',
@@ -166,7 +159,6 @@ class GuideBookingAdmin(admin.ModelAdmin):
     export_to_csv.short_description = "Export Selected to CSV (Report)"
 
     def mark_as_confirmed(self, request, queryset):
-        """Bulk confirm selected bookings."""
         count = 0
         for booking in queryset.filter(status='pending'):
             booking.status = 'confirmed'
@@ -176,7 +168,6 @@ class GuideBookingAdmin(admin.ModelAdmin):
     mark_as_confirmed.short_description = "Mark Selected as Confirmed"
 
     def mark_as_declined(self, request, queryset):
-        """Bulk decline selected bookings."""
         count = 0
         for booking in queryset.filter(status='pending'):
             booking.status = 'declined'
