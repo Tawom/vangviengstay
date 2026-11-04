@@ -36,12 +36,14 @@ def send_booking_request_email(booking, booking_reference, booking_type='guestho
 
     subject = f"{subject_prefix}: {name} - Ref: {booking_reference}"
     
-    # ✅ CORRECTED: Points to the new booking_request.html template we created
+    # ✅ CORRECTED: Points to the new booking_request.html template 
+    # AND passes 'property_name' so the template can display it.
     html_message = render_to_string('emails/booking_request.html', {
         'booking': booking,
         'booking_reference': booking_reference,
         'booking_type': booking_type,
         'voucher_url': voucher_url,
+        'property_name': name,  # <--- ADDED THIS LINE
     })
     
     plain_message = strip_tags(html_message)

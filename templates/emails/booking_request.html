@@ -31,36 +31,24 @@
         
         <div class="content">
             <p class="greeting">
-                Thank you, <strong>{{ booking.guest.first_name|default:booking.guest_name|default:"Valued Guest" }}</strong>. 
-                We have received your request for 
-                <strong>
-                    {% if booking_type == 'guesthouse' %}{{ booking.guesthouse.name }}
-                    {% elif booking_type == 'tour' %}{{ booking.tour.name }}
-                    {% elif booking_type == 'guide' %}{{ booking.guide.name }}
-                    {% elif booking_type == 'motorbike' %}{{ booking.motorbike.name }}
-                    {% elif booking_type == 'buggy' %}{{ booking.buggy_car.name }}
-                    {% else %}your booking{% endif %}
-                </strong>.
+                Thank you, <strong>{{ booking.guest.first_name|default:"Valued Guest" }}</strong>. 
+                We have received your request for <strong>{{ property_name }}</strong>.
             </p>
             
             <div class="booking-details">
                 <h3>📋 Your Booking Details</h3>
                 <p><strong>Reference:</strong> {{ booking_reference }}</p>
+                <p><strong>Service:</strong> {{ property_name }}</p>
                 
-                <p><strong>Service:</strong> 
-                    {% if booking_type == 'guesthouse' %}{{ booking.guesthouse.name }}
-                    {% elif booking_type == 'tour' %}{{ booking.tour.name }}
-                    {% elif booking_type == 'guide' %}{{ booking.guide.name }}
-                    {% elif booking_type == 'motorbike' %}{{ booking.motorbike.name }}
-                    {% elif booking_type == 'buggy' %}{{ booking.buggy_car.name }}
-                    {% else %}N/A{% endif %}
-                </p>
+                {% if booking.check_in_date %}
+                <p><strong>Check-in Date:</strong> {{ booking.check_in_date|date:"F d, Y" }}</p>
+                {% elif booking.tour_date %}
+                <p><strong>Tour Date:</strong> {{ booking.tour_date|date:"F d, Y" }}</p>
+                {% elif booking.rental_date %}
+                <p><strong>Rental Date:</strong> {{ booking.rental_date|date:"F d, Y" }}</p>
+                {% endif %}
                 
-                <p><strong>Date:</strong> 
-                    {{ booking.check_in_date|default:booking.tour_date|default:booking.rental_date|date:"F d, Y"|default:"As requested" }}
-                </p>
-                
-                <p><strong>Guests/Participants:</strong> {{ booking.number_of_guests|default:booking.guests|default:1 }}</p>
+                <p><strong>Guests/Participants:</strong> {{ booking.number_of_guests|default:"1" }}</p>
                 
                 {% if booking.pickup_location %}
                 <p><strong>Pickup Location:</strong> {{ booking.pickup_location }}</p>
@@ -71,7 +59,7 @@
                 <h3>What happens next?</h3>
                 <ul>
                     <li>The operator is currently verifying availability for your requested date.</li>
-                    <li>You will receive a quick update via <strong>WhatsApp</strong> to <span class="highlight">{{ booking.guest_phone|default:booking.phone|default:"your registered phone number" }}</span> shortly.</li>
+                    <li>You will receive a quick update via <strong>WhatsApp</strong> to <span class="highlight">{{ booking.guest_phone|default:"your registered phone number" }}</span> shortly.</li>
                     <li>Once confirmed, your spot will be officially reserved, and this email will serve as your <strong>official booking voucher</strong>.</li>
                 </ul>
             </div>
