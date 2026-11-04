@@ -7,7 +7,7 @@ from django.conf import settings
 def send_booking_request_email(booking, booking_reference, booking_type='guesthouse'):
     """
     Send a booking REQUEST email to the guest (Pending Verification).
-    This is triggered immediately when the guest submits the booking form.
+    Triggered immediately when the guest submits the booking form.
     """
     if booking_type == 'guesthouse':
         voucher_url = f"{settings.SITE_URL}/booking/{booking.id}/request-received/"
@@ -36,8 +36,8 @@ def send_booking_request_email(booking, booking_reference, booking_type='guestho
 
     subject = f"{subject_prefix}: {name} - Ref: {booking_reference}"
     
-    # Render HTML email (The template dynamically checks if status == 'pending')
-    html_message = render_to_string('emails/booking_confirmation.html', {
+    # ✅ CORRECTED: Points to the new booking_request.html template we created
+    html_message = render_to_string('emails/booking_request.html', {
         'booking': booking,
         'booking_reference': booking_reference,
         'booking_type': booking_type,
@@ -65,7 +65,7 @@ def send_booking_request_email(booking, booking_reference, booking_type='guestho
 def send_booking_confirmation_email(booking, booking_reference, booking_type='guesthouse'):
     """
     Send a final booking CONFIRMATION email to the guest.
-    This should be triggered when the owner/admin approves the pending booking.
+    Triggered when the owner/admin approves the pending booking.
     """
     if booking_type == 'guesthouse':
         voucher_url = f"{settings.SITE_URL}/booking/{booking.id}/confirmation/"
@@ -94,7 +94,6 @@ def send_booking_confirmation_email(booking, booking_reference, booking_type='gu
 
     subject = f"{subject_prefix}: {name} - Ref: {booking_reference}"
     
-    # Render HTML email (The template dynamically checks if status == 'confirmed')
     html_message = render_to_string('emails/booking_confirmation.html', {
         'booking': booking,
         'booking_reference': booking_reference,
@@ -136,16 +135,19 @@ def send_contact_form_email(name, email, subject, message):
     })
     admin_plain_message = strip_tags(admin_html_message)
     
+    # ✅ POLISH: Use settings for admin email, with a fallback
+    admin_email = getattr(settings, 'ADMIN_EMAIL', 'sonnousith.tawon8@gmail.com')
+    
     try:
         send_mail(
             subject=f"[Contact Form] {subject}",
             message=admin_plain_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=['sonnousith.tawon8@gmail.com'],  # Replace with your actual admin email
+            recipient_list=[admin_email],
             html_message=admin_html_message,
             fail_silently=False,
         )
-        print(f"✅ Contact form email sent to admin")
+        print(f"✅ Contact form email sent to admin ({admin_email})")
         admin_success = True
     except Exception as e:
         print(f"❌ Error sending contact form to admin: {e}")
@@ -164,7 +166,7 @@ def send_contact_form_email(name, email, subject, message):
             subject="Thank you for contacting Vang Vieng Stay - We received your message",
             message=auto_response_plain,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],  # Send back to the user
+            recipient_list=[email],
             html_message=auto_response_html,
             fail_silently=False,
         )
@@ -173,8 +175,6 @@ def send_contact_form_email(name, email, subject, message):
     except Exception as e:
         print(f"❌ Error sending auto-response to user: {e}")
     
-    # Return True if the admin received the message (most critical), 
-    # even if the user's auto-response failed for some reason.
     return admin_success
 
 
@@ -186,27 +186,21 @@ def send_booking_declined_email(booking, booking_reference, booking_type='guesth
     if booking_type == 'guesthouse':
         subject = f"Booking Request Declined: {booking.guesthouse.name} - Ref: {booking_reference}"
         property_name = booking.guesthouse.name
-        property_type = 'guesthouse'
     elif booking_type == 'tour':
         subject = f"Tour Request Declined: {booking.tour.name} - Ref: {booking_reference}"
         property_name = booking.tour.name
-        property_type = 'tour'
     elif booking_type == 'guide':
         subject = f"Guide Request Declined: {booking.guide.name} - Ref: {booking_reference}"
         property_name = booking.guide.name
-        property_type = 'guide'
     elif booking_type == 'motorbike':
         subject = f"Motorbike Request Declined: {booking.motorbike.name} - Ref: {booking_reference}"
         property_name = booking.motorbike.name
-        property_type = 'motorbike'
     elif booking_type == 'buggy':
         subject = f"Buggy Request Declined: {booking.buggy_car.name} - Ref: {booking_reference}"
         property_name = booking.buggy_car.name
-        property_type = 'buggy'
     else:
         subject = f"Booking Request Declined - Ref: {booking_reference}"
         property_name = "your booking"
-        property_type = 'guesthouse'
     
     # Default reasons if none provided
     if not reason:
@@ -217,7 +211,6 @@ def send_booking_declined_email(booking, booking_reference, booking_type='guesth
         'booking_reference': booking_reference,
         'booking_type': booking_type,
         'property_name': property_name,
-        'property_type': property_type,
         'reason': reason,
     })
     

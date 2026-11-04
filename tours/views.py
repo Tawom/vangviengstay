@@ -15,7 +15,6 @@ from advisor.email_utils import (
     send_booking_declined_email
 )
 
-
 # ==========================================
 # 1. TOUR LISTING & DETAIL VIEWS
 # ==========================================
@@ -182,24 +181,24 @@ def create_tour_booking(request, tour_id):
                 booking.full_clean()
                 booking.save()
                 
+                # Generate reference and send email
                 booking_reference = f"TV-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'tour')
                 
-                if booking.guest_phone:
-                    messages.success(
-                        request,
-                        f'Tour booking request received! The operator is verifying availability. '
-                        f'You will receive a final confirmation via WhatsApp to {booking.guest_phone} shortly.'
-                    )
-                else:
-                    messages.success(
-                        request,
-                        'Tour booking request received! The operator is verifying availability. '
-                        'You will receive a final confirmation email shortly.'
-                    )
+                # ✅ UNIFIED, CONSISTENT SUCCESS MESSAGE
+                messages.success(
+                    request,
+                    f"Tour booking request received! The operator is verifying availability. "
+                    f"You will receive a quick update via WhatsApp to {booking.guest_phone} shortly, "
+                    f"and an official booking voucher will be sent to {booking.guest.email} once confirmed."
+                )
+                
                 return redirect('tour_booking_request_received', booking_id=booking.id)
+            
             except ValidationError as e:
-                form.add_error('pickup_location', e.messages[0])
+                # Handle any model-level validation errors gracefully
+                form.add_error(None, e.messages[0]) # Changed to None to show as a general form error, or specify a field
+                
     else:
         form = TourBookingForm()
     
