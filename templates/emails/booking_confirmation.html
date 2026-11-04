@@ -1,111 +1,81 @@
-{% load static %}
-{% load humanize %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed!</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333333; background-color: #f4f4f5; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .header { background-color: {{ header_color|default:'#ea580c' }}; color: #ffffff; padding: 30px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
-        .header p { margin: 10px 0 0; font-size: 14px; opacity: 0.9; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        /* Green gradient for confirmed status */
+        .header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: #ffffff; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 28px; font-weight: 600; }
         .content { padding: 30px 20px; }
-        .detail-row { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb; }
-        .detail-label { font-weight: 600; color: #6b7280; font-size: 14px; }
-        .detail-value { font-weight: 600; color: #111827; font-size: 14px; text-align: right; }
-        .total-row { border-top: 2px solid #111827; border-bottom: none; margin-top: 20px; padding-top: 15px; }
-        .total-value { font-size: 18px; color: {{ header_color|default:'#ea580c' }}; }
-        .button { display: inline-block; background-color: {{ header_color|default:'#ea580c' }}; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: 600; margin-top: 20px; text-align: center; }
-        .footer { background-color: #f9fafb; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; }
+        .greeting { font-size: 18px; margin-bottom: 20px; }
+        .booking-details { background-color: #f0fdf4; border-left: 4px solid #11998e; padding: 15px; margin: 20px 0; border-radius: 4px; }
+        .booking-details h3 { margin: 0 0 10px 0; color: #11998e; font-size: 16px; }
+        .booking-details p { margin: 5px 0; font-size: 14px; }
+        .next-steps { margin: 25px 0; }
+        .next-steps h3 { color: #333333; font-size: 18px; margin-bottom: 15px; }
+        .next-steps ul { margin: 0; padding-left: 20px; }
+        .next-steps li { margin-bottom: 12px; font-size: 15px; }
+        .highlight { font-weight: 600; color: #11998e; }
+        .footer { background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 13px; color: #666666; border-top: 1px solid #e0e0e0; }
+        .footer a { color: #11998e; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>{% if booking.status == 'pending' %}Request Received{% else %}Booking Confirmed!{% endif %}</h1>
-            <p>Reference: {{ booking_reference }}</p>
+            <h1>✅ Booking Confirmed!</h1>
         </div>
+        
         <div class="content">
-            <p>Dear {{ booking.guest.username|title }},</p>
+            <p class="greeting">
+                Great news, <strong>{{ booking.guest.first_name|default:"Valued Guest" }}</strong>! 
+                Your booking for <strong>{{ property_name }}</strong> is officially confirmed and reserved.
+            </p>
             
-            {% if booking.status == 'pending' %}
-                <p>Thank you for your request! We are currently verifying availability.</p>
-                <p>
-                    {% if booking.guest_phone %}
-                        You will receive a final confirmation via <strong>phone/WhatsApp</strong> at <strong>{{ booking.guest_phone }}</strong> shortly.
-                    {% else %}
-                        You will receive a final confirmation <strong>email</strong> shortly.
-                    {% endif %}
-                </p>
-            {% else %}
-                <p>Your booking has been <strong>confirmed</strong>. Please review the details below.</p>
-            {% endif %}
-
-            <h3 style="margin-top: 25px; margin-bottom: 15px; color: #111827;">Booking Details</h3>
-            
-            {% if booking_type == 'guesthouse' %}
-                <div class="detail-row"><span class="detail-label">Property</span><span class="detail-value">{{ booking.guesthouse.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Check-in</span><span class="detail-value">{{ booking.check_in|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Check-out</span><span class="detail-value">{{ booking.check_out|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Room Type</span><span class="detail-value">{{ booking.get_room_type_display }}</span></div>
+            <div class="booking-details">
+                <h3>📋 Your Official Voucher</h3>
+                <p><strong>Reference:</strong> {{ booking_reference }}</p>
+                <p><strong>Service:</strong> {{ property_name }}</p>
                 
-            {% elif booking_type == 'tour' %}
-                <div class="detail-row"><span class="detail-label">Tour</span><span class="detail-value">{{ booking.tour.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Departure Time</span><span class="detail-value">{{ booking.tour.departure_time|time:"H:i" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Guests</span><span class="detail-value">{{ booking.number_of_people }}</span></div>
-                
-            {% elif booking_type == 'guide' %}
-                <div class="detail-row"><span class="detail-label">Guide</span><span class="detail-value">{{ booking.guide.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Start Time</span><span class="detail-value">{{ booking.start_time|time:"H:i" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">{{ booking.duration_hours }} hours</span></div>
-                <div class="detail-row"><span class="detail-label">Meeting Location</span><span class="detail-value">{{ booking.meeting_location }}</span></div>
-                
-            {% elif booking_type == 'motorbike' %}
-                <div class="detail-row"><span class="detail-label">Motorbike</span><span class="detail-value">{{ booking.motorbike.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Category</span><span class="detail-value">{{ booking.motorbike.get_category_display }}</span></div>
-                <div class="detail-row"><span class="detail-label">Start Date</span><span class="detail-value">{{ booking.start_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">End Date</span><span class="detail-value">{{ booking.end_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Security Deposit</span><span class="detail-value">₭{{ booking.deposit_amount|intcomma }}</span></div>
-
-            {% elif booking_type == 'buggy' %}
-                <div class="detail-row"><span class="detail-label">Buggy Car</span><span class="detail-value">{{ booking.buggy_car.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Size</span><span class="detail-value">{{ booking.buggy_car.get_size_display }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Start Time</span><span class="detail-value">{{ booking.start_time|time:"H:i" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">{{ booking.duration_hours }} hours</span></div>
-                <div class="detail-row"><span class="detail-label">Security Deposit</span><span class="detail-value">₭{{ booking.deposit_amount|intcomma }}</span></div>
-            {% endif %}
-
-            <div class="detail-row total-row">
-                <span class="detail-label">Total Price</span>
-                <span class="detail-value total-value">₭{{ booking.total_price }}</span>
-            </div>
-
-            {% if booking.guest_phone %}
-            <p style="margin-top: 20px; font-size: 14px;"><strong>Your Contact Number:</strong> {{ booking.guest_phone }}</p>
-            {% endif %}
-
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="{{ voucher_url }}" class="button">
-                    {% if booking.status == 'pending' %}View Request Status{% else %}View Voucher{% endif %}
-                </a>
-            </div>
-
-            <p style="margin-top: 30px; font-size: 14px; color: #6b7280;">
-                {% if booking.status == 'pending' %}
-                    No payment is required at this time. We will notify you once the owner approves your request.
-                {% else %}
-                    Please present this email or a screenshot upon arrival/pickup. Payment will be collected in cash (LAK).
+                {% if booking.check_in_date %}
+                <p><strong>Check-in Date:</strong> {{ booking.check_in_date|date:"F d, Y" }}</p>
+                {% elif booking.tour_date %}
+                <p><strong>Tour Date:</strong> {{ booking.tour_date|date:"F d, Y" }}</p>
+                {% elif booking.rental_date %}
+                <p><strong>Rental Date:</strong> {{ booking.rental_date|date:"F d, Y" }}</p>
                 {% endif %}
+                
+                <p><strong>Guests/Participants:</strong> {{ booking.number_of_guests|default:"1" }}</p>
+                
+                {% if booking.pickup_location %}
+                <p><strong>Pickup Location:</strong> {{ booking.pickup_location }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="next-steps">
+                <h3>What to do next:</h3>
+                <ul>
+                    <li><strong>Save this email:</strong> Please keep this email handy or show it on your phone upon arrival.</li>
+                    <li><strong>Pickup Details:</strong> We will send you a quick message via <strong>WhatsApp</strong> to <span class="highlight">{{ booking.guest_phone|default:"your registered phone number" }}</span> 24 hours before your booking with exact pickup instructions.</li>
+                    <li><strong>Payment:</strong> Payment can be made securely upon arrival (Cash in LAK/USD/THB, or Bank Transfer).</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 25px; font-size: 14px; color: #666666;">
+                We are thrilled to host you! If you need to make any changes, please reply to this email or contact us on WhatsApp.
             </p>
         </div>
+        
         <div class="footer">
-            <p>Thank you for choosing Vang Vieng Stay!</p>
-            <p>If you have any questions, please reply to this email.</p>
+            <p>
+                <strong>Vang Vieng Stay</strong><br>
+                Your adventure in Laos starts here<br>
+                <a href="https://vangviengstay.com">vangviengstay.com</a>
+            </p>
         </div>
     </div>
 </body>

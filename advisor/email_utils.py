@@ -101,6 +101,7 @@ def send_booking_confirmation_email(booking, booking_reference, booking_type='gu
         'booking_reference': booking_reference,
         'booking_type': booking_type,
         'voucher_url': voucher_url,
+        'property_name': name, 
     })
     
     plain_message = strip_tags(html_message)
