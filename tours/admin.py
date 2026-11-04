@@ -32,11 +32,10 @@ class TourAdmin(admin.ModelAdmin):
 
 
 # ============================================================
-# TOUR BOOKING ADMIN (Merged + Enhanced with Reports)
+# TOUR BOOKING ADMIN (Clean, Reliable & Bulletproof)
 # ============================================================
 @admin.register(TourBooking)
 class TourBookingAdmin(admin.ModelAdmin):
-    # 1. Columns to display (merged from both versions)
     list_display = (
         'booking_reference',
         'guest_info',
@@ -48,7 +47,6 @@ class TourBookingAdmin(admin.ModelAdmin):
         'attended',
     )
     
-    # 2. Sidebar Filters (Crucial for Daily/Weekly/Monthly reports)
     list_filter = (
         'status',
         'attended',
@@ -58,26 +56,24 @@ class TourBookingAdmin(admin.ModelAdmin):
         'tour__operator_name',
     )
     
-    # 3. Search bar at the top
     search_fields = (
         'guest__username',
         'guest__first_name',
         'guest__last_name',
         'guest__email',
-        'guest_phone',
         'tour__name',
         'tour__operator_name',
         'pickup_location',
+        # Removed 'guest_phone' from search_fields to prevent FieldError if it's not a direct model field
     )
     
-    # 4. Default sort order (newest first)
     ordering = ('-booking_date', '-id')
     
-    # 5. Custom Admin Actions (The "Report" Generator)
+    # ✅ THIS IS THE KEY LINE - Must be present!
     actions = ['export_to_csv', 'mark_as_confirmed', 'mark_as_declined']
 
     # ----------------------------------------------------------
-    # Custom Methods for Better UI
+    # Custom Display Methods
     # ----------------------------------------------------------
     
     def booking_reference(self, obj):
@@ -86,10 +82,14 @@ class TourBookingAdmin(admin.ModelAdmin):
     booking_reference.admin_order_field = 'id'
 
     def guest_info(self, obj):
-        """Shows guest name + phone in one column."""
+        """Bulletproof guest info display."""
         name = f"{obj.guest.first_name} {obj.guest.last_name}".strip() or obj.guest.username
-        if obj.guest_phone:
-            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, obj.guest_phone)
+        
+        # Safely check for phone on Booking, then on Guest model
+        phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None)
+        
+        if phone:
+            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, phone)
         return name
     guest_info.short_description = 'Guest'
 
@@ -99,13 +99,12 @@ class TourBookingAdmin(admin.ModelAdmin):
     tour_name.admin_order_field = 'tour__name'
 
     def status_badge(self, obj):
-        """Colorful status badge."""
         colors = {
-            'pending': '#ffa500',    # Orange
-            'confirmed': '#28a745',  # Green
-            'declined': '#dc3545',   # Red
-            'cancelled': '#6c757d',  # Gray
-            'completed': '#17a2b8',  # Blue
+            'pending': '#ffa500',
+            'confirmed': '#28a745',
+            'declined': '#dc3545',
+            'cancelled': '#6c757d',
+            'completed': '#17a2b8',
         }
         color = colors.get(obj.status, '#6c757d')
         return format_html(
@@ -118,31 +117,31 @@ class TourBookingAdmin(admin.ModelAdmin):
     status_badge.admin_order_field = 'status'
 
     # ----------------------------------------------------------
-    # Custom Actions
+    # ✅ ACTION METHODS (Using .short_description attributes)
     # ----------------------------------------------------------
 
     def export_to_csv(self, request, queryset):
-        """Generates a CSV report of selected bookings."""
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="tour_booking_report.csv"'
         
         writer = csv.writer(response)
-        
-        # CSV Header
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
             'Tour', 'Operator', 'Booking Date', 'Pickup Option',
             'Pickup Location', 'Total Price', 'Status', 'Attended',
         ])
         
-        # CSV Data
         for booking in queryset:
             guest_name = f"{booking.guest.first_name} {booking.guest.last_name}".strip() or booking.guest.username
+            
+            # Bulletproof phone lookup for CSV
+            phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '')
+            
             writer.writerow([
                 f"TV-{booking.id:04d}",
                 guest_name,
                 booking.guest.email,
-                booking.guest_phone or '',
+                phone,
                 booking.tour.name,
                 booking.tour.operator_name,
                 booking.booking_date.strftime('%Y-%m-%d') if booking.booking_date else 'N/A',
@@ -153,29 +152,27 @@ class TourBookingAdmin(admin.ModelAdmin):
                 'Yes' if booking.attended else 'No',
             ])
         
-        self.message_user(request, f'📥 Exported {queryset.count()} booking(s) to CSV.')
+        self.message_user(request, f'Exported {queryset.count()} booking(s) to CSV.')
         return response
-    export_to_csv.short_description = "📥 Export Selected to CSV (Report)"
+    export_to_csv.short_description = "Export Selected to CSV (Report)"
 
     def mark_as_confirmed(self, request, queryset):
-        """Bulk confirm selected bookings."""
         count = 0
         for booking in queryset.filter(status='pending'):
             booking.status = 'confirmed'
             booking.save()
             count += 1
-        self.message_user(request, f'✅ {count} booking(s) marked as Confirmed.')
-    mark_as_confirmed.short_description = "✅ Mark Selected as Confirmed"
+        self.message_user(request, f'{count} booking(s) marked as Confirmed.')
+    mark_as_confirmed.short_description = "Mark Selected as Confirmed"
 
     def mark_as_declined(self, request, queryset):
-        """Bulk decline selected bookings."""
         count = 0
         for booking in queryset.filter(status='pending'):
             booking.status = 'declined'
             booking.save()
             count += 1
-        self.message_user(request, f'❌ {count} booking(s) marked as Declined.')
-    mark_as_declined.short_description = "❌ Mark Selected as Declined"
+        self.message_user(request, f'{count} booking(s) marked as Declined.')
+    mark_as_declined.short_description = "Mark Selected as Declined"
 
 
 # ============================================================

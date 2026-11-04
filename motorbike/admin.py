@@ -25,9 +25,9 @@ class MotorbikeAdmin(admin.ModelAdmin):
             'fields': ('description', 'image_url'),
             'classes': ('collapse',)
         }),
-        ('📍 Pickup Location', {
+        ('Pickup Location', {
             'fields': ('pickup_address', 'latitude', 'longitude'),
-            'description': '💡 Tip: Find coordinates by right-clicking on Google Maps and copying the numbers.'
+            'description': 'Tip: Find coordinates by right-clicking on Google Maps and copying the numbers.'
         }),
         ('Status', {
             'fields': ('is_active',)
@@ -132,7 +132,7 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
     status_badge.admin_order_field = 'status'
 
     # ----------------------------------------------------------
-    # Custom Actions
+    # Custom Actions (Using .short_description attributes)
     # ----------------------------------------------------------
 
     def export_to_csv(self, request, queryset):
@@ -169,9 +169,9 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
                 booking.created_at.strftime('%Y-%m-%d %H:%M') if booking.created_at else 'N/A',
             ])
         
-        self.message_user(request, f'📥 Exported {queryset.count()} booking(s) to CSV.')
+        self.message_user(request, f'Exported {queryset.count()} booking(s) to CSV.')
         return response
-    export_to_csv.short_description = "📥 Export Selected to CSV (Report)"
+    export_to_csv.short_description = "Export Selected to CSV (Report)"
 
     def mark_as_confirmed(self, request, queryset):
         """Bulk confirm selected bookings."""
@@ -180,8 +180,8 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
             booking.status = 'confirmed'
             booking.save()
             count += 1
-        self.message_user(request, f'✅ {count} booking(s) marked as Confirmed.')
-    mark_as_confirmed.short_description = "✅ Mark Selected as Confirmed"
+        self.message_user(request, f'{count} booking(s) marked as Confirmed.')
+    mark_as_confirmed.short_description = "Mark Selected as Confirmed"
 
     def mark_as_declined(self, request, queryset):
         """Bulk decline selected bookings."""
@@ -190,8 +190,8 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
             booking.status = 'declined'
             booking.save()
             count += 1
-        self.message_user(request, f'❌ {count} booking(s) marked as Declined.')
-    mark_as_declined.short_description = "❌ Mark Selected as Declined"
+        self.message_user(request, f'{count} booking(s) marked as Declined.')
+    mark_as_declined.short_description = "Mark Selected as Declined"
 
 
 # ============================================================
