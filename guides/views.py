@@ -44,7 +44,22 @@ def guide_list(request):
 def guide_detail(request, guide_id):
     """Detail page for a specific guide."""
     guide = get_object_or_404(Guide, id=guide_id, is_active=True)
-    return render(request, 'guides/guide_detail.html', {'guide': guide})
+    
+    # Generate a safe description snippet for meta tags
+    desc_snippet = guide.bio[:150] + "..." if guide.bio else f"Book {guide.name}, an expert local guide in Vang Vieng, Laos."
+    
+    context = {
+        'guide': guide,
+        
+        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
+        'meta_title': f"{guide.name} - Local Guide | Vang Vieng Stay",
+        'meta_description': desc_snippet,
+        'meta_image': 'https://vangviengstay.com/static/images/og-default.jpg', # Fallback to default brand image
+        'meta_url': request.build_absolute_uri(),
+        'meta_type': 'article',
+    }
+    
+    return render(request, 'guides/guide_detail.html', context)
 
 
 # ==========================================

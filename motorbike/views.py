@@ -122,9 +122,19 @@ def motorbike_detail(request, motorbike_id):
             'day_num': current_day.day               
         })
         
+    # Generate a safe description snippet for meta tags
+    desc_snippet = motorbike.description[:150] + "..." if motorbike.description else "Rent the best motorbikes in Vang Vieng, Laos."
+    
     context = {
         'motorbike': motorbike,
-        'availability': availability_schedule
+        'availability': availability_schedule,
+        
+        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
+        'meta_title': f"{motorbike.name} - Vang Vieng Stay",
+        'meta_description': desc_snippet,
+        'meta_image': motorbike.image_url if motorbike.image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
+        'meta_url': request.build_absolute_uri(),
+        'meta_type': 'article',
     }
     
     return render(request, 'motorbike/motorbike_detail.html', context)

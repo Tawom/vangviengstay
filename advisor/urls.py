@@ -1,28 +1,45 @@
 """
 URL configuration for advisor project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views # <-- ADD THIS
+from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
+
+from .sitemaps import (
+    StaticSitemap, 
+    TourSitemap, 
+    GuesthouseSitemap, 
+    MotorbikeSitemap, 
+    BuggySitemap, 
+    GuideSitemap
+)
+
+# Combine all sitemaps into one dictionary
+sitemaps = {
+    'static': StaticSitemap,
+    'tours': TourSitemap,
+    'guesthouses': GuesthouseSitemap,
+    'motorbikes': MotorbikeSitemap,
+    'buggies': BuggySitemap,
+    'guides': GuideSitemap,
+}
 
 urlpatterns = [
+    # ==========================================
+    # 1. ADMIN & ANALYTICS
+    # ==========================================
     path('admin/', admin.site.urls),
+    path('analytics/', include('analytics.urls')),
     
-    # Auth URLs
+    # ==========================================
+    # 2. SEO & SITEMAP
+    # ==========================================
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    
+    # ==========================================
+    # 3. AUTHENTICATION (Password Reset)
+    # ==========================================
     path('accounts/password-reset/', auth_views.PasswordResetView.as_view(
         template_name='registration/password_reset_form.html',
         email_template_name='registration/password_reset_email.html',
@@ -43,13 +60,14 @@ urlpatterns = [
         template_name='registration/password_reset_complete.html'
     ), name='password_reset_complete'),
     
+    # ==========================================
+    # 4. APP URLS
+    # ==========================================
     path('', include('guesthouse.urls')),
     path('tours/', include('tours.urls')),
-    path('owner-dashboard/', include('dashboard.urls')),
-    path('guides/', include('guides.urls')),
-
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
+    path('guides/', include('guides.urls')),
+    path('owner-dashboard/', include('dashboard.urls')),
     path('ai-assistant/', include('ai_assistant.urls')),
-    
 ]

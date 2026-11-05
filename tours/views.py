@@ -156,7 +156,13 @@ def tour_detail(request, tour_id):
     
     context = {
         'tour': tour,
-        'availability': availability_schedule
+        'availability': availability_schedule,
+        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
+        'meta_title': f"{tour.name} - Vang Vieng Stay",
+        'meta_description': f"Book {tour.name} in Vang Vieng. {tour.description[:150]}...",
+        'meta_image': tour.main_image_url if tour.main_image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
+        'meta_url': request.build_absolute_uri(),
+        'meta_type': 'article',
     }
     
     return render(request, 'tours/tour_detail.html', context)

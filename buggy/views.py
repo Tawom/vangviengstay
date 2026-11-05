@@ -75,8 +75,18 @@ def buggy_detail(request, buggy_id):
     """Detail page for a specific buggy car."""
     buggy = get_object_or_404(BuggyCar, id=buggy_id, is_active=True)
     
+    # Generate a safe description snippet for meta tags
+    desc_snippet = buggy.description[:150] + "..." if buggy.description else "Rent the best buggy cars for your Vang Vieng adventure!"
+    
     context = {
         'buggy': buggy,
+        
+        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
+        'meta_title': f"{buggy.name} - Buggy Car Rental | Vang Vieng Stay",
+        'meta_description': desc_snippet,
+        'meta_image': buggy.image_url if buggy.image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
+        'meta_url': request.build_absolute_uri(),
+        'meta_type': 'article',
     }
     
     return render(request, 'buggy/buggy_detail.html', context)

@@ -1,0 +1,22 @@
+{% load static %}
+
+<!-- Primary Meta Tags -->
+<title>{% block meta_title %}{{ meta_title|default:"Vang Vieng Stay - Tours, Guesthouses & Motorbikes in Laos" }}{% endblock %}</title>
+<meta name="title" content="{{ meta_title|default:'Vang Vieng Stay - Best Adventures in Laos' }}">
+<meta name="description" content="{{ meta_description|default:'Book the best tours, guesthouses, motorbikes, buggy cars, and local guides in Vang Vieng, Laos. Secure, reliable, and instant confirmation.' }}">
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="{{ meta_type|default:'website' }}">
+<meta property="og:url" content="{{ meta_url|default:request.build_absolute_uri|default:'https://vangviengstay.com/' }}">
+<meta property="og:title" content="{{ meta_title|default:'Vang Vieng Stay - Best Adventures in Laos' }}">
+<meta property="og:description" content="{{ meta_description|default:'Book the best tours, guesthouses, motorbikes, buggy cars, and local guides in Vang Vieng, Laos.' }}">
+
+<!-- ✅ DYNAMIC IMAGE URL -->
+<meta property="og:image" content="{{ meta_image|default:request.scheme }}://{{ request.get_host }}{% static 'images/og-default.jpg' %}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ meta_url|default:request.build_absolute_uri|default:'https://vangviengstay.com/' }}">
+<meta property="twitter:title" content="{{ meta_title|default:'Vang Vieng Stay - Best Adventures in Laos' }}">
+<meta property="twitter:description" content="{{ meta_description|default:'Book the best tours, guesthouses, motorbikes, buggy cars, and local guides in Vang Vieng, Laos.' }}">
+<meta property="twitter:image" content="{{ meta_image|default:request.scheme }}://{{ request.get_host }}{% static 'images/og-default.jpg' %}">

@@ -147,9 +147,19 @@ def guesthouse_detail(request, guesthouse_id):
             'day_num': current_day.day               
         })
         
+    # Generate a safe description snippet for meta tags
+    desc_snippet = guesthouse.description[:150] + "..." if guesthouse.description else "Book the best guesthouse in Vang Vieng, Laos."
+    
     context = {
         'guesthouse': guesthouse,
-        'availability': availability_schedule
+        'availability': availability_schedule,
+        
+        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
+        'meta_title': f"{guesthouse.name} - Vang Vieng Stay",
+        'meta_description': desc_snippet,
+        'meta_image': guesthouse.main_image_url if guesthouse.main_image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
+        'meta_url': request.build_absolute_uri(),
+        'meta_type': 'article',
     }
     
     return render(request, 'guesthouse/guesthouse_detail.html', context)

@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.html import format_html
 from .models import Motorbike, MotorbikeBooking, MotorbikeReview
+from advisor.utils import get_whatsapp_link
 
 
 # ============================================================
@@ -50,6 +51,7 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
         'total_price',
         'status_badge',
         'created_at',
+        'whatsapp_link',
     )
     
     list_filter = (
@@ -123,6 +125,20 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
         )
     status_badge.short_description = 'Status'
     status_badge.admin_order_field = 'status'
+
+    def whatsapp_link(self, obj):
+        """Clickable WhatsApp button for contacting the guest."""
+        link = get_whatsapp_link(obj, "motorbike")
+        if not link:
+            return "—"
+        return format_html(
+            '<a href="{}" target="_blank" style="background:#25D366; color:white; '
+            'padding:5px 12px; border-radius:4px; text-decoration:none; '
+            'font-size:12px; font-weight:bold; display:inline-block;">'
+            '💬 WhatsApp</a>',
+            link
+        )
+    whatsapp_link.short_description = 'Contact Guest'
 
     # ----------------------------------------------------------
     # Custom Actions

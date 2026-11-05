@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.html import format_html
 from .models import BuggyCar, BuggyCarBooking, BuggyCarReview
+from advisor.utils import get_whatsapp_link
 
 
 # ============================================================
@@ -40,7 +41,6 @@ class BuggyCarAdmin(admin.ModelAdmin):
 # ============================================================
 @admin.register(BuggyCarBooking)
 class BuggyCarBookingAdmin(admin.ModelAdmin):
-    # 1. Columns to display (enhanced with reference & badges)
     list_display = (
         'booking_reference',
         'guest_info',
@@ -50,9 +50,9 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
         'total_price',
         'status_badge',
         'created_at',
+        'whatsapp_link',
     )
     
-    # 2. Sidebar Filters (Crucial for Daily/Weekly/Monthly reports)
     list_filter = (
         'status',
         'booking_date',
@@ -61,23 +61,16 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
         'buggy_car__size',
     )
     
-    # 3. Search bar at the top
     search_fields = (
         'guest__username',
         'guest__first_name',
         'guest__last_name',
         'guest__email',
-        'guest_phone',
         'buggy_car__name',
     )
     
-    # 4. Default sort order (newest first)
     ordering = ('-booking_date', '-id')
-    
-    # 5. Read-only fields (preserved from original)
     readonly_fields = ('total_price', 'deposit_amount', 'created_at')
-    
-    # 6. Custom Admin Actions (Reports + Bulk Status Updates)
     actions = ['export_to_csv', 'mark_as_confirmed', 'mark_as_declined']
 
     # ----------------------------------------------------------
@@ -90,10 +83,14 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
     booking_reference.admin_order_field = 'id'
 
     def guest_info(self, obj):
-        """Shows guest name + phone in one column."""
+        """Bulletproof guest info display."""
         name = f"{obj.guest.first_name} {obj.guest.last_name}".strip() or obj.guest.username
-        if obj.guest_phone:
-            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, obj.guest_phone)
+        
+        # Safely check for phone on Booking, then on Guest model
+        phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None)
+        
+        if phone:
+            return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, phone)
         return name
     guest_info.short_description = 'Guest'
 
@@ -105,11 +102,11 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
     def status_badge(self, obj):
         """Colorful status badge."""
         colors = {
-            'pending': '#ffa500',    # Orange
-            'confirmed': '#28a745',  # Green
-            'declined': '#dc3545',   # Red
-            'cancelled': '#6c757d',  # Gray
-            'completed': '#17a2b8',  # Blue
+            'pending': '#ffa500',
+            'confirmed': '#28a745',
+            'declined': '#dc3545',
+            'cancelled': '#6c757d',
+            'completed': '#17a2b8',
         }
         color = colors.get(obj.status, '#6c757d')
         return format_html(
@@ -121,8 +118,22 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
     status_badge.short_description = 'Status'
     status_badge.admin_order_field = 'status'
 
+    def whatsapp_link(self, obj):
+        """Clickable WhatsApp button for contacting the guest."""
+        link = get_whatsapp_link(obj, "buggy")
+        if not link:
+            return "—"
+        return format_html(
+            '<a href="{}" target="_blank" style="background:#25D366; color:white; '
+            'padding:5px 12px; border-radius:4px; text-decoration:none; '
+            'font-size:12px; font-weight:bold; display:inline-block;">'
+            '💬 WhatsApp</a>',
+            link
+        )
+    whatsapp_link.short_description = 'Contact Guest'
+
     # ----------------------------------------------------------
-    # Custom Actions (Using .short_description attributes)
+    # Custom Actions
     # ----------------------------------------------------------
 
     def export_to_csv(self, request, queryset):
@@ -132,21 +143,23 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
         
         writer = csv.writer(response)
         
-        # CSV Header
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
             'Buggy Car', 'Size', 'Booking Date', 'Duration (Hours)',
             'Total Price', 'Deposit', 'Status', 'Created At',
         ])
         
-        # CSV Data
         for booking in queryset:
             guest_name = f"{booking.guest.first_name} {booking.guest.last_name}".strip() or booking.guest.username
+            
+            # Bulletproof phone lookup for CSV
+            phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '')
+            
             writer.writerow([
                 f"BC-{booking.id:04d}",
                 guest_name,
                 booking.guest.email,
-                booking.guest_phone or '',
+                phone,
                 booking.buggy_car.name,
                 booking.buggy_car.size,
                 booking.booking_date.strftime('%Y-%m-%d') if booking.booking_date else 'N/A',
