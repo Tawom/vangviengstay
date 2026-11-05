@@ -1,9 +1,27 @@
 def get_booking_confirmation_message(booking, booking_type="Booking"):
     """
-    Returns the appropriate confirmation message based on whether
-    the guest provided a phone number.
+    Generates a smart, conditional success message for booking requests.
+    If a phone number is provided, it mentions WhatsApp.
+    Otherwise, it gracefully skips the WhatsApp sentence to avoid awkward cutoffs.
     """
-    if hasattr(booking, 'guest_phone') and booking.guest_phone:
-        return f'{booking_type} request received! The operator is verifying availability. You will receive a final confirmation via WhatsApp to {booking.guest_phone} shortly.'
+    # Safely get phone number (checks Booking model, then Guest/User model)
+    phone = (
+        getattr(booking, 'guest_phone', None) or 
+        getattr(booking, 'phone', None) or 
+        getattr(booking.guest, 'phone', None)
+    )
+    
+    # Safely get email
+    email = getattr(booking.guest, 'email', 'your registered email')
+    
+    if phone:
+        return (
+            f"{booking_type} request received! The operator is verifying availability. "
+            f"You will receive a quick update via WhatsApp to {phone} shortly, "
+            f"and an official booking voucher will be sent to {email} once confirmed."
+        )
     else:
-        return f'{booking_type} request received! The operator is verifying availability. You will receive a final confirmation email shortly.'
+        return (
+            f"{booking_type} request received! The operator is verifying availability. "
+            f"An official booking voucher will be sent to {email} once confirmed."
+        )

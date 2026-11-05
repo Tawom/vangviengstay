@@ -8,14 +8,15 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .forms import GuideBookingForm, GuideReviewForm, GuideManagementForm
-from .models import Guide, GuideBooking, GuideReview
 from advisor.email_utils import (
     send_booking_confirmation_email, 
     send_booking_request_email, 
     send_booking_declined_email
 )
 from advisor.utils import get_booking_confirmation_message
+from .forms import GuideBookingForm, GuideReviewForm, GuideManagementForm
+from .models import Guide, GuideBooking, GuideReview
+
 
 # ==========================================
 # 1. GUIDE LISTING & DETAIL VIEWS
@@ -61,22 +62,18 @@ def create_guide_booking(request, guide_id):
             booking = form.save(commit=False)
             booking.guide = guide
             booking.guest = request.user
-            booking.status = 'pending'  # ✅ Save as pending, not confirmed
+            booking.status = 'pending'
             
             try:
-                # ✅ Triggers validation AND the model's save() method which calculates 
-                # the tiered pricing (hourly, half-day, or full-day) automatically!
                 booking.full_clean()
                 booking.save()
                 
-                # ✅ Send "Request Received" email
                 booking_reference = f"VG-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'guide')
                 
-                # ✅ Dynamic confirmation message based on phone number
+                # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Guide booking"))
                 
-                # ✅ Redirect to the new "Request Received" page
                 return redirect('guide_booking_request_received', booking_id=booking.id)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
@@ -84,6 +81,7 @@ def create_guide_booking(request, guide_id):
         form = GuideBookingForm()
     
     return render(request, 'guides/book_guide.html', {'form': form, 'guide': guide})
+
 
 @login_required
 def guide_booking_request_received(request, booking_id):

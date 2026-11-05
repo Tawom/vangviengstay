@@ -7,6 +7,7 @@ from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+from advisor.utils import get_booking_confirmation_message
 from .forms import TourBookingForm, TourReviewForm, TourManagementForm
 from .models import Tour, TourBooking, TourReview
 from advisor.email_utils import (
@@ -14,6 +15,7 @@ from advisor.email_utils import (
     send_booking_request_email, 
     send_booking_declined_email
 )
+
 
 # ==========================================
 # 1. TOUR LISTING & DETAIL VIEWS
@@ -36,7 +38,7 @@ def tour_list(request):
         tours = tours.filter(
             Q(name__icontains=search_query) | 
             Q(description__icontains=search_query) |
-            Q(operator_name__icontains=search_query) # ✅ Added operator_name to search
+            Q(operator_name__icontains=search_query)
         )
     
     # Apply duration filter
@@ -181,28 +183,21 @@ def create_tour_booking(request, tour_id):
                 booking.full_clean()
                 booking.save()
                 
-                # Generate reference and send email
                 booking_reference = f"TV-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'tour')
                 
-                # ✅ UNIFIED, CONSISTENT SUCCESS MESSAGE
-                messages.success(
-                    request,
-                    f"Tour booking request received! The operator is verifying availability. "
-                    f"You will receive a quick update via WhatsApp to {booking.guest_phone} shortly, "
-                    f"and an official booking voucher will be sent to {booking.guest.email} once confirmed."
-                )
+                # ✅ IMPROVED UX: Use centralized utility for smart success message
+                messages.success(request, get_booking_confirmation_message(booking, "Tour booking"))
                 
                 return redirect('tour_booking_request_received', booking_id=booking.id)
             
             except ValidationError as e:
-                # Handle any model-level validation errors gracefully
-                form.add_error(None, e.messages[0]) # Changed to None to show as a general form error, or specify a field
-                
+                form.add_error(None, e.messages[0])
     else:
         form = TourBookingForm()
     
     return render(request, 'tours/book_tour.html', {'form': form, 'tour': tour})
+
 
 @login_required
 def tour_booking_request_received(request, booking_id):
@@ -383,6 +378,7 @@ def approve_tour_booking(request, booking_id):
         
     return redirect('owner_dashboard')
 
+
 @login_required
 def decline_tour_booking(request, booking_id):
     """Owner declines a pending tour booking with a reason."""
@@ -408,6 +404,7 @@ def decline_tour_booking(request, booking_id):
         return redirect('owner_dashboard')
     
     return redirect('owner_dashboard')
+
 
 @login_required
 def owner_tour_add(request):

@@ -139,7 +139,7 @@ def send_contact_form_email(name, email, subject, message):
     admin_plain_message = strip_tags(admin_html_message)
     
     # ✅ POLISH: Use settings for admin email, with a fallback
-    admin_email = getattr(settings, 'ADMIN_EMAIL', 'sonnousith.tawon8@gmail.com')
+    admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@vangviengstay.com')
     
     try:
         send_mail(

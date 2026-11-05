@@ -7,14 +7,15 @@ from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .forms import MotorbikeBookingForm, MotorbikeReviewForm, MotorbikeManagementForm
-from .models import Motorbike, MotorbikeBooking, MotorbikeReview
 from advisor.email_utils import (
     send_booking_confirmation_email, 
     send_booking_request_email, 
     send_booking_declined_email
 )
-from advisor.utils import get_booking_confirmation_message  
+from advisor.utils import get_booking_confirmation_message
+from .forms import MotorbikeBookingForm, MotorbikeReviewForm, MotorbikeManagementForm
+from .models import Motorbike, MotorbikeBooking, MotorbikeReview
+
 
 # ==========================================
 # 1. MOTORBIKE LISTING & DETAIL VIEWS
@@ -57,7 +58,7 @@ def motorbike_list(request):
             start_date_obj = datetime.strptime(start_date, '%Y-%m-%d').date()
             end_date_obj = datetime.strptime(end_date, '%Y-%m-%d').date()
             
-            # ✅ FIX: Use __lte and __gte to make end_date INCLUSIVE
+            # Find motorbikes that have overlapping confirmed/pending bookings
             unavailable_ids = MotorbikeBooking.objects.filter(
                 status__in=['pending', 'confirmed'],
                 start_date__lte=end_date_obj,
@@ -109,7 +110,7 @@ def motorbike_detail(request, motorbike_id):
         is_available = True
         
         for booking in upcoming_bookings:
-            # ✅ FIX: Use <= for end_date to make it inclusive
+            # Use <= for end_date to make it inclusive
             if booking.start_date <= current_day <= booking.end_date:
                 is_available = False
                 break
@@ -153,7 +154,7 @@ def create_motorbike_booking(request, motorbike_id):
                 booking_reference = f"MB-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'motorbike')
                 
-                # Dynamic confirmation message based on phone number
+                # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Motorbike rental"))
                 
                 return redirect('motorbike_booking_request_received', booking_id=booking.id)
@@ -163,6 +164,7 @@ def create_motorbike_booking(request, motorbike_id):
         form = MotorbikeBookingForm()
     
     return render(request, 'motorbike/book_motorbike.html', {'form': form, 'motorbike': motorbike})
+
 
 @login_required
 def motorbike_booking_request_received(request, booking_id):
@@ -207,7 +209,7 @@ def cancel_motorbike_booking(request, booking_id):
 
 @login_required
 def motorbike_bookings_dashboard(request):
-    """Displays all motorbike bookings for the logged-in user, organized by upcoming, cancelled, and past."""
+    """Displays all motorbike bookings for the logged-in user."""
     today = timezone.now().date()
     
     all_bookings = MotorbikeBooking.objects.filter(guest=request.user).select_related('motorbike')

@@ -136,21 +136,20 @@ LOGOUT_REDIRECT_URL = 'guesthouse_list'
 ADMIN_SITE_HEADER = "Vang Vieng Stay Administration"
 ADMIN_SITE_TITLE = "Vang Vieng Stay Admin"
 
-# ==========================================
-# EMAIL CONFIGURATION
-# ==========================================
-
-# ==========================================
-# EMAIL CONFIGURATION (Using Resend HTTP API)
-# ==========================================
-ANYMAIL = {
-    "RESEND_API_KEY": os.getenv("RESEND_API_KEY", ""),
-}
-
-EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Vang Vieng Stay <onboarding@resend.dev>")
-SITE_URL = os.getenv("SITE_URL", "http://localhost:8000")
-
 # MongoDB Atlas Configuration
 MONGODB_URI = os.getenv('MONGODB_URI')
 MONGODB_DB_NAME = os.getenv('MONGODB_DB_NAME', 'vangviengstay')
+
+
+   # --- Email Configuration (Bulletproof) ---
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.resend.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'resend').strip()
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '').strip()
+
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Vang Vieng Stay <info@vangviengstay.com>').strip()
+SERVER_EMAIL = os.getenv('SERVER_EMAIL', DEFAULT_FROM_EMAIL).strip()
+SITE_URL = os.getenv('SITE_URL', 'http://127.0.0.1:8000').strip()

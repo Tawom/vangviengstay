@@ -7,14 +7,15 @@ from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .forms import BuggyCarBookingForm, BuggyCarReviewForm, BuggyCarManagementForm
-from .models import BuggyCar, BuggyCarBooking, BuggyCarReview
 from advisor.email_utils import (
     send_booking_confirmation_email,
     send_booking_request_email,
     send_booking_declined_email
 )
 from advisor.utils import get_booking_confirmation_message
+from .forms import BuggyCarBookingForm, BuggyCarReviewForm, BuggyCarManagementForm
+from .models import BuggyCar, BuggyCarBooking, BuggyCarReview
+
 
 # ==========================================
 # 1. BUGGY CAR LISTING & DETAIL VIEWS
@@ -85,6 +86,7 @@ def buggy_detail(request, buggy_id):
 # 2. BUGGY CAR BOOKING VIEWS (REQUEST & VERIFY)
 # ==========================================
 
+@login_required  # ✅ ADDED: Prevents AnonymousUser database errors
 def create_buggy_booking(request, buggy_id):
     """Handles the buggy booking form - saves as PENDING for owner verification."""
     buggy = get_object_or_404(BuggyCar, id=buggy_id, is_active=True)
@@ -104,7 +106,7 @@ def create_buggy_booking(request, buggy_id):
                 booking_reference = f"BG-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'buggy')
                 
-                # Dynamic confirmation message based on phone number
+                # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Buggy car booking"))
                 
                 return redirect('buggy_booking_request_received', booking_id=booking.id)
@@ -114,6 +116,7 @@ def create_buggy_booking(request, buggy_id):
         form = BuggyCarBookingForm()
     
     return render(request, 'buggy/book_buggy.html', {'form': form, 'buggy': buggy})
+
 
 @login_required
 def buggy_booking_request_received(request, booking_id):
@@ -235,7 +238,7 @@ def approve_buggy_booking(request, booking_id):
         booking_reference = f"BG-{booking.id:04d}"
         send_booking_confirmation_email(booking, booking_reference, 'buggy')
         
-        messages.success(request, f'Buggy booking for {booking.guest.username} has been confirmed!')
+        messages.success(request, f'Buggy booking for {booking.guest.username} has been confirmed and they have been notified!')
     else:
         messages.info(request, 'This booking cannot be approved.')
     
@@ -259,7 +262,7 @@ def decline_buggy_booking(request, booking_id):
             booking_reference = f"BG-{booking.id:04d}"
             send_booking_declined_email(booking, booking_reference, 'buggy', reason)
             
-            messages.success(request, f'Buggy booking for {booking.guest.username} has been declined.')
+            messages.success(request, f'Buggy booking for {booking.guest.username} has been declined. The guest has been notified.')
         else:
             messages.info(request, 'This booking cannot be declined.')
         

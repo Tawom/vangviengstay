@@ -20,8 +20,8 @@ from .forms import (
     BookingForm, 
     GuesthouseReviewForm, 
     GuesthouseManagementForm,
-    EmailSignupForm,      # ✅ Added
-    PhoneSignupForm       # ✅ Added
+    EmailSignupForm,
+    PhoneSignupForm
 )
 from .models import Booking, Guesthouse, GuesthouseReview
 
@@ -74,23 +74,21 @@ def guesthouse_list(request):
         except ValueError:
             pass
     
-    # Apply date availability filter (only show guesthouses available for the requested dates)
+    # Apply date availability filter
     if check_in and check_out:
         try:
             check_in_date = datetime.strptime(check_in, '%Y-%m-%d').date()
             check_out_date = datetime.strptime(check_out, '%Y-%m-%d').date()
             
-            # Find guesthouses that have overlapping confirmed/pending bookings
             unavailable_ids = Booking.objects.filter(
                 status__in=['pending', 'confirmed'],
                 check_in__lt=check_out_date,
                 check_out__gt=check_in_date
             ).values_list('guesthouse_id', flat=True).distinct()
             
-            # Exclude unavailable guesthouses
             guesthouses = guesthouses.exclude(id__in=unavailable_ids)
         except ValueError:
-            pass  # Invalid date format, skip date filtering
+            pass
     
     # Get unique cities for the dropdown
     available_cities = Guesthouse.objects.filter(is_active=True).values_list('city', flat=True).distinct().order_by('city')
@@ -127,7 +125,6 @@ def guesthouse_detail(request, guesthouse_id):
     today = date.today()
     availability_schedule = []
     
-    # Block dates for BOTH pending and confirmed bookings
     upcoming_bookings = Booking.objects.filter(
         guesthouse=guesthouse,
         status__in=['pending', 'confirmed'],
@@ -182,6 +179,7 @@ def create_booking(request, guesthouse_id):
                 booking_reference = f"VV-{booking.id:04d}"
                 send_booking_request_email(booking, booking_reference, 'guesthouse')
                 
+                # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Booking"))
                 return redirect('booking_request_received', booking_id=booking.id)
             except ValidationError as e:
@@ -235,7 +233,7 @@ def cancel_booking(request, booking_id):
 
 @login_required
 def guesthouse_bookings_dashboard(request):
-    """Displays all guesthouse bookings for the logged-in user, organized by upcoming, cancelled, and past."""
+    """Displays all guesthouse bookings for the logged-in user."""
     today = timezone.now().date()
     
     all_bookings = Booking.objects.filter(guest=request.user).select_related('guesthouse')
@@ -269,42 +267,36 @@ def universal_dashboard(request):
     """Universal dashboard showing ALL upcoming bookings for the logged-in user."""
     today = timezone.now().date()
     
-    # 1. Guesthouse bookings
     guesthouse_upcoming = Booking.objects.filter(
         guest=request.user,
         check_out__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('guesthouse').order_by('check_in')
     
-    # 2. Tour bookings
     tour_upcoming = TourBooking.objects.filter(
         guest=request.user,
         booking_date__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('tour').order_by('booking_date')
     
-    # 3. Guide bookings
     guide_upcoming = GuideBooking.objects.filter(
         guest=request.user,
         booking_date__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('guide').order_by('booking_date', 'start_time')
     
-    # 4. Motorbike bookings
     motorbike_upcoming = MotorbikeBooking.objects.filter(
         guest=request.user,
         end_date__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('motorbike').order_by('start_date')
     
-    # 5. Buggy Car bookings
     buggy_upcoming = BuggyCarBooking.objects.filter(
         guest=request.user,
         booking_date__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('buggy_car').order_by('booking_date', 'start_time')
     
-    # Calculate total strictly from the upcoming lists
     total_bookings = (
         guesthouse_upcoming.count() + 
         tour_upcoming.count() + 
@@ -356,9 +348,9 @@ def signup_phone(request):
         if form.is_valid():
             user = form.save()
             
-            # Save phone number to UserProfile
+            # Save phone number to UserProfile (Ensure UserProfile model exists)
             phone_number = form.cleaned_data.get('phone_number')
-            if phone_number:
+            if phone_number and hasattr(user, 'profile'):
                 user.profile.phone_number = phone_number
                 user.profile.save()
             
