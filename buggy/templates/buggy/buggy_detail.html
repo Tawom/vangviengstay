@@ -45,7 +45,7 @@
                     </span>
                 </div>
                 
-                <!-- ✅ NEW: Operator Badge -->
+                <!-- Operator Badge -->
                 <div class="inline-flex items-center gap-2 bg-purple-50 text-purple-700 border border-purple-200 font-semibold px-4 py-2 rounded-lg mb-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <!-- Map Section -->
+            <!-- Map Section (OpenStreetMap via Leaflet - No API Key Required, No 403 Errors) -->
             {% if buggy.latitude and buggy.longitude %}
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
@@ -114,14 +114,34 @@
                     </h2>
                     
                     <!-- Map Container with data attributes for JS -->
-                    <div id="map" class="w-full h-80 rounded-lg border border-gray-200"
+                    <div id="map" class="w-full h-80 rounded-lg border border-gray-200 z-0"
                          data-lat="{{ buggy.latitude }}"
                          data-lng="{{ buggy.longitude }}"
                          data-name="{{ buggy.name }}"
                          data-address="{{ buggy.pickup_address|default:'Pickup location' }}">
                     </div>
+                    
+                    <!-- Optional: Direct link to Google Maps for users who prefer it -->
+                    <a href="https://www.google.com/maps?q={{ buggy.latitude }},{{ buggy.longitude }}" 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 text-sm text-purple-600 hover:text-purple-800 font-medium mt-3 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        Open in Google Maps App
+                    </a>
+                </div>
+            {% else %}
+                <div class="bg-purple-50 border border-purple-200 rounded-xl p-6 text-center">
+                    <svg class="w-12 h-12 mx-auto text-purple-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <p class="text-purple-800 font-semibold">Pickup location map not available</p>
+                    <p class="text-purple-700 text-sm mt-1">Contact the owner for exact pickup details after booking.</p>
                 </div>
             {% endif %}
+
         </div>
 
         <!-- Right Column: Booking Card -->
@@ -168,7 +188,7 @@
     </div>
 </div>
 
-<!-- Leaflet Map (only loads if coordinates exist) -->
+<!-- Leaflet Map Script (only loads if coordinates exist) -->
 {% if buggy.latitude and buggy.longitude %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -176,17 +196,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mapDiv = document.getElementById('map');
             if (mapDiv) {
+                // Parse coordinates safely
                 const lat = parseFloat(mapDiv.dataset.lat);
                 const lng = parseFloat(mapDiv.dataset.lng);
                 const name = mapDiv.dataset.name;
                 const address = mapDiv.dataset.address;
                 
+                // Initialize map
                 const map = L.map('map').setView([lat, lng], 15);
                 
+                // Use OpenStreetMap tiles (Free, no API key, no 403 errors)
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
                 }).addTo(map);
                 
+                // Add marker with popup
                 L.marker([lat, lng]).addTo(map)
                     .bindPopup(`<strong>${name}</strong><br>${address}`)
                     .openPopup();
@@ -194,4 +219,28 @@
         });
     </script>
 {% endif %}
+{% endblock %}
+
+<!-- ✅ SEO: JSON-LD Schema Markup for Rich Snippets -->
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ buggy.name|escapejs }}",
+  "description": "{{ buggy.description|truncatewords:50|escapejs }}",
+  "image": "{{ buggy.image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "brand": {
+    "@type": "Organization",
+    "name": "{{ buggy.operator_name|default:'Vang Vieng Stay'|escapejs }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ buggy.price_2_hours }}",
+    "priceCurrency": "LAK",
+    "availability": "https://schema.org/InStock",
+    "url": "{{ request.build_absolute_uri }}"
+  }
+}
+</script>
 {% endblock %}
