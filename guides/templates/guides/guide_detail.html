@@ -101,4 +101,32 @@
         </div>
     </div>
 </div>
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ guide.name|escapejs }}",
+  "description": "{{ guide.bio|truncatewords:50|escapejs }}",
+  "image": "{{ guide.photo_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "jobTitle": "Local Tour Guide",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "{{ guide.operator_name|default:'Vang Vieng Stay'|escapejs }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ guide.hourly_rate }}",
+    "priceCurrency": "USD",
+    "url": "{{ request.build_absolute_uri }}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ guide.average_rating }}",
+    "reviewCount": "{{ guide.review_count }}"
+  }
+}
+</script>
+{% endblock %}
 {% endblock %}

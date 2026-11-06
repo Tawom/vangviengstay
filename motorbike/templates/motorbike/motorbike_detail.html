@@ -189,4 +189,26 @@
     </script>
 {% endif %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ motorbike.name|escapejs }}",
+  "description": "{{ motorbike.description|truncatewords:50|escapejs }}",
+  "image": "{{ motorbike.image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "brand": {
+    "@type": "Organization",
+    "name": "{{ motorbike.operator_name|default:'Vang Vieng Stay'|escapejs }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ motorbike.price_per_day }}",
+    "priceCurrency": "LAK",
+    "availability": "https://schema.org/InStock",
+    "url": "{{ request.build_absolute_uri }}"
+  }
+}
+</script>
+{% endblock %}
 {% endblock %}

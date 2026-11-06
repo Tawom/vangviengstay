@@ -168,4 +168,32 @@
         </div>
     </div>
 </div>
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ tour.name|escapejs }}",
+  "description": "{{ tour.description|striptags|truncatewords:50|escapejs }}",
+  "image": "{{ tour.main_image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "brand": {
+    "@type": "Organization",
+    "name": "{{ tour.operator_name|default:'Vang Vieng Stay'|escapejs }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ tour.price_per_person }}",
+    "priceCurrency": "LAK",
+    "availability": "https://schema.org/InStock",
+    "url": "{{ request.build_absolute_uri }}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ tour.average_rating }}",
+    "reviewCount": "{{ tour.review_count }}"
+  }
+}
+</script>
+{% endblock %}
 {% endblock %}

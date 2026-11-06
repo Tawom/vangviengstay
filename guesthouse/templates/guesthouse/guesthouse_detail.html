@@ -116,4 +116,33 @@
         </div>
     </div>
 </div>
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "{{ guesthouse.name|escapejs }}",
+  "image": "{{ guesthouse.main_image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "description": "{{ guesthouse.description|truncatewords:50|escapejs }}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{ guesthouse.city|escapejs }}",
+    "addressCountry": "LA"
+  },
+  "priceRange": "₭{{ guesthouse.price_per_night|intcomma }}",
+  "telephone": "+856-20-000-0000",
+  "url": "{{ request.build_absolute_uri }}"
+  {% if guesthouse.review_count > 0 %}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ guesthouse.average_rating }}",
+    "reviewCount": "{{ guesthouse.review_count }}",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+  {% endif %}
+}
+</script>
+{% endblock %}
 {% endblock %}
