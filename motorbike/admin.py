@@ -11,13 +11,16 @@ from advisor.utils import get_whatsapp_link
 # ============================================================
 @admin.register(Motorbike)
 class MotorbikeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'owner', 'price_per_day', 'is_active', 'created_at')
+    # ✅ UPDATED: Added operator_name to list display
+    list_display = ('name', 'operator_name', 'category', 'owner', 'price_per_day', 'is_active', 'created_at')
     list_filter = ('category', 'is_active', 'owner')
-    search_fields = ('name', 'description', 'owner__username')
+    # ✅ UPDATED: Added operator_name to search
+    search_fields = ('name', 'operator_name', 'description', 'owner__username')
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'owner', 'category', 'engine_cc')
+            # ✅ UPDATED: Added operator_name field
+            'fields': ('name', 'operator_name', 'owner', 'category', 'engine_cc')
         }),
         ('Pricing', {
             'fields': ('price_per_day', 'deposit_amount')
@@ -149,9 +152,11 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
         response['Content-Disposition'] = 'attachment; filename="motorbike_booking_report.csv"'
         
         writer = csv.writer(response)
+        
+        # ✅ UPDATED: Added Operator column to CSV
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
-            'Motorbike', 'Category', 'Start Date', 'End Date',
+            'Motorbike', 'Operator', 'Category', 'Start Date', 'End Date',
             'Duration (Days)', 'Total Price', 'Deposit', 'Status', 'Created At',
         ])
         
@@ -168,6 +173,7 @@ class MotorbikeBookingAdmin(admin.ModelAdmin):
                 booking.guest.email,
                 phone,
                 booking.motorbike.name,
+                booking.motorbike.operator_name,  # ✅ NEW: Include operator in CSV
                 booking.motorbike.category,
                 booking.start_date.strftime('%Y-%m-%d') if booking.start_date else 'N/A',
                 booking.end_date.strftime('%Y-%m-%d') if booking.end_date else 'N/A',

@@ -17,6 +17,13 @@ class Motorbike(models.Model):
     )
     
     name = models.CharField(max_length=200, help_text="e.g., Honda Click 125cc")
+    
+    # ✅ NEW: Operator name (shown to customers, like "Vang Vieng Moto Rentals")
+    operator_name = models.CharField(
+        max_length=200, 
+        help_text="Business name shown to customers (e.g., 'Vang Vieng Moto Rentals')"
+    )
+    
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='motorbikes')
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     engine_cc = models.PositiveIntegerField(help_text="e.g., 110, 125, 150")
@@ -25,7 +32,7 @@ class Motorbike(models.Model):
     description = models.TextField(blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
     
-    # ✅ Location Coordinates
+    # Location Coordinates
     latitude = models.DecimalField(
         max_digits=9, decimal_places=6, 
         blank=True, null=True,
@@ -47,7 +54,7 @@ class Motorbike(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} ({self.get_category_display()})"
+        return f"{self.name} ({self.get_category_display()}) - {self.operator_name}"
     
     @property
     def average_rating(self):
