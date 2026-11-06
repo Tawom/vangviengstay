@@ -157,6 +157,59 @@
     </div>
 </div>
 
+<!-- ========================================== -->
+<!-- ✅ SOCIAL PROOF STATS BAR (NEWLY ADDED)    -->
+<!-- ========================================== -->
+<div class="bg-white shadow-xl rounded-2xl max-w-5xl mx-auto -mt-16 relative z-20 border border-gray-100 mb-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+        
+        <!-- Stat 1: Happy Travelers -->
+        <div class="p-6 text-center">
+            <div class="flex items-center justify-center mb-2">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">{{ total_travelers|default:"1,200" }}+</p>
+            <p class="text-sm text-gray-500 font-medium mt-1">Happy Travelers</p>
+        </div>
+
+        <!-- Stat 2: Average Rating -->
+        <div class="p-6 text-center">
+            <div class="flex items-center justify-center mb-2">
+                <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">{{ overall_rating|default:"4.9" }}</p>
+            <p class="text-sm text-gray-500 font-medium mt-1">Average Rating ({{ total_reviews|default:"350" }}+ reviews)</p>
+        </div>
+
+        <!-- Stat 3: Local Experiences -->
+        <div class="p-6 text-center">
+            <div class="flex items-center justify-center mb-2">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">{{ total_listings|default:"50" }}+</p>
+            <p class="text-sm text-gray-500 font-medium mt-1">Local Experiences</p>
+        </div>
+
+        <!-- Stat 4: Secure & Verified -->
+        <div class="p-6 text-center">
+            <div class="flex items-center justify-center mb-2">
+                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+            </div>
+            <p class="text-3xl font-bold text-gray-900">100%</p>
+            <p class="text-sm text-gray-500 font-medium mt-1">Secure & Verified</p>
+        </div>
+
+    </div>
+</div>
+
 <!-- Results Section -->
 <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="flex justify-between items-center mb-6">
@@ -189,7 +242,6 @@
                         <!-- Price Badge (Updated to LAK) -->
                         <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                             ₭{{ guesthouse.price_per_night | intcomma }}<span class="text-gray-500 text-xs">/night</span>
-                            <!-- ${{ guesthouse.price_per_night }}<span class="text-gray-500 text-xs">/night</span> -->
                         </div>
                         
                         <!-- Rating Badge (if reviews exist) -->

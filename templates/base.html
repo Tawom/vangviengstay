@@ -35,11 +35,12 @@
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
+    <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 
-<!-- NEW LARGER "VANGVIENG TIME" LOGO -->
+                <!-- Custom "Vang Vieng Stay" Logo -->
                 <a href="{% url 'guesthouse_list' %}" class="flex items-center gap-3 group">
                     <svg class="w-14 h-14 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <!-- Sunset Sun & Glow -->
@@ -62,13 +63,14 @@
                         <path d="M36 74 L 32 66" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
                     </svg>
                     
-                    <!-- Brand Text (Scaled Up) -->
+                    <!-- Brand Text -->
                     <div class="flex flex-col leading-none">
                         <span class="font-extrabold text-2xl text-gray-900 tracking-tight">VangVieng</span>
                         <span class="font-bold text-base text-orange-500 tracking-widest uppercase">Stay</span>
                     </div>
                 </a>                
 
+                <!-- Desktop Navigation Links -->
                 <div class="hidden lg:flex items-center gap-1">
                     <a href="{% url 'guesthouse_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
@@ -92,6 +94,7 @@
                     </a>
                 </div>
 
+                <!-- Auth & User Menu -->
                 <div class="flex items-center gap-4">
                     <button id="mobile-menu-btn" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none p-2">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,14 +113,12 @@
                                     <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
                                 
-                                <!-- ✅ FIXED: Removed conflicting Alpine.js directives. Pure CSS group-hover is smoother and more reliable here. -->
+                                <!-- Dropdown Menu (Pure CSS group-hover for reliability) -->
                                 <div class="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    
                                     <a href="{% url 'universal_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition font-semibold border-b border-gray-100 mb-1 pb-2">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                                         My Dashboard
                                     </a>
-                                    
                                     <a href="{% url 'guesthouse_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                         Places to Stay
@@ -221,7 +222,7 @@
         </div>
     </nav>
 
-    <!-- Messages -->
+    <!-- Flash Messages -->
     {% if messages %}
         <div class="max-w-7xl mx-auto px-4 mt-4 w-full">
             {% for message in messages %}

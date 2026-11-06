@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
-from django.db.models import Q, Min, Max
+from django.db.models import Q, Min, Max, Avg  # ✅ Added Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
@@ -25,11 +25,11 @@ from .forms import (
 )
 from .models import Booking, Guesthouse, GuesthouseReview
 
-# Import models from other apps for the universal dashboard
-from tours.models import TourBooking
-from guides.models import GuideBooking
-from motorbike.models import MotorbikeBooking
-from buggy.models import BuggyCarBooking
+# Import models from other apps for the universal dashboard AND social proof stats
+from tours.models import Tour, TourBooking, TourReview
+from guides.models import Guide, GuideBooking, GuideReview
+from motorbike.models import Motorbike, MotorbikeBooking, MotorbikeReview
+from buggy.models import BuggyCar, BuggyCarBooking, BuggyCarReview
 
 
 # ==========================================
@@ -99,6 +99,44 @@ def guesthouse_list(request):
         max_price=Max('price_per_night')
     )
     
+    # ==========================================
+    # ✅ SOCIAL PROOF STATS CALCULATION
+    # ==========================================
+    
+    # 1. Total Active Listings
+    total_listings = (
+        Guesthouse.objects.filter(is_active=True).count() +
+        Tour.objects.filter(is_active=True).count() +
+        Guide.objects.filter(is_active=True).count() +
+        Motorbike.objects.filter(is_active=True).count() +
+        BuggyCar.objects.filter(is_active=True).count()
+    )
+
+    # 2. Total Happy Travelers (Confirmed or Completed Bookings)
+    total_travelers = (
+        Booking.objects.filter(status__in=['confirmed', 'completed']).count() +
+        TourBooking.objects.filter(status__in=['confirmed', 'completed']).count() +
+        GuideBooking.objects.filter(status__in=['confirmed', 'completed']).count() +
+        MotorbikeBooking.objects.filter(status__in=['confirmed', 'completed']).count() +
+        BuggyCarBooking.objects.filter(status__in=['confirmed', 'completed']).count()
+    )
+
+    # 3. Average Rating & Total Reviews (Aggregate across all apps)
+    review_models = [GuesthouseReview, TourReview, GuideReview, MotorbikeReview, BuggyCarReview]
+    all_ratings = []
+    total_reviews = 0
+    
+    for model in review_models:
+        agg = model.objects.aggregate(Avg('rating'))
+        if agg['rating__avg']:
+            all_ratings.append(agg['rating__avg'])
+        total_reviews += model.objects.count()
+    
+    # Calculate overall average, fallback to 4.9 if no reviews yet
+    overall_rating = round(sum(all_ratings) / len(all_ratings), 1) if all_ratings else 4.9
+    
+    # ==========================================
+    
     context = {
         'guesthouses': guesthouses,
         'search_query': search_query,
@@ -112,7 +150,12 @@ def guesthouse_list(request):
         'price_range': {
             'min': int(price_stats['min_price'] or 0),
             'max': int(price_stats['max_price'] or 100)
-        }
+        },
+        # ✅ Add stats to context
+        'total_listings': total_listings,
+        'total_travelers': total_travelers,
+        'overall_rating': overall_rating,
+        'total_reviews': total_reviews,
     }
     
     return render(request, 'guesthouse/guesthouse_list.html', context)
