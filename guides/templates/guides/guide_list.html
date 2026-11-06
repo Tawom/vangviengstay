@@ -38,7 +38,17 @@
                     
                     <!-- Content -->
                     <div class="p-6 text-center">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">{{ guide.name }}</h3>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">{{ guide.name }}</h3>
+                        
+                        <!-- ✅ NEW: Operator/Agency Badge (Amber Theme, only shows if exists) -->
+                        {% if guide.operator_name %}
+                        <div class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 text-xs font-semibold px-2.5 py-1 rounded-md mb-4 mx-auto border border-amber-100">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            {{ guide.operator_name }}
+                        </div>
+                        {% endif %}
                         
                         <!-- Languages Badges -->
                         <div class="flex justify-center gap-3 mb-6">

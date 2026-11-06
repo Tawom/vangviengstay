@@ -11,13 +11,16 @@ from advisor.utils import get_whatsapp_link
 # ============================================================
 @admin.register(Guide)
 class GuideAdmin(admin.ModelAdmin):
-    list_display = ('name', 'languages', 'hourly_rate', 'is_active', 'owner')
+    # ✅ UPDATED: Added operator_name to list display
+    list_display = ('name', 'operator_name', 'languages', 'hourly_rate', 'is_active', 'owner')
     list_filter = ('is_active', 'languages')
-    search_fields = ('name', 'bio', 'expertise')
+    # ✅ UPDATED: Added operator_name to search
+    search_fields = ('name', 'operator_name', 'bio', 'expertise')
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'owner', 'languages', 'expertise')
+            # ✅ UPDATED: Added operator_name field
+            'fields': ('name', 'operator_name', 'owner', 'languages', 'expertise')
         }),
         ('Pricing', {
             'fields': ('hourly_rate',)
@@ -143,9 +146,11 @@ class GuideBookingAdmin(admin.ModelAdmin):
         response['Content-Disposition'] = 'attachment; filename="guide_booking_report.csv"'
         
         writer = csv.writer(response)
+        
+        # ✅ UPDATED: Added Agency/Operator column to CSV
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
-            'Guide', 'Languages', 'Booking Date', 'Start Time',
+            'Guide', 'Agency/Operator', 'Languages', 'Booking Date', 'Start Time',
             'Duration (Hours)', 'Total Price', 'Status', 'Created At',
         ])
         
@@ -161,6 +166,7 @@ class GuideBookingAdmin(admin.ModelAdmin):
                 booking.guest.email,
                 phone,
                 booking.guide.name,
+                booking.guide.operator_name or '',  # ✅ NEW: Include operator/agency in CSV
                 booking.guide.languages,
                 booking.booking_date.strftime('%Y-%m-%d') if booking.booking_date else 'N/A',
                 booking.start_time.strftime('%H:%M') if booking.start_time else 'N/A',

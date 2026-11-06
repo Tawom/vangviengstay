@@ -12,6 +12,15 @@ class Guide(models.Model):
     """Represents a local guide offering their services on the platform."""
     
     name = models.CharField(max_length=100, help_text="Guide's full name")
+    
+    # ✅ NEW: Agency/Operator Name (Optional)
+    operator_name = models.CharField(
+        max_length=200, 
+        blank=True, 
+        null=True,
+        help_text="Agency or business name (Optional, e.g., 'Vang Vieng Local Guides Co.')"
+    )
+    
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='guides')
     languages = models.CharField(max_length=200, help_text="e.g., English, French, Lao, Chinese")
     expertise = models.CharField(max_length=200, help_text="e.g., Motorbike routes, hidden cafes, photography")
@@ -29,6 +38,8 @@ class Guide(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        if self.operator_name:
+            return f"{self.name} - {self.operator_name}"
         return self.name
     
     @property
