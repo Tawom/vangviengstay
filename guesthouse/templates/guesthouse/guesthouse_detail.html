@@ -1,50 +1,57 @@
 {% extends 'base.html' %}
 {% load humanize %}
+
 {% block title %}{{ guesthouse.name }} - Vang Vieng Stay{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-12">
     
-    <!-- Back to Home Link -->
-    <a href="{% url 'guesthouse_list' %}" class="inline-flex items-center text-blue-600 hover:underline mb-6">
+    <!-- Back to List Link -->
+    <a href="{% url 'guesthouse_list' %}" class="inline-flex items-center text-blue-600 hover:underline mb-6 font-medium">
         ← Back to all guesthouses
     </a>
 
     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Lazy-Loaded Main Image -->
         {% if guesthouse.main_image_url %}
-            <img src="{{ guesthouse.main_image_url }}" alt="{{ guesthouse.name }}" class="w-full h-80 object-cover">
+            <img 
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" 
+                data-src="{{ guesthouse.main_image_url }}" 
+                alt="{{ guesthouse.name }}" 
+                loading="lazy" 
+                class="lazy-load w-full h-64 md:h-96 object-cover"
+            >
         {% endif %}
         
-        <div class="p-8">
+        <div class="p-6 md:p-8">
             <!-- Header -->
-            <div class="flex flex-col md:flex-row justify-between items-start mb-4 gap-4">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-900">{{ guesthouse.name }}</h1>
-                    <p class="text-gray-500 mt-1 flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <p class="text-gray-500 mt-2 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
-                        {{ guesthouse.city }} | {{ guesthouse.address }}
+                        {{ guesthouse.city }}{% if guesthouse.address %} | {{ guesthouse.address }}{% endif %}
                     </p>
                 </div>
                 <div class="text-left md:text-right">
-                    <!-- Updated to LAK -->
                     <span class="text-3xl font-bold text-blue-600">₭{{ guesthouse.price_per_night | intcomma }}</span>
-                    <!-- <span class="text-3xl font-bold text-blue-600">${{ guesthouse.price_per_night | intcomma }}</span> -->
                     <span class="text-gray-500"> / night</span>
                 </div>
             </div>
 
+            <!-- Description -->
             <p class="text-gray-700 leading-relaxed mb-8">{{ guesthouse.description }}</p>
 
             <!-- Availability Calendar -->
             <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
-                <h3 class="text-xl font-bold mb-4 text-center">Room Availability (Next 30 Days)</h3>
+                <h3 class="text-xl font-bold mb-4 text-center text-gray-800">Room Availability (Next 30 Days)</h3>
                 
                 <div class="flex flex-wrap gap-2 justify-center mb-6">
                     {% for day in availability %}
-                        <div class="w-14 h-14 flex flex-col items-center justify-center rounded-lg text-white font-bold {% if day.is_available %}bg-green-500{% else %}bg-red-500 cursor-not-allowed{% endif %}">
+                        <div class="w-14 h-14 flex flex-col items-center justify-center rounded-lg text-white font-bold {% if day.is_available %}bg-green-500{% else %}bg-red-500 cursor-not-allowed{% endif %} transition-colors">
                             <span class="text-xs opacity-90">{{ day.day_name }}</span>
                             <span class="text-lg">{{ day.day_num }}</span>
                         </div>
@@ -58,7 +65,7 @@
                 </div>
             </div>
 
-            <!-- Reviews Section (Properly integrated inside the block) -->
+            <!-- Reviews Section -->
             <div class="border-t border-gray-200 pt-8">
                 <div class="flex items-center gap-3 mb-6">
                     <h3 class="text-2xl font-bold text-gray-900">Guest Reviews</h3>
@@ -83,8 +90,9 @@
                                             <p class="text-xs text-gray-500">{{ review.created_at|date:"F d, Y" }}</p>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Star Rating Display -->
                                     <div class="flex text-yellow-400 text-lg">
-                                        <!-- Django trick to loop 'rating' times to show stars -->
                                         {% with ''|center:review.rating as range %}
                                             {% for _ in range %}★{% endfor %}
                                         {% endwith %}
@@ -93,6 +101,7 @@
                                         {% endwith %}
                                     </div>
                                 </div>
+                                
                                 {% if review.comment %}
                                     <p class="text-gray-700 leading-relaxed">{{ review.comment }}</p>
                                 {% endif %}
@@ -100,7 +109,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="text-gray-500 italic">No reviews yet. Be the first to review this guesthouse!</p>
+                    <p class="text-gray-500 italic bg-gray-50 p-4 rounded-lg border border-gray-100">No reviews yet. Be the first to review this guesthouse!</p>
                 {% endif %}
             </div>
             

@@ -7,17 +7,27 @@
 <div class="max-w-6xl mx-auto px-4 py-8">
     
     <a href="{% url 'buggy_list' %}" class="inline-flex items-center text-gray-600 hover:text-purple-600 mb-6 font-medium">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
         Back to Buggy Cars
     </a>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
+        <!-- Left Column: Image & Details -->
         <div class="lg:col-span-2 space-y-6">
             
+            <!-- ✅ FIXED: Correct variable names and removed redundant rounded-lg -->
             {% if buggy.image_url %}
                 <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="{{ buggy.image_url }}" alt="{{ buggy.name }}" class="w-full h-96 object-cover">
+                    <img 
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" 
+                        data-src="{{ buggy.image_url }}" 
+                        alt="{{ buggy.name }}" 
+                        loading="lazy" 
+                        class="lazy-load w-full h-64 md:h-96 object-cover"
+                    >
                 </div>
             {% else %}
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-purple-100 to-purple-200 h-96 flex items-center justify-center">
@@ -95,7 +105,7 @@
                         Pickup Location
                     </h2>
                     
-                    <!-- ✅ UPDATED: Added data-* attributes to pass data cleanly to JavaScript -->
+                    <!-- Map Container with data attributes for JS -->
                     <div id="map" class="w-full h-80 rounded-lg border border-gray-200"
                          data-lat="{{ buggy.latitude }}"
                          data-lng="{{ buggy.longitude }}"
@@ -137,7 +147,8 @@
                         Book This Buggy
                     </a>
                 {% else %}
-                    <a href="{% url 'login' %}?next={{ request.path }}" class="block w-full text-center bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition shadow-md">
+                    <!-- ✅ FIXED: Added |urlencode to safely handle query strings -->
+                    <a href="{% url 'login' %}?next={{ request.path|urlencode }}" class="block w-full text-center bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition shadow-md">
                         Login to Book
                     </a>
                 {% endif %}
@@ -156,23 +167,24 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ✅ UPDATED: Read data cleanly from the HTML div attributes
             const mapDiv = document.getElementById('map');
-            const lat = parseFloat(mapDiv.dataset.lat);
-            const lng = parseFloat(mapDiv.dataset.lng);
-            const name = mapDiv.dataset.name;
-            const address = mapDiv.dataset.address;
-            
-            const map = L.map('map').setView([lat, lng], 15);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-            
-            // ✅ UPDATED: Use JavaScript template literals (backticks) for the popup
-            L.marker([lat, lng]).addTo(map)
-                .bindPopup(`<strong>${name}</strong><br>${address}`)
-                .openPopup();
+            // ✅ FIXED: Added safety check to prevent JS errors if element is missing
+            if (mapDiv) {
+                const lat = parseFloat(mapDiv.dataset.lat);
+                const lng = parseFloat(mapDiv.dataset.lng);
+                const name = mapDiv.dataset.name;
+                const address = mapDiv.dataset.address;
+                
+                const map = L.map('map').setView([lat, lng], 15);
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+                
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup(`<strong>${name}</strong><br>${address}`)
+                    .openPopup();
+            }
         });
     </script>
 {% endif %}

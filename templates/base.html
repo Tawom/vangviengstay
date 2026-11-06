@@ -1,19 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. SEO & Open Graph Meta Tags -->
+    {% include 'includes/meta_tags.html' %}
+    
+    <!-- 2. Dynamic Page Title -->
     <title>{% block title %}Vang Vieng Stay{% endblock %}</title>
     
+    <!-- 3. External Libraries (Tailwind & Alpine.js) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
+    <!-- 4. Custom Styles -->
     <style>
+        /* Alpine.js cloak to prevent flashing before load */
         [x-cloak] { display: none !important; }
+        
+        /* Performance: Smooth fade-in for lazy-loaded images */
+        img[data-src] {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        img[data-src].loaded {
+            opacity: 1;
+        }
     </style>
     
+    <!-- 5. Page-Specific Extra CSS -->
     {% block extra_css %}{% endblock %}
-    {% include 'includes/meta_tags.html' %}
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
@@ -21,12 +39,35 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 
-                <a href="{% url 'guesthouse_list' %}" class="flex items-center gap-2">
-                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+<!-- NEW LARGER "VANGVIENG TIME" LOGO -->
+                <a href="{% url 'guesthouse_list' %}" class="flex items-center gap-3 group">
+                    <svg class="w-14 h-14 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sunset Sun & Glow -->
+                        <circle cx="78" cy="25" r="14" fill="#F97316" />
+                        <circle cx="78" cy="25" r="20" fill="#F97316" opacity="0.2" />
+                        
+                        <!-- Background Karst Mountains (Silhouettes) -->
+                        <path d="M0 70 L 25 35 L 50 70 Z" fill="#4C1D95" />
+                        <path d="M30 70 L 60 40 L 90 70 Z" fill="#5B21B6" />
+                        <path d="M70 70 L 85 50 L 100 70 Z" fill="#4C1D95" />
+                        
+                        <!-- Nam Song River -->
+                        <path d="M0 70 C 20 60, 30 80, 50 70 C 70 60, 80 75, 100 70 L 100 100 L 0 100 Z" fill="#0EA5E9" />
+                        <path d="M0 75 C 20 65, 30 85, 50 75 C 70 65, 80 80, 100 75" fill="none" stroke="#BAE6FD" stroke-width="1.5" opacity="0.6" />
+                        
+                        <!-- The Tuber (Relaxing in an inner tube) -->
+                        <ellipse cx="42" cy="76" rx="14" ry="5" fill="#FBBF24" stroke="#D97706" stroke-width="1.5" />
+                        <circle cx="46" cy="68" r="3.5" fill="#1E293B" />
+                        <path d="M46 68 Q 42 74, 36 74" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M36 74 L 32 66" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
                     </svg>
-                    <span class="font-bold text-xl text-gray-900">Vang Vieng Stay</span>
-                </a>
+                    
+                    <!-- Brand Text (Scaled Up) -->
+                    <div class="flex flex-col leading-none">
+                        <span class="font-extrabold text-2xl text-gray-900 tracking-tight">VangVieng</span>
+                        <span class="font-bold text-base text-orange-500 tracking-widest uppercase">Stay</span>
+                    </div>
+                </a>                
 
                 <div class="hidden lg:flex items-center gap-1">
                     <a href="{% url 'guesthouse_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium transition flex items-center gap-2">
@@ -69,12 +110,8 @@
                                     <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
                                 
-                                <div class="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-                                     x-data="{ open: false }" 
-                                     @click.away="open = false"
-                                     @click="open = !open"
-                                     :class="{ 'opacity-100 visible': open }"
-                                     x-cloak>
+                                <!-- ✅ FIXED: Removed conflicting Alpine.js directives. Pure CSS group-hover is smoother and more reliable here. -->
+                                <div class="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                                     
                                     <a href="{% url 'universal_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition font-semibold border-b border-gray-100 mb-1 pb-2">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
@@ -120,7 +157,6 @@
                             </div>
                         {% else %}
                             <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-600 font-medium px-4 py-2 transition">Login</a>
-                            <!-- ✅ UPDATED: Points to the new signup choice page -->
                             <a href="{% url 'signup_choice' %}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">Sign Up</a>
                         {% endif %}
                     </div>
@@ -128,6 +164,7 @@
             </div>
         </div>
 
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40">
             <div class="px-4 py-4 space-y-3">
                 <a href="{% url 'guesthouse_list' %}" class="block text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
@@ -177,7 +214,6 @@
                         </a>
                     {% else %}
                         <a href="{% url 'login' %}" class="block text-blue-600 font-semibold py-2 px-3 rounded-lg hover:bg-blue-50 transition flex items-center gap-2">Log In</a>
-                        <!-- ✅ UPDATED: Points to the new signup choice page -->
                         <a href="{% url 'signup_choice' %}" class="block bg-blue-600 text-white text-center font-semibold py-2 px-3 rounded-lg hover:bg-blue-700 transition mt-2">Sign Up</a>
                     {% endif %}
                 </div>
@@ -185,6 +221,7 @@
         </div>
     </nav>
 
+    <!-- Messages -->
     {% if messages %}
         <div class="max-w-7xl mx-auto px-4 mt-4 w-full">
             {% for message in messages %}
@@ -195,11 +232,12 @@
         </div>
     {% endif %}
 
+    <!-- Main Content -->
     <main class="flex-grow">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
             <div>
@@ -231,6 +269,7 @@
 
     {% block extra_js %}{% endblock %}
 
+    <!-- Mobile Menu Toggle Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuBtn = document.getElementById('mobile-menu-btn');
@@ -244,306 +283,226 @@
         });
     </script>
 
-<!-- ========================================== -->
-<!-- AI ASSISTANT CHAT WIDGET                   -->
-<!-- ========================================== -->
-<style>
-    #chat-widget {
-        animation: slideIn 0.3s ease-out;
-    }
-    
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
+    <!-- ========================================== -->
+    <!-- AI ASSISTANT CHAT WIDGET                   -->
+    <!-- ========================================== -->
+    <style>
+        #chat-widget { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+        #chat-window { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
-    }
-    
-    #chat-window {
-        animation: fadeIn 0.2s ease-out;
-    }
-    
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
+        .typing-indicator { display: inline-flex; gap: 4px; padding: 8px 12px; }
+        .typing-dot {
+            width: 8px; height: 8px; border-radius: 50%; background-color: #9ca3af;
+            animation: typing 1.4s infinite;
         }
-        to {
-            opacity: 1;
-            transform: scale(1);
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+            30% { transform: translateY(-10px); opacity: 1; }
         }
-    }
-    
-    .typing-indicator {
-        display: inline-flex;
-        gap: 4px;
-        padding: 8px 12px;
-    }
-    
-    .typing-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #9ca3af;
-        animation: typing 1.4s infinite;
-    }
-    
-    .typing-dot:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-    
-    .typing-dot:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-    
-    @keyframes typing {
-        0%, 60%, 100% {
-            transform: translateY(0);
-            opacity: 0.7;
-        }
-        30% {
-            transform: translateY(-10px);
-            opacity: 1;
-        }
-    }
-</style>
+    </style>
 
-<!-- Floating Chat Button -->
-<div id="chat-widget" class="fixed bottom-6 right-6 z-50">
-    <button onclick="toggleChat()" id="chat-toggle-btn" class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-4 shadow-2xl hover:shadow-blue-500/50 hover:scale-110 transition-all duration-300 flex items-center justify-center group">
-        <svg class="w-6 h-6 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-    </button>
-</div>
-
-<!-- Chat Window -->
-<div id="chat-window" class="hidden fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-96 h-[600px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl z-50 flex flex-col border border-gray-200 overflow-hidden">
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center shadow-md">
-        <div class="flex items-center gap-3">
-            <div class="bg-white/20 p-2 rounded-full">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-            </div>
-            <div>
-                <h3 class="font-bold text-sm">Vang Vieng Stay Assistant</h3>
-                <p class="text-xs text-blue-100">AI-powered help • Online</p>
-            </div>
-        </div>
-        <button onclick="toggleChat()" class="text-white hover:bg-white/20 rounded-full p-1 transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    <!-- Floating Chat Button -->
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChat()" id="chat-toggle-btn" class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-4 shadow-2xl hover:shadow-blue-500/50 hover:scale-110 transition-all duration-300 flex items-center justify-center group">
+            <svg class="w-6 h-6 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
             </svg>
         </button>
     </div>
-    
-    <!-- Messages Area -->
-    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
-        <!-- Welcome Message -->
-        <div class="flex items-start gap-2 animate-fadeIn">
-            <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
-                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
+
+    <!-- Chat Window -->
+    <div id="chat-window" class="hidden fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-96 h-[600px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl z-50 flex flex-col border border-gray-200 overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center shadow-md">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/20 p-2 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm">Vang Vieng Stay Assistant</h3>
+                    <p class="text-xs text-blue-100">AI-powered help • Online</p>
+                </div>
             </div>
-            <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 max-w-[85%]">
-                <p class="text-sm text-gray-700 leading-relaxed">Hi! 👋 I'm here to help with questions about bookings, policies, tours, and accommodations in Vang Vieng. What can I help you with?</p>
-            </div>
-        </div>
-        
-        <!-- Quick Suggestions -->
-        <div class="flex flex-wrap gap-2 ml-9">
-            <button onclick="sendQuickMessage('What is the cancellation policy?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">
-                Cancellation policy
-            </button>
-            <button onclick="sendQuickMessage('What are check-in times?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">
-                Check-in times
-            </button>
-            <button onclick="sendQuickMessage('What should I bring for tours?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">
-                Tour essentials
-            </button>
-        </div>
-    </div>
-    
-    <!-- Input Area -->
-    <div class="border-t border-gray-200 p-4 bg-white">
-        <div class="flex gap-2">
-            <input 
-                type="text" 
-                id="chat-input" 
-                placeholder="Type your question..." 
-                class="flex-1 border border-gray-300 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-                onkeypress="if(event.key==='Enter') sendMessage()"
-            >
-            <button 
-                onclick="sendMessage()" 
-                id="send-btn"
-                class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-2.5 hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+            <button onclick="toggleChat()" class="text-white hover:bg-white/20 rounded-full p-1 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
-        <p class="text-xs text-gray-400 mt-2 text-center">Powered by AI • Responses based on official policies</p>
+        
+        <!-- Messages Area -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
+            <div class="flex items-start gap-2 animate-fadeIn">
+                <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100 max-w-[85%]">
+                    <p class="text-sm text-gray-700 leading-relaxed">Hi! 👋 I'm here to help with questions about bookings, policies, tours, and accommodations in Vang Vieng. What can I help you with?</p>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 ml-9">
+                <button onclick="sendQuickMessage('What is the cancellation policy?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">Cancellation policy</button>
+                <button onclick="sendQuickMessage('What are check-in times?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">Check-in times</button>
+                <button onclick="sendQuickMessage('What should I bring for tours?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">Tour essentials</button>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="border-t border-gray-200 p-4 bg-white">
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" placeholder="Type your question..." class="flex-1 border border-gray-300 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" id="send-btn" class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-2.5 hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-2 text-center">Powered by AI • Responses based on official policies</p>
+        </div>
     </div>
-</div>
 
-<script>
-let isChatOpen = false;
+    <!-- Chat Widget Logic -->
+    <script>
+        let isChatOpen = false;
 
-function toggleChat() {
-    const chatWindow = document.getElementById('chat-window');
-    const chatWidget = document.getElementById('chat-widget');
-    isChatOpen = !isChatOpen;
-    
-    if (isChatOpen) {
-        chatWindow.classList.remove('hidden');
-        document.getElementById('chat-input').focus();
-    } else {
-        chatWindow.classList.add('hidden');
-    }
-}
-
-function sendQuickMessage(message) {
-    document.getElementById('chat-input').value = message;
-    sendMessage();
-}
-
-async function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-    const message = input.value.trim();
-    
-    if (!message) return;
-    
-    // Disable input and button
-    input.disabled = true;
-    sendBtn.disabled = true;
-    
-    // Add user message
-    addMessage(message, 'user');
-    input.value = '';
-    
-    // Show typing indicator
-    const typingId = showTypingIndicator();
-    
-    try {
-        const response = await fetch('/ai-assistant/chat/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({
-                message: message,
-                session_id: 'session_' + Date.now()
-            })
-        });
-        
-        const data = await response.json();
-        
-        // Remove typing indicator and add response
-        document.getElementById(typingId).remove();
-        addMessage(data.response, 'bot');
-        
-    } catch (error) {
-        console.error('Chat error:', error);
-        document.getElementById(typingId).remove();
-        addMessage('Sorry, I encountered an error. Please try again or contact us directly.', 'bot', true);
-    } finally {
-        // Re-enable input and button
-        input.disabled = false;
-        sendBtn.disabled = false;
-        input.focus();
-    }
-}
-
-function addMessage(text, sender, isError = false) {
-    const messagesDiv = document.getElementById('chat-messages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'flex items-start gap-2 animate-fadeIn';
-    
-    if (sender === 'user') {
-        messageDiv.innerHTML = `
-            <div class="flex-1"></div>
-            <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]">
-                <p class="text-sm leading-relaxed">${escapeHtml(text)}</p>
-            </div>
-        `;
-    } else {
-        const bgColor = isError ? 'bg-red-50 border-red-200' : 'bg-white border-gray-100';
-        const textColor = isError ? 'text-red-700' : 'text-gray-700';
-        
-        messageDiv.innerHTML = `
-            <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
-                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-            </div>
-            <div class="${bgColor} p-3 rounded-2xl rounded-tl-sm shadow-sm border max-w-[85%]">
-                <p class="text-sm ${textColor} leading-relaxed whitespace-pre-line">${escapeHtml(text)}</p>
-            </div>
-        `;
-    }
-    
-    messagesDiv.appendChild(messageDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-function showTypingIndicator() {
-    const messagesDiv = document.getElementById('chat-messages');
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'flex items-start gap-2';
-    typingDiv.id = 'typing-' + Date.now();
-    
-    typingDiv.innerHTML = `
-        <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
-            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-        </div>
-        <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100">
-            <div class="typing-indicator">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            </div>
-        </div>
-    `;
-    
-    messagesDiv.appendChild(typingDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    return typingDiv.id;
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatWindow.classList.remove('hidden');
+                document.getElementById('chat-input').focus();
+            } else {
+                chatWindow.classList.add('hidden');
             }
         }
-    }
-    return cookieValue;
-}
-</script>
 
+        function sendQuickMessage(message) {
+            document.getElementById('chat-input').value = message;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            input.disabled = true;
+            sendBtn.disabled = true;
+            addMessage(message, 'user');
+            input.value = '';
+            
+            const typingId = showTypingIndicator();
+            
+            try {
+                const response = await fetch('/ai-assistant/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({ message: message, session_id: 'session_' + Date.now() })
+                });
+                const data = await response.json();
+                document.getElementById(typingId).remove();
+                addMessage(data.response, 'bot');
+            } catch (error) {
+                console.error('Chat error:', error);
+                document.getElementById(typingId).remove();
+                addMessage('Sorry, I encountered an error. Please try again or contact us directly.', 'bot', true);
+            } finally {
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function addMessage(text, sender, isError = false) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start gap-2 animate-fadeIn';
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="flex-1"></div>
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]">
+                        <p class="text-sm leading-relaxed">${escapeHtml(text)}</p>
+                    </div>`;
+            } else {
+                const bgColor = isError ? 'bg-red-50 border-red-200' : 'bg-white border-gray-100';
+                const textColor = isError ? 'text-red-700' : 'text-gray-700';
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="${bgColor} p-3 rounded-2xl rounded-tl-sm shadow-sm border max-w-[85%]">
+                        <p class="text-sm ${textColor} leading-relaxed whitespace-pre-line">${escapeHtml(text)}</p>
+                    </div>`;
+            }
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesDiv = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'flex items-start gap-2';
+            typingDiv.id = 'typing-' + Date.now();
+            typingDiv.innerHTML = `
+                <div class="bg-blue-100 p-2 rounded-full flex-shrink-0">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-gray-100">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+                    </div>
+                </div>`;
+            messagesDiv.appendChild(typingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return typingDiv.id;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+
+    <!-- ✅ Performance: Lazy Loading Script (Must be loaded AFTER static tag) -->
+    <script src="{% static 'js/lazy-load.js' %}"></script>
 </body>
 </html>
