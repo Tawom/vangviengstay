@@ -11,13 +11,16 @@ from advisor.utils import get_whatsapp_link
 # ============================================================
 @admin.register(BuggyCar)
 class BuggyCarAdmin(admin.ModelAdmin):
-    list_display = ('name', 'size', 'owner', 'price_2_hours', 'is_active', 'created_at')
+    # ✅ UPDATED: Added operator_name to list display
+    list_display = ('name', 'operator_name', 'size', 'owner', 'price_2_hours', 'is_active', 'created_at')
     list_filter = ('size', 'is_active', 'owner')
-    search_fields = ('name', 'description', 'owner__username')
+    # ✅ UPDATED: Added operator_name to search
+    search_fields = ('name', 'operator_name', 'description', 'owner__username')
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'owner', 'size')
+            # ✅ UPDATED: Added operator_name field
+            'fields': ('name', 'operator_name', 'owner', 'size')
         }),
         ('Pricing (LAK)', {
             'fields': ('price_2_hours', 'price_3_hours', 'price_4_hours', 'price_5_hours', 'price_6_hours', 'price_full_day')
@@ -143,9 +146,10 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
         
         writer = csv.writer(response)
         
+        # ✅ UPDATED: Added Operator column to CSV
         writer.writerow([
             'Reference', 'Guest Name', 'Email', 'Phone',
-            'Buggy Car', 'Size', 'Booking Date', 'Duration (Hours)',
+            'Buggy Car', 'Operator', 'Size', 'Booking Date', 'Duration (Hours)',
             'Total Price', 'Deposit', 'Status', 'Created At',
         ])
         
@@ -161,6 +165,7 @@ class BuggyCarBookingAdmin(admin.ModelAdmin):
                 booking.guest.email,
                 phone,
                 booking.buggy_car.name,
+                booking.buggy_car.operator_name,  # ✅ NEW: Include operator in CSV
                 booking.buggy_car.size,
                 booking.booking_date.strftime('%Y-%m-%d') if booking.booking_date else 'N/A',
                 booking.duration_hours,

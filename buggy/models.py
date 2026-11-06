@@ -12,10 +12,17 @@ class BuggyCar(models.Model):
     )
     
     name = models.CharField(max_length=200, help_text="e.g., Yamaha Rhino 2-Seater")
+    
+    # ✅ NEW: Operator name (shown to customers, like "Vang Vieng Buggy Adventures")
+    operator_name = models.CharField(
+        max_length=200, 
+        help_text="Business name shown to customers (e.g., 'Vang Vieng Buggy Adventures')"
+    )
+    
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buggy_cars')
     size = models.CharField(max_length=10, choices=SIZE_CHOICES)
     
-    # ✅ UPDATED: Hourly pricing + Full Day (removed 7, 8, 9 hours)
+    # Hourly pricing + Full Day
     price_2_hours = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price for 2 hours")
     price_3_hours = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price for 3 hours")
     price_4_hours = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price for 4 hours")
@@ -36,7 +43,7 @@ class BuggyCar(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} ({self.get_size_display()})"
+        return f"{self.name} ({self.get_size_display()}) - {self.operator_name}"
     
     def get_price_for_duration(self, hours):
         """Get the price based on rental duration."""
@@ -46,7 +53,7 @@ class BuggyCar(models.Model):
             4: self.price_4_hours,
             5: self.price_5_hours,
             6: self.price_6_hours,
-            24: self.price_full_day,  # ✅ Map 24 hours to Full Day price
+            24: self.price_full_day,  # Map 24 hours to Full Day price
         }
         return price_map.get(hours, 0)
     
@@ -70,7 +77,7 @@ class BuggyCarBooking(models.Model):
         ('completed', 'Completed'),
     )
     
-    # ✅ UPDATED: Duration choices with Full Day mapped to 24 hours
+    # Duration choices with Full Day mapped to 24 hours
     DURATION_CHOICES = [
         (2, '2 Hours'),
         (3, '3 Hours'),
@@ -102,7 +109,6 @@ class BuggyCarBooking(models.Model):
         super().clean()
         if self.booking_date and self.booking_date < date.today():
             raise ValidationError("You cannot book a buggy car for a past date.")
-        # ✅ Updated validation to allow 24 hours (Full Day)
         if self.duration_hours and self.duration_hours not in [2, 3, 4, 5, 6, 24]:
             raise ValidationError("Duration must be 2, 3, 4, 5, 6 hours, or Full Day.")
 
