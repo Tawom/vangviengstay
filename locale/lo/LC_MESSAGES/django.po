@@ -60,7 +60,7 @@ msgstr "ລົດຈັກ"
 
 #: templates/base.html:97 templates/base.html:214
 msgid "Buggy Cars"
-msgstr "ລົດຍົນບັກກີ"
+msgstr "ລົດບັກກີ"
 
 #: templates/base.html:119
 msgid "Switch"
