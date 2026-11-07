@@ -101,7 +101,7 @@
                 <!-- Auth, Language & User Menu -->
                 <div class="flex items-center gap-4">
                     
-                    <!-- ✅ IMPROVED: Language Switcher (Auto-submits on selection, added flags) -->
+                    <!-- Desktop Language Switcher -->
                     <div class="hidden md:flex items-center gap-2">
                         <form action="{% url 'set_language' %}" method="post" class="flex items-center">
                             {% csrf_token %}
@@ -195,6 +195,29 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40">
             <div class="px-4 py-4 space-y-3">
+                
+                <!-- ✅ NEW: Mobile Language Switcher -->
+                <div class="pb-3 border-b border-gray-200">
+                    <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-2">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        <label class="text-sm font-semibold text-gray-700">{% trans "Language" %}:</label>
+                        <select name="language" 
+                                onchange="this.form.submit()" 
+                                class="flex-1 text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang_code, lang_name in LANGUAGES %}
+                                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                    {% if lang_code == 'en' %}🇬🇧 {% endif %}
+                                    {% if lang_code == 'lo' %}🇱🇦 {% endif %}
+                                    {{ lang_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+
                 <a href="{% url 'guesthouse_list' %}" class="block text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     {% trans "Places to Stay" %}
