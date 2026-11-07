@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load i18n %}
+
+{% block title %}{% trans "Owner Analytics" %} - Vang Vieng Stay{% endblock %}
+
+{% block extra_css %}
+<style>
+    .stat-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8">
+    
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <div>
+            <a href="{% url 'owner_dashboard' %}" class="inline-flex items-center text-gray-600 hover:text-blue-600 mb-2 text-sm font-medium">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                {% trans "Back to Dashboard" %}
+            </a>
+            <h1 class="text-3xl font-bold text-gray-900">{% trans "Business Analytics" %}</h1>
+            <p class="text-gray-600 mt-1">{% trans "Deep insights into your performance across all listings" %}</p>
+        </div>
+        
+        <!-- Period Selector -->
+        <form method="GET" class="flex items-center gap-2">
+            <select name="period" onchange="this.form.submit()" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="7" {% if period == '7' %}selected{% endif %}>{% trans "Last 7 days" %}</option>
+                <option value="30" {% if period == '30' %}selected{% endif %}>{% trans "Last 30 days" %}</option>
+                <option value="90" {% if period == '90' %}selected{% endif %}>{% trans "Last 90 days" %}</option>
+                <option value="365" {% if period == '365' %}selected{% endif %}>{% trans "Last 12 months" %}</option>
+                <option value="all" {% if period == 'all' %}selected{% endif %}>{% trans "All time" %}</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- KEY METRICS CARDS                          -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        
+        <!-- Total Revenue -->
+        <div class="stat-card bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+                <div class="bg-green-100 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 font-medium">{% trans "Total Revenue" %}</p>
+            <p class="text-2xl font-bold text-gray-900 mt-1">₭{{ total_revenue|intcomma }}</p>
+        </div>
+
+        <!-- Total Bookings -->
+        <div class="stat-card bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+                <div class="bg-blue-100 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 font-medium">{% trans "Total Bookings" %}</p>
+            <p class="text-2xl font-bold text-gray-900 mt-1">{{ total_bookings|intcomma }}</p>
+            <p class="text-xs text-gray-500 mt-1">
+                <span class="text-green-600 font-semibold">{{ total_confirmed }}</span> {% trans "confirmed" %} · 
+                <span class="text-orange-600 font-semibold">{{ total_pending }}</span> {% trans "pending" %}
+            </p>
+        </div>
+
+        <!-- Conversion Rate -->
+        <div class="stat-card bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+                <div class="bg-purple-100 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 font-medium">{% trans "Conversion Rate" %}</p>
+            <p class="text-2xl font-bold text-gray-900 mt-1">{{ conversion_rate }}%</p>
+            <p class="text-xs text-gray-500 mt-1">{% trans "of inquiries confirmed" %}</p>
+        </div>
+
+        <!-- Average Rating -->
+        <div class="stat-card bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center justify-between mb-2">
+                <div class="bg-yellow-100 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 font-medium">{% trans "Average Rating" %}</p>
+            <p class="text-2xl font-bold text-gray-900 mt-1">{{ avg_rating|default:"—" }} <span class="text-sm text-gray-500 font-normal">/ 5</span></p>
+            <p class="text-xs text-gray-500 mt-1">{% trans "from" %} {{ total_reviews|intcomma }} {% trans "reviews" %}</p>
+        </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CHARTS SECTION                             -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        
+        <!-- Revenue by Category -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">{% trans "Revenue by Category" %}</h2>
+            <div class="h-80">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Booking Status Breakdown -->
+        <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">{% trans "Booking Status" %}</h2>
+            <div class="h-80">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TOP PERFORMING LISTINGS                    -->
+    <!-- ========================================== -->
+    <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">{% trans "Top Performing Listings" %}</h2>
+        
+        {% if top_listings %}
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200 text-left">
+                            <th class="pb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{% trans "Listing" %}</th>
+                            <th class="pb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">{% trans "Category" %}</th>
+                            <th class="pb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide text-right">{% trans "Revenue" %}</th>
+                            <th class="pb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide text-right">{% trans "Bookings" %}</th>
+                            <th class="pb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide text-right">{% trans "Rating" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        {% for listing in top_listings %}
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="py-4">
+                                    <p class="font-semibold text-gray-900">{{ listing.name }}</p>
+                                </td>
+                                <td class="py-4">
+                                    <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-{{ listing.color }}-100 text-{{ listing.color }}-800">
+                                        {{ listing.category }}
+                                    </span>
+                                </td>
+                                <td class="py-4 text-right font-bold text-gray-900">₭{{ listing.revenue|intcomma }}</td>
+                                <td class="py-4 text-right font-semibold text-gray-700">{{ listing.bookings }}</td>
+                                <td class="py-4 text-right">
+                                    {% if listing.rating %}
+                                        <span class="inline-flex items-center gap-1 text-gray-700">
+                                            <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                            {{ listing.rating }} <span class="text-xs text-gray-500">({{ listing.reviews }})</span>
+                                        </span>
+                                    {% else %}
+                                        <span class="text-gray-400 text-sm">—</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-12">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+                <p class="text-gray-500 text-lg">{% trans "No bookings yet" %}</p>
+                <p class="text-gray-400 text-sm mt-2">{% trans "Your analytics will appear here once you receive your first booking." %}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- ========================================== -->
+    <!-- QUICK INSIGHTS                             -->
+    <!-- ========================================== -->
+    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            {% trans "Quick Insights" %}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white rounded-lg p-4 border border-gray-100">
+                <p class="text-sm text-gray-500 mb-1">{% trans "Total Properties" %}</p>
+                <p class="text-2xl font-bold text-gray-900">{{ total_properties }}</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-gray-100">
+                <p class="text-sm text-gray-500 mb-1">{% trans "Pending Actions" %}</p>
+                <p class="text-2xl font-bold text-orange-600">{{ total_pending }}</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-gray-100">
+                <p class="text-sm text-gray-500 mb-1">{% trans "Cancelled" %}</p>
+                <p class="text-2xl font-bold text-red-600">{{ total_cancelled }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+    // Revenue by Category Chart (Doughnut)
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+        type: 'doughnut',
+        data: {
+            labels: {{ revenue_by_category.labels|safe }},
+            datasets: [{
+                data: {{ revenue_by_category.data|safe }},
+                backgroundColor: {{ revenue_by_category.colors|safe }},
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        font: { size: 12 }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ₭' + context.parsed.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Booking Status Chart (Bar)
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    new Chart(statusCtx, {
+        type: 'bar',
+        data: {
+            labels: [{% trans "'Confirmed'" %}, {% trans "'Pending'" %}, {% trans "'Cancelled'" %}],
+            datasets: [{
+                label: {% trans "'Bookings'" %},
+                data: [{{ total_confirmed }}, {{ total_pending }}, {{ total_cancelled }}],
+                backgroundColor: ['#16A34A', '#F59E0B', '#DC2626'],
+                borderRadius: 8,
+                borderSkipped: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        font: { size: 12 }
+                    },
+                    grid: { color: '#f3f4f6' }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 12 } }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

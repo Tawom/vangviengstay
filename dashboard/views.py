@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 from django.utils import timezone
+from datetime import timedelta
+from decimal import Decimal
 
 from guesthouse.models import Booking, Guesthouse
 from tours.models import TourBooking, Tour
@@ -10,6 +12,10 @@ from motorbike.models import Motorbike, MotorbikeBooking
 from guides.models import GuideBooking, Guide
 from buggy.models import BuggyCar, BuggyCarBooking
 
+
+# ==========================================
+# 1. OWNER DASHBOARD
+# ==========================================
 
 @login_required
 def owner_dashboard(request):
@@ -20,12 +26,14 @@ def owner_dashboard(request):
     
     today = timezone.now().date()
     
+    # Get all owner's properties
     my_guesthouses = Guesthouse.objects.filter(owner=request.user)
     my_tours = Tour.objects.filter(owner=request.user)
     my_motorbikes = Motorbike.objects.filter(owner=request.user)
     my_guides = Guide.objects.filter(owner=request.user)
     my_buggies = BuggyCar.objects.filter(owner=request.user)
     
+    # Calculate revenue for each category
     guesthouse_bookings = Booking.objects.filter(guesthouse__owner=request.user, status='confirmed')
     total_guesthouse_revenue = guesthouse_bookings.aggregate(total=Sum('total_price'))['total'] or 0
     upcoming_guesthouse_checkins = guesthouse_bookings.filter(check_in=today, checked_in=False).count()
@@ -44,11 +52,26 @@ def owner_dashboard(request):
     buggy_bookings = BuggyCarBooking.objects.filter(buggy_car__owner=request.user, status='confirmed')
     total_buggy_revenue = buggy_bookings.aggregate(total=Sum('total_price'))['total'] or 0
     
-    pending_bookings = Booking.objects.filter(guesthouse__owner=request.user, status='pending').select_related('guesthouse', 'guest').order_by('-created_at')
-    pending_tour_bookings = TourBooking.objects.filter(tour__owner=request.user, status='pending').select_related('tour', 'guest').order_by('-created_at')
-    pending_motorbike_bookings = MotorbikeBooking.objects.filter(motorbike__owner=request.user, status='pending').select_related('motorbike', 'guest').order_by('-created_at')
-    pending_guide_bookings = GuideBooking.objects.filter(guide__owner=request.user, status='pending').select_related('guide', 'guest').order_by('-created_at')
-    pending_buggy_bookings = BuggyCarBooking.objects.filter(buggy_car__owner=request.user, status='pending').select_related('buggy_car', 'guest').order_by('-created_at')
+    # Get pending bookings for all categories
+    pending_bookings = Booking.objects.filter(
+        guesthouse__owner=request.user, status='pending'
+    ).select_related('guesthouse', 'guest').order_by('-created_at')
+    
+    pending_tour_bookings = TourBooking.objects.filter(
+        tour__owner=request.user, status='pending'
+    ).select_related('tour', 'guest').order_by('-created_at')
+    
+    pending_motorbike_bookings = MotorbikeBooking.objects.filter(
+        motorbike__owner=request.user, status='pending'
+    ).select_related('motorbike', 'guest').order_by('-created_at')
+    
+    pending_guide_bookings = GuideBooking.objects.filter(
+        guide__owner=request.user, status='pending'
+    ).select_related('guide', 'guest').order_by('-created_at')
+    
+    pending_buggy_bookings = BuggyCarBooking.objects.filter(
+        buggy_car__owner=request.user, status='pending'
+    ).select_related('buggy_car', 'guest').order_by('-created_at')
     
     context = {
         'my_guesthouses': my_guesthouses,
@@ -63,7 +86,10 @@ def owner_dashboard(request):
         'total_motorbike_revenue': total_motorbike_revenue,
         'total_guide_revenue': total_guide_revenue,
         'total_buggy_revenue': total_buggy_revenue,
-        'total_revenue': total_guesthouse_revenue + total_tour_revenue + total_motorbike_revenue + total_guide_revenue + total_buggy_revenue,
+        'total_revenue': (
+            total_guesthouse_revenue + total_tour_revenue + 
+            total_motorbike_revenue + total_guide_revenue + total_buggy_revenue
+        ),
         'upcoming_guesthouse_checkins': upcoming_guesthouse_checkins,
         'upcoming_tour_departures': upcoming_tour_departures,
         'upcoming_guide_bookings_today': upcoming_guide_bookings_today,
@@ -72,14 +98,26 @@ def owner_dashboard(request):
         'pending_motorbike_bookings': pending_motorbike_bookings,
         'pending_guide_bookings': pending_guide_bookings,
         'pending_buggy_bookings': pending_buggy_bookings,
+        'total_pending_requests': (
+            pending_bookings.count() + 
+            pending_tour_bookings.count() + 
+            pending_motorbike_bookings.count() + 
+            pending_guide_bookings.count() + 
+            pending_buggy_bookings.count()
+        ),
         'today': today,
     }
     
     return render(request, 'dashboard/owner_dashboard.html', context)
 
 
+# ==========================================
+# 2. GUESTHOUSE BOOKINGS MANAGEMENT
+# ==========================================
+
 @login_required
 def owner_guesthouse_bookings(request, guesthouse_id):
+    """View all bookings for a specific guesthouse."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'You do not have permission to access this page.')
         return redirect('guesthouse_list')
@@ -87,7 +125,9 @@ def owner_guesthouse_bookings(request, guesthouse_id):
     guesthouse = get_object_or_404(Guesthouse, id=guesthouse_id, owner=request.user)
     today = timezone.now().date()
     
-    bookings = Booking.objects.filter(guesthouse=guesthouse, status='confirmed').select_related('guest').order_by('check_in')
+    bookings = Booking.objects.filter(
+        guesthouse=guesthouse, status='confirmed'
+    ).select_related('guest').order_by('check_in')
     
     context = {
         'guesthouse': guesthouse,
@@ -101,6 +141,7 @@ def owner_guesthouse_bookings(request, guesthouse_id):
 
 @login_required
 def check_in_guest(request, booking_id):
+    """Mark a guest as checked in."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'Permission denied.')
         return redirect('guesthouse_list')
@@ -110,13 +151,18 @@ def check_in_guest(request, booking_id):
     if request.method == 'POST':
         booking.checked_in = True
         booking.save()
-        messages.success(request, f'{booking.guest.username|title} has been checked in successfully!')
+        messages.success(request, f'{booking.guest.username} has been checked in successfully!')
     
     return redirect('owner_guesthouse_bookings', guesthouse_id=booking.guesthouse.id)
 
 
+# ==========================================
+# 3. TOUR BOOKINGS MANAGEMENT
+# ==========================================
+
 @login_required
 def owner_tour_bookings(request, tour_id):
+    """View all bookings for a specific tour."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'You do not have permission to access this page.')
         return redirect('guesthouse_list')
@@ -124,7 +170,9 @@ def owner_tour_bookings(request, tour_id):
     tour = get_object_or_404(Tour, id=tour_id, owner=request.user)
     today = timezone.now().date()
     
-    bookings = TourBooking.objects.filter(tour=tour, status='confirmed').select_related('guest').order_by('booking_date')
+    bookings = TourBooking.objects.filter(
+        tour=tour, status='confirmed'
+    ).select_related('guest').order_by('booking_date')
     
     context = {
         'tour': tour,
@@ -138,6 +186,7 @@ def owner_tour_bookings(request, tour_id):
 
 @login_required
 def mark_attended(request, booking_id):
+    """Mark a tour participant as attended."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'Permission denied.')
         return redirect('guesthouse_list')
@@ -147,19 +196,19 @@ def mark_attended(request, booking_id):
     if request.method == 'POST':
         booking.attended = True
         booking.save()
-        messages.success(request, f'{booking.guest.username|title} marked as attended!')
+        messages.success(request, f'{booking.guest.username} marked as attended!')
     
     return redirect('owner_tour_bookings', tour_id=booking.tour.id)
 
 
+# ==========================================
+# 4. UNIVERSAL DASHBOARD (FOR GUESTS)
+# ==========================================
+
 @login_required
 def universal_dashboard(request):
     """Universal dashboard for guests showing all their bookings across all services."""
-    print("🚀🚀🚀 UNIVERSAL DASHBOARD VIEW IS RUNNING! 🚀🚀🚀")
-    
     today = timezone.now().date()
-    print(f"DEBUG: Server 'today' is {today}")
-    print(f"DEBUG: Current user is {request.user.username} (ID: {request.user.id})")
     
     guesthouse_upcoming = Booking.objects.filter(
         guest=request.user,
@@ -185,19 +234,11 @@ def universal_dashboard(request):
         status__in=['pending', 'confirmed']
     ).select_related('motorbike').order_by('start_date')
     
-    # 🔍 DETAILED BUGGY DEBUGGING
-    all_buggy_for_user = BuggyCarBooking.objects.filter(guest=request.user)
-    print(f"DEBUG: ALL buggy bookings for {request.user.username}: {all_buggy_for_user.count()}")
-    for b in all_buggy_for_user:
-        print(f"  - ID: {b.id} | Date: {b.booking_date} | Status: {b.status} | >= today? {b.booking_date >= today}")
-    
     buggy_upcoming = BuggyCarBooking.objects.filter(
         guest=request.user,
         booking_date__gte=today,
         status__in=['pending', 'confirmed']
     ).select_related('buggy_car').order_by('booking_date', 'start_time')
-    
-    print(f"DEBUG: Buggy upcoming count = {buggy_upcoming.count()}")
     
     total_bookings = (
         guesthouse_upcoming.count() + 
@@ -206,8 +247,6 @@ def universal_dashboard(request):
         motorbike_upcoming.count() +
         buggy_upcoming.count()
     )
-    
-    print(f"DEBUG: Calculated total_bookings = {total_bookings}")
     
     context = {
         'guesthouse_upcoming': guesthouse_upcoming,
@@ -219,3 +258,185 @@ def universal_dashboard(request):
     }
     
     return render(request, 'dashboard/universal_dashboard.html', context)
+
+
+# ==========================================
+# 5. ADVANCED OWNER ANALYTICS
+# ==========================================
+
+@login_required
+def owner_analytics(request):
+    """Advanced analytics dashboard for property owners."""
+    if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
+        messages.warning(request, "You do not have owner permissions.")
+        return redirect('guesthouse_list')
+    
+    # Get date range from URL params (default: last 30 days)
+    period = request.GET.get('period', '30')
+    period_map = {
+        '7': 7,
+        '30': 30,
+        '90': 90,
+        '365': 365,
+        'all': None
+    }
+    days = period_map.get(period, 30)
+    
+    if days:
+        start_date = timezone.now().date() - timedelta(days=days)
+    else:
+        start_date = None
+    
+    # Get all owner's properties
+    owner_guesthouses = Guesthouse.objects.filter(owner=request.user)
+    owner_tours = Tour.objects.filter(owner=request.user)
+    owner_guides = Guide.objects.filter(owner=request.user)
+    owner_motorbikes = Motorbike.objects.filter(owner=request.user)
+    owner_buggies = BuggyCar.objects.filter(owner=request.user)
+    
+    # Calculate revenue for each category
+    def calculate_revenue(model, owner_field, start_date):
+        qs = model.objects.filter(
+            **{owner_field: request.user},
+            status__in=['confirmed', 'completed']
+        )
+        if start_date:
+            qs = qs.filter(created_at__date__gte=start_date)
+        return qs.aggregate(total=Sum('total_price'))['total'] or Decimal('0')
+    
+    gh_revenue_total = calculate_revenue(Booking, 'guesthouse__owner', start_date)
+    tour_revenue_total = calculate_revenue(TourBooking, 'tour__owner', start_date)
+    guide_revenue_total = calculate_revenue(GuideBooking, 'guide__owner', start_date)
+    motorbike_revenue_total = calculate_revenue(MotorbikeBooking, 'motorbike__owner', start_date)
+    buggy_revenue_total = calculate_revenue(BuggyCarBooking, 'buggy_car__owner', start_date)
+    
+    total_revenue = (
+        gh_revenue_total + tour_revenue_total + guide_revenue_total + 
+        motorbike_revenue_total + buggy_revenue_total
+    )
+    
+    # Count bookings by status
+    def count_bookings(model, owner_field, status_filter, start_date):
+        qs = model.objects.filter(**{f'{owner_field}': request.user, 'status__in': status_filter})
+        if start_date:
+            qs = qs.filter(created_at__date__gte=start_date)
+        return qs.count()
+    
+    total_confirmed = (
+        count_bookings(Booking, 'guesthouse__owner', ['confirmed', 'completed'], start_date) +
+        count_bookings(TourBooking, 'tour__owner', ['confirmed', 'completed'], start_date) +
+        count_bookings(GuideBooking, 'guide__owner', ['confirmed', 'completed'], start_date) +
+        count_bookings(MotorbikeBooking, 'motorbike__owner', ['confirmed', 'completed'], start_date) +
+        count_bookings(BuggyCarBooking, 'buggy_car__owner', ['confirmed', 'completed'], start_date)
+    )
+    
+    total_pending = (
+        count_bookings(Booking, 'guesthouse__owner', ['pending'], start_date) +
+        count_bookings(TourBooking, 'tour__owner', ['pending'], start_date) +
+        count_bookings(GuideBooking, 'guide__owner', ['pending'], start_date) +
+        count_bookings(MotorbikeBooking, 'motorbike__owner', ['pending'], start_date) +
+        count_bookings(BuggyCarBooking, 'buggy_car__owner', ['pending'], start_date)
+    )
+    
+    total_cancelled = (
+        count_bookings(Booking, 'guesthouse__owner', ['cancelled', 'refunded'], start_date) +
+        count_bookings(TourBooking, 'tour__owner', ['cancelled'], start_date) +
+        count_bookings(GuideBooking, 'guide__owner', ['cancelled'], start_date) +
+        count_bookings(MotorbikeBooking, 'motorbike__owner', ['cancelled'], start_date) +
+        count_bookings(BuggyCarBooking, 'buggy_car__owner', ['cancelled'], start_date)
+    )
+    
+    total_bookings = total_confirmed + total_pending + total_cancelled
+    conversion_rate = round((total_confirmed / total_bookings * 100), 1) if total_bookings > 0 else 0
+    
+    # Calculate reviews and ratings
+    all_reviews = []
+    for gh in owner_guesthouses:
+        all_reviews.extend(gh.reviews.all())
+    for tour in owner_tours:
+        all_reviews.extend(tour.reviews.all())
+    for guide in owner_guides:
+        all_reviews.extend(guide.reviews.all())
+    for mb in owner_motorbikes:
+        all_reviews.extend(mb.reviews.all())
+    for buggy in owner_buggies:
+        all_reviews.extend(buggy.reviews.all())
+    
+    total_reviews = len(all_reviews)
+    avg_rating = round(sum(r.rating for r in all_reviews) / total_reviews, 1) if total_reviews > 0 else 0
+    
+    # Chart data: Revenue by category
+    revenue_by_category = {
+        'labels': ['Guesthouses', 'Tours', 'Guides', 'Motorbikes', 'Buggy Cars'],
+        'data': [
+            float(gh_revenue_total),
+            float(tour_revenue_total),
+            float(guide_revenue_total),
+            float(motorbike_revenue_total),
+            float(buggy_revenue_total)
+        ],
+        'colors': ['#2563EB', '#16A34A', '#D97706', '#EA580C', '#9333EA']
+    }
+    
+    # Top performing listings
+    top_listings = []
+    
+    def get_listing_stats(model, booking_model, item, booking_field, category, color):
+        revenue = booking_model.objects.filter(
+            **{booking_field: item},
+            status__in=['confirmed', 'completed']
+        ).aggregate(total=Sum('total_price'))['total'] or Decimal('0')
+        
+        bookings = booking_model.objects.filter(
+            **{booking_field: item},
+            status__in=['confirmed', 'completed']
+        ).count()
+        
+        return {
+            'name': item.name,
+            'category': category,
+            'color': color,
+            'revenue': revenue,
+            'bookings': bookings,
+            'rating': item.average_rating,
+            'reviews': item.review_count
+        }
+    
+    for gh in owner_guesthouses:
+        top_listings.append(get_listing_stats(Guesthouse, Booking, gh, 'guesthouse', 'Guesthouse', 'blue'))
+    
+    for tour in owner_tours:
+        top_listings.append(get_listing_stats(Tour, TourBooking, tour, 'tour', 'Tour', 'green'))
+    
+    for guide in owner_guides:
+        top_listings.append(get_listing_stats(Guide, GuideBooking, guide, 'guide', 'Guide', 'amber'))
+    
+    for mb in owner_motorbikes:
+        top_listings.append(get_listing_stats(Motorbike, MotorbikeBooking, mb, 'motorbike', 'Motorbike', 'orange'))
+    
+    for buggy in owner_buggies:
+        top_listings.append(get_listing_stats(BuggyCar, BuggyCarBooking, buggy, 'buggy_car', 'Buggy Car', 'purple'))
+    
+    # Sort by revenue descending and take top 5
+    top_listings.sort(key=lambda x: x['revenue'], reverse=True)
+    top_listings = top_listings[:5]
+    
+    context = {
+        'period': period,
+        'total_revenue': total_revenue,
+        'total_bookings': total_bookings,
+        'total_confirmed': total_confirmed,
+        'total_pending': total_pending,
+        'total_cancelled': total_cancelled,
+        'conversion_rate': conversion_rate,
+        'total_reviews': total_reviews,
+        'avg_rating': avg_rating,
+        'revenue_by_category': revenue_by_category,
+        'top_listings': top_listings,
+        'total_properties': (
+            owner_guesthouses.count() + owner_tours.count() + owner_guides.count() +
+            owner_motorbikes.count() + owner_buggies.count()
+        ),
+    }
+    
+    return render(request, 'dashboard/owner_analytics.html', context)
