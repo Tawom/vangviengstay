@@ -19,7 +19,7 @@ msgstr ""
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:30
 msgid "Find Your Perfect Stay"
-msgstr "ສະຖານທີ່ພັກບ່ອນດີທີ່ສຸດ"
+msgstr "ສະຖານທີ່ພັກສວຍງາມ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:31
 msgid "Discover amazing guesthouses in Vang Vieng"
@@ -52,7 +52,7 @@ msgstr "ສະຖານທີ່ທ່ອງທ່ຽວ"
 
 #: templates/base.html:89 templates/base.html:206 templates/base.html:278
 msgid "Local Guides"
-msgstr "ໄກ໋ນໍາທ່ຽວທ້ອງຖິ່ນ"
+msgstr "ໄກ້ນໍາທ່ຽວທ້ອງຖິ່ນ"
 
 #: templates/base.html:93 templates/base.html:210
 msgid "Motorbikes"
