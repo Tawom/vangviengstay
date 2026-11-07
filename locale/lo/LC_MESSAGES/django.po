@@ -19,7 +19,7 @@ msgstr ""
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:30
 msgid "Find Your Perfect Stay"
-msgstr "ສະຖານພັກບ່ອນດີທີ່ສຸດ"
+msgstr "ສະຖານທີ່ພັກບ່ອນດີທີ່ສຸດ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:31
 msgid "Discover amazing guesthouses in Vang Vieng"
