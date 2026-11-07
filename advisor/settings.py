@@ -57,17 +57,18 @@ SITE_ID = 1
 # ==========================================
 # Note: UpdateCacheMiddleware MUST be near the top, FetchFromCacheMiddleware MUST be near the bottom.
 MIDDLEWARE = [
-    'advisor.middleware.MaintenanceModeMiddleware',       # Custom middleware
-    'django.middleware.cache.UpdateCacheMiddleware',      # MUST BE FIRST for caching
+    'advisor.middleware.MaintenanceModeMiddleware',       
+    'django.middleware.cache.UpdateCacheMiddleware',      
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',     
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'analytics.middleware.AnalyticsMiddleware',           # Custom analytics
-    'django.middleware.cache.FetchFromCacheMiddleware',   # MUST BE LAST for caching
+    'analytics.middleware.AnalyticsMiddleware',           
+    'django.middleware.cache.FetchFromCacheMiddleware',   
 ]
 
 # Cache Middleware Settings
@@ -124,9 +125,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # ==========================================
 # 7. INTERNATIONALIZATION
 # ==========================================
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Vientiane'  # Laos time zone
-USE_I18N = True
+LANGUAGE_CODE = 'en'  # Default language
+
+# Available languages
+LANGUAGES = [
+    ('en', 'English'),
+    ('lo', 'Lao'),
+]
+
+# Where translation files are stored
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+TIME_ZONE = 'Asia/Vientiane'
+USE_I18N = True  # ✅ Make sure this is True
+USE_L10N = True
 USE_TZ = True
 
 # ==========================================
@@ -186,3 +200,24 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '').strip()
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Vang Vieng Stay <info@vangviengstay.com>').strip()
 SERVER_EMAIL = os.getenv('SERVER_EMAIL', DEFAULT_FROM_EMAIL).strip()
 SITE_URL = os.getenv('SITE_URL', 'http://127.0.0.1:8000').strip()
+
+# ==========================================
+# 7. INTERNATIONALIZATION
+# ==========================================
+LANGUAGE_CODE = 'en'  # Default language
+
+# Available languages
+LANGUAGES = [
+    ('en', 'English'),
+    ('lo', 'Lao'),
+]
+
+# Where translation files are stored
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+TIME_ZONE = 'Asia/Vientiane'
+USE_I18N = True  # ✅ Make sure this is True
+USE_L10N = True
+USE_TZ = True
