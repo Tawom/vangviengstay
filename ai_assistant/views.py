@@ -16,11 +16,8 @@ def chat_api(request):
         if not user_message:
             return JsonResponse({'error': 'Message is required'}, status=400)
         
-        # Get AI response (this now uses MongoDB Atlas)
+        # Get AI response
         bot_response, relevant_docs = get_ai_response(user_message)
-        
-        # Optional: Save conversation to MongoDB (commented out for now to avoid errors)
-        # We can add this later if needed
         
         return JsonResponse({
             'response': bot_response,
