@@ -43,7 +43,7 @@ def guide_list(request):
 
 def guide_detail(request, guide_id):
     """Detail page for a specific guide."""
-    guide = get_object_or_404(Guide, id=guide_id, is_active=True)
+    guide = get_object_or_404(Guide, pk=guide_id, is_active=True)
     
     # Generate a safe description snippet for meta tags
     desc_snippet = guide.bio[:150] + "..." if guide.bio else f"Book {guide.name}, an expert local guide in Vang Vieng, Laos."
@@ -69,7 +69,7 @@ def guide_detail(request, guide_id):
 @login_required
 def create_guide_booking(request, guide_id):
     """Handles the guide booking form submission - saves as PENDING for owner verification."""
-    guide = get_object_or_404(Guide, id=guide_id, is_active=True)
+    guide = get_object_or_404(Guide, pk=guide_id, is_active=True)
     
     if request.method == 'POST':
         form = GuideBookingForm(request.POST)
@@ -79,21 +79,28 @@ def create_guide_booking(request, guide_id):
             booking.guest = request.user
             booking.status = 'pending'
             
+            # ✅ UX Improvement: Pre-fill email from user profile if left blank
+            if request.user.email and not booking.contact_email:
+                booking.contact_email = request.user.email
+            
             try:
                 booking.full_clean()
                 booking.save()
                 
-                booking_reference = f"VG-{booking.id:04d}"
+                booking_reference = f"VG-{booking.pk:04d}"
                 send_booking_request_email(booking, booking_reference, 'guide')
                 
                 # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Guide booking"))
                 
-                return redirect('guide_booking_request_received', booking_id=booking.id)
+                return redirect('guide_booking_request_received', booking_id=booking.pk)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
     else:
         form = GuideBookingForm()
+        # ✅ UX Improvement: Pre-fill email field if user is logged in
+        if request.user.is_authenticated and request.user.email:
+            form.fields['contact_email'].initial = request.user.email
     
     return render(request, 'guides/book_guide.html', {'form': form, 'guide': guide})
 
@@ -101,15 +108,15 @@ def create_guide_booking(request, guide_id):
 @login_required
 def guide_booking_request_received(request, booking_id):
     """Displays a reassuring message that the guide request is being verified."""
-    booking = get_object_or_404(GuideBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(GuideBooking, pk=booking_id, guest=request.user)
     return render(request, 'guides/guide_booking_request_received.html', {'booking': booking})
 
 
 @login_required
 def guide_booking_confirmation(request, booking_id):
     """Display booking voucher for guide."""
-    booking = get_object_or_404(GuideBooking, id=booking_id, guest=request.user)
-    booking_reference = f"VG-{booking.id:04d}"
+    booking = get_object_or_404(GuideBooking, pk=booking_id, guest=request.user)
+    booking_reference = f"VG-{booking.pk:04d}"
     
     return render(request, 'guides/guide_booking_confirmation.html', {
         'booking': booking,
@@ -120,7 +127,7 @@ def guide_booking_confirmation(request, booking_id):
 @login_required
 def cancel_guide_booking(request, booking_id):
     """Allows a user to cancel a pending or confirmed guide booking."""
-    booking = get_object_or_404(GuideBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(GuideBooking, pk=booking_id, guest=request.user)
     
     if request.method == 'POST':
         if booking.status in ['pending', 'confirmed']:
@@ -130,7 +137,7 @@ def cancel_guide_booking(request, booking_id):
         else:
             messages.info(request, 'This booking cannot be cancelled.')
         
-        return redirect('guide_booking_confirmation', booking_id=booking.id)
+        return redirect('guide_booking_confirmation', booking_id=booking.pk)
     
     return render(request, 'guides/cancel_guide_booking.html', {'booking': booking})
 
@@ -177,13 +184,13 @@ def guide_bookings_dashboard(request):
 @login_required
 def approve_guide_booking(request, booking_id):
     """Owner approves a pending guide booking."""
-    booking = get_object_or_404(GuideBooking, id=booking_id, guide__owner=request.user)
+    booking = get_object_or_404(GuideBooking, pk=booking_id, guide__owner=request.user)
     
     if booking.status == 'pending':
         booking.status = 'confirmed'
         booking.save()
         
-        booking_reference = f"VG-{booking.id:04d}"
+        booking_reference = f"VG-{booking.pk:04d}"
         send_booking_confirmation_email(booking, booking_reference, 'guide')
         
         messages.success(request, f'Guide booking for {booking.guest.username} has been confirmed and they have been notified!')
@@ -196,7 +203,7 @@ def approve_guide_booking(request, booking_id):
 @login_required
 def decline_guide_booking(request, booking_id):
     """Owner declines a pending guide booking with a reason."""
-    booking = get_object_or_404(GuideBooking, id=booking_id, guide__owner=request.user)
+    booking = get_object_or_404(GuideBooking, pk=booking_id, guide__owner=request.user)
     
     if request.method == 'POST':
         if booking.status == 'pending':
@@ -207,7 +214,7 @@ def decline_guide_booking(request, booking_id):
             booking.status = 'cancelled'
             booking.save()
             
-            booking_reference = f"VG-{booking.id:04d}"
+            booking_reference = f"VG-{booking.pk:04d}"
             send_booking_declined_email(booking, booking_reference, 'guide', reason)
             
             messages.success(request, f'Guide booking for {booking.guest.username} has been declined. The guest has been notified.')
@@ -242,7 +249,7 @@ def owner_guide_add(request):
 @login_required
 def owner_guide_edit(request, guide_id):
     """Allows an owner to edit their existing guide profile."""
-    guide = get_object_or_404(Guide, id=guide_id, owner=request.user)
+    guide = get_object_or_404(Guide, pk=guide_id, owner=request.user)
     
     if request.method == 'POST':
         form = GuideManagementForm(request.POST, instance=guide)

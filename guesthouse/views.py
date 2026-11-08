@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
-from django.db.models import Q, Min, Max, Avg  # ✅ Added Avg
+from django.db.models import Q, Min, Max, Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
@@ -86,7 +86,7 @@ def guesthouse_list(request):
                 check_out__gt=check_in_date
             ).values_list('guesthouse_id', flat=True).distinct()
             
-            guesthouses = guesthouses.exclude(id__in=unavailable_ids)
+            guesthouses = guesthouses.exclude(pk__in=unavailable_ids)
         except ValueError:
             pass
     
@@ -163,7 +163,7 @@ def guesthouse_list(request):
 
 def guesthouse_detail(request, guesthouse_id):
     """Detail page: Shows guesthouse info and 30-day availability calendar."""
-    guesthouse = get_object_or_404(Guesthouse, id=guesthouse_id, is_active=True)
+    guesthouse = get_object_or_404(Guesthouse, pk=guesthouse_id, is_active=True)
     
     today = date.today()
     availability_schedule = []
@@ -215,7 +215,7 @@ def guesthouse_detail(request, guesthouse_id):
 @login_required
 def create_booking(request, guesthouse_id):
     """Handles the booking form submission - saves as PENDING for owner verification."""
-    guesthouse = get_object_or_404(Guesthouse, id=guesthouse_id, is_active=True)
+    guesthouse = get_object_or_404(Guesthouse, pk=guesthouse_id, is_active=True)
     
     if request.method == 'POST':
         form = BookingForm(request.POST, guesthouse=guesthouse)
@@ -225,20 +225,27 @@ def create_booking(request, guesthouse_id):
             booking.guest = request.user
             booking.status = 'pending'
             
+            # ✅ UX Improvement: Pre-fill email from user profile if left blank
+            if request.user.email and not booking.contact_email:
+                booking.contact_email = request.user.email
+            
             try:
                 booking.full_clean()
                 booking.save()
                 
-                booking_reference = f"VV-{booking.id:04d}"
+                booking_reference = f"VV-{booking.pk:04d}"
                 send_booking_request_email(booking, booking_reference, 'guesthouse')
                 
                 # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Booking"))
-                return redirect('booking_request_received', booking_id=booking.id)
+                return redirect('booking_request_received', booking_id=booking.pk)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
     else:
         form = BookingForm(guesthouse=guesthouse)
+        # ✅ UX Improvement: Pre-fill email field if user is logged in
+        if request.user.is_authenticated and request.user.email:
+            form.fields['contact_email'].initial = request.user.email
         
     return render(request, 'guesthouse/book.html', {'form': form, 'guesthouse': guesthouse})
 
@@ -246,15 +253,15 @@ def create_booking(request, guesthouse_id):
 @login_required
 def booking_request_received(request, booking_id):
     """Displays a reassuring message that the booking request is being verified."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     return render(request, 'guesthouse/booking_request_received.html', {'booking': booking})
 
 
 @login_required
 def booking_confirmation(request, booking_id):
     """Displays the booking voucher with a unique reference number."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
-    booking_reference = f"VV-{booking.id:04d}"
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
+    booking_reference = f"VV-{booking.pk:04d}"
     
     return render(request, 'guesthouse/booking_confirmation.html', {
         'booking': booking,
@@ -265,7 +272,7 @@ def booking_confirmation(request, booking_id):
 @login_required
 def cancel_booking(request, booking_id):
     """Allows a user to cancel a pending or confirmed booking."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if request.method == 'POST':
         if booking.status in ['pending', 'confirmed']:
@@ -275,7 +282,7 @@ def cancel_booking(request, booking_id):
         else:
             messages.info(request, 'This booking cannot be cancelled.')
             
-        return redirect('booking_confirmation', booking_id=booking.id)
+        return redirect('booking_confirmation', booking_id=booking.pk)
         
     return render(request, 'guesthouse/cancel_booking.html', {'booking': booking})
 
@@ -490,7 +497,7 @@ def owner_guesthouse_add(request):
 @login_required
 def owner_guesthouse_edit(request, pk):
     """Allows an owner to edit their existing guesthouse."""
-    guesthouse = get_object_or_404(Guesthouse, id=pk, owner=request.user)
+    guesthouse = get_object_or_404(Guesthouse, pk=pk, owner=request.user)
     
     if request.method == 'POST':
         form = GuesthouseManagementForm(request.POST, instance=guesthouse)
@@ -510,13 +517,13 @@ def owner_guesthouse_edit(request, pk):
 @login_required
 def approve_booking(request, booking_id):
     """Owner approves a pending booking."""
-    booking = get_object_or_404(Booking, id=booking_id, guesthouse__owner=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guesthouse__owner=request.user)
     
     if booking.status == 'pending':
         booking.status = 'confirmed'
         booking.save()
         
-        booking_reference = f"VV-{booking.id:04d}"
+        booking_reference = f"VV-{booking.pk:04d}"
         send_booking_confirmation_email(booking, booking_reference, 'guesthouse')
         
         messages.success(request, f'Booking for {booking.guest.username} has been confirmed and they have been notified!')
@@ -529,7 +536,7 @@ def approve_booking(request, booking_id):
 @login_required
 def decline_booking(request, booking_id):
     """Owner declines a pending booking with a reason."""
-    booking = get_object_or_404(Booking, id=booking_id, guesthouse__owner=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guesthouse__owner=request.user)
     
     if request.method == 'POST':
         if booking.status == 'pending':
@@ -540,7 +547,7 @@ def decline_booking(request, booking_id):
             booking.status = 'cancelled'
             booking.save()
             
-            booking_reference = f"VV-{booking.id:04d}"
+            booking_reference = f"VV-{booking.pk:04d}"
             send_booking_declined_email(booking, booking_reference, 'guesthouse', reason)
             
             messages.success(request, f'Booking for {booking.guest.username} has been declined. The guest has been notified.')
@@ -596,7 +603,7 @@ def contact_us_submit(request):
 @login_required
 def submit_guesthouse_review(request, booking_id):
     """Handles the submission of a guesthouse review."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if booking.status != 'confirmed':
         messages.error(request, 'You can only review confirmed bookings.')
@@ -619,7 +626,7 @@ def submit_guesthouse_review(request, booking_id):
             review.guest = request.user
             review.save()
             messages.success(request, 'Thank you for your review!')
-            return redirect('guesthouse_detail', guesthouse_id=booking.guesthouse.id)
+            return redirect('guesthouse_detail', guesthouse_id=booking.guesthouse.pk)
     else:
         form = GuesthouseReviewForm()
 
@@ -632,7 +639,7 @@ def submit_guesthouse_review(request, booking_id):
 @login_required
 def edit_guesthouse_review(request, booking_id):
     """Allows a user to edit their existing guesthouse review."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'guesthouse_review'):
         messages.error(request, 'No review found for this booking.')
@@ -645,7 +652,7 @@ def edit_guesthouse_review(request, booking_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your review has been updated!')
-            return redirect('guesthouse_detail', guesthouse_id=booking.guesthouse.id)
+            return redirect('guesthouse_detail', guesthouse_id=booking.guesthouse.pk)
     else:
         form = GuesthouseReviewForm(instance=review)
 
@@ -659,7 +666,7 @@ def edit_guesthouse_review(request, booking_id):
 @login_required
 def delete_guesthouse_review(request, booking_id):
     """Allows a user to delete their guesthouse review."""
-    booking = get_object_or_404(Booking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'guesthouse_review'):
         messages.error(request, 'No review found for this booking.')

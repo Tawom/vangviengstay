@@ -87,9 +87,25 @@ class Booking(models.Model):
         default='standard',
         help_text="Type of room requested"
     )
+    
+    # ✅ UPDATED: Flexible Contact Info (at least one required)
+    contact_phone = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True,
+        verbose_name="Contact Phone",
+        help_text="For WhatsApp/SMS coordination (optional)"
+    )
+    contact_email = models.EmailField(
+        blank=True, 
+        null=True,
+        verbose_name="Contact Email",
+        help_text="For booking confirmation and updates"
+    )
 
     def __str__(self):
-        return f"{self.guest.username} - {self.guesthouse.name} ({self.check_in})"
+        contact = self.contact_email if self.contact_email else self.contact_phone
+        return f"{self.guest.username} - {self.guesthouse.name} ({self.check_in}, {contact})"
 
     def clean(self):
         """Comprehensive validation for guesthouse bookings."""
@@ -125,6 +141,10 @@ class Booking(models.Model):
                 raise ValidationError(
                     "These dates overlap with an existing pending or confirmed booking."
                 )
+                
+        # ✅ Rule 4: Contact validation - at least one method required
+        if not self.contact_phone and not self.contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the guesthouse owner can reach you.")
 
     def save(self, *args, **kwargs):
         """Calculate total price before saving."""

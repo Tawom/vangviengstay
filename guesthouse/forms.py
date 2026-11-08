@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from .models import Booking, Guesthouse, GuesthouseReview
 
@@ -71,6 +72,7 @@ class PhoneSignupForm(UserCreationForm):
             'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition'
         })
 
+
 # ==========================================
 # 2. GUESTHOUSE BOOKING FORM
 # ==========================================
@@ -80,7 +82,7 @@ class BookingForm(forms.ModelForm):
     
     class Meta:
         model = Booking
-        fields = ['check_in', 'check_out', 'guests', 'room_type']
+        fields = ['check_in', 'check_out', 'guests', 'room_type', 'contact_phone', 'contact_email']
         widgets = {
             'check_in': forms.DateInput(attrs={
                 'type': 'date',
@@ -96,7 +98,15 @@ class BookingForm(forms.ModelForm):
             }),
             'room_type': forms.Select(attrs={
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white'
-            })
+            }),
+            'contact_phone': forms.TextInput(attrs={
+                'placeholder': '+856 20 XXXX XXXX (Optional)',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition'
+            }),
+            'contact_email': forms.EmailInput(attrs={
+                'placeholder': 'your.email@example.com',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition'
+            }),
         }
 
     def __init__(self, *args, **kwargs):
@@ -109,6 +119,17 @@ class BookingForm(forms.ModelForm):
             self.fields['room_type'].widget = forms.HiddenInput()
             self.fields['room_type'].initial = 'standard'
             self.fields['room_type'].required = False
+
+    def clean(self):
+        """Validate that at least one contact method is provided."""
+        cleaned_data = super().clean()
+        contact_phone = cleaned_data.get('contact_phone')
+        contact_email = cleaned_data.get('contact_email')
+        
+        if not contact_phone and not contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the guesthouse owner can reach you.")
+        
+        return cleaned_data
 
 
 # ==========================================

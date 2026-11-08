@@ -79,7 +79,7 @@ class TourBooking(models.Model):
     attended = models.BooleanField(default=False)  
     created_at = models.DateTimeField(auto_now_add=True)
     
-    # Pickup & Contact Fields
+    # Pickup Information
     pickup_option = models.CharField(
         max_length=10, 
         choices=PICKUP_CHOICES, 
@@ -91,14 +91,25 @@ class TourBooking(models.Model):
         blank=True,
         help_text="Guesthouse name, address, or landmark (only if vehicle pickup)"
     )
-    guest_phone = models.CharField(
+    
+    # ✅ UPDATED: Flexible Contact Info (at least one required)
+    contact_phone = models.CharField(
         max_length=20, 
-        blank=True,
-        help_text="Your phone number with country code for WhatsApp (e.g., +85620...)"
+        blank=True, 
+        null=True,
+        verbose_name="Contact Phone",
+        help_text="For WhatsApp/SMS coordination (optional)"
+    )
+    contact_email = models.EmailField(
+        blank=True, 
+        null=True,
+        verbose_name="Contact Email",
+        help_text="For booking confirmation and updates"
     )
 
     def __str__(self):
-        return f"{self.guest.username} - {self.tour.name} on {self.booking_date} ({self.number_of_people} people)"
+        contact = self.contact_email if self.contact_email else self.contact_phone
+        return f"{self.guest.username} - {self.tour.name} on {self.booking_date} ({self.number_of_people} people, {contact})"
 
     def clean(self):
         """Comprehensive validation for tour bookings."""
@@ -116,7 +127,11 @@ class TourBooking(models.Model):
         if self.pickup_option == 'vehicle' and not self.pickup_location.strip():
             raise ValidationError('Please provide your pickup location (guesthouse name or address).')
 
-        # Rule 4: Check capacity (only for active bookings)
+        # ✅ Rule 4: Contact validation - at least one method required
+        if not self.contact_phone and not self.contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the tour operator can reach you.")
+
+        # Rule 5: Check capacity (only for active bookings)
         if self.status in ('cancelled', 'refunded'):
             return
 

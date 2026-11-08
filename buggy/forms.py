@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import BuggyCar, BuggyCarBooking, BuggyCarReview
 
 
@@ -23,7 +24,7 @@ class BuggyCarBookingForm(forms.ModelForm):
     
     class Meta:
         model = BuggyCarBooking
-        fields = ['booking_date', 'start_time', 'duration_hours', 'guest_phone', 'passport_number']
+        fields = ['booking_date', 'start_time', 'duration_hours', 'contact_phone', 'contact_email', 'passport_number']
         widgets = {
             'booking_date': forms.DateInput(attrs={
                 'type': 'date',
@@ -33,8 +34,12 @@ class BuggyCarBookingForm(forms.ModelForm):
                 'type': 'time',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition'
             }),
-            'guest_phone': forms.TextInput(attrs={
-                'placeholder': '+856 20 XXXX XXXX',
+            'contact_phone': forms.TextInput(attrs={
+                'placeholder': '+856 20 XXXX XXXX (Optional)',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition'
+            }),
+            'contact_email': forms.EmailInput(attrs={
+                'placeholder': 'your.email@example.com',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition'
             }),
             'passport_number': forms.TextInput(attrs={
@@ -42,6 +47,17 @@ class BuggyCarBookingForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition'
             }),
         }
+
+    def clean(self):
+        """Validate that at least one contact method is provided."""
+        cleaned_data = super().clean()
+        contact_phone = cleaned_data.get('contact_phone')
+        contact_email = cleaned_data.get('contact_email')
+        
+        if not contact_phone and not contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the owner can reach you.")
+        
+        return cleaned_data
 
 
 class BuggyCarReviewForm(forms.ModelForm):

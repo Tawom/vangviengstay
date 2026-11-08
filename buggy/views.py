@@ -73,7 +73,7 @@ def buggy_list(request):
 
 def buggy_detail(request, buggy_id):
     """Detail page for a specific buggy car."""
-    buggy = get_object_or_404(BuggyCar, id=buggy_id, is_active=True)
+    buggy = get_object_or_404(BuggyCar, pk=buggy_id, is_active=True)
     
     # Generate a safe description snippet for meta tags
     desc_snippet = buggy.description[:150] + "..." if buggy.description else "Rent the best buggy cars for your Vang Vieng adventure!"
@@ -96,10 +96,10 @@ def buggy_detail(request, buggy_id):
 # 2. BUGGY CAR BOOKING VIEWS (REQUEST & VERIFY)
 # ==========================================
 
-@login_required  # ✅ ADDED: Prevents AnonymousUser database errors
+@login_required
 def create_buggy_booking(request, buggy_id):
     """Handles the buggy booking form - saves as PENDING for owner verification."""
-    buggy = get_object_or_404(BuggyCar, id=buggy_id, is_active=True)
+    buggy = get_object_or_404(BuggyCar, pk=buggy_id, is_active=True)
     
     if request.method == 'POST':
         form = BuggyCarBookingForm(request.POST)
@@ -109,21 +109,28 @@ def create_buggy_booking(request, buggy_id):
             booking.guest = request.user
             booking.status = 'pending'
             
+            # ✅ UX Improvement: Pre-fill email from user profile if left blank
+            if request.user.email and not booking.contact_email:
+                booking.contact_email = request.user.email
+            
             try:
                 booking.full_clean()
                 booking.save()
                 
-                booking_reference = f"BG-{booking.id:04d}"
+                booking_reference = f"BG-{booking.pk:04d}"
                 send_booking_request_email(booking, booking_reference, 'buggy')
                 
                 # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Buggy car booking"))
                 
-                return redirect('buggy_booking_request_received', booking_id=booking.id)
+                return redirect('buggy_booking_request_received', booking_id=booking.pk)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
     else:
         form = BuggyCarBookingForm()
+        # ✅ UX Improvement: Pre-fill email field if user is logged in
+        if request.user.is_authenticated and request.user.email:
+            form.fields['contact_email'].initial = request.user.email
     
     return render(request, 'buggy/book_buggy.html', {'form': form, 'buggy': buggy})
 
@@ -131,15 +138,15 @@ def create_buggy_booking(request, buggy_id):
 @login_required
 def buggy_booking_request_received(request, booking_id):
     """Displays a reassuring message that the buggy request is being verified."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, guest=request.user)
     return render(request, 'buggy/buggy_booking_request_received.html', {'booking': booking})
 
 
 @login_required
 def buggy_booking_confirmation(request, booking_id):
     """Displays the buggy booking voucher."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, guest=request.user)
-    booking_reference = f"BG-{booking.id:04d}"
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, guest=request.user)
+    booking_reference = f"BG-{booking.pk:04d}"
     
     return render(request, 'buggy/buggy_booking_confirmation.html', {
         'booking': booking,
@@ -150,7 +157,7 @@ def buggy_booking_confirmation(request, booking_id):
 @login_required
 def cancel_buggy_booking(request, booking_id):
     """Allows a user to cancel a pending or confirmed buggy booking."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, guest=request.user)
     
     if request.method == 'POST':
         if booking.status in ['pending', 'confirmed']:
@@ -160,7 +167,7 @@ def cancel_buggy_booking(request, booking_id):
         else:
             messages.info(request, 'This booking cannot be cancelled.')
         
-        return redirect('buggy_booking_confirmation', booking_id=booking.id)
+        return redirect('buggy_booking_confirmation', booking_id=booking.pk)
     
     return render(request, 'buggy/cancel_buggy_booking.html', {'booking': booking})
 
@@ -203,7 +210,7 @@ def buggy_bookings_dashboard(request):
 @login_required
 def submit_buggy_review(request, booking_id):
     """Handles the submission of a buggy review."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, guest=request.user)
     
     if booking.status != 'confirmed':
         messages.error(request, 'You can only review confirmed bookings.')
@@ -222,7 +229,7 @@ def submit_buggy_review(request, booking_id):
             review.guest = request.user
             review.save()
             messages.success(request, 'Thank you for your review!')
-            return redirect('buggy_detail', buggy_id=booking.buggy_car.id)
+            return redirect('buggy_detail', buggy_id=booking.buggy_car.pk)
     else:
         form = BuggyCarReviewForm()
     
@@ -239,13 +246,13 @@ def submit_buggy_review(request, booking_id):
 @login_required
 def approve_buggy_booking(request, booking_id):
     """Owner approves a pending buggy booking."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, buggy_car__owner=request.user)
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, buggy_car__owner=request.user)
     
     if booking.status == 'pending':
         booking.status = 'confirmed'
         booking.save()
         
-        booking_reference = f"BG-{booking.id:04d}"
+        booking_reference = f"BG-{booking.pk:04d}"
         send_booking_confirmation_email(booking, booking_reference, 'buggy')
         
         messages.success(request, f'Buggy booking for {booking.guest.username} has been confirmed and they have been notified!')
@@ -258,7 +265,7 @@ def approve_buggy_booking(request, booking_id):
 @login_required
 def decline_buggy_booking(request, booking_id):
     """Owner declines a pending buggy booking with a reason."""
-    booking = get_object_or_404(BuggyCarBooking, id=booking_id, buggy_car__owner=request.user)
+    booking = get_object_or_404(BuggyCarBooking, pk=booking_id, buggy_car__owner=request.user)
     
     if request.method == 'POST':
         if booking.status == 'pending':
@@ -269,7 +276,7 @@ def decline_buggy_booking(request, booking_id):
             booking.status = 'cancelled'
             booking.save()
             
-            booking_reference = f"BG-{booking.id:04d}"
+            booking_reference = f"BG-{booking.pk:04d}"
             send_booking_declined_email(booking, booking_reference, 'buggy', reason)
             
             messages.success(request, f'Buggy booking for {booking.guest.username} has been declined. The guest has been notified.')
@@ -304,7 +311,7 @@ def owner_buggy_add(request):
 @login_required
 def owner_buggy_edit(request, buggy_id):
     """Allows an owner to edit their existing buggy car."""
-    buggy = get_object_or_404(BuggyCar, id=buggy_id, owner=request.user)
+    buggy = get_object_or_404(BuggyCar, pk=buggy_id, owner=request.user)
     
     if request.method == 'POST':
         form = BuggyCarManagementForm(request.POST, instance=buggy)

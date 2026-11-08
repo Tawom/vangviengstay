@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Motorbike, MotorbikeBooking, MotorbikeReview
 
 
@@ -6,7 +7,7 @@ class MotorbikeBookingForm(forms.ModelForm):
     """Form for creating a new motorbike booking."""
     class Meta:
         model = MotorbikeBooking
-        fields = ['start_date', 'end_date', 'guest_phone', 'passport_number']
+        fields = ['start_date', 'end_date', 'contact_phone', 'contact_email', 'passport_number']
         widgets = {
             'start_date': forms.DateInput(attrs={
                 'type': 'date',
@@ -16,8 +17,12 @@ class MotorbikeBookingForm(forms.ModelForm):
                 'type': 'date',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition'
             }),
-            'guest_phone': forms.TextInput(attrs={
-                'placeholder': '+856 20 XXXX XXXX',
+            'contact_phone': forms.TextInput(attrs={
+                'placeholder': '+856 20 XXXX XXXX (Optional)',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition'
+            }),
+            'contact_email': forms.EmailInput(attrs={
+                'placeholder': 'your.email@example.com',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition'
             }),
             'passport_number': forms.TextInput(attrs={
@@ -25,6 +30,17 @@ class MotorbikeBookingForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition'
             }),
         }
+
+    def clean(self):
+        """Validate that at least one contact method is provided."""
+        cleaned_data = super().clean()
+        contact_phone = cleaned_data.get('contact_phone')
+        contact_email = cleaned_data.get('contact_email')
+        
+        if not contact_phone and not contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the owner can reach you.")
+        
+        return cleaned_data
 
 
 class MotorbikeReviewForm(forms.ModelForm):

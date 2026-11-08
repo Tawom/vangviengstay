@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Tour, TourBooking, TourReview
 
 
@@ -6,7 +7,7 @@ class TourBookingForm(forms.ModelForm):
     """Form for creating a new tour booking."""
     class Meta:
         model = TourBooking
-        fields = ['booking_date', 'number_of_people', 'pickup_option', 'pickup_location', 'guest_phone']
+        fields = ['booking_date', 'number_of_people', 'pickup_option', 'pickup_location', 'contact_phone', 'contact_email']
         widgets = {
             'booking_date': forms.DateInput(attrs={
                 'type': 'date',
@@ -24,8 +25,12 @@ class TourBookingForm(forms.ModelForm):
                 'placeholder': 'e.g., Vang Vieng Central Lodge, Room 203, or near the bus station',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition'
             }),
-            'guest_phone': forms.TextInput(attrs={
-                'placeholder': '+856 20 XXXX XXXX',
+            'contact_phone': forms.TextInput(attrs={
+                'placeholder': '+856 20 XXXX XXXX (Optional)',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition'
+            }),
+            'contact_email': forms.EmailInput(attrs={
+                'placeholder': 'your.email@example.com',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition'
             }),
         }
@@ -34,6 +39,17 @@ class TourBookingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # ✅ Form-level: pickup_location is not required. Model's clean() enforces it when pickup_option == 'vehicle'
         self.fields['pickup_location'].required = False
+
+    def clean(self):
+        """Validate that at least one contact method is provided."""
+        cleaned_data = super().clean()
+        contact_phone = cleaned_data.get('contact_phone')
+        contact_email = cleaned_data.get('contact_email')
+        
+        if not contact_phone and not contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the tour operator can reach you.")
+        
+        return cleaned_data
 
 
 class TourReviewForm(forms.ModelForm):

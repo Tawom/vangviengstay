@@ -96,21 +96,50 @@ class BuggyCarBooking(models.Model):
     deposit_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     
-    guest_phone = models.CharField(max_length=20, help_text="For WhatsApp coordination")
-    passport_number = models.CharField(max_length=50, blank=True)
+    # ✅ UPDATED: Flexible Contact Info (at least one required)
+    contact_phone = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True,
+        verbose_name="Contact Phone",
+        help_text="For WhatsApp/SMS coordination (optional)"
+    )
+    contact_email = models.EmailField(
+        blank=True, 
+        null=True,
+        verbose_name="Contact Email",
+        help_text="For booking confirmation and updates"
+    )
+    
+    # Collateral Info
+    passport_number = models.CharField(
+        max_length=50, 
+        blank=True, 
+        help_text="Optional: Passport number for deposit record"
+    )
     
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         duration_display = "Full Day" if self.duration_hours == 24 else f"{self.duration_hours} Hours"
-        return f"{self.guest.username} - {self.buggy_car.name} ({self.booking_date}, {duration_display})"
+        contact = self.contact_email if self.contact_email else self.contact_phone
+        return f"{self.guest.username} - {self.buggy_car.name} ({self.booking_date}, {duration_display}, {contact})"
 
     def clean(self):
+        """Validate dates, prevent past bookings, and ensure at least one contact method."""
         super().clean()
+        
+        # Date validation
         if self.booking_date and self.booking_date < date.today():
             raise ValidationError("You cannot book a buggy car for a past date.")
+        
+        # Duration validation
         if self.duration_hours and self.duration_hours not in [2, 3, 4, 5, 6, 24]:
             raise ValidationError("Duration must be 2, 3, 4, 5, 6 hours, or Full Day.")
+        
+        # ✅ Contact validation: at least one method required
+        if not self.contact_phone and not self.contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the owner can reach you.")
 
     def save(self, *args, **kwargs):
         if self.buggy_car and self.duration_hours:

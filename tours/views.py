@@ -89,13 +89,13 @@ def tour_list(request):
                 total_booked = sum(
                     booking.number_of_people 
                     for booking in bookings_on_date 
-                    if booking.tour_id == tour.id
+                    if booking.tour_id == tour.pk
                 )
                 available_spots = tour.max_capacity - total_booked
                 if available_spots > 0:
-                    available_tour_ids.append(tour.id)
+                    available_tour_ids.append(tour.pk)
             
-            tours = tours.filter(id__in=available_tour_ids)
+            tours = tours.filter(pk__in=available_tour_ids)
         except ValueError:
             pass
     
@@ -124,7 +124,7 @@ def tour_list(request):
 
 def tour_detail(request, tour_id):
     """Detail page: Shows tour info and availability for next 30 days."""
-    tour = get_object_or_404(Tour, id=tour_id, is_active=True)
+    tour = get_object_or_404(Tour, pk=tour_id, is_active=True)
     
     today = date.today()
     availability_schedule = []
@@ -175,7 +175,7 @@ def tour_detail(request, tour_id):
 @login_required
 def create_tour_booking(request, tour_id):
     """Handles the tour booking form submission - saves as PENDING for owner verification."""
-    tour = get_object_or_404(Tour, id=tour_id, is_active=True)
+    tour = get_object_or_404(Tour, pk=tour_id, is_active=True)
     
     if request.method == 'POST':
         form = TourBookingForm(request.POST)
@@ -185,22 +185,29 @@ def create_tour_booking(request, tour_id):
             booking.guest = request.user
             booking.status = 'pending'
             
+            # ✅ UX Improvement: Pre-fill email from user profile if left blank
+            if request.user.email and not booking.contact_email:
+                booking.contact_email = request.user.email
+            
             try:
                 booking.full_clean()
                 booking.save()
                 
-                booking_reference = f"TV-{booking.id:04d}"
+                booking_reference = f"TV-{booking.pk:04d}"
                 send_booking_request_email(booking, booking_reference, 'tour')
                 
                 # ✅ IMPROVED UX: Use centralized utility for smart success message
                 messages.success(request, get_booking_confirmation_message(booking, "Tour booking"))
                 
-                return redirect('tour_booking_request_received', booking_id=booking.id)
+                return redirect('tour_booking_request_received', booking_id=booking.pk)
             
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
     else:
         form = TourBookingForm()
+        # ✅ UX Improvement: Pre-fill email field if user is logged in
+        if request.user.is_authenticated and request.user.email:
+            form.fields['contact_email'].initial = request.user.email
     
     return render(request, 'tours/book_tour.html', {'form': form, 'tour': tour})
 
@@ -208,15 +215,15 @@ def create_tour_booking(request, tour_id):
 @login_required
 def tour_booking_request_received(request, booking_id):
     """Displays a reassuring message that the tour request is being verified."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
     return render(request, 'tours/tour_booking_request_received.html', {'booking': booking})
 
 
 @login_required
 def tour_booking_confirmation(request, booking_id):
     """Displays the tour booking voucher."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
-    booking_reference = f"TV-{booking.id:04d}"
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
+    booking_reference = f"TV-{booking.pk:04d}"
     
     return render(request, 'tours/tour_booking_confirmation.html', {
         'booking': booking,
@@ -227,7 +234,7 @@ def tour_booking_confirmation(request, booking_id):
 @login_required
 def cancel_tour_booking(request, booking_id):
     """Allows a user to cancel a pending or confirmed tour booking."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
     
     if request.method == 'POST':
         if booking.status in ['pending', 'confirmed']:
@@ -237,7 +244,7 @@ def cancel_tour_booking(request, booking_id):
         else:
             messages.info(request, 'This booking cannot be cancelled.')
         
-        return redirect('tour_booking_confirmation', booking_id=booking.id)
+        return redirect('tour_booking_confirmation', booking_id=booking.pk)
     
     return render(request, 'tours/cancel_tour_booking.html', {'booking': booking})
 
@@ -280,7 +287,7 @@ def tour_bookings_dashboard(request):
 @login_required
 def submit_tour_review(request, booking_id):
     """Handles the submission of a tour review."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
     
     if booking.status != 'confirmed':
         messages.error(request, 'You can only review confirmed bookings.')
@@ -303,7 +310,7 @@ def submit_tour_review(request, booking_id):
             review.guest = request.user
             review.save()
             messages.success(request, 'Thank you for your review!')
-            return redirect('tour_detail', tour_id=booking.tour.id)
+            return redirect('tour_detail', tour_id=booking.tour.pk)
     else:
         form = TourReviewForm()
 
@@ -316,7 +323,7 @@ def submit_tour_review(request, booking_id):
 @login_required
 def edit_tour_review(request, booking_id):
     """Allows a user to edit their existing tour review."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'tour_review'):
         messages.error(request, 'No review found for this booking.')
@@ -329,7 +336,7 @@ def edit_tour_review(request, booking_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your review has been updated!')
-            return redirect('tour_detail', tour_id=booking.tour.id)
+            return redirect('tour_detail', tour_id=booking.tour.pk)
     else:
         form = TourReviewForm(instance=review)
 
@@ -343,7 +350,7 @@ def edit_tour_review(request, booking_id):
 @login_required
 def delete_tour_review(request, booking_id):
     """Allows a user to delete their tour review."""
-    booking = get_object_or_404(TourBooking, id=booking_id, guest=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'tour_review'):
         messages.error(request, 'No review found for this booking.')
@@ -369,13 +376,13 @@ def delete_tour_review(request, booking_id):
 @login_required
 def approve_tour_booking(request, booking_id):
     """Owner approves a pending tour booking."""
-    booking = get_object_or_404(TourBooking, id=booking_id, tour__owner=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, tour__owner=request.user)
     
     if booking.status == 'pending':
         booking.status = 'confirmed'
         booking.save()
         
-        booking_reference = f"TV-{booking.id:04d}"
+        booking_reference = f"TV-{booking.pk:04d}"
         send_booking_confirmation_email(booking, booking_reference, 'tour')
         
         messages.success(request, f'Tour booking for {booking.guest.username} has been confirmed and they have been notified!')
@@ -388,7 +395,7 @@ def approve_tour_booking(request, booking_id):
 @login_required
 def decline_tour_booking(request, booking_id):
     """Owner declines a pending tour booking with a reason."""
-    booking = get_object_or_404(TourBooking, id=booking_id, tour__owner=request.user)
+    booking = get_object_or_404(TourBooking, pk=booking_id, tour__owner=request.user)
     
     if request.method == 'POST':
         if booking.status == 'pending':
@@ -399,7 +406,7 @@ def decline_tour_booking(request, booking_id):
             booking.status = 'cancelled'
             booking.save()
             
-            booking_reference = f"TV-{booking.id:04d}"
+            booking_reference = f"TV-{booking.pk:04d}"
             send_booking_declined_email(booking, booking_reference, 'tour', reason)
             
             messages.success(request, f'Tour booking for {booking.guest.username} has been declined and they have been notified.')
@@ -435,7 +442,7 @@ def owner_tour_add(request):
 @login_required
 def owner_tour_edit(request, tour_id):
     """Allows an owner to edit their existing tour."""
-    tour = get_object_or_404(Tour, id=tour_id, owner=request.user)
+    tour = get_object_or_404(Tour, pk=tour_id, owner=request.user)
     
     if request.method == 'POST':
         form = TourManagementForm(request.POST, instance=tour)

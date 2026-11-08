@@ -90,22 +90,47 @@ class MotorbikeBooking(models.Model):
     deposit_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     
-    # Contact & Collateral Info
-    guest_phone = models.CharField(max_length=20, help_text="For WhatsApp coordination")
-    passport_number = models.CharField(max_length=50, blank=True, help_text="Optional: Passport number for deposit record")
+    # ✅ UPDATED: Flexible Contact Info (at least one required)
+    contact_phone = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True,
+        verbose_name="Contact Phone",
+        help_text="For WhatsApp/SMS coordination (optional)"
+    )
+    contact_email = models.EmailField(
+        blank=True, 
+        null=True,
+        verbose_name="Contact Email",
+        help_text="For booking confirmation and updates"
+    )
+    
+    # Collateral Info
+    passport_number = models.CharField(
+        max_length=50, 
+        blank=True, 
+        help_text="Optional: Passport number for deposit record"
+    )
     
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.guest.username} - {self.motorbike.name} ({self.start_date} to {self.end_date})"
+        contact = self.contact_email if self.contact_email else self.contact_phone
+        return f"{self.guest.username} - {self.motorbike.name} ({contact})"
 
     def clean(self):
-        """Validate dates and prevent past bookings."""
+        """Validate dates, prevent past bookings, and ensure at least one contact method."""
         super().clean()
+        
+        # Date validation
         if self.start_date and self.start_date < date.today():
             raise ValidationError("You cannot rent a motorbike for a past date.")
         if self.end_date and self.end_date < self.start_date:
             raise ValidationError("End date must be after or equal to the start date.")
+        
+        # ✅ Contact validation: at least one method required
+        if not self.contact_phone and not self.contact_email:
+            raise ValidationError("Please provide either a contact phone number or an email address so the owner can reach you.")
 
     def save(self, *args, **kwargs):
         """Calculate total price and deposit before saving."""
