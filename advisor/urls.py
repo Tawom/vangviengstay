@@ -71,8 +71,9 @@ urlpatterns += i18n_patterns(
     ), name='password_reset_complete'),
     
     # App URLs
-    path('', include('guesthouse.urls')),
-    path('tours/', include('tours.urls')),
+    
+    path('', include('tours.urls')),
+    path('guesthouses/', include('guesthouse.urls')),
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
     path('guides/', include('guides.urls')),

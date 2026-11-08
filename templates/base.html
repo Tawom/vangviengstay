@@ -45,7 +45,7 @@
             <div class="flex justify-between items-center h-16">
                 
                 <!-- Custom "Vang Vieng Stay" Logo -->
-                <a href="{% url 'guesthouse_list' %}" class="flex items-center gap-3 group">
+                <a href="{% url 'tour_list' %}" class="flex items-center gap-3 group">
                     <svg class="w-14 h-14 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <!-- Sunset Sun & Glow -->
                         <circle cx="78" cy="25" r="14" fill="#F97316" />
@@ -76,11 +76,14 @@
 
                 <!-- Desktop Navigation Links -->
                 <div class="hidden lg:flex items-center gap-1">
+                    <!-- ✅ COMMENTED OUT: Places to Stay (will be enabled when guesthouses are added) -->
+                    <!--
                     <a href="{% url 'guesthouse_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         {% trans "Places to Stay" %}
                     </a>
-                    <a href="{% url 'tour_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-green-50 hover:text-green-600 font-medium transition flex items-center gap-2">
+                    -->
+                    <a href="{% url 'tour_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-[#483D8B]/10 hover:text-[#483D8B] font-medium transition flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         {% trans "Tours" %}
                     </a>
@@ -146,11 +149,14 @@
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                                         {% trans "My Dashboard" %}
                                     </a>
+                                    <!-- ✅ COMMENTED OUT: Places to Stay (will be enabled when guesthouses are added) -->
+                                    <!--
                                     <a href="{% url 'guesthouse_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                         {% trans "Places to Stay" %}
                                     </a>
-                                    <a href="{% url 'tour_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600 transition">
+                                    -->
+                                    <a href="{% url 'tour_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-[#483D8B]/10 hover:text-[#483D8B] transition">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                                         {% trans "Tour Adventures" %}
                                     </a>
@@ -196,7 +202,7 @@
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40">
             <div class="px-4 py-4 space-y-3">
                 
-                <!-- ✅ NEW: Mobile Language Switcher -->
+                <!-- Mobile Language Switcher -->
                 <div class="pb-3 border-b border-gray-200">
                     <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-2">
                         {% csrf_token %}
@@ -218,11 +224,14 @@
                     </form>
                 </div>
 
+                <!-- ✅ COMMENTED OUT: Places to Stay (will be enabled when guesthouses are added) -->
+                <!--
                 <a href="{% url 'guesthouse_list' %}" class="block text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     {% trans "Places to Stay" %}
                 </a>
-                <a href="{% url 'tour_list' %}" class="block text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
+                -->
+                <a href="{% url 'tour_list' %}" class="block text-gray-700 hover:text-[#483D8B] hover:bg-[#483D8B]/10 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     {% trans "Tours" %}
                 </a>
@@ -253,7 +262,10 @@
                             </a>
                         {% endif %}
 
+                        <!-- ✅ COMMENTED OUT: My Guesthouse Stays (will be enabled when guesthouses are added) -->
+                        <!--
                         <a href="{% url 'guesthouse_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏠 {% trans "My Guesthouse Stays" %}</a>
+                        -->
                         <a href="{% url 'tour_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🎯 {% trans "My Tour Adventures" %}</a>
                         <a href="{% url 'guide_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🧑‍🤝‍🧑 {% trans "My Guide Bookings" %}</a>
                         <a href="{% url 'motorbike_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏍️ {% trans "My Motorbike Rentals" %}</a>
@@ -298,7 +310,10 @@
             <div>
                 <h4 class="text-white font-bold mb-2">{% trans "Explore" %}</h4>
                 <ul class="space-y-1">
+                    <!-- ✅ COMMENTED OUT: Places to Stay (will be enabled when guesthouses are added) -->
+                    <!--
                     <li><a href="{% url 'guesthouse_list' %}" class="hover:text-white transition">{% trans "Places to Stay" %}</a></li>
+                    -->
                     <li><a href="{% url 'tour_list' %}" class="hover:text-white transition">{% trans "Tours & Activities" %}</a></li>
                     <li><a href="{% url 'guide_list' %}" class="hover:text-white transition">{% trans "Local Guides" %}</a></li>
                     <li><a href="{% url 'motorbike_list' %}" class="hover:text-white transition">{% trans "Motorbike Rentals" %}</a></li>
