@@ -12,7 +12,24 @@ class PolicyDocument(models.Model):
         ('accommodation', 'Accommodation Info'),
         ('transport', 'Transport Info'),
         ('general', 'General FAQ'),
+        ('safety', 'Safety Information'),
+        ('pricing', 'Pricing Information'),
+        ('cultural', 'Cultural Information'),
     ])
+    
+    # ✅ NEW: Language field for multi-language support
+    language = models.CharField(
+        max_length=10, 
+        default='en',
+        db_index=True,
+        choices=[
+            ('en', 'English'),
+            ('lo', 'Lao'),
+            ('zh', 'Chinese'),
+            ('th', 'Thai'),
+            ('vi', 'Vietnamese'),
+        ]
+    )
     
     # Vector field for embeddings (768 dimensions for nomic-embed-text)
     embedding = VectorField(dimensions=768, null=True, blank=True)
@@ -23,9 +40,12 @@ class PolicyDocument(models.Model):
     class Meta:
         verbose_name = 'Policy Document'
         verbose_name_plural = 'Policy Documents'
+        # ✅ Ensure unique title per language
+        unique_together = ['title', 'language']
     
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.get_language_display()})"
+
 
 class Conversation(models.Model):
     session_id = models.CharField(max_length=100, db_index=True)
