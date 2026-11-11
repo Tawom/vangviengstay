@@ -48,7 +48,13 @@ msgstr "ສະຖານທີ່ພັກເຊົາ"
 
 #: templates/base.html:85 templates/base.html:202
 msgid "Tours"
-msgstr "ສະຖານທີ່ທ່ອງທ່ຽວ"
+msgstr "ລາຍການທ່ອງທ່ຽວ"
+
+msgid "Discover Unforgettable Tours"
+msgstr "ພົບກັບ ລາຍການທ່ອງທ່ຽວ ທີ່ໜ້າຈົດຈໍາ"
+
+msgid "Explore Vang Vieng with expert local guides and unique experiences"
+msgstr "ສຳຫຼວດວັງວຽງໄປກັບຜູ້ຊ່ຽວຊານນຳທ່ຽວທ້ອງຖິ່ນ ແລະ ເພີດເພີນກັບປະສົບການທີ່ເປັນເອກະລັກບໍ່ຄືໃຜ"
 
 #: templates/base.html:89 templates/base.html:206 templates/base.html:278
 msgid "Local Guides"
@@ -146,7 +152,7 @@ msgstr "ສໍາຫຼວດ"
 
 #: templates/base.html:277
 msgid "Tours & Activities"
-msgstr "ການທ່ອງທ່ຽວ & ກີດຈະກໍາຕ່າງຯ"
+msgstr "ລາຍການທ່ອງທ່ຽວ & ກີດຈະກໍາຕ່າງຯ"
 
 #: templates/base.html:284
 msgid "Support"
@@ -173,10 +179,8 @@ msgid "AI-powered help • Online"
 msgstr "ການຊວ່ຍເຫລືອທີ່ຂັບເຄື່ອນດວ້ຍເອໄອ • ອອນລາຍ"
 
 #: templates/base.html:379
-msgid ""
-"Hi! 👋 I'm here to help with questions about bookings, policies, tours, and "
-"accommodations in Vang Vieng. What can I help you with?"
-msgstr "ສະບາຍດີ! 👋 ຂ້ອຢູ່ທີ່ນີ້ເພື່ອຊວ່ຍຕອບຄໍາຖາມກ່ຽວກັບການຈອງ, ນະໂຍບາຍຕ່າງຯ, ການທ່ອງທ່ຽວ ແລະ ທີ່ພັກ ໃນວັງວຽງ, ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍບໍ?"
+msgid "Hi! 👋 I'm here to help with questions about bookings, policies and tours in Vang Vieng. What can I help you with?"
+msgstr "ສະບາຍດີ! 👋 ຂ້ອຄືຜູ້ຊວ່ຍຕອບຄໍາຖາມກ່ຽວກັບການຈອງ, ນະໂຍບາຍຕ່າງຯ, ການທ່ອງທ່ຽວ ແລະ ທີ່ພັກ ໃນວັງວຽງ, ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍບໍ?"
 
 #: templates/base.html:384
 msgid "Cancellation policy"
