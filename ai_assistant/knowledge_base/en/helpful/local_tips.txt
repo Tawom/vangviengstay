@@ -236,6 +236,7 @@ Tuk-tuk:
 - Negotiate price before getting in
 - Good for groups
 - Can hire for half-day or full-day
+- From Railway Station to town: 30,000 - 50,000 LAK per person (shared) or 100,000 - 150,000 LAK (private)
 
 Motorbike taxi (xe om):
 - Short distances: 10,000 - 30,000 LAK
@@ -252,17 +253,19 @@ Bus:
 GETTING TO VANG VIENG
 
 From Vientiane (150 km):
+- High-Speed Train (Laos-China Railway): ~1 hour, 100,000 - 120,000 LAK (Second Class). The fastest, safest, and most comfortable option. Departs from Vientiane Railway Station. Book via the LCR Ticket app, 12306 app, or at the station with your passport.
 - Bus: 3-4 hours, 100,000 - 150,000 LAK
 - Minivan: 2.5-3 hours, 150,000 - 200,000 LAK
 - Private car: 2-2.5 hours, 800,000 - 1,200,000 LAK
 
 From Luang Prabang (200 km):
+- High-Speed Train: ~1 hour, 100,000 - 120,000 LAK. Highly recommended over the long bus journey.
 - Bus: 6-7 hours, 200,000 - 300,000 LAK
 - Minivan: 5-6 hours, 250,000 - 350,000 LAK
 - Slow boat + bus: Scenic but long (2 days)
 
 From Vientiane Airport (Wattay):
-- Taxi to bus station: 50,000 - 100,000 LAK
+- Taxi to Vientiane Railway Station: 30,000 - 50,000 LAK, then take the high-speed train (most efficient route).
 - Direct minivan to Vang Vieng: 200,000 - 300,000 LAK
 - Pre-arrange transfer through guesthouse
 
