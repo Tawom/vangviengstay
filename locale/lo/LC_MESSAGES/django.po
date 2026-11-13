@@ -1330,7 +1330,7 @@ msgstr "ຕິດຕໍ່ພວກເຮົາ"
 
 #: templates/backup.html:317 templates/base.html:303
 msgid "All rights reserved."
-msgstr "ສະຫງວນລິຂະສິດທັງຫມົດ"
+msgstr "ສະຫງວນລິຂະສິດພຽງຜູ້ດຽວ"
 
 #: templates/backup.html:384 templates/base.html:370
 msgid "Vang Vieng Stay Assistant"
