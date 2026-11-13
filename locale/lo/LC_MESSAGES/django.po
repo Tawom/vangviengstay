@@ -24,19 +24,19 @@ msgstr ""
 #: guides/templates/guides/book_guide.html:15
 #: tours/templates/tours/book_tour.html:5
 msgid "Book"
-msgstr ""
+msgstr "ຈອງ"
 
 #: buggy/templates/buggy/book_buggy.html:11
 #: guesthouse/templates/guesthouse/book.html:11
 #: motorbike/templates/motorbike/book_motorbike.html:11
 #: tours/templates/tours/book_tour.html:11
 msgid "Back to"
-msgstr ""
+msgstr "ກັບຄືນ"
 
 #: buggy/templates/buggy/book_buggy.html:17
 #: dashboard/templates/dashboard/owner_dashboard.html:511
 msgid "From"
-msgstr ""
+msgstr "ຈາກ"
 
 #: buggy/templates/buggy/book_buggy.html:18
 #: buggy/templates/buggy/buggy_detail.html:161
@@ -45,21 +45,21 @@ msgstr ""
 #: motorbike/templates/motorbike/motorbike_detail.html:145
 #: motorbike/templates/motorbike/motorbike_list.html:67
 msgid "Deposit:"
-msgstr ""
+msgstr "ມັດຈໍາ"
 
 #: buggy/templates/buggy/book_buggy.html:27
 msgid "Booking Date"
-msgstr ""
+msgstr "ວັນທີຈອງ"
 
 #: buggy/templates/buggy/book_buggy.html:32
 #: guides/templates/guides/book_guide.html:28
 msgid "Start Time"
-msgstr ""
+msgstr "ເວລາເລີ້ມຕົ້ນ"
 
 #: buggy/templates/buggy/book_buggy.html:40
 #: buggy/templates/buggy/buggy_detail.html:171
 msgid "Rental Duration"
-msgstr ""
+msgstr "ໄລຍະເວລາເຊົ່າ"
 
 #: buggy/templates/buggy/book_buggy.html:43
 #: buggy/templates/buggy/buggy_detail.html:82
@@ -67,7 +67,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Tours"
 msgid "2 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "2 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:44
 #: buggy/templates/buggy/buggy_detail.html:86
@@ -75,14 +75,14 @@ msgstr "ລາຍການທ່ອງທ່ຽວ"
 #, fuzzy
 #| msgid "Tours"
 msgid "3 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "3 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:45
 #: buggy/templates/buggy/buggy_detail.html:90
 #, fuzzy
 #| msgid "Tours"
 msgid "4 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "4 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:46
 #: buggy/templates/buggy/buggy_detail.html:94
@@ -90,7 +90,7 @@ msgstr "ລາຍການທ່ອງທ່ຽວ"
 #, fuzzy
 #| msgid "Tours"
 msgid "5 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "5 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:47
 #: buggy/templates/buggy/buggy_detail.html:98
@@ -98,12 +98,12 @@ msgstr "ລາຍການທ່ອງທ່ຽວ"
 #, fuzzy
 #| msgid "Tours"
 msgid "6 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "6 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:48
 #: buggy/templates/buggy/buggy_detail.html:102
 msgid "Full Day"
-msgstr ""
+msgstr "ເຕັມມື້"
 
 #: buggy/templates/buggy/book_buggy.html:55
 #: guesthouse/templates/guesthouse/book.html:87
@@ -111,12 +111,12 @@ msgstr ""
 #: motorbike/templates/motorbike/book_motorbike.html:41
 #: tours/templates/tours/book_tour.html:75
 msgid "Contact Information"
-msgstr ""
+msgstr "ຂໍ້ມູນການຕິດຕໍ່"
 
 #: buggy/templates/buggy/book_buggy.html:57
 #: motorbike/templates/motorbike/book_motorbike.html:43
 msgid "Please provide at least one way for the owner to contact you."
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ຊ່ອງທາງການຕິດຕໍ່ 1 ຊ່ອງທາງ"
 
 #: buggy/templates/buggy/book_buggy.html:63
 #: guesthouse/templates/guesthouse/book.html:96
@@ -140,41 +140,41 @@ msgstr ""
 #: motorbike/templates/motorbike/book_motorbike.html:63
 #: tours/templates/tours/book_tour.html:99
 msgid "Please provide either an email address or a phone number."
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ອັນໃດກໍ່ໄດ້ ລະຫວ່າງ ອີເມວ ຫຼື ເບີໂທ"
 
 #: buggy/templates/buggy/book_buggy.html:84
 #: motorbike/templates/motorbike/book_motorbike.html:70
 msgid "Passport Number"
-msgstr ""
+msgstr "ເລກທີໜັງສືພາສປອດ"
 
 #: buggy/templates/buggy/book_buggy.html:84
 #: guesthouse/templates/guesthouse/book.html:102
 #: motorbike/templates/motorbike/book_motorbike.html:70
 #: tours/templates/tours/book_tour.html:90
 msgid "Optional"
-msgstr ""
+msgstr "ບໍ່ໃສ່ກໍ່ໄດ້"
 
 #: buggy/templates/buggy/book_buggy.html:87
 #: motorbike/templates/motorbike/book_motorbike.html:73
 msgid "For deposit record"
-msgstr ""
+msgstr "ສໍາລັບບັນທຶກເງິນມັດຈໍາ"
 
 #: buggy/templates/buggy/book_buggy.html:89
 #: motorbike/templates/motorbike/book_motorbike.html:75
 msgid ""
 "You'll need to leave your original passport OR this number as collateral."
-msgstr ""
+msgstr "ທ່ານຈະຕ້ອງຝາກພາສປອດຕົ້ນສະບັບ ຫຼື ເງິນຈໍານວນໜື່ງ ເປັນຫຼັກຊັບຄໍ້າປະກັນ"
 
 #: buggy/templates/buggy/book_buggy.html:98
 #: motorbike/templates/motorbike/book_motorbike.html:84
 msgid "Payment of the rental fee and deposit will be collected in"
-msgstr ""
+msgstr "ການຈ່າຍສໍາລັບຄ່າເຊົ່າ ແລະ ຄ່າມັດຈໍາ ຈະຕ້ອງເປັນ"
 
 #: buggy/templates/buggy/book_buggy.html:98
 #: guides/templates/guides/book_guide.html:93
 #: motorbike/templates/motorbike/book_motorbike.html:84
 msgid "cash (Lao Kip)"
-msgstr ""
+msgstr "ເງິນກີບ"
 
 #: buggy/templates/buggy/book_buggy.html:98
 msgid ""
@@ -1330,7 +1330,7 @@ msgstr "ຕິດຕໍ່ພວກເຮົາ"
 
 #: templates/backup.html:317 templates/base.html:303
 msgid "All rights reserved."
-msgstr "ສະຫງວນລິຂະສິດພຽງຜູ້ດຽວ"
+msgstr "ສະຫງວນລິຂະສິດແຕ່ພຽງຜູ້ດຽວ"
 
 #: templates/backup.html:384 templates/base.html:370
 msgid "Vang Vieng Stay Assistant"
