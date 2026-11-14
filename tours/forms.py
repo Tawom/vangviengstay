@@ -74,7 +74,7 @@ class TourManagementForm(forms.ModelForm):
     class Meta:
         model = Tour
         fields = [
-            'operator_name', 'name', 'description', 'price_per_person', 'duration_hours', 
+            'operator_name', 'name', 'description_en', 'description_lo', 'price_per_person', 'duration_hours', 
             'max_capacity', 'departure_time', 'latitude', 'longitude', 
             'main_image_url', 'is_active'
         ]
@@ -87,10 +87,15 @@ class TourManagementForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none',
                 'placeholder': 'e.g., Rock Climbing Intro Course'
             }),
-            'description': forms.Textarea(attrs={
+            'description_en': forms.Textarea(attrs={
                 'rows': 4, 
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none',
-                'placeholder': 'Describe the tour, what is included, safety info, etc.'
+                'placeholder': 'Describe the tour, what is included, safety info, etc. (English)'
+            }),
+            'description_lo': forms.Textarea(attrs={
+                'rows': 4, 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none',
+                'placeholder': 'ອະທິບາຍກ່ຽວກັບການທ່ອງທ່ຽວ, ສິ່ງທີ່ລວມຢູ່, ຂໍ້ມູນຄວາມປອດໄພ, ແລະອື່ນໆ (Lao - Optional)'
             }),
             'price_per_person': forms.NumberInput(attrs={
                 'step': '0.01', 
@@ -126,5 +131,7 @@ class TourManagementForm(forms.ModelForm):
             }),
         }
         labels = {
+            'description_en': 'Description (English)',
+            'description_lo': 'Description (Lao)',
             'is_active': 'Publish this tour (Visible to guests)',
         }

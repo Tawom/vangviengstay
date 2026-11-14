@@ -164,14 +164,23 @@ class GuesthouseManagementForm(forms.ModelForm):
     class Meta:
         model = Guesthouse
         fields = [
-            'name', 'city', 'address', 'description', 'price_per_night', 
+            'name', 'city', 'address', 'description_en', 'description_lo', 'price_per_night', 
             'latitude', 'longitude', 'allow_room_selection', 'main_image_url', 'is_active'
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
             'city': forms.TextInput(attrs={'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
             'address': forms.Textarea(attrs={'rows': 2, 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
-            'description': forms.Textarea(attrs={'rows': 4, 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
+            'description_en': forms.Textarea(attrs={
+                'rows': 4, 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none',
+                'placeholder': 'Describe your property in English...'
+            }),
+            'description_lo': forms.Textarea(attrs={
+                'rows': 4, 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none',
+                'placeholder': 'ອະທິບາຍກ່ຽວກັບສະຖານທີ່ຂອງທ່ານເປັນພາສາລາວ (ບໍ່ບັງຄັບ)...'
+            }),
             'price_per_night': forms.NumberInput(attrs={'step': '0.01', 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
             'latitude': forms.NumberInput(attrs={'step': '0.000001', 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
             'longitude': forms.NumberInput(attrs={'step': '0.000001', 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none'}),
@@ -180,6 +189,8 @@ class GuesthouseManagementForm(forms.ModelForm):
             'is_active': forms.CheckboxInput(attrs={'class': 'w-5 h-5 text-blue-600 rounded focus:ring-blue-500'}),
         }
         labels = {
+            'description_en': 'Description (English)',
+            'description_lo': 'Description (Lao)',
             'is_active': 'Publish this guesthouse (Visible to guests)',
             'allow_room_selection': 'Allow guests to select specific room types (Single, Double, etc.)'
         }

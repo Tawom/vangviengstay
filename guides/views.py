@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.utils.translation import get_language  # ✅ Added for language detection
 
 from advisor.email_utils import (
     send_booking_confirmation_email, 
@@ -28,10 +29,12 @@ def guide_list(request):
     
     search_query = request.GET.get('search', '').strip()
     
+    # ✅ Apply text search filter (Updated to search both English and Lao bios)
     if search_query:
         guides = guides.filter(
             Q(name__icontains=search_query) | 
-            Q(bio__icontains=search_query) |
+            Q(bio_en__icontains=search_query) |
+            Q(bio_lo__icontains=search_query) |
             Q(expertise__icontains=search_query)
         )
         
@@ -45,8 +48,10 @@ def guide_detail(request, guide_id):
     """Detail page for a specific guide."""
     guide = get_object_or_404(Guide, pk=guide_id, is_active=True)
     
-    # Generate a safe description snippet for meta tags
-    desc_snippet = guide.bio[:150] + "..." if guide.bio else f"Book {guide.name}, an expert local guide in Vang Vieng, Laos."
+    # ✅ Generate a safe description snippet for meta tags using the correct language
+    current_lang = getattr(request, 'LANGUAGE_CODE', 'en')
+    bio_text = guide.get_bio(current_lang)
+    desc_snippet = bio_text[:150] + "..." if bio_text else f"Book {guide.name}, an expert local guide in Vang Vieng, Laos."
     
     context = {
         'guide': guide,

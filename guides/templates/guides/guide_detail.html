@@ -78,7 +78,15 @@
                     </svg>
                     About {{ guide.name }}
                 </h2>
-                <p class="text-gray-700 leading-relaxed mb-8 text-lg">{{ guide.bio|default:"Experienced local guide ready to show you the best of Vang Vieng." }}</p>
+                
+                <!-- ✅ MULTI-LANGUAGE BIO -->
+                <p class="text-gray-700 leading-relaxed mb-8 text-lg">
+                    {% if LANGUAGE_CODE == 'lo' and guide.bio_lo %}
+                        {{ guide.bio_lo|safe|default:"ມັດແນະນຳທ້ອງຖິ່ນທີ່ມີປະສົບການພ້ອມທີ່ຈະພາທ່ານໄປສຳຫຼວດວັງວຽງ." }}
+                    {% else %}
+                        {{ guide.bio_en|safe|default:"Experienced local guide ready to show you the best of Vang Vieng." }}
+                    {% endif %}
+                </p>
 
                 <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +116,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "{{ guide.name|escapejs }}",
-  "description": "{{ guide.bio|truncatewords:50|escapejs }}",
+  "description": "{% if LANGUAGE_CODE == 'lo' and guide.bio_lo %}{{ guide.bio_lo|truncatewords:50|escapejs }}{% else %}{{ guide.bio_en|truncatewords:50|escapejs }}{% endif %}",
   "image": "{{ guide.photo_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
   "jobTitle": "Local Tour Guide",
   "worksFor": {

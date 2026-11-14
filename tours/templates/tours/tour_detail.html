@@ -88,9 +88,13 @@
                 </div>
             </div>
 
-            <!-- Description (Safe filter allows rich HTML content from the admin) -->
+            <!-- ✅ MULTI-LANGUAGE DESCRIPTION (Safe filter allows rich HTML content from the admin) -->
             <div class="text-gray-700 leading-relaxed mb-8">
-                {{ tour.description|safe }}
+                {% if LANGUAGE_CODE == 'lo' and tour.description_lo %}
+                    {{ tour.description_lo|safe }}
+                {% else %}
+                    {{ tour.description_en|safe }}
+                {% endif %}
             </div>
 
             <!-- Availability Calendar -->
@@ -177,7 +181,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "{{ tour.name|escapejs }}",
-  "description": "{{ tour.description|striptags|truncatewords:50|escapejs }}",
+  "description": "{% if LANGUAGE_CODE == 'lo' and tour.description_lo %}{{ tour.description_lo|striptags|truncatewords:50|escapejs }}{% else %}{{ tour.description_en|striptags|truncatewords:50|escapejs }}{% endif %}",
   "image": "{{ tour.main_image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
   "brand": {
     "@type": "Organization",

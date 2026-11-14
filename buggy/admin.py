@@ -14,8 +14,9 @@ class BuggyCarAdmin(admin.ModelAdmin):
     # ✅ UPDATED: Added operator_name to list display
     list_display = ('name', 'operator_name', 'size', 'owner', 'price_2_hours', 'is_active', 'created_at')
     list_filter = ('size', 'is_active', 'owner')
-    # ✅ UPDATED: Added operator_name to search
-    search_fields = ('name', 'operator_name', 'description', 'owner__username')
+    
+    # ✅ UPDATED: Search in both English and Lao descriptions
+    search_fields = ('name', 'operator_name', 'description_en', 'description_lo', 'owner__username')
     
     fieldsets = (
         ('Basic Information', {
@@ -25,8 +26,9 @@ class BuggyCarAdmin(admin.ModelAdmin):
         ('Pricing (LAK)', {
             'fields': ('price_2_hours', 'price_3_hours', 'price_4_hours', 'price_5_hours', 'price_6_hours', 'price_full_day')
         }),
-        ('Deposit & Media', {
-            'fields': ('deposit_amount', 'description', 'image_url'),
+        ('Deposit, Description & Media (Multi-Language)', {
+            'fields': ('deposit_amount', 'description_en', 'description_lo', 'image_url'),
+            'description': 'Add descriptions in both languages. Lao is optional and will fall back to English if empty.',
             'classes': ('collapse',)
         }),
         ('Pickup Location', {

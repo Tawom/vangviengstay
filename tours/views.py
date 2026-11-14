@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.utils.translation import get_language  # ✅ Added for language detection
 
 from advisor.utils import get_booking_confirmation_message
 from .forms import TourBookingForm, TourReviewForm, TourManagementForm
@@ -33,11 +34,12 @@ def tour_list(request):
     max_price = request.GET.get('max_price')
     max_guests = request.GET.get('max_guests')
     
-    # Apply text search filter
+    # ✅ Apply text search filter (Updated to search both English and Lao descriptions)
     if search_query:
         tours = tours.filter(
             Q(name__icontains=search_query) | 
-            Q(description__icontains=search_query) |
+            Q(description_en__icontains=search_query) |
+            Q(description_lo__icontains=search_query) |
             Q(operator_name__icontains=search_query)
         )
     
@@ -154,12 +156,17 @@ def tour_detail(request, tour_id):
             'day_num': current_day.day
         })
     
+    # ✅ Generate a safe description snippet for meta tags using the correct language
+    current_lang = getattr(request, 'LANGUAGE_CODE', 'en')
+    desc_text = tour.get_description(current_lang)
+    desc_snippet = desc_text[:150] + "..." if desc_text else f"Book {tour.name} in Vang Vieng."
+    
     context = {
         'tour': tour,
         'availability': availability_schedule,
         # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
         'meta_title': f"{tour.name} - Vang Vieng Stay",
-        'meta_description': f"Book {tour.name} in Vang Vieng. {tour.description[:150]}...",
+        'meta_description': desc_snippet,
         'meta_image': tour.main_image_url if tour.main_image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
         'meta_url': request.build_absolute_uri(),
         'meta_type': 'article',

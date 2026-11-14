@@ -29,7 +29,21 @@ class Motorbike(models.Model):
     engine_cc = models.PositiveIntegerField(help_text="e.g., 110, 125, 150")
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2, help_text="Price in LAK")
     deposit_amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Security deposit in LAK (or passport)")
-    description = models.TextField(blank=True, null=True)
+    
+    # ✅ MULTI-LANGUAGE DESCRIPTION FIELDS
+    description_en = models.TextField(
+        verbose_name="Description (English)",
+        blank=True, 
+        null=True,
+        help_text="Motorbike description in English"
+    )
+    description_lo = models.TextField(
+        verbose_name="Description (Lao)",
+        blank=True, 
+        null=True,
+        help_text="Motorbike description in Lao (optional, falls back to English if empty)"
+    )
+    
     image_url = models.URLField(blank=True, null=True)
     
     # Location Coordinates
@@ -55,6 +69,12 @@ class Motorbike(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.get_category_display()}) - {self.operator_name}"
+    
+    def get_description(self, language='en'):
+        """Return description in the requested language, fallback to English"""
+        if language == 'lo' and self.description_lo:
+            return self.description_lo
+        return self.description_en
     
     @property
     def average_rating(self):

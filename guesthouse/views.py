@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q, Min, Max, Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.utils.translation import get_language  # ✅ Added for language detection
 
 from advisor.email_utils import (
     send_booking_confirmation_email, 
@@ -49,12 +50,13 @@ def guesthouse_list(request):
     max_price = request.GET.get('max_price')
     city = request.GET.get('city', '')
     
-    # Apply text search filter
+    # ✅ Apply text search filter (Updated to search both English and Lao descriptions)
     if search_query:
         guesthouses = guesthouses.filter(
             Q(name__icontains=search_query) | 
             Q(city__icontains=search_query) |
-            Q(description__icontains=search_query)
+            Q(description_en__icontains=search_query) |
+            Q(description_lo__icontains=search_query)
         )
     
     # Apply city filter
@@ -190,8 +192,10 @@ def guesthouse_detail(request, guesthouse_id):
             'day_num': current_day.day               
         })
         
-    # Generate a safe description snippet for meta tags
-    desc_snippet = guesthouse.description[:150] + "..." if guesthouse.description else "Book the best guesthouse in Vang Vieng, Laos."
+    # ✅ Generate a safe description snippet for meta tags using the correct language
+    current_lang = getattr(request, 'LANGUAGE_CODE', 'en')
+    desc_text = guesthouse.get_description(current_lang)
+    desc_snippet = desc_text[:150] + "..." if desc_text else "Book the best guesthouse in Vang Vieng, Laos."
     
     context = {
         'guesthouse': guesthouse,

@@ -14,23 +14,24 @@ class GuideAdmin(admin.ModelAdmin):
     # ✅ UPDATED: Added operator_name to list display
     list_display = ('name', 'operator_name', 'languages', 'hourly_rate', 'is_active', 'owner')
     list_filter = ('is_active', 'languages')
-    # ✅ UPDATED: Added operator_name to search
-    search_fields = ('name', 'operator_name', 'bio', 'expertise')
+    
+    # ✅ UPDATED: Search in both English and Lao bios
+    search_fields = ('name', 'operator_name', 'bio_en', 'bio_lo', 'expertise')
     
     fieldsets = (
         ('Basic Information', {
-            # ✅ UPDATED: Added operator_name field
             'fields': ('name', 'operator_name', 'owner', 'languages', 'expertise')
         }),
-        ('Pricing', {
-            'fields': ('hourly_rate',)
+        ('Bio & Description (Multi-Language)', {
+            'fields': ('bio_en', 'bio_lo'),
+            'description': 'Add descriptions in both languages. Lao is optional and will fall back to English if empty.'
         }),
-        ('Bio & Description', {
-            'fields': ('bio',),
+        ('Pricing & Contact', {
+            'fields': ('hourly_rate', 'half_day_rate', 'full_day_rate', 'contact_number')
+        }),
+        ('Media & Status', {
+            'fields': ('photo_url', 'is_active'),
             'classes': ('collapse',)
-        }),
-        ('Status', {
-            'fields': ('is_active',)
         }),
     )
 

@@ -14,11 +14,15 @@ from advisor.utils import get_whatsapp_link
 class GuesthouseAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'price_per_night', 'allow_room_selection', 'is_active')
     list_filter = ('is_active', 'allow_room_selection', 'city')
-    search_fields = ('name', 'city', 'description')
+    search_fields = ('name', 'city', 'description_en', 'description_lo')
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'owner', 'description', 'city', 'is_active')
+            'fields': ('name', 'owner', 'city', 'address', 'is_active')
+        }),
+        ('Descriptions (Multi-Language)', {
+            'fields': ('description_en', 'description_lo'),
+            'description': 'Add descriptions in both languages. Lao is optional and will fall back to English if empty.'
         }),
         ('Location (Coordinates)', {
             'fields': ('latitude', 'longitude'),

@@ -46,15 +46,16 @@ urlpatterns = [
 
 # ==========================================
 # 3. LANGUAGED URLS (Will get /en/ or /lo/ prefix)
-# Wrapped in i18n_patterns so the language persists across clicks
 # ==========================================
 urlpatterns += i18n_patterns(
+    # ✅ All path() calls FIRST (positional arguments)
+    
     # Authentication (Password Reset)
     path('accounts/password-reset/', auth_views.PasswordResetView.as_view(
         template_name='registration/password_reset_form.html',
         email_template_name='registration/password_reset_email.html',
         subject_template_name='registration/password_reset_subject.txt',
-        success_url='/accounts/password-reset/done/'
+        success_url='/accounts/password-reset/done/',
     ), name='password_reset'),
     
     path('accounts/password-reset/done/', auth_views.PasswordResetDoneView.as_view(
@@ -71,7 +72,6 @@ urlpatterns += i18n_patterns(
     ), name='password_reset_complete'),
     
     # App URLs
-    
     path('', include('tours.urls')),
     path('guesthouses/', include('guesthouse.urls')),
     path('motorbike/', include('motorbike.urls')),
@@ -79,8 +79,10 @@ urlpatterns += i18n_patterns(
     path('guides/', include('guides.urls')),
     path('owner-dashboard/', include('dashboard.urls')),
     path('ai-assistant/', include('ai_assistant.urls')),
+    
+    # ✅ Keyword argument LAST
+    prefix_default_language=True,
 )
-
 # Serve media files in development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -66,7 +66,8 @@ class MotorbikeManagementForm(forms.ModelForm):
         model = Motorbike
         fields = [
             'name', 'category', 'engine_cc', 'price_per_day', 'deposit_amount',
-            'description', 'image_url', 'latitude', 'longitude', 'pickup_address', 'is_active'
+            'description_en', 'description_lo', 'image_url', 'latitude', 'longitude', 
+            'pickup_address', 'is_active'
         ]
         widgets = {
             'name': forms.TextInput(attrs={
@@ -77,7 +78,16 @@ class MotorbikeManagementForm(forms.ModelForm):
             'engine_cc': forms.NumberInput(attrs={'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'}),
             'price_per_day': forms.NumberInput(attrs={'step': '0.01', 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'}),
             'deposit_amount': forms.NumberInput(attrs={'step': '0.01', 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'}),
-            'description': forms.Textarea(attrs={'rows': 4, 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'}),
+            'description_en': forms.Textarea(attrs={
+                'rows': 4, 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none',
+                'placeholder': 'Describe the motorbike, condition, and what is included (English)...'
+            }),
+            'description_lo': forms.Textarea(attrs={
+                'rows': 4, 
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none',
+                'placeholder': 'ອະທິບາຍກ່ຽວກັບລົດຈັກ, ສະພາບ ແລະ ສິ່ງທີ່ລວມຢູ່ (Lao - Optional)...'
+            }),
             'image_url': forms.URLInput(attrs={'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'}),
             'latitude': forms.NumberInput(attrs={
                 'step': '0.000001',
@@ -94,4 +104,9 @@ class MotorbikeManagementForm(forms.ModelForm):
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none'
             }),
             'is_active': forms.CheckboxInput(attrs={'class': 'w-5 h-5 text-orange-600 rounded focus:ring-orange-500'}),
+        }
+        labels = {
+            'description_en': 'Description (English)',
+            'description_lo': 'Description (Lao)',
+            'is_active': 'Publish this motorbike (Visible to guests)',
         }

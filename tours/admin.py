@@ -13,11 +13,17 @@ from advisor.utils import get_whatsapp_link
 class TourAdmin(admin.ModelAdmin):
     list_display = ('name', 'operator_name', 'price_per_person', 'duration_hours', 'max_capacity', 'is_active')
     list_filter = ('is_active', 'duration_hours')
-    search_fields = ('name', 'operator_name', 'description')
+    
+    # ✅ UPDATED: Search in both English and Lao descriptions
+    search_fields = ('name', 'operator_name', 'description_en', 'description_lo')
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('name', 'operator_name', 'owner', 'description', 'is_active')
+            'fields': ('name', 'operator_name', 'owner', 'is_active')
+        }),
+        ('Descriptions (Multi-Language)', {
+            'fields': ('description_en', 'description_lo'),
+            'description': 'Add descriptions in both languages. Lao is optional and will fall back to English if empty.'
         }),
         ('Tour Details', {
             'fields': ('price_per_person', 'duration_hours', 'max_capacity', 'departure_time')

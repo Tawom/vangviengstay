@@ -19,7 +19,18 @@ class Tour(models.Model):
     )
     
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tours')
-    description = models.TextField()
+    
+    # ✅ MULTI-LANGUAGE DESCRIPTION FIELDS
+    description_en = models.TextField(
+        verbose_name="Description (English)",
+        help_text="Tour description in English"
+    )
+    description_lo = models.TextField(
+        verbose_name="Description (Lao)",
+        blank=True,
+        help_text="Tour description in Lao (optional, falls back to English if empty)"
+    )
+    
     price_per_person = models.DecimalField(max_digits=8, decimal_places=2)
     duration_hours = models.DecimalField(max_digits=4, decimal_places=1, help_text="Duration in hours")
     max_capacity = models.PositiveIntegerField(help_text="Maximum number of people per tour")
@@ -40,6 +51,12 @@ class Tour(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.operator_name})"
+    
+    def get_description(self, language='en'):
+        """Return description in the requested language, fallback to English"""
+        if language == 'lo' and self.description_lo:
+            return self.description_lo
+        return self.description_en
     
     @property
     def average_rating(self):

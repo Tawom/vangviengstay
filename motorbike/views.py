@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.utils.translation import get_language  # ✅ Added for language detection
 
 from advisor.email_utils import (
     send_booking_confirmation_email, 
@@ -32,11 +33,12 @@ def motorbike_list(request):
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
     
-    # Apply text search filter
+    # ✅ Apply text search filter (Updated to search both English and Lao descriptions)
     if search_query:
         motorbikes = motorbikes.filter(
             Q(name__icontains=search_query) | 
-            Q(description__icontains=search_query)
+            Q(description_en__icontains=search_query) |
+            Q(description_lo__icontains=search_query)
         )
     
     # Apply price range filter
@@ -122,8 +124,10 @@ def motorbike_detail(request, motorbike_id):
             'day_num': current_day.day               
         })
         
-    # Generate a safe description snippet for meta tags
-    desc_snippet = motorbike.description[:150] + "..." if motorbike.description else "Rent the best motorbikes in Vang Vieng, Laos."
+    # ✅ Generate a safe description snippet for meta tags using the correct language
+    current_lang = getattr(request, 'LANGUAGE_CODE', 'en')
+    desc_text = motorbike.get_description(current_lang)
+    desc_snippet = desc_text[:150] + "..." if desc_text else "Rent the best motorbikes in Vang Vieng, Laos."
     
     context = {
         'motorbike': motorbike,

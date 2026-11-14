@@ -24,7 +24,18 @@ class Guide(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='guides')
     languages = models.CharField(max_length=200, help_text="e.g., English, French, Lao, Chinese")
     expertise = models.CharField(max_length=200, help_text="e.g., Motorbike routes, hidden cafes, photography")
-    bio = models.TextField(help_text="Brief introduction and what they offer")
+    
+    # ✅ MULTI-LANGUAGE BIO FIELDS
+    bio_en = models.TextField(
+        verbose_name="Bio (English)",
+        help_text="Brief introduction and what they offer in English"
+    )
+    bio_lo = models.TextField(
+        verbose_name="Bio (Lao)",
+        blank=True,
+        help_text="Brief introduction and what they offer in Lao (optional, falls back to English if empty)"
+    )
+    
     hourly_rate = models.DecimalField(max_digits=6, decimal_places=2, help_text="Price per hour in USD")
     half_day_rate = models.DecimalField(max_digits=6, decimal_places=2, help_text="Up to 4 hours")
     full_day_rate = models.DecimalField(max_digits=6, decimal_places=2, help_text="Up to 8 hours")
@@ -41,6 +52,12 @@ class Guide(models.Model):
         if self.operator_name:
             return f"{self.name} - {self.operator_name}"
         return self.name
+    
+    def get_bio(self, language='en'):
+        """Return bio in the requested language, fallback to English"""
+        if language == 'lo' and self.bio_lo:
+            return self.bio_lo
+        return self.bio_en
     
     @property
     def average_rating(self):

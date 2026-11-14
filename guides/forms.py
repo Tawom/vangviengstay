@@ -96,7 +96,7 @@ class GuideManagementForm(forms.ModelForm):
     class Meta:
         model = Guide
         fields = [
-            'name', 'languages', 'expertise', 'bio', 
+            'name', 'languages', 'expertise', 'bio_en', 'bio_lo', 
             'hourly_rate', 'half_day_rate', 'full_day_rate',
             'photo_url', 'contact_number', 'is_active'
         ]
@@ -113,9 +113,14 @@ class GuideManagementForm(forms.ModelForm):
                 'placeholder': 'e.g., Motorbike routes, hidden cafes, photography',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
             }),
-            'bio': forms.Textarea(attrs={
+            'bio_en': forms.Textarea(attrs={
                 'rows': 4,
-                'placeholder': 'Brief introduction and what the guide offers...',
+                'placeholder': 'Brief introduction and what the guide offers (English)...',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
+            }),
+            'bio_lo': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'ຂໍ້ຄວາມແນະນຳໂຕແລະສິ່ງທີ່ມັດແນະນຳ (Lao - Optional)...',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
             }),
             'hourly_rate': forms.NumberInput(attrs={
@@ -143,6 +148,8 @@ class GuideManagementForm(forms.ModelForm):
             }),
         }
         labels = {
+            'bio_en': 'Bio (English)',
+            'bio_lo': 'Bio (Lao)',
             'is_active': 'Publish this guide (Visible to guests)',
             'hourly_rate': 'Hourly Rate (₭)',
             'half_day_rate': 'Half Day Rate - up to 4 hours (₭)',

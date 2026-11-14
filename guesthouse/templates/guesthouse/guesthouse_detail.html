@@ -42,8 +42,14 @@
                 </div>
             </div>
 
-            <!-- Description -->
-            <p class="text-gray-700 leading-relaxed mb-8">{{ guesthouse.description }}</p>
+            <!-- ✅ MULTI-LANGUAGE DESCRIPTION -->
+            <div class="text-gray-700 leading-relaxed mb-8">
+                {% if LANGUAGE_CODE == 'lo' and guesthouse.description_lo %}
+                    {{ guesthouse.description_lo|safe }}
+                {% else %}
+                    {{ guesthouse.description_en|safe }}
+                {% endif %}
+            </div>
 
             <!-- Availability Calendar -->
             <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
@@ -124,7 +130,7 @@
   "@type": "LodgingBusiness",
   "name": "{{ guesthouse.name|escapejs }}",
   "image": "{{ guesthouse.main_image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
-  "description": "{{ guesthouse.description|truncatewords:50|escapejs }}",
+  "description": "{% if LANGUAGE_CODE == 'lo' and guesthouse.description_lo %}{{ guesthouse.description_lo|truncatewords:50|escapejs }}{% else %}{{ guesthouse.description_en|truncatewords:50|escapejs }}{% endif %}",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "{{ guesthouse.city|escapejs }}",

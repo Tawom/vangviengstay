@@ -20,11 +20,11 @@
         <div class="lg:col-span-2 space-y-6">
             
             <!-- Lazy-Loaded Image -->
-            {% if buggy.main_image_url %}
+            {% if buggy.image_url %}
                 <div class="rounded-xl overflow-hidden shadow-lg">
                     <img 
                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" 
-                        data-src="{{ buggy.main_image_url }}" 
+                        data-src="{{ buggy.image_url }}" 
                         alt="{{ buggy.name }}" 
                         loading="lazy" 
                         class="lazy-load w-full h-64 md:h-96 object-cover"
@@ -67,10 +67,17 @@
                 {% endif %}
             </div>
 
-            {% if buggy.description %}
+            <!-- ✅ MULTI-LANGUAGE DESCRIPTION -->
+            {% if buggy.description_en or buggy.description_lo %}
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
                     <h2 class="text-xl font-bold text-gray-900 mb-3">{% trans "About this Buggy Car" %}</h2>
-                    <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ buggy.description }}</p>
+                    <p class="text-gray-700 leading-relaxed whitespace-pre-line">
+                        {% if LANGUAGE_CODE == 'lo' and buggy.description_lo %}
+                            {{ buggy.description_lo|safe }}
+                        {% else %}
+                            {{ buggy.description_en|safe }}
+                        {% endif %}
+                    </p>
                 </div>
             {% endif %}
 
@@ -173,7 +180,6 @@
                     </div>
                 </div>
 
-                <!-- ✅ CRITICAL FIX: Use buggy.pk instead of buggy.id for bulletproof routing -->
                 {% if user.is_authenticated %}
                     <a href="{% url 'create_buggy_booking' buggy.pk %}" class="block w-full text-center bg-[#9333EA] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#7E22CE] transition shadow-md">
                         {% trans "Book This Buggy Car" %}
@@ -230,8 +236,8 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "{{ buggy.name|escapejs }}",
-  "description": "{{ buggy.description|striptags|truncatewords:50|escapejs }}",
-  "image": "{{ buggy.main_image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
+  "description": "{% if LANGUAGE_CODE == 'lo' and buggy.description_lo %}{{ buggy.description_lo|striptags|truncatewords:50|escapejs }}{% else %}{{ buggy.description_en|striptags|truncatewords:50|escapejs }}{% endif %}",
+  "image": "{{ buggy.image_url|default:'https://vangviengstay.com/static/images/og-default.jpg' }}",
   "brand": {
     "@type": "Organization",
     "name": "{{ buggy.operator_name|default:'Vang Vieng Stay'|escapejs }}"

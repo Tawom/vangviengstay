@@ -81,11 +81,11 @@ class BuggyCarManagementForm(forms.ModelForm):
     """Form for owners to add/edit their buggy car properties."""
     class Meta:
         model = BuggyCar
-        # ✅ UPDATED: Removed 7, 8, 9 hour fields, added price_full_day
+        # ✅ UPDATED: Replaced 'description' with 'description_en' and 'description_lo'
         fields = [
             'name', 'size', 'price_2_hours', 'price_3_hours', 'price_4_hours', 
             'price_5_hours', 'price_6_hours', 'price_full_day',
-            'deposit_amount', 'description', 'image_url', 
+            'deposit_amount', 'description_en', 'description_lo', 'image_url', 
             'latitude', 'longitude', 'pickup_address', 'is_active'
         ]
         widgets = {
@@ -130,8 +130,14 @@ class BuggyCarManagementForm(forms.ModelForm):
                 'step': '0.01',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
             }),
-            'description': forms.Textarea(attrs={
+            'description_en': forms.Textarea(attrs={
                 'rows': 4,
+                'placeholder': 'Describe the buggy car, condition, and what is included (English)...',
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
+            }),
+            'description_lo': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'ອະທິບາຍກ່ຽວກັບລົດບັກກີ້, ສະພາບ ແລະ ສິ່ງທີ່ລວມຢູ່ (Lao - Optional)...',
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none'
             }),
             'image_url': forms.URLInput(attrs={
@@ -154,4 +160,9 @@ class BuggyCarManagementForm(forms.ModelForm):
             'is_active': forms.CheckboxInput(attrs={
                 'class': 'w-5 h-5 text-purple-600 rounded focus:ring-purple-500'
             }),
+        }
+        labels = {
+            'description_en': 'Description (English)',
+            'description_lo': 'Description (Lao)',
+            'is_active': 'Publish this buggy car (Visible to guests)',
         }

@@ -13,7 +13,18 @@ class Guesthouse(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='guesthouses')
     city = models.CharField(max_length=100, default='Vang Vieng')
     address = models.TextField(blank=True, help_text="Full street address")
-    description = models.TextField()
+    
+    # ✅ MULTI-LANGUAGE DESCRIPTION FIELDS
+    description_en = models.TextField(
+        verbose_name="Description (English)",
+        help_text="Property description in English"
+    )
+    description_lo = models.TextField(
+        verbose_name="Description (Lao)",
+        blank=True,
+        help_text="Property description in Lao (optional, falls back to English if empty)"
+    )
+    
     price_per_night = models.DecimalField(max_digits=8, decimal_places=2)
     
     # Location Coordinates
@@ -38,6 +49,12 @@ class Guesthouse(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_description(self, language='en'):
+        """Return description in the requested language, fallback to English"""
+        if language == 'lo' and self.description_lo:
+            return self.description_lo
+        return self.description_en
     
     @property
     def average_rating(self):
