@@ -17,7 +17,8 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Left Column: Image & Details -->
-        <div class="lg:col-span-2 space-y-6">
+        <!-- ✅ CHANGED: space-y-6 to space-y-5 to reduce overall vertical gaps -->
+        <div class="lg:col-span-2 space-y-5">
             
             <!-- Lazy-Loaded Image -->
             {% if buggy.image_url %}
@@ -70,7 +71,8 @@
             <!-- ✅ MULTI-LANGUAGE DESCRIPTION -->
             {% if buggy.description_en or buggy.description_lo %}
                 <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                    <h2 class="text-xl font-bold text-gray-900 mb-3">{% trans "About this Buggy Car" %}</h2>
+                    <!-- ✅ CHANGED: mb-3 to mb-2 to tighten space between heading and text -->
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">{% trans "About this Buggy Car" %}</h2>
                     <p class="text-gray-700 leading-relaxed whitespace-pre-line">
                         {% if LANGUAGE_CODE == 'lo' and buggy.description_lo %}
                             {{ buggy.description_lo|safe }}
