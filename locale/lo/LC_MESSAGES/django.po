@@ -1793,7 +1793,7 @@ msgstr "ຄົ້ນຫາທົວ"
 
 #: tours/templates/tours/tour_list.html:45
 msgid "e.g., Kayaking, Cave, Hot Air Balloon..."
-msgstr "ເຊັ່ນ: ພາຍເຮືອ, ຖໍ້າ, ບານລົມຮ້ອນ..."
+msgstr "ເຊັ່ນ: ພາຍເຮືອກາຍັກ, ຖໍ້າ, ບອລລູນລົມຮ້ອນ..."
 
 #: tours/templates/tours/tour_list.html:61
 msgid "Min Price"
