@@ -233,3 +233,79 @@ def send_booking_declined_email(booking, booking_reference, booking_type='guesth
     except Exception as e:
         print(f"❌ Error sending booking declined email: {e}")
         return False
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+def send_inquiry_confirmation_email(inquiry):
+    """Send a confirmation email to the customer."""
+    subject = "We received your inquiry - Vang Vieng Stay"
+    message = f"""Hello {inquiry.name},
+
+Thank you for reaching out to Vang Vieng Stay!
+
+We have received your inquiry regarding: {inquiry.get_subject_display()}
+
+Our team will review your message and get back to you within 24 hours.
+
+---
+Your message:
+{inquiry.message}
+---
+
+If you need immediate assistance, feel free to reply to this email.
+
+Best regards,
+The Vang Vieng Stay Team
+https://vangviengstay.com
+"""
+    
+    try:
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [inquiry.email],
+            fail_silently=False,
+        )
+        inquiry.customer_email_sent = True
+        inquiry.save()
+        return True
+    except Exception as e:
+        print(f"Error sending customer confirmation email: {e}")
+        return False
+
+
+def send_inquiry_notification_email(inquiry):
+    """Send notification email to admin about new inquiry."""
+    subject = f"New Inquiry: {inquiry.get_subject_display()} from {inquiry.name}"
+    message = f"""A new inquiry has been received:
+
+Name: {inquiry.name}
+Email: {inquiry.email}
+Phone: {inquiry.phone or 'Not provided'}
+Subject: {inquiry.get_subject_display()}
+Received: {inquiry.created_at.strftime('%Y-%m-%d %H:%M')}
+
+Message:
+{inquiry.message}
+
+---
+Reply directly to: {inquiry.email}
+"""
+    
+    try:
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.ADMIN_EMAIL],  # Make sure this is set in settings.py
+            fail_silently=False,
+        )
+        inquiry.admin_email_sent = True
+        inquiry.save()
+        return True
+    except Exception as e:
+        print(f"Error sending admin notification email: {e}")
+        return False

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Message Sent - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-16 text-center">
+    <div class="bg-white rounded-xl shadow-lg p-10 border border-gray-100">
+        <div class="text-6xl mb-4">✅</div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-3">{% trans "Message Sent Successfully!" %}</h1>
+        <p class="text-lg text-gray-600 mb-6">
+            {% trans "Thank you for reaching out. We've received your message and sent a confirmation to your email." %}
+        </p>
+        <p class="text-gray-600 mb-8">
+            {% trans "Our team will review your inquiry and get back to you within 24 hours." %}
+        </p>
+        <a href="/" class="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition shadow-md">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

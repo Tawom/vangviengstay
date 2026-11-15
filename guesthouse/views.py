@@ -571,39 +571,6 @@ def terms_of_service(request):
     """Displays the Terms of Service page."""
     return render(request, 'guesthouse/terms_of_service.html')
 
-
-def contact_us(request):
-    """Displays the Contact Us page."""
-    return render(request, 'guesthouse/contact_us.html')
-
-
-@login_required
-def contact_us_submit(request):
-    """Handles the contact form submission."""
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        
-        email_sent = send_contact_form_email(name, email, subject, message)
-        
-        if email_sent:
-            messages.success(
-                request, 
-                f'Thank you, {name}! Your message has been received. Check your email for a confirmation. We will get back to you within 24 hours.'
-            )
-        else:
-            messages.error(
-                request, 
-                f'Sorry, there was an error sending your message. Please try again or email us directly at support@vangviengstay.com.'
-            )
-        
-        return redirect('contact_us')
-    
-    return redirect('contact_us')
-
-
 @login_required
 def submit_guesthouse_review(request, booking_id):
     """Handles the submission of a guesthouse review."""

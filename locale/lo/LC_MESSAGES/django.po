@@ -708,6 +708,9 @@ msgstr ""
 msgid "Guide"
 msgstr ""
 
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພວກເຮົາ"
+
 #: dashboard/templates/dashboard/owner_dashboard.html:273
 #: dashboard/templates/dashboard/owner_dashboard.html:336
 msgid "Date & Time"

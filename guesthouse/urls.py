@@ -46,8 +46,6 @@ urlpatterns = [
     # 6. Support
     # ==========================================
     path('terms-of-service/', views.terms_of_service, name='terms_of_service'),
-    path('contact-us/', views.contact_us, name='contact_us'),
-    path('contact-us/submit/', views.contact_us_submit, name='contact_us_submit'),
     
     # ==========================================
     # 7. Reviews

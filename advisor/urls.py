@@ -57,6 +57,7 @@ urlpatterns += i18n_patterns(
         subject_template_name='registration/password_reset_subject.txt',
         success_url='/accounts/password-reset/done/',
     ), name='password_reset'),
+    path('contact/', include('inquiry.urls')),
     
     path('accounts/password-reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='registration/password_reset_done.html'

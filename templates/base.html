@@ -92,6 +92,9 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
                         {% trans "Buggy Cars" %}
                     </a>
+                    <a href="{% url 'inquiry' %}" class="text-gray-700 hover:text-indigo-600">
+                        {% trans "Contact" %}
+                    </a>
                 </div>
 
                 <!-- Auth, Language & User Menu -->
@@ -294,7 +297,7 @@
             <div>
                 <h4 class="text-white font-bold mb-2">{% trans "Support" %}</h4>
                 <ul class="space-y-1">
-                    <li><a href="{% url 'contact_us' %}" class="hover:text-white transition">{% trans "Contact Us" %}</a></li>
+                    <li><a href="{% url 'inquiry' %}" class="hover:text-white transition">{% trans "Contact Us" %}</a></li>
                     <li><a href="{% url 'terms_of_service' %}" class="hover:text-white transition">{% trans "Terms of Service" %}</a></li>
                 </ul>
             </div>

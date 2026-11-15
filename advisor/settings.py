@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'ai_assistant',
     'analytics',
+    'inquiry',
 ]
 
 SITE_ID = 1
@@ -164,6 +165,7 @@ LOGOUT_REDIRECT_URL = 'guesthouse_list'
 
 ADMIN_SITE_HEADER = "Vang Vieng Stay Administration"
 ADMIN_SITE_TITLE = "Vang Vieng Stay Admin"
+ADMIN_EMAIL = 'info@vangviengstay.com'  # Where you want to receive inquiries
 
 # ==========================================
 # 10. EXTERNAL SERVICES & CONFIGURATION
