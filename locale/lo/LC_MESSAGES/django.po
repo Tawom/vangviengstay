@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 10:36+0700\n"
+"POT-Creation-Date: 2026-11-15 12:43+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,10 +38,10 @@ msgid "From"
 msgstr "ຈາກ"
 
 #: buggy/templates/buggy/book_buggy.html:18
-#: buggy/templates/buggy/buggy_detail.html:161
+#: buggy/templates/buggy/buggy_detail.html:166
 #: buggy/templates/buggy/buggy_list.html:71
 #: motorbike/templates/motorbike/book_motorbike.html:18
-#: motorbike/templates/motorbike/motorbike_detail.html:145
+#: motorbike/templates/motorbike/motorbike_detail.html:152
 #: motorbike/templates/motorbike/motorbike_list.html:67
 msgid "Deposit:"
 msgstr "ມັດຈໍາ"
@@ -57,51 +56,41 @@ msgid "Start Time"
 msgstr "ເວລາເລີ້ມຕົ້ນ"
 
 #: buggy/templates/buggy/book_buggy.html:40
-#: buggy/templates/buggy/buggy_detail.html:171
+#: buggy/templates/buggy/buggy_detail.html:176
 msgid "Rental Duration"
 msgstr "ໄລຍະເວລາເຊົ່າ"
 
 #: buggy/templates/buggy/book_buggy.html:43
-#: buggy/templates/buggy/buggy_detail.html:82
+#: buggy/templates/buggy/buggy_detail.html:89
 #: guides/templates/guides/book_guide.html:37
-#, fuzzy
-#| msgid "Tours"
 msgid "2 Hours"
 msgstr "2 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:44
-#: buggy/templates/buggy/buggy_detail.html:86
+#: buggy/templates/buggy/buggy_detail.html:93
 #: guides/templates/guides/book_guide.html:38
-#, fuzzy
-#| msgid "Tours"
 msgid "3 Hours"
 msgstr "3 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:45
-#: buggy/templates/buggy/buggy_detail.html:90
-#, fuzzy
-#| msgid "Tours"
+#: buggy/templates/buggy/buggy_detail.html:97
 msgid "4 Hours"
 msgstr "4 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:46
-#: buggy/templates/buggy/buggy_detail.html:94
+#: buggy/templates/buggy/buggy_detail.html:101
 #: guides/templates/guides/book_guide.html:40
-#, fuzzy
-#| msgid "Tours"
 msgid "5 Hours"
 msgstr "5 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:47
-#: buggy/templates/buggy/buggy_detail.html:98
+#: buggy/templates/buggy/buggy_detail.html:105
 #: guides/templates/guides/book_guide.html:41
-#, fuzzy
-#| msgid "Tours"
 msgid "6 Hours"
 msgstr "6 ຊົ່ວໂມງ"
 
 #: buggy/templates/buggy/book_buggy.html:48
-#: buggy/templates/buggy/buggy_detail.html:102
+#: buggy/templates/buggy/buggy_detail.html:109
 msgid "Full Day"
 msgstr "ເຕັມມື້"
 
@@ -124,7 +113,7 @@ msgstr "ກະລຸນາໃຫ້ຊ່ອງທາງການຕິດຕໍ
 #: motorbike/templates/motorbike/book_motorbike.html:49
 #: tours/templates/tours/book_tour.html:84
 msgid "your.email@example.com"
-msgstr ""
+msgstr "your.email@example.com"
 
 #: buggy/templates/buggy/book_buggy.html:70
 #: guesthouse/templates/guesthouse/book.html:104
@@ -132,7 +121,7 @@ msgstr ""
 #: motorbike/templates/motorbike/book_motorbike.html:56
 #: tours/templates/tours/book_tour.html:92
 msgid "+856 20 XXXX XXXX (for WhatsApp)"
-msgstr ""
+msgstr "+856 20 XXXX XXXX (for WhatsApp)"
 
 #: buggy/templates/buggy/book_buggy.html:77
 #: guesthouse/templates/guesthouse/book.html:111
@@ -161,8 +150,7 @@ msgstr "ສໍາລັບບັນທຶກເງິນມັດຈໍາ"
 
 #: buggy/templates/buggy/book_buggy.html:89
 #: motorbike/templates/motorbike/book_motorbike.html:75
-msgid ""
-"You'll need to leave your original passport OR this number as collateral."
+msgid "You'll need to leave your original passport OR this number as collateral."
 msgstr "ທ່ານຈະຕ້ອງຝາກພາສປອດຕົ້ນສະບັບ ຫຼື ເງິນຈໍານວນໜື່ງ ເປັນຫຼັກຊັບຄໍ້າປະກັນ"
 
 #: buggy/templates/buggy/book_buggy.html:98
@@ -177,367 +165,335 @@ msgid "cash (Lao Kip)"
 msgstr "ເງິນກີບ"
 
 #: buggy/templates/buggy/book_buggy.html:98
-msgid ""
-"at pickup. The deposit will be fully refunded when you return the buggy car."
-msgstr ""
+msgid "at pickup. The deposit will be fully refunded when you return the buggy car."
+msgstr "ທີ່ຈຸດຮັບລົດ. ຄ່າມັດຈໍາຈະຖືກສົ່ງຄືນເຕັມຈໍານວນເວລາເອົາລົດບັກກີກັບມາສົ່ງ"
 
 #: buggy/templates/buggy/book_buggy.html:104
 msgid "Confirm Booking (Pay Cash on Pickup)"
-msgstr ""
+msgstr "ຢືນຢັນການຈອງ (ຈ່າຍເງິນສົດຕອນເອົາລົດ)"
 
 #: buggy/templates/buggy/buggy_detail.html:14
-#, fuzzy
-#| msgid "Buggy Cars"
 msgid "Back to Buggy Cars"
-msgstr "ລົດບັກກີ"
+msgstr "ກັບໄປໜ້າລົດບັກກີ"
 
 #: buggy/templates/buggy/buggy_detail.html:55
 #: motorbike/templates/motorbike/motorbike_detail.html:55
 #: tours/templates/tours/tour_detail.html:41
 msgid "Operated by:"
-msgstr ""
+msgstr "ເຈົ້າຂອງທຸລະກິດ"
 
-#: buggy/templates/buggy/buggy_detail.html:72
-#, fuzzy
-#| msgid "Buggy Cars"
+#: buggy/templates/buggy/buggy_detail.html:73
 msgid "About this Buggy Car"
-msgstr "ລົດບັກກີ"
+msgstr "ກ່ຽວກັບລົດບັກກີ"
 
-#: buggy/templates/buggy/buggy_detail.html:79
-#: motorbike/templates/motorbike/motorbike_detail.html:79
+#: buggy/templates/buggy/buggy_detail.html:86
+#: motorbike/templates/motorbike/motorbike_detail.html:86
 msgid "Rental Rates"
-msgstr ""
+msgstr "ຄ່າເຊົ່າ"
 
-#: buggy/templates/buggy/buggy_detail.html:116
-#: motorbike/templates/motorbike/motorbike_detail.html:100
+#: buggy/templates/buggy/buggy_detail.html:123
+#: motorbike/templates/motorbike/motorbike_detail.html:107
 msgid "Pickup Location"
-msgstr ""
+msgstr "ສະຖານທີ່ຮັບລົດ"
 
-#: buggy/templates/buggy/buggy_detail.html:134
-#: motorbike/templates/motorbike/motorbike_detail.html:118
+#: buggy/templates/buggy/buggy_detail.html:139
+#: motorbike/templates/motorbike/motorbike_detail.html:125
 msgid "Open in Google Maps App"
-msgstr ""
+msgstr "ເປີດເບິ່ງຢູ່ແຜນທີ່ກູໂກແອບ"
 
-#: buggy/templates/buggy/buggy_detail.html:143
-#: motorbike/templates/motorbike/motorbike_detail.html:127
+#: buggy/templates/buggy/buggy_detail.html:148
+#: motorbike/templates/motorbike/motorbike_detail.html:134
 msgid "Pickup location map not available"
-msgstr ""
+msgstr "ແຜນທີ່ໄປຮັບເຊື່ອມຕໍ່ບໍ່ໄດ້"
 
-#: buggy/templates/buggy/buggy_detail.html:144
-#: motorbike/templates/motorbike/motorbike_detail.html:128
+#: buggy/templates/buggy/buggy_detail.html:149
+#: motorbike/templates/motorbike/motorbike_detail.html:135
 msgid "Contact the owner for exact pickup details after booking."
-msgstr ""
+msgstr "ຕິດຕໍ່ເຈົ້າຂອງທຸລະກິດສໍາລັບຂໍ້ມູນລາຍລະອຽດບ່ອນໄປຮັບ ຫຼັງຈາກຈອງແລ້ວ"
 
-#: buggy/templates/buggy/buggy_detail.html:155
+#: buggy/templates/buggy/buggy_detail.html:160
 #: buggy/templates/buggy/buggy_list.html:103
-#: motorbike/templates/motorbike/motorbike_detail.html:139
+#: motorbike/templates/motorbike/motorbike_detail.html:146
 msgid "Starting from"
-msgstr ""
-
-#: buggy/templates/buggy/buggy_detail.html:167
-#: motorbike/templates/motorbike/motorbike_detail.html:151
-msgid "Size"
-msgstr ""
+msgstr "ລາຄາເລີ້ມຕົ້ນ"
 
 #: buggy/templates/buggy/buggy_detail.html:172
+msgid "Size"
+msgstr "ຂະໜາດ"
+
+#: buggy/templates/buggy/buggy_detail.html:177
 #: buggy/templates/buggy/buggy_list.html:67
 msgid "2-6 Hours or Full Day"
-msgstr ""
-
-#: buggy/templates/buggy/buggy_detail.html:179
-#, fuzzy
-#| msgid "Buggy Cars"
-msgid "Book This Buggy Car"
-msgstr "ລົດບັກກີ"
+msgstr "2-6 ຊົ່ວໂມງ ຫຼື ໝົດມື້"
 
 #: buggy/templates/buggy/buggy_detail.html:183
-#: motorbike/templates/motorbike/motorbike_detail.html:162
-msgid "Login to Book"
-msgstr ""
+msgid "Book This Buggy Car"
+msgstr "ຈອງລົດບັກກີຄັນນີ້"
 
-#: buggy/templates/buggy/buggy_detail.html:188
-#: motorbike/templates/motorbike/motorbike_detail.html:167
+#: buggy/templates/buggy/buggy_detail.html:187
+#: motorbike/templates/motorbike/motorbike_detail.html:169
+msgid "Login to Book"
+msgstr "ລັອກອິນເພື່ອດໍາເນີນການຈອງ"
+
+#: buggy/templates/buggy/buggy_detail.html:192
+#: motorbike/templates/motorbike/motorbike_detail.html:174
 msgid "You won't be charged yet. The owner will verify availability first."
-msgstr ""
+msgstr "ຍັງບໍ່ຈ່າຍຕອນນີ້"
 
 #: buggy/templates/buggy/buggy_list.html:5
-#, fuzzy
-#| msgid "Buggy Car Rentals"
 msgid "Buggy Cars for Rent"
-msgstr "ລົດຍົນບັກກີໃຫ້ເຊົ່າ"
+msgstr "ລົດບັກກີໃຫ້ເຊົ່າ"
 
 #: buggy/templates/buggy/buggy_list.html:17
-#, fuzzy
-#| msgid "Buggy Cars"
 msgid "Rent a Buggy Car"
-msgstr "ລົດບັກກີ"
+msgstr "ເຊົ່າລົດບັກກີ"
 
 #: buggy/templates/buggy/buggy_list.html:18
-msgid ""
-"Perfect for groups and families. Explore Vang Vieng in style and comfort."
-msgstr ""
+msgid "Perfect for groups and families. Explore Vang Vieng in style and comfort."
+msgstr "ເໝາະສົມທີ່ສຸດສໍາລັບເປັນກຸ່ມ ແລະ ຄອບຄົວ"
 
 #: buggy/templates/buggy/buggy_list.html:67
 msgid "Rental Duration:"
-msgstr ""
+msgstr "ໄລຍະເວລາການເຊົ່າ"
 
 #: buggy/templates/buggy/buggy_list.html:90
 #: motorbike/templates/motorbike/motorbike_list.html:86
 msgid "View Pickup Location"
-msgstr ""
+msgstr "ເບິ່ງຈຸດຮັບລົດ"
 
 #: buggy/templates/buggy/buggy_list.html:95
 #: motorbike/templates/motorbike/motorbike_list.html:91
 msgid "Pickup location pending"
-msgstr ""
+msgstr "ຈຸດຮັບລົດຍັງຢູ່ລະຫວ່າງການດໍາເນີນການ"
 
 #: buggy/templates/buggy/buggy_list.html:111
 #: motorbike/templates/motorbike/motorbike_list.html:106
 msgid "View Details & Rent"
-msgstr ""
+msgstr "ເບິ່ງລາຍລະອຽດ & ເຊົ່າ"
 
 #: buggy/templates/buggy/buggy_list.html:125
 msgid "No buggy cars available at the moment."
-msgstr ""
+msgstr "ລົດບັກກີໃນຂະນະນີ້ຖືກຈອງໝົດແລ້ວ"
 
 #: buggy/templates/buggy/buggy_list.html:126
 #: motorbike/templates/motorbike/motorbike_list.html:121
 msgid "Please check back later or contact us for more information."
-msgstr ""
+msgstr "ກະລຸນາກັບມາກວດເຊັກອີກຄັ້ງໃນພາຍຫຼັງ ຫຼື ຕິດຕໍ່ພວກເຮົາສໍາລັບຂໍ້ມູນເພີ່ມເຕີມ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:5
 msgid "Owner Analytics"
-msgstr ""
+msgstr "ການວິເຄາະຂໍ້ມູນສໍາລັບເຈົ້າຂອງ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:29
-#, fuzzy
-#| msgid "My Dashboard"
 msgid "Back to Dashboard"
-msgstr "ຫນ້າຄວບຄຸມຂອງຂ້ອຍ"
+msgstr "ກັບໄປໜ້າແດຊບອດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:31
 msgid "Business Analytics"
-msgstr ""
+msgstr "ການວິເຄາະຂໍ້ມູນທາງທຸລະກິດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:32
 msgid "Deep insights into your performance across all listings"
-msgstr ""
+msgstr "ຄວາມເຂົ້າໃຈຢ່າງເລິກເຊິ່ງກ່ຽວກັບຜົນການດໍາເນີນງານຂອງທ່ານໃນທຸກລາຍການ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:38
 msgid "Last 7 days"
-msgstr ""
+msgstr "7 ວັນຫຼ້າສຸດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:39
 msgid "Last 30 days"
-msgstr ""
+msgstr "30 ວັນຫຼ້າສຸດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:40
 msgid "Last 90 days"
-msgstr ""
+msgstr "90 ວັນຫຼ້າສຸດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:41
 msgid "Last 12 months"
-msgstr ""
+msgstr "12 ເດືອນຫຼ້າສຸດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:42
 msgid "All time"
-msgstr ""
+msgstr "ທຸກມື້"
 
 #: dashboard/templates/dashboard/owner_analytics.html:61
 #: dashboard/templates/dashboard/owner_dashboard.html:53
 msgid "Total Revenue"
-msgstr ""
+msgstr "ລາຍຮັບທັງໝົດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:74
-#, fuzzy
-#| msgid "Guide Bookings"
 msgid "Total Bookings"
-msgstr "ການຈອງຄົນນໍາທ່ຽວ"
+msgstr "ການຈອງທັງໝົດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:77
 msgid "confirmed"
-msgstr ""
+msgstr "ຢືນຢັນແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:78
 msgid "pending"
-msgstr ""
+msgstr "ຍັງດໍາເນີນການຢູ່"
 
 #: dashboard/templates/dashboard/owner_analytics.html:91
 msgid "Conversion Rate"
-msgstr ""
+msgstr "ອັດຕາແລກປ່ຽນ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:93
 msgid "of inquiries confirmed"
-msgstr ""
+msgstr "ຢືນຢັນການສອບຖາມ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:105
 msgid "Average Rating"
-msgstr ""
+msgstr "ຄະແນນສະເລ່ຍ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:107
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
 msgid "from"
-msgstr ""
+msgstr "ຈາກ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:107
-#: tours/templates/tours/tour_detail.html:130
+#: tours/templates/tours/tour_detail.html:134
 msgid "reviews"
-msgstr ""
+msgstr "ການທົບທວນ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:119
 msgid "Revenue by Category"
-msgstr ""
+msgstr "ລາຍຮັບຕາມໝວດໝູ່"
 
 #: dashboard/templates/dashboard/owner_analytics.html:127
 msgid "Booking Status"
-msgstr ""
+msgstr "ສະຖານະການຈອງ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:139
 msgid "Top Performing Listings"
-msgstr ""
+msgstr "ລາຍການທີ່ມີຜົນງານດີທີ່ສຸດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:146
 msgid "Listing"
-msgstr ""
+msgstr "ລາຍການ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:147
+#: motorbike/templates/motorbike/motorbike_detail.html:158
 msgid "Category"
-msgstr ""
+msgstr "ໝວດໝູ່"
 
 #: dashboard/templates/dashboard/owner_analytics.html:148
 msgid "Revenue"
-msgstr ""
+msgstr "ລາຍຮັບ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:149
-#, fuzzy
-#| msgid "Guide Bookings"
 msgid "Bookings"
-msgstr "ການຈອງຄົນນໍາທ່ຽວ"
+msgstr "ການຈອງ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:150
 msgid "Rating"
-msgstr ""
+msgstr "ການໃຫ້ຄະແນນ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:188
 msgid "No bookings yet"
-msgstr ""
+msgstr "ຍັງບໍ່ມີການຈອງ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:189
 msgid "Your analytics will appear here once you receive your first booking."
-msgstr ""
+msgstr "ການວິເຄາະຂອງທ່ານຈະປາກົດອອກຢູ່ນີ້ ຫຼັງຈາກທີ່ທ່ານໄດ້ຮັບການຈອງສໍາເລັດຄັ້ງທໍາອິດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:202
 msgid "Quick Insights"
-msgstr ""
+msgstr "ພາບລວມແບບງ່າຍ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:206
 #: dashboard/templates/dashboard/owner_dashboard.html:29
 msgid "Total Properties"
-msgstr ""
+msgstr "ຊັບສິນທັງໝົດ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:210
 msgid "Pending Actions"
-msgstr ""
+msgstr "ຍັງຢູ່ລະຫວ່າງການດໍາເນີນການ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:214
 msgid "Cancelled"
-msgstr ""
+msgstr "ຖືກຍົກເລີກ"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
 msgid "'Confirmed'"
-msgstr ""
+msgstr "'ຢືນຢັນແລ້ວ'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
 msgid "'Pending'"
-msgstr ""
+msgstr "'ຍັງດໍາເນີນການຢູ່'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
 msgid "'Cancelled'"
-msgstr ""
+msgstr "'ຖືກຍົກເລີກ'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:268
-#, fuzzy
-#| msgid "Guide Bookings"
 msgid "'Bookings'"
-msgstr "ການຈອງຄົນນໍາທ່ຽວ"
+msgstr "'ການຈອງ'"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:5
 #: dashboard/templates/dashboard/owner_dashboard.html:13
-#, fuzzy
-#| msgid "My Dashboard"
 msgid "Owner Dashboard"
-msgstr "ຫນ້າຄວບຄຸມຂອງຂ້ອຍ"
+msgstr "ໜ້າແດຊບອດເຈົ້າຂອງ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:14
 msgid "Welcome back"
-msgstr ""
+msgstr "ຍິນດີຕ້ອນຮັບກັບຄືນ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:14
 msgid "Here's your business overview."
-msgstr ""
+msgstr "ນີ້ແມ່ນພາບລວມທຸລະກິດຂອງທ່ານ."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:20
 msgid "View Analytics"
-msgstr ""
+msgstr "ເບິ່ງການວິເຄາະ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:35
 msgid "currently active"
-msgstr ""
+msgstr "ເປີດໃຊ້ງານຢູ່"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:41
 msgid "Pending Requests"
-msgstr ""
+msgstr "ຄໍາຮ້ອງຂໍທີ່ຍັງລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:47
 msgid "Awaiting your approval"
-msgstr ""
+msgstr "ລໍຖ້າການອະນຸມັດຈາກທ່ານ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:59
 msgid "From confirmed bookings"
-msgstr ""
+msgstr "ຈາກການຈອງທີ່ຢືນຢັນແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:64
 msgid "Quick Actions"
-msgstr ""
+msgstr "ການດໍາເນີນການດ່ວນ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:65
 #: dashboard/templates/dashboard/owner_dashboard.html:411
-#, fuzzy
-#| msgid "My Guesthouse Stays"
 msgid "Add Guesthouse"
-msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
+msgstr "ເພີ່ມເຮືອນພັກ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:66
 #: dashboard/templates/dashboard/owner_dashboard.html:438
-#, fuzzy
-#| msgid "Tours"
 msgid "Add Tour"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "ເພີ່ມທົວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:67
 #: dashboard/templates/dashboard/owner_dashboard.html:465
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "Add Motorbike"
-msgstr "ລົດຈັກ"
+msgstr "ເພີ່ມລົດຈັກ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:68
 #: dashboard/templates/dashboard/owner_dashboard.html:492
 msgid "Add Guide"
-msgstr ""
+msgstr "ເພີ່ມໄກ້ນໍາທ່ຽວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:69
 #: dashboard/templates/dashboard/owner_dashboard.html:519
-#, fuzzy
-#| msgid "Buggy Cars"
 msgid "Add Buggy Car"
-msgstr "ລົດບັກກີ"
+msgstr "ເພີ່ມລົດບັກກີ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:80
-#, fuzzy
-#| msgid "My Guesthouse Stays"
 msgid "Pending Guesthouse Requests"
-msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
+msgstr "ຄໍາຮ້ອງຂໍຈອງເຮືອນພັກທີ່ລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:86
 #: dashboard/templates/dashboard/owner_dashboard.html:149
@@ -545,19 +501,17 @@ msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
 #: dashboard/templates/dashboard/owner_dashboard.html:271
 #: dashboard/templates/dashboard/owner_dashboard.html:334
 #: tours/templates/tours/tour_list.html:79
-#, fuzzy
-#| msgid "Guests"
 msgid "Guest"
-msgstr "ຜູ້ພັກເຊົາ"
+msgstr "ຜູ້ພັກ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:87
 msgid "Property"
-msgstr ""
+msgstr "ຊັບສິນ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:88
 #: dashboard/templates/dashboard/owner_dashboard.html:212
 msgid "Dates"
-msgstr ""
+msgstr "ວັນທີ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:89
 #: dashboard/templates/dashboard/owner_dashboard.html:152
@@ -565,7 +519,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:275
 #: dashboard/templates/dashboard/owner_dashboard.html:338
 msgid "Total"
-msgstr ""
+msgstr "ທັງໝົດ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:90
 #: dashboard/templates/dashboard/owner_dashboard.html:153
@@ -573,7 +527,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:276
 #: dashboard/templates/dashboard/owner_dashboard.html:339
 msgid "Actions"
-msgstr ""
+msgstr "ການກະທໍາ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:104
 #: dashboard/templates/dashboard/owner_dashboard.html:166
@@ -581,7 +535,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:290
 #: dashboard/templates/dashboard/owner_dashboard.html:353
 msgid "Approve"
-msgstr ""
+msgstr "ອະນຸມັດ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:106
 #: dashboard/templates/dashboard/owner_dashboard.html:168
@@ -589,7 +543,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:292
 #: dashboard/templates/dashboard/owner_dashboard.html:355
 msgid "Decline"
-msgstr ""
+msgstr "ປະຕິເສດ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:111
 #: dashboard/templates/dashboard/owner_dashboard.html:173
@@ -597,7 +551,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:297
 #: dashboard/templates/dashboard/owner_dashboard.html:360
 msgid "Reason for declining:"
-msgstr ""
+msgstr "ເຫດຜົນໃນການປະຕິເສດ:"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:113
 #: dashboard/templates/dashboard/owner_dashboard.html:175
@@ -605,21 +559,21 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:299
 #: dashboard/templates/dashboard/owner_dashboard.html:362
 msgid "Select a reason"
-msgstr ""
+msgstr "ເລືອກເຫດຜົນ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:114
 #: dashboard/templates/dashboard/owner_dashboard.html:237
 msgid "Dates no longer available"
-msgstr ""
+msgstr "ວັນທີບໍ່ຫວ່າງແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:115
 msgid "Property fully booked"
-msgstr ""
+msgstr "ຊັບສິນຖືກຈອງເຕັມແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:116
 #: dashboard/templates/dashboard/owner_dashboard.html:238
 msgid "Maintenance issue"
-msgstr ""
+msgstr "ບັນຫາການບໍາລຸງຮັກສາ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:117
 #: dashboard/templates/dashboard/owner_dashboard.html:178
@@ -627,7 +581,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:302
 #: dashboard/templates/dashboard/owner_dashboard.html:365
 msgid "Unable to accommodate"
-msgstr ""
+msgstr "ບໍ່ສາມາດຮອງຮັບໄດ້"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:118
 #: dashboard/templates/dashboard/owner_dashboard.html:179
@@ -635,11 +589,11 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:303
 #: dashboard/templates/dashboard/owner_dashboard.html:366
 msgid "Other (please specify)"
-msgstr ""
+msgstr "ອື່ນໆ (ກະລຸນາລະບຸ)"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:120
 msgid "Please explain the reason..."
-msgstr ""
+msgstr "ກະລຸນາອະທິບາຍເຫດຜົນ..."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:122
 #: dashboard/templates/dashboard/owner_dashboard.html:183
@@ -647,7 +601,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:307
 #: dashboard/templates/dashboard/owner_dashboard.html:370
 msgid "Cancel"
-msgstr ""
+msgstr "ຍົກເລີກ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:123
 #: dashboard/templates/dashboard/owner_dashboard.html:184
@@ -655,116 +609,100 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:308
 #: dashboard/templates/dashboard/owner_dashboard.html:371
 msgid "Confirm Decline"
-msgstr ""
+msgstr "ຢືນຢັນການປະຕິເສດ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:143
 msgid "Pending Tour Requests"
-msgstr ""
+msgstr "ຄໍາຮ້ອງຂໍທົວທີ່ລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:150
+#: inquiry/models.py:10
 #: tours/templates/tours/tour_list.html:109
-#, fuzzy
-#| msgid "Tours"
 msgid "Tour"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "ທົວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:151
 #: guides/templates/guides/book_guide.html:22
 msgid "Date"
-msgstr ""
+msgstr "ວັນທີ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:176
 msgid "Date no longer available"
-msgstr ""
+msgstr "ວັນທີບໍ່ຫວ່າງແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:177
 msgid "Tour fully booked"
-msgstr ""
+msgstr "ທົວຖືກຈອງເຕັມແລ້ວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:181
 #: dashboard/templates/dashboard/owner_dashboard.html:242
 #: dashboard/templates/dashboard/owner_dashboard.html:305
 #: dashboard/templates/dashboard/owner_dashboard.html:368
 msgid "Please explain..."
-msgstr ""
+msgstr "ກະລຸນາອະທິບາຍ..."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:204
-#, fuzzy
-#| msgid "My Motorbike Rentals"
 msgid "Pending Motorbike Requests"
-msgstr "ການເຊົ່າລົດຈັກຂອງຂ້ອຍ"
+msgstr "ຄໍາຮ້ອງຂໍລົດຈັກທີ່ລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:211
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "Motorbike"
 msgstr "ລົດຈັກ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:265
 msgid "Pending Guide Requests"
-msgstr ""
+msgstr "ຄໍາຮ້ອງຂໍໄກ້ນໍາທ່ຽວທີ່ລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:272
 msgid "Guide"
-msgstr ""
-
-msgid "Contact"
-msgstr "ຕິດຕໍ່ພວກເຮົາ"
+msgstr "ໄກ້ນໍາທ່ຽວ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:273
 #: dashboard/templates/dashboard/owner_dashboard.html:336
 msgid "Date & Time"
-msgstr ""
+msgstr "ວັນທີ ແລະ ເວລາ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:274
 #: dashboard/templates/dashboard/owner_dashboard.html:337
 #: guides/templates/guides/book_guide.html:34
 msgid "Duration"
-msgstr ""
+msgstr "ໄລຍະເວລາ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:284
 #: dashboard/templates/dashboard/owner_dashboard.html:347
 msgid "at"
-msgstr ""
+msgstr "ທີ່"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:285
 #: dashboard/templates/dashboard/owner_dashboard.html:348
 #: tours/templates/tours/tour_detail.html:68
-#, fuzzy
-#| msgid "Tours"
 msgid "hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "ຊົ່ວໂມງ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:300
 msgid "Guide unavailable"
-msgstr ""
+msgstr "ໄກ້ນໍາທ່ຽວບໍ່ຫວ່າງ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:301
 #: dashboard/templates/dashboard/owner_dashboard.html:364
 msgid "Time slot unavailable"
-msgstr ""
+msgstr "ຊ່ວງເວລາບໍ່ຫວ່າງ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:328
-#, fuzzy
-#| msgid "My Buggy Car Rentals"
 msgid "Pending Buggy Car Requests"
-msgstr "ການເຊົ່າລົດບັກກີຂອງຂ້ອຍ"
+msgstr "ຄໍາຮ້ອງຂໍລົດບັກກີທີ່ລໍຖ້າ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:335
-#, fuzzy
-#| msgid "Buggy Cars"
 msgid "Buggy Car"
 msgstr "ລົດບັກກີ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:363
 msgid "Buggy unavailable"
-msgstr ""
+msgstr "ລົດບັກກີບໍ່ຫວ່າງ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:393
-#, fuzzy
-#| msgid "My Guesthouse Stays"
 msgid "My Guesthouses"
-msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
+msgstr "ເຮືອນພັກຂອງຂ້ອຍ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:401
 #: dashboard/templates/dashboard/owner_dashboard.html:428
@@ -772,7 +710,7 @@ msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
 #: dashboard/templates/dashboard/owner_dashboard.html:482
 #: dashboard/templates/dashboard/owner_dashboard.html:509
 msgid "Active"
-msgstr ""
+msgstr "ເປີດໃຊ້ງານ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:401
 #: dashboard/templates/dashboard/owner_dashboard.html:428
@@ -780,7 +718,7 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:482
 #: dashboard/templates/dashboard/owner_dashboard.html:509
 msgid "Inactive"
-msgstr ""
+msgstr "ບໍ່ເປີດໃຊ້ງານ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:404
 #: dashboard/templates/dashboard/owner_dashboard.html:431
@@ -788,188 +726,171 @@ msgstr ""
 #: dashboard/templates/dashboard/owner_dashboard.html:485
 #: dashboard/templates/dashboard/owner_dashboard.html:512
 msgid "Edit"
-msgstr ""
+msgstr "ແກ້ໄຂ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:410
-#, fuzzy
-#| msgid "My Guesthouse Stays"
 msgid "No guesthouses yet."
-msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
+msgstr "ຍັງບໍ່ມີເຮືອນພັກ."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:420
-#, fuzzy
-#| msgid "Tours"
 msgid "My Tours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "ທົວຂອງຂ້ອຍ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:430
 msgid "hrs"
-msgstr ""
+msgstr "ຊມ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:430
 #: tours/templates/tours/book_tour.html:17
 #: tours/templates/tours/tour_detail.html:87
 #: tours/templates/tours/tour_list.html:135
 msgid "person"
-msgstr ""
+msgstr "ຄົນ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:437
 msgid "No tours yet."
-msgstr ""
+msgstr "ຍັງບໍ່ມີທົວ."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:447
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "My Motorbikes"
-msgstr "ລົດຈັກ"
+msgstr "ລົດຈັກຂອງຂ້ອຍ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:457
 #: motorbike/templates/motorbike/book_motorbike.html:17
-#: motorbike/templates/motorbike/motorbike_detail.html:142
+#: motorbike/templates/motorbike/motorbike_detail.html:149
 #: motorbike/templates/motorbike/motorbike_list.html:101
 msgid "day"
-msgstr ""
+msgstr "ມື້"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:464
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "No motorbikes yet."
-msgstr "ລົດຈັກ"
+msgstr "ຍັງບໍ່ມີລົດຈັກ."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:474
-#, fuzzy
-#| msgid "My Guide Bookings"
 msgid "My Guides"
-msgstr "ຄົນນໍາທ່ຽວຂອງຂ້ອຍ"
+msgstr "ໄກ້ນໍາທ່ຽວຂອງຂ້ອຍ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:491
 msgid "No guides yet."
-msgstr ""
+msgstr "ຍັງບໍ່ມີໄກ້ນໍາທ່ຽວ."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:501
-#, fuzzy
-#| msgid "Buggy Cars"
 msgid "My Buggy Cars"
-msgstr "ລົດບັກກີ"
+msgstr "ລົດບັກກີຂອງຂ້ອຍ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:511
 msgid "2hrs"
-msgstr ""
+msgstr "2ຊມ"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:518
 msgid "No buggy cars yet."
-msgstr ""
+msgstr "ຍັງບໍ່ມີລົດບັກກີ."
 
 #: guesthouse/templates/guesthouse/book.html:15
 msgid "Book Your Stay"
-msgstr ""
+msgstr "ຈອງທີ່ພັກຂອງທ່ານ"
 
 #: guesthouse/templates/guesthouse/book.html:17
 #: motorbike/templates/motorbike/book_motorbike.html:17
 #: tours/templates/tours/book_tour.html:17
 msgid "Price:"
-msgstr ""
+msgstr "ລາຄາ:"
 
 #: guesthouse/templates/guesthouse/book.html:17
 msgid "night"
-msgstr ""
+msgstr "ຄືນ"
 
 #: guesthouse/templates/guesthouse/book.html:23
 msgid "Unable to complete booking:"
-msgstr ""
+msgstr "ບໍ່ສາມາດດໍາເນີນການຈອງໄດ້:"
 
 #: guesthouse/templates/guesthouse/book.html:37
-#, fuzzy
-#| msgid "Check-in times"
 msgid "Check-in Date"
-msgstr "ເວລາລົງທະບຽນເຂົ້າພັກ"
+msgstr "ວັນທີເຊັກອິນ"
 
 #: guesthouse/templates/guesthouse/book.html:46
-#, fuzzy
-#| msgid "Check-out"
 msgid "Check-out Date"
-msgstr "ອອກຈາກທີ່ພັກ"
+msgstr "ວັນທີເຊັກເອົາ"
 
 #: guesthouse/templates/guesthouse/book.html:55
 msgid "Number of Guests"
-msgstr ""
+msgstr "ຈໍານວນຜູ້ພັກ"
 
 #: guesthouse/templates/guesthouse/book.html:57
 msgid "How many people will be staying?"
-msgstr ""
+msgstr "ຈະມີຈັກຄົນພັກເຊົາ?"
 
 #: guesthouse/templates/guesthouse/book.html:66
 msgid "Room Type"
-msgstr ""
+msgstr "ປະເພດຫ້ອງ"
 
 #: guesthouse/templates/guesthouse/book.html:68
 msgid "Select your preferred room type."
-msgstr ""
+msgstr "ເລືອກປະເພດຫ້ອງທີ່ທ່ານຕ້ອງການ."
 
 #: guesthouse/templates/guesthouse/book.html:79
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: guesthouse/templates/guesthouse/book.html:79
 msgid "standard room"
-msgstr ""
+msgstr "ຫ້ອງມາດຕະຖານ"
 
 #: guesthouse/templates/guesthouse/book.html:79
 msgid "will be assigned to you upon arrival based on availability."
-msgstr ""
+msgstr "ຈະຖືກມອບໝາຍໃຫ້ທ່ານເມື່ອມາຮອດ ໂດຍອີງຕາມຄວາມພ້ອມ."
 
 #: guesthouse/templates/guesthouse/book.html:89
-msgid ""
-"Please provide at least one way for the guesthouse owner to contact you."
-msgstr ""
+msgid "Please provide at least one way for the guesthouse owner to contact you."
+msgstr "ກະລຸນາໃຫ້ຊ່ອງທາງຢ່າງໜ້ອຍ 1 ຊ່ອງທາງ ເພື່ອໃຫ້ເຈົ້າຂອງເຮືອນພັກຕິດຕໍ່ທ່ານ."
 
 #: guesthouse/templates/guesthouse/book.html:94
+#: inquiry/templates/inquiry/inquiry.html:42
 #: tours/templates/tours/book_tour.html:82
 msgid "Email Address"
-msgstr ""
+msgstr "ອີເມວຂອງທ່ານ"
 
 #: guesthouse/templates/guesthouse/book.html:102
+#: inquiry/templates/inquiry/inquiry.html:55
 #: tours/templates/tours/book_tour.html:90
 msgid "Phone Number"
-msgstr ""
+msgstr "ເບີໂທຂອງທ່ານ"
 
 #: guesthouse/templates/guesthouse/book.html:121
 #: guides/templates/guides/book_guide.html:93
 #: tours/templates/tours/book_tour.html:109
 msgid "Final payment will be collected in"
-msgstr ""
+msgstr "ການຊໍາລະສຸດທ້າຍຈະຖືກເກັບເປັນ"
 
 #: guesthouse/templates/guesthouse/book.html:121
 #: tours/templates/tours/book_tour.html:109
 msgid "Lao Kip (LAK)"
-msgstr ""
+msgstr "ເງິນກີບລາວ (LAK)"
 
 #: guesthouse/templates/guesthouse/book.html:121
-msgid ""
-"based on the official daily BCEL/LDB exchange rate on the day of your check-"
-"in."
-msgstr ""
+msgid "based on the official daily BCEL/LDB exchange rate on the day of your check-in."
+msgstr "ອີງຕາມອັດຕາແລກປ່ຽນປະຈໍາວັນທາງການຂອງ BCEL/LDB ໃນວັນທີທ່ານເຊັກອິນ."
 
 #: guesthouse/templates/guesthouse/book.html:127
 #: tours/templates/tours/book_tour.html:115
 msgid "Confirm Booking (Pay Cash on Arrival)"
-msgstr ""
+msgstr "ຢືນຢັນການຈອງ (ຈ່າຍເງິນສົດຕອນມາຮອດ)"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:30
 msgid "Find Your Perfect Stay"
-msgstr "ສະຖານທີ່ພັກສວຍງາມ"
+msgstr "ຄົ້ນຫາທີ່ພັກທີ່ສົມບູນແບບຂອງທ່ານ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:31
 msgid "Discover amazing guesthouses in Vang Vieng"
-msgstr "ຄົ້ນຫາສະຖານທີ່ພັກອັນເຫມາະສົມຢູ່ວັງວຽງ"
+msgstr "ຄົ້ນພົບເຮືອນພັກທີ່ໜ້າປະທັບໃຈໃນວັງວຽງ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:41
 msgid "Check-in"
-msgstr "ລົງທະບຽນເຂົ້າພັກ"
+msgstr "ເຊັກອິນ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:50
 msgid "Check-out"
-msgstr "ອອກຈາກທີ່ພັກ"
+msgstr "ເຊັກເອົາ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:64
 #: tours/templates/tours/tour_list.html:75
@@ -978,14 +899,14 @@ msgstr "ອອກຈາກທີ່ພັກ"
 #: tours/templates/tours/tour_list.html:82
 #: tours/templates/tours/tour_list.html:83
 msgid "Guests"
-msgstr "ຜູ້ພັກເຊົາ"
+msgstr "ຜູ້ພັກ"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:123
 msgid "Search"
 msgstr "ຄົ້ນຫາ"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:10
-#: templates/backup.html:312 templates/base.html:298
+#: templates/base.html:301
 msgid "Terms of Service"
 msgstr "ເງື່ອນໄຂການໃຫ້ບໍລິການ"
 
@@ -994,500 +915,756 @@ msgid "Last Updated: October 2026"
 msgstr "ອັບເດດຄັ້ງຫຼ້າສຸດ: ເດືອນ 10 ປີ 2026"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
-#, fuzzy, python-format
-#| msgid ""
-#| "Welcome to <strong>%(brand)s</strong>. By accessing our website and using "
-#| "our booking services, you agree to comply with and be bound by the "
-#| "following terms and conditions. Please read them carefully."
-msgid ""
-" Welcome to <strong>%(brand)s</strong>. By accessing our website and using "
-"our booking services, you agree to comply with and be bound by the following "
-"terms and conditions. Please read them carefully.\" "
-msgstr ""
-"ຍິນດີຕ້ອນຮັບສູ່ <strong>%(brand)s</strong>. ໂດຍການເຂົ້າເຖິງເວັບໄຊທ໌ຂອງພວກເຮົາ ແລະ "
-"ໃຊ້ບໍລິການຈອງຫ້ອງພັກຂອງພວກເຮົາ, ທ່ານຕົກລົງທີ່ຈະປະຕິບັດຕາມ ແລະ ຜູກມັດຕາມຂໍ້ກຳນົດ ແລະ "
-"ເງື່ອນໄຂຕໍ່ໄປນີ້. ກະລຸນາອ່ານຢ່າງລະອຽດ."
+msgid "Welcome to"
+msgstr "ຍິນດີຕ້ອນຮັບສູ່"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:17
+#: templates/base.html:285 templates/base.html:306
+msgid "Vang Vieng Stay"
+msgstr "ວັງວຽງສະເຕ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:17
+msgid "By accessing our website and using our booking services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully."
+msgstr "ໂດຍການເຂົ້າເຖິງເວັບໄຊທ໌ຂອງພວກເຮົາ ແລະ ໃຊ້ບໍລິການຈອງຫ້ອງພັກຂອງພວກເຮົາ, ທ່ານຕົກລົງທີ່ຈະປະຕິບັດຕາມ ແລະ ຜູກມັດຕາມຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຕໍ່ໄປນີ້. ກະລຸນາອ່ານຢ່າງລະອຽດ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:20
+msgid "1. Platform Role"
+msgstr "1. ພາລະບົດບາດຂອງແພລດຟອມ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+msgid "Vang Vieng Stay acts solely as an intermediary booking platform connecting travelers with independent local business owners in Vang Vieng, Laos. We facilitate bookings for"
+msgstr "Vang Vieng Stay ເຮັດໜ້າທີ່ເປັນແພລດຟອມການຈອງ, ເຊື່ອມຕໍ່ນັກທ່ອງທ່ຽວກັບເຈົ້າຂອງທຸລະກິດເອກະລາດໃນທ້ອງຖິ່ນໃນວັງວຽງ, ລາວ. ພວກເຮົາອຳນວຍຄວາມສະດວກໃນການຈອງທີ່ພັກສຳລັບ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+msgid "Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
+msgstr "ເຮືອນພັກ, ທົວ, ຜູ້ນຳທ່ຽວທ້ອງຖິ່ນ, ການເຊົ່າລົດຈັກ, ແລະ ການເຊົ່າລົດ Buggy"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+msgid "We do not own, manage, or operate these services. The actual service provider"
+msgstr "ພວກເຮົາບໍ່ໄດ້ເປັນເຈົ້າຂອງ, ຄຸ້ມຄອງ ຫຼື ດຳເນີນງານການບໍລິການເຫຼົ່ານີ້. ຜູ້ໃຫ້ບໍລິການຕົວຈິງ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+msgid "is solely responsible for the quality, safety, and delivery of the services rendered."
+msgstr "ຮັບຜິດຊອບແຕ່ພຽງຜູ້ດຽວຕໍ່ຄຸນນະພາບ, ຄວາມປອດໄພ ແລະ ການໃຫ້ບໍລິການ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:25
+msgid "2. The 'Request & Verify' Booking Process"
+msgstr "2. ຂັ້ນຕອນການຈອງ 'ຮ້ອງຂໍ & ການຢືນຢັນ' "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+msgid "Booking Requests:"
+msgstr "ຄໍາຂໍຈອງ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+msgid "Submitting a booking form on our platform does"
+msgstr "ການສົ່ງຟອມຈອງທາງແພລດໄອມຂອງພວກເຮົາ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "not"
+msgstr "ບໍ່ໄດ້"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+msgid "guarantee a reservation. It initiates a 'Booking Request' which is sent to the Owner for availability verification."
+msgstr "ຮັບປະກັນວ່າຈອງໄດ້ແລ້ວ. ມັນເປັນພຽງການເລີ້ມຕົ້ນ 'ຂໍຈອງ' ໂດຍທີ່ຖືກສົ່ງຕໍ່ໄປຍັງເຈົ້າຂອງເພື່ອຮັບຮອງການຈອງອີກເທື່ອໜຶ່ງ "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+msgid "Confirmation:"
+msgstr "ການຮັບຮອງ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+msgid "A booking is only considered"
+msgstr "ແມ່ນການທີ່ຖືກຈອງແລ້ວ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+msgid "Confirmed"
+msgstr "ເມື່ອຖືກຮັບຮອງແລ້ວ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+msgid "once the Owner approves the request and you receive a final Confirmation Voucher via email."
+msgstr "ຫຼັງຈາກທາງເຈົ້າຂອງຜູ້ຮັບຮອງການຈອງໄດ້ອະນຸມັດແລ້ວ ແລະ ທ່ານເອງກໍ່ຈະໄດ້ຮັບ ວາວເຈີ ທາງອີເມວ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+msgid "Declined Requests:"
+msgstr "ການຈອງທີ່ຖືກປະຕິເສດ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+msgid "If the Owner cannot accommodate your request"
+msgstr "ຖ້າວ່າ ເຈົ້າຂອງທຸລະກີດບໍ່ສາມາດຈັດຫາໃຫ້ໄດ້ຕາມການຈອງ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+msgid "e.g., the vehicle or room is no longer available"
+msgstr "ເຊັ່ນວ່າ, ພາຫະນະ ຫຼື ສິ່ງທີ່ຈອງຖືກຄົນອື່ນເອົາໝົດແລ້ວ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+msgid "the request will be declined at no cost to you."
+msgstr "ການຮ້ອງຂໍກໍ່ຈະຖືກປະຕິເສດໂດຍປາສະຈາກການຄິດໄລ່ມູນຄ່າໃດເລີຍ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:34
+msgid "3. Payment, Currency & Security Deposits"
+msgstr "3. ການຊໍາລະເງິນ, ສະກຸນເງິນ & ວັດຖຸມີຄ່າ ເພື່ອຄໍ້າປະກັນ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "Cash on Arrival:"
+msgstr "ຈ່າຍຕອນມາເຖິງຫ້ອງການໜ່ວຍທຸລະກິດ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "Vang Vieng Stay does"
+msgstr " ວັງວຽງ ສະເຕ "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "process online payments. All payments for services must be made directly to the Owner in"
+msgstr "ດໍາເນີນການຮັບເງິນໂດຍການໂອນ. ການຈ່າຍເງິນສໍາລັບບໍລິການນີ້ ແມ່ນຕ້ອງໄດ້ຈ່າຍໃຫ້ກັບທາງໜ່ວຍບໍລິການເປັນ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "cash"
+msgstr "ເງິນສົດ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "Lao Kip - LAK"
+msgstr "ເງິນກີບລາວ - ກີບ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+msgid "upon check-in, arrival, or vehicle pickup."
+msgstr "ຕອນລົງທະບຽນ, ຕອນມາເຖິງ, ຫຼື ຕອນພາຫະນະມາຮັບ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:37
+msgid "Pricing:"
+msgstr "ລາຄາ: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:37
+msgid "All prices displayed on the platform are estimates in LAK and are subject to change based on the Owner's current rates. The final price agreed upon with the Owner at the time of pickup/check-in is the binding price."
+msgstr "ລາຄາທັງໝົດທີ່ສະແດງເທິງແພລດຟອມເປັນລາຄາໂດຍປະມານໃນສະກຸນເງິນກີບ ແລະ ຍັງຖືກກໍານົດຕໍ່ການປ່ຽນແປງບົນພື້ນຖານອັດຕາແລກປ່ຽນທີ່ທາງເຈົ້າຂອງທຸລະກິດກໍານົດນະເວລານັ້ນ ລາຄາສຸດທ້າຍກໍ່ຕ້ອງໄດ້ເຫັນດີກັບເຈົ້າຂອງທຸລະກິດຕອນໄປຮັບ/ເຊັກອິນ ແມ່ນເປັນລາຄາທີ່ຕົກລົງກັນ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:38
+msgid "Security Deposits (Vehicles): "
+msgstr "ສິ່ງຈອງມັດຈໍາ (ສໍາລັບພາຫະນະ)"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:38
+msgid "For Motorbike and Buggy Car rentals, a cash security deposit and/or the physical surrender of a valid Passport or Government ID is required by the Owner at the time of pickup. This deposit/ID will be returned upon the safe return of the vehicle."
+msgstr " ສໍາລັບການເຊົ່າ ລົດຈັກ ແລະ ລົດບັກກີ້ ການວາງເງິນປະກັນເປັນເງິນສົດ ແລະ/ຫຼືໜັງສືເດີນທາງ ຫຼືບັດປະຈຳຕົວປະຊາຊົນທີ່ຍັງບໍ່ໝົດອາຍຸເວລາຮັບລົດ/ສິ່ງຈອງທີ່ຄໍ້າປະກັນຈະຄືນໃຫ້ເມື່ອສົ່ງຄືນທີ່ຢູ່ໃນສະພາບເດີມ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:43
+msgid "4. Cancellations"
+msgstr "4. ການຍົກເລີກ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:45
+msgid "Pending Requests: "
+msgstr "ຄໍາຮ້ອງຂໍທີ່ຍັງລໍຖ້າດໍາເນີນການຢູ່"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:45
+msgid "You may cancel any pending booking request instantly via your dashboard at no charge."
+msgstr "ທ່ານອາດຈະຍົກເລີກຄໍາຮ້ອງຂໍທີ່ຍັງລໍຖ້າດໍາເນີນການຢູ່ໄດ້ທັນທີ ຢູ່ທາງໜ້າແດສໂບດຂອງທ່ານເອງ ໂດຍ ທີ່ບໍ່ໄດ້ເສຍຄ່າ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:46
+msgid "Confirmed Bookings: "
+msgstr "ການຈອງທີ່ຢືນຢັນແລ້ວ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:46
+msgid "If you need to cancel a confirmed booking, you must contact the Owner directly. Cancellation policies, including the potential forfeiture of your security deposit for vehicle rentals or late cancellation fees for guesthouses, are determined solely by the individual Owner."
+msgstr "ຖ້າຕ້ອງການຍົກເລີກການຈອງທີ່ຢືນຢັນແລ້ວ, ທ່ານຕ້ອງຕິດຕໍ່ເຈົ້າຂອງທຸລະກິດໂດຍກົງ. ນະໂຍບາຍການຍົກເລີກ ລວມທັງ ເງິນຄໍ້າປະກັນລົດເຊົ່າ ຫຼື ຂໍ້ຕົກລົງການຍົກເລີກທີ່ຊັກຊ້າເກີນໄປສໍາລັບທີ່ພັກແມ່ນຖືກກໍານົດໂດຍເຈົ້າຂອງແຕ່ລະລາຍ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:51
+msgid "5. User Responsibilities & Safety"
+msgstr "ຄວາມຮັບຜິດຊອບຂອງຜູ້ໃຊ້ ແລະ ຄວາມປອດໄພ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:53
+msgid "Identification: "
+msgstr "ການລະບຸຕົວຕົນ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:53
+msgid "You must present a valid Passport or Government ID and your Booking Voucher (digital or printed) upon check-in or vehicle pickup."
+msgstr "ທ່ານຕ້ອງສະແດງໜັງສືພາສປອດ ຫຼື ບັດປະຈຳຕົວປະຊາຊົນ ແລະ ໃບຢືນຢັນການຈອງ (ແບບດິຈິຕອນ ຫຼື ແບບພິມ) ເມື່ອລົງທະບຽນ ຫຼື ຮັບລົດ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:54
+msgid "Vehicle Rentals: "
+msgstr "ການເຊົ່າພາຫະນະ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:54
+msgid "For Motorbikes and Buggy Cars, the renter must possess a valid, legally recognized driver's license for Laos. You are fully responsible for the safe operation of the vehicle, adhering to local traffic laws, and wearing appropriate safety gear (e.g., helmets)."
+msgstr "ການເຊົ່າລົດ: ສຳລັບລົດຈັກ ແລະ ລົດບັກກີ້, ຜູ້ເຊົ່າຕ້ອງມີໃບຂັບຂີ່ທີ່ຖືກຕ້ອງຕາມກົດໝາຍສຳລັບລາວ. ທ່ານມີຄວາມຮັບຜິດຊອບຢ່າງເຕັມທີ່ຕໍ່ການຂັບຂີ່ລົດຢ່າງປອດໄພ, ປະຕິບັດຕາມກົດໝາຍຈໍລາຈອນໃນທ້ອງຖິ່ນ, ແລະ ໃສ່ອຸປະກອນຄວາມປອດໄພທີ່ເໝາະສົມ (ເຊັ່ນ: ໝວກກັນກະທົບ)."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:55
+msgid "Property Respect: "
+msgstr "ການປະຕິບັດ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:55
+msgid "You agree to respect the property, staff, and local regulations of the service providers."
+msgstr "ທ່ານເຫັນດີທີ່ຈະປະຕິບັດຕໍ່ ຊັບສິນ, ພະນັກງານ, ແລະ ກົດລະບຽບທ້ອງຖິ່ນຂອງຜູ້ໃຫ້ບໍລິການຢ່າງເໝາະສົມ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:60
+msgid "6. Limitation of Liability"
+msgstr "6. ຂອບເຂດຂອງຄວາມຮັບຜິດຊອບ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:61
+msgid "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable for any indirect, incidental, or consequential damages arising from your use of the platform or the services booked. This includes, but is not limited to, traffic accidents, vehicle damage, personal injuries during tours, theft, or travel disruptions. All risks associated with the use of rented vehicles and participation in tours are assumed entirely by the user."
+msgstr "ເພື່ອທໍາຕາມຂອບເຂດສູງສຸດທີ່ກົດໝາຍອະນຸຍາດ, Vang Vieng Stay ຈະບໍ່ຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທາງອ້ອມ, ໂດຍບັງເອີນ, ຫຼື ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນຈາກການນຳໃຊ້ແພລດຟອມ ຫຼື ການບໍລິການທີ່ທ່ານຈອງໄວ້. ສິ່ງນີ້ລວມມີ, ແຕ່ບໍ່ໄດ້ຈຳກັດໃສ່ອຸບັດຕິເຫດຈໍລາຈອນທາງຖະໜົນ, ຄວາມເສຍຫາຍຈາກຍານພາຫະນະ, ການບາດເຈັບສ່ວນຕົວໃນລະຫວ່າງການທ່ອງທ່ຽວ, ການລັກຂະໂມຍ, ຫຼື ອຸປະສັກໃນການເດີນທາງ. ຄວາມສ່ຽງທັງໝົດທີ່ກ່ຽວຂ້ອງກັບການນຳໃຊ້ຍານພາຫະນະທີ່ເຊົ່າ ແລະ ການເຂົ້າຮ່ວມໃນການທ່ອງທ່ຽວແມ່ນຜູ້ນໍາໃຊ້ຮັບຜິດຊອບທັງໝົດ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:65
+msgid "7. Governing Law"
+msgstr "7. ການບັງຄັບໃຊ້ກົດຫມາຍ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:66
+msgid "These terms shall be governed by and construed in accordance with the laws of the Lao People's Democratic Republic. Any disputes arising from these terms or the services booked shall be subject to the exclusive jurisdiction of the local authorities and courts in Vientiane, Laos."
+msgstr "ເງື່ອນໄຂເຫຼົ່ານີ້ຈະຖືກຄຸ້ມຄອງ ແລະ ຕີຄວາມໝາຍຕາມກົດໝາຍຂອງສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ. ຂໍ້ຂັດແຍ່ງໃດໆທີ່ເກີດຂຶ້ນຈາກເງື່ອນໄຂເຫຼົ່ານີ້ ຫຼື ການບໍລິການທີ່ໄດ້ຈອງໄວ້ແມ່ນຂຶ້ນກັບອຳນາດຕັດສິນຂອງອຳນາດການປົກຄອງທ້ອງຖິ່ນ ແລະ ສານໃນນະຄອນຫຼວງວຽງຈັນ, ລາວ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:71
+msgid "Questions? "
+msgstr "ມີຄໍາຖາມອື່ນບໍ? "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:71
+msgid "If you have any questions about these Terms of Service or your data privacy, please contact us at"
+msgstr "ຖ້າຫາກທ່ານມີຄໍາຖາມກ່ຽວກັບເງື່ອນໄຂການໃຊ້ບໍລິການ ຫຼື ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານ, ກະລຸນາຕິດຕໍ່"
 
 #: guides/templates/guides/book_guide.html:11
 msgid "Back to guide profile"
-msgstr ""
+msgstr "ກັບໄປໂປຣໄຟລ໌ໄກ້ນໍາທ່ຽວ"
 
 #: guides/templates/guides/book_guide.html:16
 msgid "Tell us when and where to meet you."
-msgstr ""
+msgstr "ບອກພວກເຮົາວ່າຈະພົບກັນເວລາໃດ ແລະ ບ່ອນໃດ."
 
 #: guides/templates/guides/book_guide.html:36
 msgid "1 Hour"
-msgstr ""
+msgstr "1 ຊົ່ວໂມງ"
 
 #: guides/templates/guides/book_guide.html:39
 msgid "Half Day (4 Hours)"
-msgstr ""
+msgstr "ເຄິ່ງມື້ (4 ຊົ່ວໂມງ)"
 
 #: guides/templates/guides/book_guide.html:42
-#, fuzzy
-#| msgid "Tours"
 msgid "7 Hours"
-msgstr "ລາຍການທ່ອງທ່ຽວ"
+msgstr "7 ຊົ່ວໂມງ"
 
 #: guides/templates/guides/book_guide.html:43
 msgid "Full Day (8 Hours)"
-msgstr ""
+msgstr "ເຕັມມື້ (8 ຊົ່ວໂມງ)"
 
 #: guides/templates/guides/book_guide.html:50
 msgid "Where should the guide meet you?"
-msgstr ""
+msgstr "ໄກ້ນໍາທ່ຽວຄວນພົບທ່ານຢູ່ໃສ?"
 
 #: guides/templates/guides/book_guide.html:53
 msgid "e.g., Vang Vieng Central Lodge, or near the bus station"
-msgstr ""
+msgstr "ເຊັ່ນ: Vang Vieng Central Lodge, ຫຼື ໃກ້ສະຖານີລົດເມ"
 
 #: guides/templates/guides/book_guide.html:55
-msgid ""
-"Your guide will meet you here. You can share a live location via WhatsApp "
-"later."
-msgstr ""
+msgid "Your guide will meet you here. You can share a live location via WhatsApp later."
+msgstr "ໄກ້ນໍາທ່ຽວຈະພົບທ່ານຢູ່ນີ້. ທ່ານສາມາດແບ່ງປັນສະຖານທີ່ແບບສົດຜ່ານ WhatsApp ໃນພາຍຫຼັງ."
 
 #: guides/templates/guides/book_guide.html:63
 msgid "Please provide at least one way for the guide to contact you."
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ຊ່ອງທາງຢ່າງໜ້ອຍ 1 ຊ່ອງທາງ ເພື່ອໃຫ້ໄກ້ນໍາທ່ຽວຕິດຕໍ່ທ່ານ."
 
 #: guides/templates/guides/book_guide.html:93
 msgid "at the meeting point."
-msgstr ""
+msgstr "ທີ່ຈຸດນັດພົບ."
 
 #: guides/templates/guides/book_guide.html:99
 msgid "Confirm Booking (Pay Cash at Meeting Point)"
-msgstr ""
+msgstr "ຢືນຢັນການຈອງ (ຈ່າຍເງິນສົດທີ່ຈຸດນັດພົບ)"
 
-#: guides/templates/guides/guide_list.html:4 templates/backup.html:89
-#: templates/backup.html:231 templates/backup.html:303 templates/base.html:85
-#: templates/base.html:219 templates/base.html:289
+#: guides/templates/guides/guide_list.html:4 templates/base.html:85
+#: templates/base.html:222 templates/base.html:292
 msgid "Local Guides"
 msgstr "ໄກ້ນໍາທ່ຽວທ້ອງຖິ່ນ"
 
 #: guides/templates/guides/guide_list.html:16
 msgid "Hire a Local Expert"
-msgstr ""
+msgstr "ຈ້າງຜູ້ຊ່ຽວຊານທ້ອງຖິ່ນ"
 
 #: guides/templates/guides/guide_list.html:17
-msgid ""
-"Rent your own motorbike but want someone to show you the hidden waterfalls, "
-"safe routes, and best local food? Our certified local guides have you "
-"covered."
-msgstr ""
+msgid "Rent your own motorbike but want someone to show you the hidden waterfalls, safe routes, and best local food? Our certified local guides have you covered."
+msgstr "ເຊົ່າລົດຈັກຂອງທ່ານເອງແຕ່ຕ້ອງການໃຫ້ຄົນພາໄປຊົມນໍ້າຕົກຕາດທີ່ລີ້ລັບ, ເສັ້ນທາງທີ່ປອດໄພ, ແລະ ອາຫານທ້ອງຖິ່ນທີ່ດີທີ່ສຸດບໍ? ໄກ້ນໍາທ່ຽວທ້ອງຖິ່ນທີ່ມີໃບຢັ້ງຢືນຂອງພວກເຮົາພ້ອມດູແລທ່ານ."
 
 #: guides/templates/guides/guide_list.html:23
-#, fuzzy
-#| msgid "Local Guides"
 msgid "Available Guides"
-msgstr "ໄກ້ນໍາທ່ຽວທ້ອງຖິ່ນ"
+msgstr "ໄກ້ນໍາທ່ຽວທີ່ພ້ອມໃຫ້ບໍລິການ"
 
 #: guides/templates/guides/guide_list.html:57
 msgid "Lao"
-msgstr ""
+msgstr "ລາວ"
 
 #: guides/templates/guides/guide_list.html:60
 msgid "English"
-msgstr ""
+msgstr "ອັງກິດ"
 
 #: guides/templates/guides/guide_list.html:65
 msgid "View Profile & Book"
-msgstr ""
+msgstr "ເບິ່ງໂປຣໄຟລ໌ & ຈອງ"
 
 #: guides/templates/guides/guide_list.html:73
 msgid "No guides available at the moment."
-msgstr ""
+msgstr "ບໍ່ມີໄກ້ນໍາທ່ຽວໃຫ້ບໍລິການໃນຂະນະນີ້."
+
+#: inquiry/models.py:7
+msgid "General Question"
+msgstr "ຄຳຖາມທົ່ວໄປ"
+
+#: inquiry/models.py:8
+msgid "Booking Inquiry"
+msgstr "ສອບຖາມການຈອງ"
+
+#: inquiry/models.py:9
+msgid "Guesthouse"
+msgstr "ເຮືອນພັກ"
+
+#: inquiry/models.py:11
+msgid "Motorbike Rental"
+msgstr "ເຊົ່າລົດຈັກ"
+
+#: inquiry/models.py:12
+msgid "Buggy Car Rental"
+msgstr "ເຊົ່າລົດບັກກີ້"
+
+#: inquiry/models.py:13
+msgid "Local Guide"
+msgstr "ໄກ້ນໍາທ່ຽວທ້ອງຖິ່ນ"
+
+#: inquiry/models.py:14
+msgid "Technical Support"
+msgstr "ຝ່າຍຊ່ວຍເຫຼືອດ້ານເຕັກນິກ"
+
+#: inquiry/models.py:15
+msgid "Other"
+msgstr "ອື່ນໆ"
+
+#: inquiry/models.py:19
+msgid "New"
+msgstr "ໃໝ່"
+
+#: inquiry/models.py:20
+msgid "Read"
+msgstr "ອ່ານແລ້ວ"
+
+#: inquiry/models.py:21
+msgid "Responded"
+msgstr "ຕອບກັບແລ້ວ"
+
+#: inquiry/models.py:22
+msgid "Closed"
+msgstr "ປິດ"
+
+#: inquiry/models.py:25
+msgid "Name"
+msgstr "ຊື່"
+
+#: inquiry/models.py:26
+msgid "Email"
+msgstr "ອີເມວ"
+
+#: inquiry/models.py:27
+msgid "Phone"
+msgstr "ເບີໂທລະສັບ"
+
+#: inquiry/models.py:28 inquiry/templates/inquiry/inquiry.html:61
+msgid "Subject"
+msgstr "ຫົວຂໍ້"
+
+#: inquiry/models.py:29
+msgid "Message"
+msgstr "ຂໍ້ຄວາມ"
+
+#: inquiry/models.py:30
+msgid "Status"
+msgstr "ສະຖານະ"
+
+#: inquiry/models.py:33
+msgid "Customer Email Sent"
+msgstr "ສົ່ງອີເມວຫາລູກຄ້າແລ້ວ"
+
+#: inquiry/models.py:34
+msgid "Admin Email Sent"
+msgstr "ສົ່ງອີເມວຫາຜູ້ດູແລລະບົບແລ້ວ"
+
+#: inquiry/models.py:36
+msgid "Created At"
+msgstr "ສ້າງເມື່ອ"
+
+#: inquiry/models.py:37
+msgid "Updated At"
+msgstr "ອັບເດດເມື່ອ"
+
+#: inquiry/models.py:41
+msgid "Inquiry"
+msgstr "ການສອບຖາມ"
+
+#: inquiry/models.py:42
+msgid "Inquiries"
+msgstr "ການສອບຖາມທັງໝົດ"
+
+#: inquiry/templates/inquiry/inquiry.html:10
+msgid "Get in Touch"
+msgstr "ຕິດຕໍ່ພວກເຮົາ"
+
+#: inquiry/templates/inquiry/inquiry.html:12
+msgid "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours."
+msgstr "ມີຄໍາຖາມບໍ? ພວກເຮົາຢາກໄດ້ຍິນຄວາມຄິດເຫັນຂອງທ່ານ. ສົ່ງຂໍ້ຄວາມຫາພວກເຮົາໄດ້ ແລະ ພວກເຮົາຈະຕອບກັບພາຍໃນ 24 ຊົ່ວໂມງ"
+
+#: inquiry/templates/inquiry/inquiry.html:33
+msgid "Your Name"
+msgstr "ຊື່ຂອງທ່ານ"
+
+#: inquiry/templates/inquiry/inquiry.html:70
+msgid "Your Message"
+msgstr "ຂໍ້ຄວາມຂອງທ່ານ"
+
+#: inquiry/templates/inquiry/inquiry.html:80
+msgid "Send Message"
+msgstr "ສົ່ງຂໍ້ຄວາມ"
+
+#: inquiry/templates/inquiry/inquiry.html:84
+msgid "We respect your privacy. Your information will never be shared."
+msgstr "ພວກເຮົາເຄົາລົບຄວາມເປັນສ່ວນຕົວຂອງທ່ານ"
+
+#: inquiry/templates/inquiry/inquiry_success.html:10
+msgid "Message Sent Successfully!"
+msgstr "ສົ່ງຂໍ້ຄວາມສຳເລັດແລ້ວ!"
+
+#: inquiry/templates/inquiry/inquiry_success.html:12
+msgid "Thank you for reaching out. We've received your message and sent a confirmation to your email."
+msgstr "ຂອບໃຈທີ່ຕິດຕໍ່ພວກເຮົາ. ພວກເຮົາໄດ້ຮັບຂໍ້ຄວາມຂອງທ່ານແລ້ວ ແລະ ໄດ້ສົ່ງການຢືນຢັນໄປຍັງອີເມວຂອງທ່ານ."
+
+#: inquiry/templates/inquiry/inquiry_success.html:15
+msgid "Our team will review your inquiry and get back to you within 24 hours."
+msgstr "ທີມງານຂອງພວກເຮົາຈະກວດສອບການສອບຖາມຂອງທ່ານ ແລະ ຕອບກັບພາຍໃນ 24 ຊົ່ວໂມງ."
+
+#: inquiry/templates/inquiry/inquiry_success.html:18
+msgid "Return to Homepage"
+msgstr "ກັບໄປໜ້າຫຼັກ"
 
 #: motorbike/templates/motorbike/book_motorbike.html:5
 #: motorbike/templates/motorbike/book_motorbike.html:15
 msgid "Rent"
-msgstr ""
+msgstr "ເຊົ່າ"
 
 #: motorbike/templates/motorbike/book_motorbike.html:27
 msgid "Pickup Date"
-msgstr ""
+msgstr "ວັນທີຮັບລົດ"
 
 #: motorbike/templates/motorbike/book_motorbike.html:32
 msgid "Return Date"
-msgstr ""
+msgstr "ວັນທີຄືນລົດ"
 
 #: motorbike/templates/motorbike/book_motorbike.html:84
-msgid ""
-"at pickup. The deposit will be fully refunded when you return the motorbike."
-msgstr ""
+msgid "at pickup. The deposit will be fully refunded when you return the motorbike."
+msgstr "ທີ່ຈຸດຮັບລົດ. ຄ່າມັດຈໍາຈະຖືກສົ່ງຄືນເຕັມຈໍານວນເວລາເອົາລົດຈັກກັບມາສົ່ງ"
 
 #: motorbike/templates/motorbike/book_motorbike.html:90
 msgid "Confirm Rental (Pay Cash on Pickup)"
-msgstr ""
+msgstr "ຢືນຢັນການເຊົ່າ (ຈ່າຍເງິນສົດຕອນຮັບລົດ)"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:4
-#, fuzzy
-#| msgid "Motorbike Rentals"
 msgid "Cancel Motorbike Rental"
-msgstr "ລົດຈັກໃຫ້ເຊົ່າ"
+msgstr "ຍົກເລີກການເຊົ່າລົດຈັກ"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:15
 msgid "Cancel Rental?"
-msgstr ""
+msgstr "ຍົກເລີກການເຊົ່າບໍ?"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
 msgid "Are you sure you want to cancel your rental of"
-msgstr ""
+msgstr "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການຍົກເລີກການເຊົ່າ"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
 msgid "to"
-msgstr ""
+msgstr "ຫາ"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:18
-msgid ""
-"This action cannot be undone, and the motorbike will be released for others "
-"to book."
-msgstr ""
+msgid "This action cannot be undone, and the motorbike will be released for others to book."
+msgstr "ການກະທໍານີ້ບໍ່ສາມາດຍ້ອນກັບໄດ້, ແລະ ລົດຈັກຈະຖືກປ່ອຍໃຫ້ຄົນອື່ນຈອງ."
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
 msgid "Keep Rental"
-msgstr ""
+msgstr "ເກັບການເຊົ່າໄວ້"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:27
 msgid "Yes, Cancel Rental"
-msgstr ""
+msgstr "ແມ່ນແລ້ວ, ຍົກເລີກການເຊົ່າ"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:14
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "Back to Motorbikes"
-msgstr "ລົດຈັກ"
+msgstr "ກັບໄປໜ້າລົດຈັກ"
 
-#: motorbike/templates/motorbike/motorbike_detail.html:72
-#, fuzzy
-#| msgid "Motorbikes"
+#: motorbike/templates/motorbike/motorbike_detail.html:73
 msgid "About this Motorbike"
-msgstr "ລົດຈັກ"
+msgstr "ກ່ຽວກັບລົດຈັກ"
 
-#: motorbike/templates/motorbike/motorbike_detail.html:82
+#: motorbike/templates/motorbike/motorbike_detail.html:89
 msgid "Daily Rate"
-msgstr ""
+msgstr "ອັດຕາລາຍວັນ"
 
-#: motorbike/templates/motorbike/motorbike_detail.html:86
+#: motorbike/templates/motorbike/motorbike_detail.html:93
 msgid "Deposit Required"
-msgstr ""
+msgstr "ຕ້ອງການເງິນມັດຈໍາ"
 
-#: motorbike/templates/motorbike/motorbike_detail.html:158
-#, fuzzy
-#| msgid "Motorbikes"
+#: motorbike/templates/motorbike/motorbike_detail.html:165
 msgid "Book This Motorbike"
-msgstr "ລົດຈັກ"
+msgstr "ຈອງລົດຈັກຄັນນີ້"
 
 #: motorbike/templates/motorbike/motorbike_list.html:5
-#, fuzzy
-#| msgid "Motorbike Rentals"
 msgid "Motorbikes for Rent"
 msgstr "ລົດຈັກໃຫ້ເຊົ່າ"
 
 #: motorbike/templates/motorbike/motorbike_list.html:17
-#, fuzzy
-#| msgid "Motorbikes"
 msgid "Rent a Motorbike"
-msgstr "ລົດຈັກ"
+msgstr "ເຊົ່າລົດຈັກ"
 
 #: motorbike/templates/motorbike/motorbike_list.html:18
-msgid ""
-"Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
-msgstr ""
+msgid "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
+msgstr "ສໍາຫຼວດວັງວຽງຕາມຈັງຫວະຂອງທ່ານເອງ. ລົດຈັກທີ່ເຊື່ອຖືໄດ້ສໍາລັບທຸກການຜະຈົນໄພ."
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
 msgid "Rental Type:"
-msgstr ""
+msgstr "ປະເພດການເຊົ່າ:"
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
 msgid "Daily"
-msgstr ""
+msgstr "ລາຍວັນ"
 
 #: motorbike/templates/motorbike/motorbike_list.html:120
 msgid "No motorbikes available at the moment."
-msgstr ""
+msgstr "ບໍ່ມີລົດຈັກໃຫ້ບໍລິການໃນຂະນະນີ້."
 
-#: templates/backup.html:81 templates/backup.html:151 templates/backup.html:223
-#: templates/backup.html:301
-msgid "Places to Stay"
-msgstr "ສະຖານທີ່ພັກເຊົາ"
-
-#: templates/backup.html:85 templates/backup.html:227 templates/base.html:81
-#: templates/base.html:215
+#: templates/base.html:81 templates/base.html:218
 msgid "Tours"
 msgstr "ລາຍການທ່ອງທ່ຽວ"
 
-#: templates/backup.html:93 templates/backup.html:235 templates/base.html:89
-#: templates/base.html:223
+#: templates/base.html:89 templates/base.html:226
 msgid "Motorbikes"
 msgstr "ລົດຈັກ"
 
-#: templates/backup.html:97 templates/backup.html:239 templates/base.html:93
-#: templates/base.html:227
+#: templates/base.html:93 templates/base.html:230
 msgid "Buggy Cars"
 msgstr "ລົດບັກກີ"
 
-#: templates/backup.html:147 templates/backup.html:246 templates/base.html:143
-#: templates/base.html:234
-msgid "My Dashboard"
-msgstr "ຫນ້າຄວບຄຸມຂອງຂ້ອຍ"
+#: templates/base.html:96
+msgid "Contact"
+msgstr "ຕິດຕໍ່ພວກເຮົາ"
 
-#: templates/backup.html:155 templates/base.html:147
+#: templates/base.html:146 templates/base.html:237
+msgid "My Dashboard"
+msgstr "ໜ້າຄວບຄຸມຂອງຂ້ອຍ"
+
+#: templates/base.html:150
 msgid "Tour Adventures"
 msgstr "ການທ່ອງທ່ຽວແບບຜະຈົນໄພ"
 
-#: templates/backup.html:159 templates/base.html:151
+#: templates/base.html:154
 msgid "Guide Bookings"
 msgstr "ການຈອງຄົນນໍາທ່ຽວ"
 
-#: templates/backup.html:163 templates/backup.html:304 templates/base.html:155
-#: templates/base.html:290
+#: templates/base.html:158 templates/base.html:293
 msgid "Motorbike Rentals"
 msgstr "ລົດຈັກໃຫ້ເຊົ່າ"
 
-#: templates/backup.html:167 templates/backup.html:305 templates/base.html:159
-#: templates/base.html:291
+#: templates/base.html:162 templates/base.html:294
 msgid "Buggy Car Rentals"
 msgstr "ລົດຍົນບັກກີໃຫ້ເຊົ່າ"
 
-#: templates/backup.html:175 templates/backup.html:252 templates/base.html:167
-#: templates/base.html:240
+#: templates/base.html:170 templates/base.html:243
 msgid "Admin Dashboard"
-msgstr "ຫນ້າຄວບຄຸມແອັດມິນ"
+msgstr "ໜ້າຄວບຄຸມແອັດມິນ"
 
-#: templates/backup.html:182 templates/base.html:174
+#: templates/base.html:177
 msgid "Logout"
 msgstr "ອອກຈາກລະບົບ"
 
-#: templates/backup.html:187 templates/base.html:179
+#: templates/base.html:182
 msgid "Login"
 msgstr "ເຂົ້າສູ່ລະບົບ"
 
-#: templates/backup.html:188 templates/backup.html:268 templates/base.html:180
-#: templates/base.html:255
+#: templates/base.html:183 templates/base.html:258
 msgid "Sign Up"
 msgstr "ລົງທະບຽນນໍາໃຊ້"
 
-#: templates/backup.html:204 templates/base.html:196
+#: templates/base.html:199
 msgid "Language"
-msgstr ""
+msgstr "ພາສາ"
 
-#: templates/backup.html:256
-msgid "My Guesthouse Stays"
-msgstr "ເຮືອນພັກທີ່ຂ້ອຍພັກເຊົາ"
-
-#: templates/backup.html:257 templates/base.html:244
+#: templates/base.html:247
 msgid "My Tour Adventures"
 msgstr "ການທ່ອງທ່ຽວແບບຜະຈົນໄພຂອງຂ້ອຍ"
 
-#: templates/backup.html:258 templates/base.html:245
+#: templates/base.html:248
 msgid "My Guide Bookings"
 msgstr "ຄົນນໍາທ່ຽວຂອງຂ້ອຍ"
 
-#: templates/backup.html:259 templates/base.html:246
+#: templates/base.html:249
 msgid "My Motorbike Rentals"
 msgstr "ການເຊົ່າລົດຈັກຂອງຂ້ອຍ"
 
-#: templates/backup.html:260 templates/base.html:247
+#: templates/base.html:250
 msgid "My Buggy Car Rentals"
 msgstr "ການເຊົ່າລົດບັກກີຂອງຂ້ອຍ"
 
-#: templates/backup.html:264 templates/base.html:251
+#: templates/base.html:254
 msgid "Log Out"
 msgstr "ອອກຈາກລະບົບ"
 
-#: templates/backup.html:267 templates/base.html:254
+#: templates/base.html:257
 msgid "Log In"
 msgstr "ເຂົ້າສູ່ລະບົບ"
 
-#: templates/backup.html:295 templates/backup.html:317 templates/base.html:282
-#: templates/base.html:303
-msgid "Vang Vieng Stay"
-msgstr "ວັງວຽງສະເຕ"
+#: templates/base.html:286
+msgid "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures."
+msgstr "ແພລດຟອມທີ່ເຊື່ອຖືໄດ້ສໍາລັບທ່ານໃນການນໍາໃຊ້ບໍລິການເຮືອນພັກທ້ອງຖິ່ນ, ການທ່ອງທ່ຽວທີ່ໜ້າຈົດຈໍາ, ພະນັກງານນໍາທ່ຽວຂັ້ນທ້ອງຖິ່ນທີ່ຊໍານິຊໍານານ, ລົດຈັກ ແລະ ລົດຍົນບັກກີ ສໍາລັບທ່ຽວຜະຈົນໄພ ໃຫ້ເຊົ່າ"
 
-#: templates/backup.html:296 templates/base.html:283
-msgid ""
-"Your trusted platform for local guesthouses, unforgettable tours, expert "
-"local guides, motorbike rentals, and buggy car adventures."
-msgstr ""
-"ແພລດຟອມທີ່ເຊື່ອຖືໄດ້ສໍາລັບທ່ານໃນການນໍາໃຊ້ບໍລິການເຮືອນພັກທ້ອງຖິ່ນ, ການທ່ອງທ່ຽວທີ່ຫນ້າຈົດຈໍາ, "
-"ພະນັກງານນໍາທ່ຽວຂັ້ນທ້ອງຖິ່ນທີ່ຊໍານິຊໍານານ, ລົດຈັກ ແລະ ລົດຍົນບັກກີ ສໍາລັບທ່ຽວຜະຈົນໄພ ໃຫ້ເຊົ່າ"
-
-#: templates/backup.html:299 templates/base.html:286
+#: templates/base.html:289
 msgid "Explore"
 msgstr "ສໍາຫຼວດ"
 
-#: templates/backup.html:302 templates/base.html:288
-#: tours/templates/tours/tour_list.html:5
+#: templates/base.html:291 tours/templates/tours/tour_list.html:5
 msgid "Tours & Activities"
-msgstr "ລາຍການທ່ອງທ່ຽວ & ກີດຈະກໍາຕ່າງຯ"
+msgstr "ລາຍການທ່ອງທ່ຽວ & ກິດຈະກໍາຕ່າງໆ"
 
-#: templates/backup.html:309 templates/base.html:295
+#: templates/base.html:298
 msgid "Support"
-msgstr "ຊວ່ຍເຫລືອ"
+msgstr "ຊ່ວຍເຫຼືອ"
 
-#: templates/backup.html:311 templates/base.html:297
+#: templates/base.html:300
 msgid "Contact Us"
 msgstr "ຕິດຕໍ່ພວກເຮົາ"
 
-#: templates/backup.html:317 templates/base.html:303
+#: templates/base.html:306
 msgid "All rights reserved."
 msgstr "ສະຫງວນລິຂະສິດແຕ່ພຽງຜູ້ດຽວ"
 
-#: templates/backup.html:384 templates/base.html:370
+#: templates/base.html:373
 msgid "Vang Vieng Stay Assistant"
-msgstr "ຜູ້ຊວ່ຍ ວັງວຽງສະເຕ"
+msgstr "ຜູ້ຊ່ວຍ ວັງວຽງສະເຕ"
 
-#: templates/backup.html:385 templates/base.html:371
+#: templates/base.html:374
 msgid "AI-powered help • Online"
-msgstr "ການຊວ່ຍເຫລືອທີ່ຂັບເຄື່ອນດວ້ຍເອໄອ • ອອນລາຍ"
+msgstr "ການຊ່ວຍເຫຼືອທີ່ຂັບເຄື່ອນດ້ວຍເອໄອ • ອອນລາຍ"
 
-#: templates/backup.html:404
-#, fuzzy
-#| msgid ""
-#| "Hi! 👋 I'm here to help with questions about bookings, policies and tours "
-#| "in Vang Vieng. What can I help you with?"
-msgid ""
-"Hi! 👋 I'm here to help with questions about bookings, policies, tours, and "
-"accommodations in Vang Vieng. What can I help you with?"
-msgstr ""
-"ສະບາຍດີ! 👋 ຂ້ອຄືຜູ້ຊວ່ຍຕອບຄໍາຖາມກ່ຽວກັບການຈອງ, ນະໂຍບາຍຕ່າງຯ, ການທ່ອງທ່ຽວ ແລະ ທີ່ພັກ "
-"ໃນວັງວຽງ, ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍບໍ?"
+#: templates/base.html:393
+msgid "Hi! 👋 I'm here to help with questions about bookings, policies and tours in Vang Vieng. What can I help you with?"
+msgstr "ສະບາຍດີ! 👋 ຂ້ອຍຄືຜູ້ຊ່ວຍຕອບຄໍາຖາມກ່ຽວກັບການຈອງ, ນະໂຍບາຍຕ່າງໆ, ການທ່ອງທ່ຽວ ແລະ ທີ່ພັກ ໃນວັງວຽງ, ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍບໍ?"
 
-#: templates/backup.html:409 templates/base.html:395
+#: templates/base.html:398
 msgid "Cancellation policy"
-msgstr "ນະໂຍບາຍການຍົກເລີກຫລັງຈາກຈອງແລ້ວ"
+msgstr "ນະໂຍບາຍການຍົກເລີກຫຼັງຈາກຈອງແລ້ວ"
 
-#: templates/backup.html:410 templates/base.html:397
+#: templates/base.html:400
 msgid "Check-in times"
 msgstr "ເວລາລົງທະບຽນເຂົ້າພັກ"
 
-#: templates/backup.html:411 templates/base.html:399
+#: templates/base.html:402
 msgid "Tour essentials"
 msgstr "ສິ່ງຈໍາເປັນສໍາລັບການທ່ອງທ່ຽວ"
 
-#: templates/backup.html:418 templates/base.html:406
+#: templates/base.html:409
 msgid "Type your question..."
 msgstr "ພິມຄໍາຖາມຂອງທ່ານທີ່ນີ້..."
 
-#: templates/backup.html:425 templates/base.html:413
+#: templates/base.html:416
 msgid "Powered by AI • Responses based on official policies"
-msgstr "ຂັບເຄື່ອນດວ້ຍເອໄອ • ທຸກຄໍາຕອບແມ່ນຢູ່ບົນພື້ນຖານນະໂຍບາຍຕ່າງຯທີ່ຖືກກໍານົດໄວ້"
-
-#: templates/base.html:390
-msgid ""
-"Hi! 👋 I'm here to help with questions about bookings, policies and tours in "
-"Vang Vieng. What can I help you with?"
-msgstr ""
-"ສະບາຍດີ! 👋 ຂ້ອຄືຜູ້ຊວ່ຍຕອບຄໍາຖາມກ່ຽວກັບການຈອງ, ນະໂຍບາຍຕ່າງຯ, ການທ່ອງທ່ຽວ ແລະ ທີ່ພັກ "
-"ໃນວັງວຽງ, ມີຫຍັງໃຫ້ຂ້ອຍຊ່ວຍບໍ?"
+msgstr "ຂັບເຄື່ອນດ້ວຍເອໄອ • ທຸກຄໍາຕອບແມ່ນຢູ່ບົນພື້ນຖານນະໂຍບາຍຕ່າງໆທີ່ຖືກກໍານົດໄວ້"
 
 #: tours/templates/tours/book_tour.html:15
 msgid "Book Your Tour"
-msgstr ""
+msgstr "ຈອງທົວຂອງທ່ານ"
 
 #: tours/templates/tours/book_tour.html:18
 #: tours/templates/tours/tour_list.html:177
 msgid "Departs"
-msgstr ""
+msgstr "ອອກເດີນທາງ"
 
 #: tours/templates/tours/book_tour.html:26
 #: tours/templates/tours/tour_list.html:50
 msgid "Tour Date"
-msgstr ""
+msgstr "ວັນທີທົວ"
 
 #: tours/templates/tours/book_tour.html:33
 msgid "Number of People"
-msgstr ""
+msgstr "ຈໍານວນຄົນ"
 
 #: tours/templates/tours/book_tour.html:35
 msgid "Maximum"
-msgstr ""
+msgstr "ສູງສຸດ"
 
 #: tours/templates/tours/book_tour.html:35
 msgid "people per tour"
-msgstr ""
+msgstr "ຄົນຕໍ່ທົວ"
 
 #: tours/templates/tours/book_tour.html:43
 msgid "Pickup Arrangements"
-msgstr ""
+msgstr "ການຈັດການຮັບສົ່ງ"
 
 #: tours/templates/tours/book_tour.html:48
 msgid "How will you get to the tour?"
-msgstr ""
+msgstr "ທ່ານຈະໄປທົວແນວໃດ?"
 
 #: tours/templates/tours/book_tour.html:65
 msgid "Your Pickup Location"
-msgstr ""
+msgstr "ສະຖານທີ່ຮັບທ່ານ"
 
 #: tours/templates/tours/book_tour.html:68
 msgid "Please include your guesthouse name and any helpful landmarks."
-msgstr ""
+msgstr "ກະລຸນາລວມຊື່ເຮືອນພັກຂອງທ່ານ ແລະ ສະຖານທີ່ສໍາຄັນໃດໆທີ່ຊ່ວຍໄດ້."
 
 #: tours/templates/tours/book_tour.html:77
 msgid "Please provide at least one way for the tour operator to contact you."
-msgstr ""
+msgstr "ກະລຸນາໃຫ້ຊ່ອງທາງຢ່າງໜ້ອຍ 1 ຊ່ອງທາງ ເພື່ອໃຫ້ຜູ້ດໍາເນີນການທົວຕິດຕໍ່ທ່ານ."
 
 #: tours/templates/tours/book_tour.html:109
 msgid "based on the official daily exchange rate on the day of your tour."
-msgstr ""
+msgstr "ອີງຕາມອັດຕາແລກປ່ຽນປະຈໍາວັນທາງການໃນວັນທີທົວຂອງທ່ານ."
 
 #: tours/templates/tours/tour_detail.html:15
 msgid "Back to all tours"
-msgstr ""
+msgstr "ກັບໄປທົວທັງໝົດ"
 
 #: tours/templates/tours/tour_detail.html:52
 msgid "Open Tour Office in Google Maps"
-msgstr ""
+msgstr "ເປີດຫ້ອງການທົວໃນ Google Maps"
 
 #: tours/templates/tours/tour_detail.html:59
 msgid "Exact office map location will be provided upon booking confirmation."
-msgstr ""
+msgstr "ສະຖານທີ່ແຜນທີ່ຫ້ອງການທີ່ແນ່ນອນຈະຖືກໃຫ້ເມື່ອຢືນຢັນການຈອງ."
 
 #: tours/templates/tours/tour_detail.html:75
 msgid "Departs daily at"
-msgstr ""
+msgstr "ອອກເດີນທາງທຸກມື້ເວລາ"
 
 #: tours/templates/tours/tour_detail.html:81
 #: tours/templates/tours/tour_list.html:70
 #: tours/templates/tours/tour_list.html:183
 msgid "Max"
-msgstr ""
+msgstr "ສູງສຸດ"
 
 #: tours/templates/tours/tour_detail.html:81
 msgid "people"
-msgstr ""
+msgstr "ຄົນ"
 
-#: tours/templates/tours/tour_detail.html:98
+#: tours/templates/tours/tour_detail.html:102
 msgid "Tour Availability (Next 30 Days)"
-msgstr ""
+msgstr "ຄວາມພ້ອມຂອງທົວ (30 ມື້ຕໍ່ໜ້າ)"
 
-#: tours/templates/tours/tour_detail.html:103
+#: tours/templates/tours/tour_detail.html:107
 msgid "spots available"
-msgstr ""
+msgstr "ບ່ອນນັ່ງຫວ່າງ"
 
-#: tours/templates/tours/tour_detail.html:108
+#: tours/templates/tours/tour_detail.html:112
 msgid "left"
-msgstr ""
+msgstr "ເຫຼືອ"
 
-#: tours/templates/tours/tour_detail.html:110
+#: tours/templates/tours/tour_detail.html:114
 msgid "Full"
-msgstr ""
+msgstr "ເຕັມ"
 
-#: tours/templates/tours/tour_detail.html:119
+#: tours/templates/tours/tour_detail.html:123
 msgid "Book This Tour"
-msgstr ""
+msgstr "ຈອງທົວນີ້"
 
-#: tours/templates/tours/tour_detail.html:127
-#, fuzzy
-#| msgid "Guests"
+#: tours/templates/tours/tour_detail.html:131
 msgid "Guest Reviews"
-msgstr "ຜູ້ພັກເຊົາ"
+msgstr "ການທົບທວນຈາກຜູ້ພັກ"
 
-#: tours/templates/tours/tour_detail.html:165
+#: tours/templates/tours/tour_detail.html:169
 msgid "No reviews yet. Be the first to review this tour!"
-msgstr ""
+msgstr "ຍັງບໍ່ມີການທົບທວນ. ເປັນຄົນທໍາອິດທີ່ທົບທວນທົວນີ້!"
 
 #: tours/templates/tours/tour_list.html:31
 msgid "Discover Unforgettable Tours"
@@ -1499,219 +1676,57 @@ msgstr "ສຳຫຼວດວັງວຽງໄປກັບຜູ້ຊ່ຽວ
 
 #: tours/templates/tours/tour_list.html:42
 #: tours/templates/tours/tour_list.html:95
-#, fuzzy
-#| msgid "Search"
 msgid "Search Tours"
-msgstr "ຄົ້ນຫາ"
+msgstr "ຄົ້ນຫາທົວ"
 
 #: tours/templates/tours/tour_list.html:45
 msgid "e.g., Kayaking, Cave, Hot Air Balloon..."
-msgstr ""
+msgstr "ເຊັ່ນ: ພາຍເຮືອ, ຖໍ້າ, ບານລົມຮ້ອນ..."
 
 #: tours/templates/tours/tour_list.html:61
 msgid "Min Price"
-msgstr ""
+msgstr "ລາຄາຕໍ່າສຸດ"
 
 #: tours/templates/tours/tour_list.html:63
 msgid "Min"
-msgstr ""
+msgstr "ຕໍ່າສຸດ"
 
 #: tours/templates/tours/tour_list.html:68
 msgid "Max Price"
-msgstr ""
+msgstr "ລາຄາສູງສຸດ"
 
 #: tours/templates/tours/tour_list.html:78
 msgid "Any"
-msgstr ""
+msgstr "ໃດກໍ່ໄດ້"
 
 #: tours/templates/tours/tour_list.html:109
 msgid "Found"
-msgstr ""
+msgstr "ພົບ"
 
 #: tours/templates/tours/tour_list.html:111
 msgid "No Results"
-msgstr ""
+msgstr "ບໍ່ມີຜົນລັບ"
 
 #: tours/templates/tours/tour_list.html:201
 msgid "View Office on Map"
-msgstr ""
+msgstr "ເບິ່ງຫ້ອງການເທິງແຜນທີ່"
 
 #: tours/templates/tours/tour_list.html:206
 msgid "Map pending"
-msgstr ""
+msgstr "ແຜນທີ່ກໍາລັງດໍາເນີນການ"
 
 #: tours/templates/tours/tour_list.html:213
 msgid "View Details & Book"
-msgstr ""
+msgstr "ເບິ່ງລາຍລະອຽດ & ຈອງ"
 
 #: tours/templates/tours/tour_list.html:224
 msgid "No tours found"
-msgstr ""
+msgstr "ບໍ່ພົບທົວ"
 
 #: tours/templates/tours/tour_list.html:225
 msgid "Try adjusting your search filters or dates"
-msgstr ""
+msgstr "ລອງປັບຕົວກອງການຄົ້ນຫາ ຫຼື ວັນທີ"
 
 #: tours/templates/tours/tour_list.html:227
 msgid "Clear All Filters"
-msgstr ""
-
-#~ msgid "Switch"
-#~ msgstr "ສັບປ່ຽນ"
-
-#: templates/terms.html:15
-
-msgid "Welcome to"
-msgstr "ຍິນດີຕ້ອນຮັບສູ່"
-
-msgid "Vang Vieng Stay."
-msgstr "Vang Vieng Stay."
-
-msgid "By accessing our website and using our booking services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully."
-msgstr "ໂດຍການເຂົ້າເຖິງເວັບໄຊທ໌ຂອງພວກເຮົາ ແລະ ໃຊ້ບໍລິການຈອງຫ້ອງພັກຂອງພວກເຮົາ, ທ່ານຕົກລົງທີ່ຈະປະຕິບັດຕາມ ແລະ ຜູກມັດຕາມຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂຕໍ່ໄປນີ້. ກະລຸນາອ່ານຢ່າງລະອຽດ."
-
-msgid "1. Platform Role"
-msgstr "1. ພາລະບົດບາດຂອງແພລດຟອມ"
-
-
-
-msgid "Vang Vieng Stay acts solely as an intermediary booking platform connecting travelers with independent local business owners in Vang Vieng, Laos. We facilitate bookings for"
-msgstr "Vang Vieng Stay ເຮັດໜ້າທີ່ເປັນແພລດຟອມການຈອງ, ເຊື່ອມຕໍ່ນັກທ່ອງທ່ຽວກັບເຈົ້າຂອງທຸລະກິດເອກະລາດໃນທ້ອງຖິ່ນໃນວັງວຽງ, ລາວ. ພວກເຮົາອຳນວຍຄວາມສະດວກໃນການຈອງທີ່ພັກສຳລັບ"
-
-msgid "Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
-msgstr "ເຮືອນພັກ, ທົວ, ຜູ້ນຳທ່ຽວທ້ອງຖິ່ນ, ການເຊົ່າລົດຈັກ, ແລະ ການເຊົ່າລົດ Buggy"
-
-msgid "We do not own, manage, or operate these services. The actual service provider"
-msgstr "ພວກເຮົາບໍ່ໄດ້ເປັນເຈົ້າຂອງ, ຄຸ້ມຄອງ ຫຼື ດຳເນີນງານການບໍລິການເຫຼົ່ານີ້. ຜູ້ໃຫ້ບໍລິການຕົວຈິງ"
-
-msgid "is solely responsible for the quality, safety, and delivery of the services rendered." 
-msgstr "ຮັບຜິດຊອບແຕ່ພຽງຜູ້ດຽວຕໍ່ຄຸນນະພາບ, ຄວາມປອດໄພ ແລະ ການໃຫ້ບໍລິການ."
-
-msgid "2. The 'Request & Verify' Booking Process"
-msgstr "2. ຂັ້ນຕອນການຈອງ 'ຮ້ອງຂໍ & ການຢືນຢັນ' "
-
-msgid "Booking Requests:"
-msgstr "ຄໍາຂໍຈອງ"
-
-msgid "Submitting a booking form on our platform does"
-msgstr "ການສົ່ງຟອມຈອງທາງແພລດໄອມຂອງພວກເຮົາ"
-
-msgid "not"
-msgstr "ບໍ່ໄດ້"
-
-msgid "guarantee a reservation. It initiates a 'Booking Request' which is sent to the Owner for availability verification." 
-msgstr "ຮັບປະກັນວ່າຈອງໄດ້ແລ້ວ. ມັນເປັນພຽງການເລີ້ມຕົ້ນ 'ຂໍຈອງ' ໂດຍທີ່ຖືກສົ່ງຕໍ່ໄປຍັງເຈົ້າຂອງເພື່ອຮັບຮອງການຈອງອີກເທື່ອໜຶ່ງ "
-
-msgid "Confirmation:"
-msgstr "ການຮັບຮອງ"
-
-msgid "A booking is only considered"
-msgstr "ແມ່ນການທີ່ຖືກຈອງແລ້ວ"
-
-msgid "Confirmed"
-msgstr "ເມື່ອຖືກຮັບຮອງແລ້ວ"
-
-msgid "once the Owner approves the request and you receive a final Confirmation Voucher via email." 
-msgstr "ຫຼັງຈາກທາງເຈົ້າຂອງຜູ້ຮັບຮອງການຈອງໄດ້ອະນຸມັດແລ້ວ ແລະ ທ່ານເອງກໍ່ຈະໄດ້ຮັບ ວາວເຈີ ທາງອີເມວ"
-
-msgid "Declined Requests:"
-msgstr "ການຈອງທີ່ຖືກປະຕິເສດ"
-
-msgid "If the Owner cannot accommodate your request"
-msgstr "ຖ້າວ່າ ເຈົ້າຂອງທຸລະກີດບໍ່ສາມາດຈັດຫາໃຫ້ໄດ້ຕາມການຈອງ"
-
-msgid "e.g., the vehicle or room is no longer available"
-msgstr "ເຊັ່ນວ່າ, ພາຫະນະ ຫຼື ສິ່ງທີ່ຈອງຖືກຄົນອື່ນເອົາຫມົດແລ້ວ"
-
-msgid "the request will be declined at no cost to you." 
-msgstr "ການຮ້ອງຂໍກໍ່ຈະຖືກປະຕິເສດໂດຍປາສະຈາກການຄິດໄລ່ມູນຄ່າໃດເລີຍ"
-
-msgid "3. Payment, Currency & Security Deposits" 
-msgstr "3. ການຊໍາລະເງິນ, ສະກຸນເງິນ & ວັດຖຸມີຄ່າ ເພື່ອຄໍ້າປະກັນ"
-
-msgid "Cash on Arrival:"
-msgstr "ຈ່າຍຕອນມາເຖິງຫ້ອງການໜ່ວຍທຸລະກິດ"
-
-msgid "Vang Vieng Stay does"
-msgstr " ວັງວຽງ ສະເຕ "
-
-# msgid "not"
-# msgstr "ບໍ່ໄດ້"
-
-msgid "process online payments. All payments for services must be made directly to the Owner in"
-msgstr "ດໍາເນີນການຮັບເງິນໂດຍການໂອນ. ການຈ່າຍເງິນສໍາລັບບໍລິການນີ້ ແມ່ນຕ້ອງໄດ້ຈ່າຍໃຫ້ກັບທາງໜ່ວຍບໍລິການເປັນ"
-
-msgid "cash"
-msgstr "ເງິນສົດ"
-
-msgid "Lao Kip - LAK"
-msgstr "ເງິນກີບລາວ - ກີບ"
-
-msgid "upon check-in, arrival, or vehicle pickup."
-msgstr "ຕອນລົງທະບຽນ, ຕອນມາເຖິງ, ຫຼື ຕອນພາຫະນະມາຮັບ" 
-
-msgid "Pricing:"
-msgstr "ລາຄາ: "
-
-msgid "All prices displayed on the platform are estimates in LAK and are subject to change based on the Owner's current rates. The final price agreed upon with the Owner at the time of pickup/check-in is the binding price."
-msgstr "ລາຄາທັງຫມົດທີ່ສະແດງເທິງແພລດຟອມເປັນລາຄາໂດຍປະມານໃນສະກຸນເງິນກີບ ແລະ ຍັງຖືກກໍານົດຕໍ່ການປ່ຽນແປງບົນພື້ນຖານອັດຕາແລກປ່ຽນທີ່ທາງເຈົ້າຂອງທຸລະກິດກໍານົດນະເວລານັ້ນ ລາຄາສຸດທ້າຍກໍ່ຕ້ອງໄດ້ເຫັນດີກັບເຈົ້າຂອງທຸລະກິດຕອນໄປຮັບ/ເຊັກອິນ ແມ່ນເປັນລາຄາທີ່ຕົກລົງກັນ"
-
-msgid "Security Deposits (Vehicles): "
-msgstr "ສິ່ງຈອງມັດຈໍາ (ສໍາລັບພາຫະນະ)"
-
-msgid "For Motorbike and Buggy Car rentals, a cash security deposit and/or the physical surrender of a valid Passport or Government ID is required by the Owner at the time of pickup. This deposit/ID will be returned upon the safe return of the vehicle."
-msgstr " ສໍາລັບການເຊົ່າ ລົດຈັກ ແລະ ລົດບັກກີ້ ການວາງເງິນປະກັນເປັນເງິນສົດ ແລະ/ຫຼືໜັງສືເດີນທາງ ຫຼືບັດປະຈຳຕົວປະຊາຊົນທີ່ຍັງບໍ່ໝົດອາຍຸເວລາຮັບລົດ/ສິ່ງຈອງທີ່ຄໍ້າປະກັນຈະຄືນໃຫ້ເມື່ອສົ່ງຄືນທີ່ຢູ່ໃນສະພາບເດີມ"
-
-msgid "Pending Requests: "
-msgstr "ຄໍາຮ້ອງຂໍທີ່ຍັງລໍຖ້າດໍາເນີນການຢູ່"
-
-msgid "You may cancel any pending booking request instantly via your dashboard at no charge." 
-msgstr "ທ່ານອາດຈະຍົກເລີກຄໍາຮ້ອງຂໍທີ່ຍັງລໍຖ້າດໍາເນີນການຢູ່ໄດ້ທັນທີ ຢູ່ທາງໜ້າແດສໂບດຂອງທ່ານເອງ ໂດຍ ທີ່ບໍ່ໄດ້ເສຍຄ່າ"
-
-msgid "Confirmed Bookings: "
-msgstr "ການຈອງທີ່ຢືນຢັນແລ້ວ"
-
-msgid "4. Cancellations"
-msgstr "4. ການຍົກເລີກ"
-
-msgid "5. User Responsibilities & Safety"
-msgstr "ຄວາມຮັບຜິດຊອບຂອງຜູ້ໃຊ້ ແລະ ຄວາມປອດໄພ"
-
-msgid "If you need to cancel a confirmed booking, you must contact the Owner directly. Cancellation policies, including the potential forfeiture of your security deposit for vehicle rentals or late cancellation fees for guesthouses, are determined solely by the individual Owner."
-msgstr "ຖ້າຕ້ອງການຍົກເລີກການຈອງທີ່ຢືນຢັນແລ້ວ, ທ່ານຕ້ອງຕິດຕໍ່ເຈົ້າຂອງທຸລະກິດໂດຍກົງ. ນະໂຍບາຍການຍົກເລີກ ລວມທັງ ເງິນຄໍ້າປະກັນລົດເຊົ່າ ຫຼື ຂໍ້ຕົກລົງການຍົກເລີກທີ່ຊັກຊ້າເກີນໄປສໍາລັບທີ່ພັກແມ່ນຖືກກໍານົດໂດຍເຈົ້າຂອງແຕ່ລະລາຍ"
-
-msgid "Identification: "
-msgstr "ການລະບຸຕົວຕົນ"
-
-msgid "You must present a valid Passport or Government ID and your Booking Voucher (digital or printed) upon check-in or vehicle pickup." 
-msgstr "ທ່ານຕ້ອງສະແດງໜັງສືພາສປອດ ຫຼື ບັດປະຈຳຕົວປະຊາຊົນ ແລະ ໃບຢືນຢັນການຈອງ (ແບບດິຈິຕອນ ຫຼື ແບບພິມ) ເມື່ອລົງທະບຽນ ຫຼື ຮັບລົດ"
-
-msgid "Vehicle Rentals: "
-msgstr "ການເຊົ່າພາຫະນະ"
-
-msgid "For Motorbikes and Buggy Cars, the renter must possess a valid, legally recognized driver's license for Laos. You are fully responsible for the safe operation of the vehicle, adhering to local traffic laws, and wearing appropriate safety gear (e.g., helmets)." 
-msgstr "ການເຊົ່າລົດ: ສຳລັບລົດຈັກ ແລະ ລົດບັກກີ້, ຜູ້ເຊົ່າຕ້ອງມີໃບຂັບຂີ່ທີ່ຖືກຕ້ອງຕາມກົດໝາຍສຳລັບລາວ. ທ່ານມີຄວາມຮັບຜິດຊອບຢ່າງເຕັມທີ່ຕໍ່ການຂັບຂີ່ລົດຢ່າງປອດໄພ, ປະຕິບັດຕາມກົດໝາຍຈໍລາຈອນໃນທ້ອງຖິ່ນ, ແລະ ໃສ່ອຸປະກອນຄວາມປອດໄພທີ່ເໝາະສົມ (ເຊັ່ນ: ໝວກກັນກະທົບ)."
-
-msgid "Property Respect: "
-msgstr "ການປະຕິບັດ"
-
-msgid "You agree to respect the property, staff, and local regulations of the service providers." 
-msgstr "ທ່ານເຫັນດີທີ່ຈະປະຕິບັດຕໍ່ ຊັບສິນ, ພະນັກງານ, ແລະ ກົດລະບຽບທ້ອງຖິ່ນຂອງຜູ້ໃຫ້ບໍລິການຢ່າງເຫມາະສົມ." 
-
-msgid "6. Limitation of Liability"
-msgstr "6. ຂອບເຂດຂອງຄວາມຮັບຜິດຊອບ"
-
-msgid "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable for any indirect, incidental, or consequential damages arising from your use of the platform or the services booked. This includes, but is not limited to, traffic accidents, vehicle damage, personal injuries during tours, theft, or travel disruptions. All risks associated with the use of rented vehicles and participation in tours are assumed entirely by the user." 
-msgstr "ເພື່ອທໍາຕາມຂອບເຂດສູງສຸດທີ່ກົດໝາຍອະນຸຍາດ, Vang Vieng Stay ຈະບໍ່ຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທາງອ້ອມ, ໂດຍບັງເອີນ, ຫຼື ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນຈາກການນຳໃຊ້ແພລດຟອມ ຫຼື ການບໍລິການທີ່ທ່ານຈອງໄວ້. ສິ່ງນີ້ລວມມີ, ແຕ່ບໍ່ໄດ້ຈຳກັດໃສ່ອຸບັດຕິເຫດຈໍລາຈອນທາງຖະໜົນ, ຄວາມເສຍຫາຍຈາກຍານພາຫະນະ, ການບາດເຈັບສ່ວນຕົວໃນລະຫວ່າງການທ່ອງທ່ຽວ, ການລັກຂະໂມຍ, ຫຼື ອຸປະສັກໃນການເດີນທາງ. ຄວາມສ່ຽງທັງໝົດທີ່ກ່ຽວຂ້ອງກັບການນຳໃຊ້ຍານພາຫະນະທີ່ເຊົ່າ ແລະ ການເຂົ້າຮ່ວມໃນການທ່ອງທ່ຽວແມ່ນຜູ້ນໍາໃຊ້ຮັບຜິດຊອບທັງໝົດ." 
-
-msgid "7. Governing Law"
-msgstr "7. ການບັງຄັບໃຊ້ກົດຫມາຍ"
-
-msgid "These terms shall be governed by and construed in accordance with the laws of the Lao People's Democratic Republic. Any disputes arising from these terms or the services booked shall be subject to the exclusive jurisdiction of the local authorities and courts in Vientiane, Laos."
-msgstr "ເງື່ອນໄຂເຫຼົ່ານີ້ຈະຖືກຄຸ້ມຄອງ ແລະ ຕີຄວາມໝາຍຕາມກົດໝາຍຂອງສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ. ຂໍ້ຂັດແຍ່ງໃດໆທີ່ເກີດຂຶ້ນຈາກເງື່ອນໄຂເຫຼົ່ານີ້ ຫຼື ການບໍລິການທີ່ໄດ້ຈອງໄວ້ແມ່ນຂຶ້ນກັບອຳນາດຕັດສິນຂອງອຳນາດການປົກຄອງທ້ອງຖິ່ນ ແລະ ສານໃນນະຄອນຫຼວງວຽງຈັນ, ລາວ." 
-
-msgid "Questions? "
-msgstr "ມີຄໍາຖາມອື່ນບໍ? "
-
-msgid "If you have any questions about these Terms of Service or your data privacy, please contact us at" 
-msgstr "ຖ້າຫາກທ່ານມີຄໍາຖາມກ່ຽວກັບເງື່ອນໄຂການໃຊ້ບໍລິການ ຫຼື ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານ, ກະລຸນາຕິດຕໍ່"
+msgstr "ລ້າງຕົວກອງທັງໝົດ"
