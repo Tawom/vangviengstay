@@ -36,14 +36,12 @@ def send_booking_request_email(booking, booking_reference, booking_type='guestho
 
     subject = f"{subject_prefix}: {name} - Ref: {booking_reference}"
     
-    # ✅ CORRECTED: Points to the new booking_request.html template 
-    # AND passes 'property_name' so the template can display it.
     html_message = render_to_string('emails/booking_request.html', {
         'booking': booking,
         'booking_reference': booking_reference,
         'booking_type': booking_type,
         'voucher_url': voucher_url,
-        'property_name': name,  # <--- ADDED THIS LINE
+        'property_name': name,
     })
     
     plain_message = strip_tags(html_message)
@@ -138,7 +136,6 @@ def send_contact_form_email(name, email, subject, message):
     })
     admin_plain_message = strip_tags(admin_html_message)
     
-    # ✅ POLISH: Use settings for admin email, with a fallback
     admin_email = getattr(settings, 'ADMIN_EMAIL', 'info@vangviengstay.com')
     
     try:
@@ -205,7 +202,6 @@ def send_booking_declined_email(booking, booking_reference, booking_type='guesth
         subject = f"Booking Request Declined - Ref: {booking_reference}"
         property_name = "your booking"
     
-    # Default reasons if none provided
     if not reason:
         reason = "The requested dates are no longer available."
     
@@ -233,9 +229,6 @@ def send_booking_declined_email(booking, booking_reference, booking_type='guesth
     except Exception as e:
         print(f"❌ Error sending booking declined email: {e}")
         return False
-
-from django.core.mail import send_mail
-from django.conf import settings
 
 
 def send_inquiry_confirmation_email(inquiry):
@@ -300,7 +293,7 @@ Reply directly to: {inquiry.email}
             subject,
             message,
             settings.DEFAULT_FROM_EMAIL,
-            [settings.ADMIN_EMAIL],  # Make sure this is set in settings.py
+            [settings.ADMIN_EMAIL],
             fail_silently=False,
         )
         inquiry.admin_email_sent = True
