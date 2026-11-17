@@ -3,7 +3,13 @@ certifi==2026.10.23
 charset-normalizer==3.5.2
 django==6.1.2
 django-anymail==15.2
+django-cors-headers==4.9.0
+djangorestframework==3.18.3
+dnspython==2.9.1
 idna==3.20
+pgvector==0.5.1
+psycopg2-binary==2.9.13
+pymongo==4.19.0
 python-dotenv==1.2.4
 requests==2.34.2
 resend==2.50.1

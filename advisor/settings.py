@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     
     # Third-party apps
     'anymail',
+    'rest_framework',
+    'corsheaders',
     
     # Local apps
     'guesthouse',
@@ -50,6 +52,15 @@ INSTALLED_APPS = [
     'analytics',
     'inquiry',
 ]
+# Add REST Framework settings at the bottom of the file
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # Allow anyone to access (for testing)
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+}
 
 SITE_ID = 1
 
@@ -61,6 +72,7 @@ MIDDLEWARE = [
     'advisor.middleware.MaintenanceModeMiddleware',       
     'django.middleware.cache.UpdateCacheMiddleware',      
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',     
     'django.middleware.common.CommonMiddleware',
@@ -202,3 +214,12 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@vangviengstay.com')
 
 # Site URL
 SITE_URL = os.getenv('SITE_URL', 'http://127.0.0.1:8000').strip()
+
+# CORS Configuration (Allow Flutter Web to connect)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:51023",
+    "http://127.0.0.1:51023",
+]
+
+# Optional: For local development only, you can allow all origins to avoid port changes
+CORS_ALLOW_ALL_ORIGINS = True 
