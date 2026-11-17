@@ -190,18 +190,15 @@ CACHES = {
     }
 }
 
-# Email Configuration (Defaults to Console for safe local development)
+# Email Configuration (Anymail + Resend HTTP API)
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.resend.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False') == 'True'
-
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'resend').strip()
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '').strip()
+ANYMAIL = {
+    "RESEND_API_KEY": os.getenv('ANYMAIL_RESEND_API_KEY', ''),
+}
 
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Vang Vieng Stay <onboarding@resend.dev>').strip()
 SERVER_EMAIL = os.getenv('SERVER_EMAIL', 'Vang Vieng Stay <onboarding@resend.dev>').strip()
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'info@vangviengstay.com')
 
 # Site URL
 SITE_URL = os.getenv('SITE_URL', 'http://127.0.0.1:8000').strip()
