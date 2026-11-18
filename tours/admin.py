@@ -14,7 +14,7 @@ class TourAdmin(admin.ModelAdmin):
     list_display = ('name', 'operator_name', 'price_per_person', 'duration_hours', 'max_capacity', 'is_active')
     list_filter = ('is_active', 'duration_hours')
     
-    # ✅ UPDATED: Search in both English and Lao descriptions
+    # ✅ Search in both English and Lao descriptions
     search_fields = ('name', 'operator_name', 'description_en', 'description_lo')
     
     fieldsets = (
@@ -64,6 +64,7 @@ class TourBookingAdmin(admin.ModelAdmin):
         'tour__operator_name',
     )
     
+    # ✅ UPDATED: Added contact_phone and contact_email to safely search guest checkouts
     search_fields = (
         'guest__username',
         'guest__first_name',
@@ -72,6 +73,8 @@ class TourBookingAdmin(admin.ModelAdmin):
         'tour__name',
         'tour__operator_name',
         'pickup_location',
+        'contact_phone',
+        'contact_email',
     )
     
     ordering = ('-booking_date', '-id')
@@ -88,14 +91,21 @@ class TourBookingAdmin(admin.ModelAdmin):
     booking_reference.admin_order_field = 'id'
 
     def guest_info(self, obj):
-        """Bulletproof guest info display."""
-        name = f"{obj.guest.first_name} {obj.guest.last_name}".strip() or obj.guest.username
-        
-        # Safely check for phone on Booking, then on Guest model
-        phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None)
+        """Bulletproof guest info display (handles guest checkout safely)."""
+        if obj.guest:
+            name = f"{obj.guest.first_name} {obj.guest.last_name}".strip() or obj.guest.username
+            phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None) or obj.contact_phone
+            email = obj.guest.email or obj.contact_email
+        else:
+            # Guest checkout fallback
+            name = obj.contact_name or "Guest"
+            phone = obj.contact_phone
+            email = obj.contact_email
         
         if phone:
             return format_html('{}<br><small style="color:#666;">📱 {}</small>', name, phone)
+        if email:
+            return format_html('{}<br><small style="color:#666;">✉️ {}</small>', name, email)
         return name
     guest_info.short_description = 'Guest'
 
@@ -152,15 +162,20 @@ class TourBookingAdmin(admin.ModelAdmin):
         ])
         
         for booking in queryset:
-            guest_name = f"{booking.guest.first_name} {booking.guest.last_name}".strip() or booking.guest.username
-            
-            # Bulletproof phone lookup for CSV
-            phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '')
+            # ✅ Bulletproof guest data extraction for CSV
+            if booking.guest:
+                guest_name = f"{booking.guest.first_name} {booking.guest.last_name}".strip() or booking.guest.username
+                email = booking.guest.email
+                phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '') or booking.contact_phone or ''
+            else:
+                guest_name = booking.contact_name or "Guest"
+                email = booking.contact_email or ''
+                phone = booking.contact_phone or ''
             
             writer.writerow([
                 f"TV-{booking.id:04d}",
                 guest_name,
-                booking.guest.email,
+                email,
                 phone,
                 booking.tour.name,
                 booking.tour.operator_name,
