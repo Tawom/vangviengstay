@@ -1,10 +1,11 @@
+import requests
 from django.core.cache import cache
 from django.utils import timezone
-from .models import DailyVisit, PageVisit, VisitLog  # ✅ Added VisitLog
+from .models import DailyVisit, PageVisit, VisitLog
 
 
 class AnalyticsMiddleware:
-    """Lightweight middleware to track site visits."""
+    """Lightweight middleware to track site visits with free geolocation."""
     
     def __init__(self, get_response):
         self.get_response = get_response
@@ -38,11 +39,11 @@ class AnalyticsMiddleware:
         return True
     
     def track_visit(self, request):
-        """Record the visit in the database."""
+        """Record the visit in the database with geolocation."""
         today = timezone.now().date()
         ip = self.get_client_ip(request)
         path = request.path
-        user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown')  # ✅ Get User Agent
+        user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown')
         
         # Use cache to track unique visitors (24-hour expiry)
         cache_key = f"visit_{today}_{ip}"
@@ -51,12 +52,36 @@ class AnalyticsMiddleware:
         if is_unique:
             cache.set(cache_key, True, timeout=86400)  # 24 hours
         
-        # ✅ NEW: Save detailed visit log
+        # ✅ FREE GEOLOCATION: Check cache first to avoid API rate limits
+        geo_cache_key = f"geo_{ip}"
+        geo_data = cache.get(geo_cache_key)
+        
+        if not geo_data:
+            try:
+                # Free, no-auth API (fields parameter keeps response tiny and fast)
+                api_url = f"http://ip-api.com/json/{ip}?fields=country,city"
+                response = requests.get(api_url, timeout=2)
+                if response.status_code == 200:
+                    geo_data = response.json()
+                    # Cache location for 24 hours so we never hit rate limits for repeat visitors
+                    cache.set(geo_cache_key, geo_data, timeout=86400)
+                else:
+                    geo_data = {'country': 'Unknown', 'city': 'Unknown'}
+            except Exception:
+                # Fail silently so analytics never break the user experience
+                geo_data = {'country': 'Unknown', 'city': 'Unknown'}
+        
+        country = geo_data.get('country', 'Unknown')
+        city = geo_data.get('city', 'Unknown')
+        
+        # ✅ Save detailed visit log with geolocation
         VisitLog.objects.create(
             path=path,
             ip_address=ip,
             user_agent=user_agent,
             is_unique=is_unique,
+            country=country,
+            city=city,
         )
         
         # Update daily site-wide stats (your existing code)

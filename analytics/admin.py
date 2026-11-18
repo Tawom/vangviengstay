@@ -40,15 +40,23 @@ class PageVisitAdmin(admin.ModelAdmin):
 
 
 # ==========================================
-# 3. VISIT LOG ADMIN (NEW!)
+# 3. VISIT LOG ADMIN (With Geolocation!)
 # ==========================================
 @admin.register(VisitLog)
 class VisitLogAdmin(admin.ModelAdmin):
-    list_display = ('path', 'ip_address', 'timestamp', 'is_unique', 'device_info')
-    list_filter = ('timestamp', 'path', 'is_unique')
-    search_fields = ('path', 'ip_address', 'user_agent')
-    readonly_fields = ('path', 'ip_address', 'user_agent', 'timestamp', 'is_unique')
+    list_display = ('path', 'ip_address', 'location_info', 'timestamp', 'is_unique', 'device_info')
+    list_filter = ('timestamp', 'country', 'is_unique')
+    search_fields = ('path', 'ip_address', 'user_agent', 'country', 'city')
+    readonly_fields = ('path', 'ip_address', 'user_agent', 'timestamp', 'is_unique', 'country', 'city')
     date_hierarchy = 'timestamp'
+
+    def location_info(self, obj):
+        """Combine city and country for a clean display."""
+        if obj.country and obj.country != 'Unknown':
+            city_str = f", {obj.city}" if obj.city and obj.city != 'Unknown' else ""
+            return f"🌍 {obj.country}{city_str}"
+        return "🌐 Unknown"
+    location_info.short_description = 'Location'
 
     def device_info(self, obj):
         """Show a readable device type from the user agent."""
@@ -64,7 +72,6 @@ class VisitLogAdmin(admin.ModelAdmin):
         elif 'bot' in ua.lower() or 'crawler' in ua.lower() or 'spider' in ua.lower():
             return '🤖 Search Bot'
         return '🌐 Other'
-    
     device_info.short_description = 'Device'
     
     def has_add_permission(self, request):
@@ -122,10 +129,10 @@ class AnalyticsAdminSite(admin.AdminSite):
             total_visits=Sum('visit_count')
         ).order_by('-total_visits')[:10]
         
-        # ✅ NEW: Recent detailed visit logs (last 20)
+        # Recent detailed visit logs (last 20)
         recent_visits = VisitLog.objects.all()[:20]
         
-        # ✅ NEW: Device breakdown (last 7 days)
+        # Device breakdown (last 7 days)
         seven_days_ago_visits = VisitLog.objects.filter(timestamp__date__gte=seven_days_ago)
         
         def get_device_type(ua):
@@ -148,8 +155,17 @@ class AnalyticsAdminSite(admin.AdminSite):
             device_type = get_device_type(visit)
             device_counts[device_type] = device_counts.get(device_type, 0) + 1
         
-        # ✅ NEW: Unique IPs in last 7 days
+        # Unique IPs in last 7 days
         unique_ips_7d = seven_days_ago_visits.values('ip_address').distinct().count()
+        
+        # ✅ NEW: Country breakdown (last 7 days)
+        country_counts = {}
+        for visit in seven_days_ago_visits.values('country').annotate(count=Count('id')).order_by('-count'):
+            if visit['country'] and visit['country'] != 'Unknown':
+                country_counts[visit['country']] = visit['count']
+        
+        # Take top 10 countries
+        top_countries = dict(list(country_counts.items())[:10])
         
         context = {
             'title': 'Site Analytics',
@@ -157,9 +173,10 @@ class AnalyticsAdminSite(admin.AdminSite):
             'last_7_days': last_7_days,
             'monthly_stats': monthly_stats,
             'top_pages': top_pages,
-            'recent_visits': recent_visits,              # ✅ NEW
-            'device_counts': device_counts,              # ✅ NEW
-            'unique_ips_7d': unique_ips_7d,              # ✅ NEW
+            'recent_visits': recent_visits,
+            'device_counts': device_counts,
+            'unique_ips_7d': unique_ips_7d,
+            'top_countries': top_countries,  # ✅ NEW
         }
         
         return render(request, 'admin/analytics_dashboard.html', context)
@@ -169,4 +186,4 @@ class AnalyticsAdminSite(admin.AdminSite):
 analytics_admin_site = AnalyticsAdminSite(name='analytics_admin')
 analytics_admin_site.register(DailyVisit, DailyVisitAdmin)
 analytics_admin_site.register(PageVisit, PageVisitAdmin)
-analytics_admin_site.register(VisitLog, VisitLogAdmin)  # ✅ NEW
+analytics_admin_site.register(VisitLog, VisitLogAdmin)

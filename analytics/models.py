@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class DailyVisit(models.Model):
     """Tracks daily site-wide visitor statistics."""
     date = models.DateField(unique=True, db_index=True)
@@ -32,14 +33,18 @@ class PageVisit(models.Model):
         return f"{self.date}: {self.path} ({self.visit_count} visits)"
 
 
-# ✅ NEW: Tracks individual visit details for deep analytics
+# ✅ NEW: Tracks individual visit details for deep analytics + FREE Geolocation
 class VisitLog(models.Model):
-    """Records every individual visit with IP, device, and timestamp."""
+    """Records every individual visit with IP, device, timestamp, and location."""
     path = models.CharField(max_length=500, db_index=True)
     timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     user_agent = models.TextField(blank=True, null=True)
     is_unique = models.BooleanField(default=False, help_text="True if this IP hasn't visited today")
+    
+    # ✅ FREE Geolocation Fields
+    country = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ['-timestamp']
@@ -47,4 +52,5 @@ class VisitLog(models.Model):
         verbose_name_plural = 'Visit Logs'
 
     def __str__(self):
-        return f"{self.path} | {self.ip_address} | {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
+        location = f" ({self.country})" if self.country and self.country != 'Unknown' else ""
+        return f"{self.path} | {self.ip_address}{location} | {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
