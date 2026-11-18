@@ -1,6 +1,6 @@
 from django.core.cache import cache
 from django.utils import timezone
-from .models import DailyVisit, PageVisit
+from .models import DailyVisit, PageVisit, VisitLog  # ✅ Added VisitLog
 
 
 class AnalyticsMiddleware:
@@ -20,22 +20,18 @@ class AnalyticsMiddleware:
     
     def should_track(self, request, response):
         """Determine if this request should be tracked."""
-        # Only track GET requests
         if request.method != 'GET':
             return False
         
-        # Only track successful responses
         if response.status_code != 200:
             return False
         
         path = request.path
         
-        # Skip admin, static, media, and API routes
         skip_prefixes = ['/admin/', '/static/', '/media/', '/api/', '/__debug__/']
         if any(path.startswith(prefix) for prefix in skip_prefixes):
             return False
         
-        # Skip favicon and robots.txt
         if path in ['/favicon.ico', '/robots.txt', '/sitemap.xml']:
             return False
         
@@ -46,6 +42,7 @@ class AnalyticsMiddleware:
         today = timezone.now().date()
         ip = self.get_client_ip(request)
         path = request.path
+        user_agent = request.META.get('HTTP_USER_AGENT', 'Unknown')  # ✅ Get User Agent
         
         # Use cache to track unique visitors (24-hour expiry)
         cache_key = f"visit_{today}_{ip}"
@@ -54,14 +51,22 @@ class AnalyticsMiddleware:
         if is_unique:
             cache.set(cache_key, True, timeout=86400)  # 24 hours
         
-        # Update daily site-wide stats
+        # ✅ NEW: Save detailed visit log
+        VisitLog.objects.create(
+            path=path,
+            ip_address=ip,
+            user_agent=user_agent,
+            is_unique=is_unique,
+        )
+        
+        # Update daily site-wide stats (your existing code)
         daily_visit, _ = DailyVisit.objects.get_or_create(date=today)
         daily_visit.total_visits += 1
         if is_unique:
             daily_visit.unique_visitors += 1
         daily_visit.save()
         
-        # Update page-specific stats
+        # Update page-specific stats (your existing code)
         page_visit, _ = PageVisit.objects.get_or_create(
             date=today,
             path=path

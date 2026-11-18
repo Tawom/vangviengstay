@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import render
-from django.db.models import Sum, Avg
+from django.db.models import Sum, Avg, Count, Q
 from django.utils import timezone
 from datetime import timedelta
-from .models import DailyVisit, PageVisit
+from .models import DailyVisit, PageVisit, VisitLog
 
 
+# ==========================================
+# 1. DAILY VISIT ADMIN
+# ==========================================
 @admin.register(DailyVisit)
 class DailyVisitAdmin(admin.ModelAdmin):
     list_display = ('date', 'total_visits', 'unique_visitors')
@@ -20,6 +23,9 @@ class DailyVisitAdmin(admin.ModelAdmin):
         return False
 
 
+# ==========================================
+# 2. PAGE VISIT ADMIN
+# ==========================================
 @admin.register(PageVisit)
 class PageVisitAdmin(admin.ModelAdmin):
     list_display = ('date', 'path', 'visit_count', 'unique_visitors')
@@ -33,6 +39,44 @@ class PageVisitAdmin(admin.ModelAdmin):
         return False
 
 
+# ==========================================
+# 3. VISIT LOG ADMIN (NEW!)
+# ==========================================
+@admin.register(VisitLog)
+class VisitLogAdmin(admin.ModelAdmin):
+    list_display = ('path', 'ip_address', 'timestamp', 'is_unique', 'device_info')
+    list_filter = ('timestamp', 'path', 'is_unique')
+    search_fields = ('path', 'ip_address', 'user_agent')
+    readonly_fields = ('path', 'ip_address', 'user_agent', 'timestamp', 'is_unique')
+    date_hierarchy = 'timestamp'
+
+    def device_info(self, obj):
+        """Show a readable device type from the user agent."""
+        ua = obj.user_agent or 'Unknown'
+        if 'iPhone' in ua or 'iPad' in ua:
+            return '📱 iOS'
+        elif 'Android' in ua:
+            return '📱 Android'
+        elif 'Windows' in ua:
+            return '💻 Windows'
+        elif 'Macintosh' in ua or 'Mac OS' in ua:
+            return '💻 Mac'
+        elif 'bot' in ua.lower() or 'crawler' in ua.lower() or 'spider' in ua.lower():
+            return '🤖 Search Bot'
+        return '🌐 Other'
+    
+    device_info.short_description = 'Device'
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+# ==========================================
+# 4. CUSTOM ANALYTICS DASHBOARD
+# ==========================================
 class AnalyticsAdminSite(admin.AdminSite):
     """Custom admin site with analytics dashboard."""
     
@@ -78,12 +122,44 @@ class AnalyticsAdminSite(admin.AdminSite):
             total_visits=Sum('visit_count')
         ).order_by('-total_visits')[:10]
         
+        # ✅ NEW: Recent detailed visit logs (last 20)
+        recent_visits = VisitLog.objects.all()[:20]
+        
+        # ✅ NEW: Device breakdown (last 7 days)
+        seven_days_ago_visits = VisitLog.objects.filter(timestamp__date__gte=seven_days_ago)
+        
+        def get_device_type(ua):
+            ua = ua or ''
+            if 'iPhone' in ua or 'iPad' in ua:
+                return 'iOS'
+            elif 'Android' in ua:
+                return 'Android'
+            elif 'Windows' in ua:
+                return 'Windows'
+            elif 'Macintosh' in ua or 'Mac OS' in ua:
+                return 'Mac'
+            elif 'bot' in ua.lower() or 'crawler' in ua.lower() or 'spider' in ua.lower():
+                return 'Bot'
+            return 'Other'
+        
+        # Count devices manually (since user_agent is a TextField)
+        device_counts = {'iOS': 0, 'Android': 0, 'Windows': 0, 'Mac': 0, 'Bot': 0, 'Other': 0}
+        for visit in seven_days_ago_visits.values_list('user_agent', flat=True):
+            device_type = get_device_type(visit)
+            device_counts[device_type] = device_counts.get(device_type, 0) + 1
+        
+        # ✅ NEW: Unique IPs in last 7 days
+        unique_ips_7d = seven_days_ago_visits.values('ip_address').distinct().count()
+        
         context = {
             'title': 'Site Analytics',
             'today_stats': today_stats,
             'last_7_days': last_7_days,
             'monthly_stats': monthly_stats,
             'top_pages': top_pages,
+            'recent_visits': recent_visits,              # ✅ NEW
+            'device_counts': device_counts,              # ✅ NEW
+            'unique_ips_7d': unique_ips_7d,              # ✅ NEW
         }
         
         return render(request, 'admin/analytics_dashboard.html', context)
@@ -93,3 +169,4 @@ class AnalyticsAdminSite(admin.AdminSite):
 analytics_admin_site = AnalyticsAdminSite(name='analytics_admin')
 analytics_admin_site.register(DailyVisit, DailyVisitAdmin)
 analytics_admin_site.register(PageVisit, PageVisitAdmin)
+analytics_admin_site.register(VisitLog, VisitLogAdmin)  # ✅ NEW

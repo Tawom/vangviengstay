@@ -30,3 +30,21 @@ class PageVisit(models.Model):
     
     def __str__(self):
         return f"{self.date}: {self.path} ({self.visit_count} visits)"
+
+
+# ✅ NEW: Tracks individual visit details for deep analytics
+class VisitLog(models.Model):
+    """Records every individual visit with IP, device, and timestamp."""
+    path = models.CharField(max_length=500, db_index=True)
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.TextField(blank=True, null=True)
+    is_unique = models.BooleanField(default=False, help_text="True if this IP hasn't visited today")
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = 'Visit Log'
+        verbose_name_plural = 'Visit Logs'
+
+    def __str__(self):
+        return f"{self.path} | {self.ip_address} | {self.timestamp.strftime('%Y-%m-%d %H:%M')}"
