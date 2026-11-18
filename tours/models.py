@@ -8,11 +8,10 @@ from datetime import datetime, timedelta
 # ==========================================
 # 1. TOUR MODEL
 # ==========================================
-
 class Tour(models.Model):
     name = models.CharField(max_length=200, help_text="e.g., Rock Climbing Intro Course")
     
-    # ✅ NEW: Operator/Business Name
+    # ✅ Operator/Business Name
     operator_name = models.CharField(
         max_length=200, 
         help_text="e.g., Jacky Adventure, Vang Vieng Trekking Co."
@@ -20,7 +19,7 @@ class Tour(models.Model):
     
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tours')
     
-    # ✅ MULTI-LANGUAGE DESCRIPTION FIELDS
+    # ✅ Multi-language description fields
     description_en = models.TextField(
         verbose_name="Description (English)",
         help_text="Tour description in English"
@@ -73,7 +72,6 @@ class Tour(models.Model):
 # ==========================================
 # 2. TOUR BOOKING MODEL
 # ==========================================
-
 class TourBooking(models.Model):
     STATUS_CHOICES = (
         ('pending', 'Pending Payment'),
@@ -88,7 +86,17 @@ class TourBooking(models.Model):
     )
     
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='bookings')
-    guest = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tour_bookings')
+    
+    # ✅ UPDATED: Allow null/blank for guest checkout
+    guest = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL,  # ✅ Changed to SET_NULL so deleting a user doesn't delete the booking
+        related_name='tour_bookings',
+        null=True,       
+        blank=True,      
+        help_text="Leave blank for guest checkout"
+    )
+    
     booking_date = models.DateField(help_text="Date of the tour")
     number_of_people = models.PositiveIntegerField(default=1)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -109,7 +117,7 @@ class TourBooking(models.Model):
         help_text="Guesthouse name, address, or landmark (only if vehicle pickup)"
     )
     
-    # ✅ UPDATED: Flexible Contact Info (at least one required)
+    # ✅ Flexible Contact Info (at least one required)
     contact_phone = models.CharField(
         max_length=20, 
         blank=True, 
@@ -125,8 +133,10 @@ class TourBooking(models.Model):
     )
 
     def __str__(self):
-        contact = self.contact_email if self.contact_email else self.contact_phone
-        return f"{self.guest.username} - {self.tour.name} on {self.booking_date} ({self.number_of_people} people, {contact})"
+        # ✅ Safely handle cases where guest is None
+        guest_name = self.guest.username if self.guest else "Guest"
+        contact = self.contact_email if self.contact_email else (self.contact_phone or "No contact")
+        return f"{guest_name} - {self.tour.name} on {self.booking_date} ({self.number_of_people} people, {contact})"
 
     def clean(self):
         """Comprehensive validation for tour bookings."""
@@ -144,7 +154,7 @@ class TourBooking(models.Model):
         if self.pickup_option == 'vehicle' and not self.pickup_location.strip():
             raise ValidationError('Please provide your pickup location (guesthouse name or address).')
 
-        # ✅ Rule 4: Contact validation - at least one method required
+        # Rule 4: Contact validation - at least one method required
         if not self.contact_phone and not self.contact_email:
             raise ValidationError("Please provide either a contact phone number or an email address so the tour operator can reach you.")
 
@@ -177,7 +187,7 @@ class TourBooking(models.Model):
     def save(self, *args, **kwargs):
         """Calculate total price before saving."""
         if self.tour_id and self.number_of_people:
-            self.total_price = self.number_of_people * self.tour.price_per_person
+            self.total_price = self.number_of_people * float(self.tour.price_per_person)
         super().save(*args, **kwargs)
 
     def get_pickup_time_display(self):
@@ -193,7 +203,6 @@ class TourBooking(models.Model):
 # ==========================================
 # 3. TOUR REVIEW MODEL
 # ==========================================
-
 class TourReview(models.Model):
     RATING_CHOICES = [(i, str(i)) for i in range(1, 6)]
     
@@ -208,4 +217,5 @@ class TourReview(models.Model):
         ordering = ['-created_at']  # Always show newest first
 
     def __str__(self):
-        return f"Review for {self.tour.name} by {self.guest.username}"
+        guest_name = self.guest.username if self.guest else "Guest"
+        return f"Review for {self.tour.name} by {guest_name}"

@@ -4,4 +4,5 @@ from . import api_views
 urlpatterns = [
     path('tours/', api_views.tour_list, name='api_tour_list'),
     path('tours/<int:pk>/', api_views.tour_detail, name='api_tour_detail'),
+   path('tours/<int:tour_id>/book/', api_views.create_booking, name='api_create_booking'),
 ]
