@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q, Min, Max
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.utils.translation import get_language  # ✅ Added for language detection
+from django.utils.translation import get_language
 
 from advisor.utils import get_booking_confirmation_message
 from .forms import TourBookingForm, TourReviewForm, TourManagementForm
@@ -390,9 +390,16 @@ def approve_tour_booking(request, booking_id):
         booking.save()
         
         booking_reference = f"TV-{booking.pk:04d}"
-        send_booking_confirmation_email(booking, booking_reference, 'tour')
         
-        messages.success(request, f'Tour booking for {booking.guest.username} has been confirmed and they have been notified!')
+        # ✅ BULLETPROOF: Safely get guest name (handles guest checkout where guest is None)
+        guest_name = booking.guest.username if booking.guest else "Guest"
+        
+        try:
+            send_booking_confirmation_email(booking, booking_reference, 'tour')
+            messages.success(request, f'Tour booking for {guest_name} has been confirmed and they have been notified!')
+        except Exception as e:
+            # Fallback in case email utils crash on None guest attributes
+            messages.warning(request, f'Booking confirmed, but email failed to send: {e}')
     else:
         messages.info(request, 'This booking cannot be approved.')
         
@@ -414,9 +421,16 @@ def decline_tour_booking(request, booking_id):
             booking.save()
             
             booking_reference = f"TV-{booking.pk:04d}"
-            send_booking_declined_email(booking, booking_reference, 'tour', reason)
             
-            messages.success(request, f'Tour booking for {booking.guest.username} has been declined and they have been notified.')
+            # ✅ BULLETPROOF: Safely get guest name
+            guest_name = booking.guest.username if booking.guest else "Guest"
+            
+            try:
+                send_booking_declined_email(booking, booking_reference, 'tour', reason)
+                messages.success(request, f'Tour booking for {guest_name} has been declined and they have been notified.')
+            except Exception as e:
+                messages.warning(request, f'Booking declined, but email failed to send: {e}')
+                
             return redirect('owner_dashboard')
         else:
             messages.info(request, 'This booking cannot be declined.')
