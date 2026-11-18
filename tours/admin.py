@@ -97,8 +97,8 @@ class TourBookingAdmin(admin.ModelAdmin):
             phone = getattr(obj, 'guest_phone', None) or getattr(obj, 'phone', None) or getattr(obj.guest, 'phone', None) or obj.contact_phone
             email = obj.guest.email or obj.contact_email
         else:
-            # Guest checkout fallback
-            name = obj.contact_name or "Guest"
+            # ✅ Guest checkout fallback (Model does not have 'contact_name', so default to "Guest")
+            name = "Guest"
             phone = obj.contact_phone
             email = obj.contact_email
         
@@ -168,7 +168,8 @@ class TourBookingAdmin(admin.ModelAdmin):
                 email = booking.guest.email
                 phone = getattr(booking, 'guest_phone', '') or getattr(booking, 'phone', '') or getattr(booking.guest, 'phone', '') or booking.contact_phone or ''
             else:
-                guest_name = booking.contact_name or "Guest"
+                # ✅ Guest checkout fallback
+                guest_name = "Guest"
                 email = booking.contact_email or ''
                 phone = booking.contact_phone or ''
             
