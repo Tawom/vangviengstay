@@ -8,8 +8,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
-from accounts import views as accounts_views
 from django.views.generic import TemplateView
+from guesthouse import views as guesthouse_views
 
 from .sitemaps import (
     StaticSitemap,
@@ -41,8 +41,10 @@ urlpatterns = [
     # ✅ Built-in Auth URLs (provides 'login', 'logout', etc.)
     path('accounts/', include('django.contrib.auth.urls')),
 
-    # ✅ Custom signup (no language prefix, matches /accounts/login/)
-    path('accounts/signup/', accounts_views.signup, name='signup'),
+    # ✅ Custom Signup Flow (no language prefix, matches /accounts/login/)
+    path('accounts/signup/', guesthouse_views.signup_choice, name='signup_choice'),
+    path('accounts/signup/email/', guesthouse_views.signup_email, name='signup_email'),
+    path('accounts/signup/phone/', guesthouse_views.signup_phone, name='signup_phone'),
 
     # Analytics (no language prefix)
     path('analytics/', include('analytics.urls')),
