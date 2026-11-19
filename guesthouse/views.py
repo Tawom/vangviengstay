@@ -4,11 +4,12 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import Group  # ✅ ADDED: To assign Owner group
 from django.core.exceptions import ValidationError
 from django.db.models import Q, Min, Max, Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.utils.translation import get_language  # ✅ Added for language detection
+from django.utils.translation import get_language
 
 from advisor.email_utils import (
     send_booking_confirmation_email, 
@@ -50,7 +51,7 @@ def guesthouse_list(request):
     max_price = request.GET.get('max_price')
     city = request.GET.get('city', '')
     
-    # ✅ Apply text search filter (Updated to search both English and Lao descriptions)
+    # ✅ Apply text search filter
     if search_query:
         guesthouses = guesthouses.filter(
             Q(name__icontains=search_query) | 
@@ -104,8 +105,6 @@ def guesthouse_list(request):
     # ==========================================
     # ✅ SOCIAL PROOF STATS CALCULATION
     # ==========================================
-    
-    # 1. Total Active Listings
     total_listings = (
         Guesthouse.objects.filter(is_active=True).count() +
         Tour.objects.filter(is_active=True).count() +
@@ -114,7 +113,6 @@ def guesthouse_list(request):
         BuggyCar.objects.filter(is_active=True).count()
     )
 
-    # 2. Total Happy Travelers (Confirmed or Completed Bookings)
     total_travelers = (
         Booking.objects.filter(status__in=['confirmed', 'completed']).count() +
         TourBooking.objects.filter(status__in=['confirmed', 'completed']).count() +
@@ -123,7 +121,6 @@ def guesthouse_list(request):
         BuggyCarBooking.objects.filter(status__in=['confirmed', 'completed']).count()
     )
 
-    # 3. Average Rating & Total Reviews (Aggregate across all apps)
     review_models = [GuesthouseReview, TourReview, GuideReview, MotorbikeReview, BuggyCarReview]
     all_ratings = []
     total_reviews = 0
@@ -134,9 +131,7 @@ def guesthouse_list(request):
             all_ratings.append(agg['rating__avg'])
         total_reviews += model.objects.count()
     
-    # Calculate overall average, fallback to 4.9 if no reviews yet
     overall_rating = round(sum(all_ratings) / len(all_ratings), 1) if all_ratings else 4.9
-    
     # ==========================================
     
     context = {
@@ -153,7 +148,6 @@ def guesthouse_list(request):
             'min': int(price_stats['min_price'] or 0),
             'max': int(price_stats['max_price'] or 100)
         },
-        # ✅ Add stats to context
         'total_listings': total_listings,
         'total_travelers': total_travelers,
         'overall_rating': overall_rating,
@@ -192,7 +186,6 @@ def guesthouse_detail(request, guesthouse_id):
             'day_num': current_day.day               
         })
         
-    # ✅ Generate a safe description snippet for meta tags using the correct language
     current_lang = getattr(request, 'LANGUAGE_CODE', 'en')
     desc_text = guesthouse.get_description(current_lang)
     desc_snippet = desc_text[:150] + "..." if desc_text else "Book the best guesthouse in Vang Vieng, Laos."
@@ -200,8 +193,6 @@ def guesthouse_detail(request, guesthouse_id):
     context = {
         'guesthouse': guesthouse,
         'availability': availability_schedule,
-        
-        # ✅ ADD DYNAMIC META TAGS FOR WHATSAPP/FACEBOOK PREVIEWS
         'meta_title': f"{guesthouse.name} - Vang Vieng Stay",
         'meta_description': desc_snippet,
         'meta_image': guesthouse.main_image_url if guesthouse.main_image_url else 'https://vangviengstay.com/static/images/og-default.jpg',
@@ -229,7 +220,6 @@ def create_booking(request, guesthouse_id):
             booking.guest = request.user
             booking.status = 'pending'
             
-            # ✅ UX Improvement: Pre-fill email from user profile if left blank
             if request.user.email and not booking.contact_email:
                 booking.contact_email = request.user.email
             
@@ -240,14 +230,12 @@ def create_booking(request, guesthouse_id):
                 booking_reference = f"VV-{booking.pk:04d}"
                 send_booking_request_email(booking, booking_reference, 'guesthouse')
                 
-                # ✅ Clean, centralized UX message
                 messages.success(request, get_booking_confirmation_message(booking, "Booking"))
                 return redirect('booking_request_received', booking_id=booking.pk)
             except ValidationError as e:
                 form.add_error(None, e.messages[0])
     else:
         form = BookingForm(guesthouse=guesthouse)
-        # ✅ UX Improvement: Pre-fill email field if user is logged in
         if request.user.is_authenticated and request.user.email:
             form.fields['contact_email'].initial = request.user.email
         
@@ -396,6 +384,11 @@ def signup_email(request):
         form = EmailSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            # ✅ NEW: Automatically add new user to the 'Owner' group
+            owner_group, created = Group.objects.get_or_create(name='Owner')
+            user.groups.add(owner_group)
+            
             login(request, user)
             messages.success(request, f'Welcome {user.username}! Your account has been created with email.')
             return redirect('owner_dashboard')
@@ -411,6 +404,10 @@ def signup_phone(request):
         form = PhoneSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
+            
+            # ✅ NEW: Automatically add new user to the 'Owner' group
+            owner_group, created = Group.objects.get_or_create(name='Owner')
+            user.groups.add(owner_group)
             
             # Save phone number to UserProfile (Ensure UserProfile model exists)
             phone_number = form.cleaned_data.get('phone_number')
@@ -436,7 +433,7 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, f'Welcome back, {user.username}!')
-            next_url = request.GET.get('next', 'guesthouse_list')
+            next_url = request.GET.get('next', 'tour_list') # ✅ FIXED: was guesthouse_list
             return redirect(next_url)
     else:
         form = AuthenticationForm()
@@ -448,7 +445,7 @@ def user_logout(request):
     """User logout."""
     logout(request)
     messages.info(request, 'You have been logged out successfully.')
-    return redirect('owner_dashboard')
+    return redirect('tour_list') # ✅ FIXED: was owner_dashboard
 
 
 # ==========================================
@@ -460,7 +457,7 @@ def owner_dashboard(request):
     """Main dashboard for property owners."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.warning(request, "You do not have owner permissions.")
-        return redirect('owner_dashboard')
+        return redirect('tour_list') # ✅ FIXED: Was 'owner_dashboard' (caused infinite loop)
         
     my_guesthouses = Guesthouse.objects.filter(owner=request.user)
     
