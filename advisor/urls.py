@@ -9,6 +9,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from accounts import views as accounts_views
+from django.views.generic import TemplateView
 
 from .sitemaps import (
     StaticSitemap,
@@ -101,6 +102,7 @@ urlpatterns += i18n_patterns(
     path('guides/', include('guides.urls')),
     path('owner-dashboard/', include('dashboard.urls')),
     path('ai-assistant/', include('ai_assistant.urls')),
+    path('terms-of-service/', TemplateView.as_view(template_name='pages/terms_of_service.html'), name='terms_of_service'),
 
     # ✅ Keyword arguments must come LAST
     prefix_default_language=True,

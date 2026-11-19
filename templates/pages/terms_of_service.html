@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Terms of Service" %} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">{% trans "Terms of Service" %}</h1>
+    
+    <div class="prose prose-blue max-w-none text-gray-700 space-y-6">
+        <p>{% trans "Welcome to Vang Vieng Stay. By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement." %}</p>
+        
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">1. {% trans "Use License" %}</h2>
+            <p>{% trans "Permission is granted to temporarily download one copy of the materials on Vang Vieng Stay's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title." %}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">2. {% trans "Disclaimer" %}</h2>
+            <p>{% trans "The materials on Vang Vieng Stay's website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property." %}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">3. {% trans "Limitations" %}</h2>
+            <p>{% trans "In no event shall Vang Vieng Stay or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we have been notified orally or in writing of the possibility of such damage." %}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">4. {% trans "Bookings & Payments" %}</h2>
+            <p>{% trans "All bookings are subject to availability and confirmation by the property owner or service provider. Prices are listed in Lao Kip (LAK) and are subject to change without notice." %}</p>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">5. {% trans "Contact Us" %}</h2>
+            <p>{% trans "If you have any questions about these Terms of Service, please" %} <a href="{% url 'inquiry' %}" class="text-blue-600 hover:underline font-medium">{% trans "contact us" %}</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
