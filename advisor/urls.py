@@ -88,7 +88,7 @@ urlpatterns += i18n_patterns(
 
     # --- App URLs ---
     path('', include('tours.urls')),
-    path('guesthouses/', include('guesthouse.urls')),
+    #path('guesthouses/', include('guesthouse.urls')),
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
     path('guides/', include('guides.urls')),
