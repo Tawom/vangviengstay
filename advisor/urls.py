@@ -8,6 +8,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from accounts import views as accounts_views
 
 from .sitemaps import (
     StaticSitemap,
@@ -36,9 +37,11 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
     
-        # ✅ Built-in Auth URLs (provides 'login', 'logout', etc.)
+    # ✅ Built-in Auth URLs (provides 'login', 'logout', etc.)
     path('accounts/', include('django.contrib.auth.urls')),
 
+    # ✅ Custom signup (no language prefix, matches /accounts/login/)
+    path('accounts/signup/', accounts_views.signup, name='signup'),
 
     # Analytics (no language prefix)
     path('analytics/', include('analytics.urls')),
@@ -52,7 +55,6 @@ urlpatterns = [
 
     # ✅ API endpoints (no language prefix)
     path('api/', include('advisor.api_urls')),
-
 ]
 
 # ==========================================

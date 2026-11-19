@@ -172,8 +172,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # 9. AUTHENTICATION & ADMIN
 # ==========================================
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'guesthouse_list'
-LOGOUT_REDIRECT_URL = 'guesthouse_list'
+LOGIN_REDIRECT_URL = 'tour_list'
+LOGOUT_REDIRECT_URL = 'tour_list'
 
 ADMIN_SITE_HEADER = "Vang Vieng Stay Administration"
 ADMIN_SITE_TITLE = "Vang Vieng Stay Admin"

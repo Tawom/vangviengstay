@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign Up" %} - Vang Vieng Stay{% endblock %}
+
+{% block content %}
+<div class="min-h-[60vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <div class="text-center">
+            <h2 class="mt-2 text-3xl font-extrabold text-gray-900">
+                {% trans "Create Your Account" %}
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+                {% trans "Join Vang Vieng Stay and start managing your properties." %}
+            </p>
+        </div>
+        
+        <form class="mt-8 space-y-6" method="POST">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <div class="flex">
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700 font-semibold">
+                                {% trans "Please correct the errors below:" %}
+                            </p>
+                            <ul class="mt-2 text-sm text-red-600 list-disc list-inside">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="space-y-4">
+                <div>
+                    <label for="id_username" class="block text-sm font-medium text-gray-700 mb-1">
+                        {% trans "Username" %}
+                    </label>
+                    <input id="id_username" name="username" type="text" required 
+                           value="{{ form.username.value|default:'' }}"
+                           class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                           placeholder="{% trans 'Choose a username' %}">
+                    <p class="mt-1 text-xs text-gray-500">{% trans "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only." %}</p>
+                </div>
+                
+                <div>
+                    <label for="id_password1" class="block text-sm font-medium text-gray-700 mb-1">
+                        {% trans "Password" %}
+                    </label>
+                    <input id="id_password1" name="password1" type="password" required 
+                           class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                           placeholder="{% trans 'Create a password' %}">
+                </div>
+                
+                <div>
+                    <label for="id_password2" class="block text-sm font-medium text-gray-700 mb-1">
+                        {% trans "Confirm Password" %}
+                    </label>
+                    <input id="id_password2" name="password2" type="password" required 
+                           class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                           placeholder="{% trans 'Confirm your password' %}">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                    {% trans "Create Account" %}
+                </button>
+            </div>
+            
+            <div class="text-center text-sm">
+                <span class="text-gray-600">{% trans "Already have an account?" %}</span>
+                <a href="{% url 'login' %}" class="font-medium text-blue-600 hover:text-blue-500 ml-1">
+                    {% trans "Log in" %}
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

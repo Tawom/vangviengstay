@@ -172,15 +172,18 @@
                                         <div class="border-t border-gray-200 my-2"></div>
                                     {% endif %}
                                     
-                                    <a href="{% url 'logout' %}" class="flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                                        {% trans "Logout" %}
-                                    </a>
+                                    <form method="POST" action="{% url 'logout' %}" class="w-full">
+                                        {% csrf_token %}
+                                        <button type="submit" class="block text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition mt-2 flex items-center gap-2 w-full text-left">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                            {% trans "Log Out" %}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         {% else %}
                             <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-600 font-medium px-4 py-2 transition">{% trans "Login" %}</a>
-                            <a href="#" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">{% trans "Sign Up" %}</a>
+                            <a href="{% url 'signup' %}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">{% trans "Sign Up" %}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -249,13 +252,17 @@
                         <a href="{% url 'motorbike_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏍️ {% trans "My Motorbike Rentals" %}</a>
                         <a href="{% url 'buggy_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏎️ {% trans "My Buggy Car Rentals" %}</a>
                         
-                        <a href="{% url 'logout' %}" class="block text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition mt-2 flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                            {% trans "Log Out" %}
-                        </a>
+                        <!-- ✅ FIXED: Mobile logout is now a POST form -->
+                        <form method="POST" action="{% url 'logout' %}" class="w-full">
+                            {% csrf_token %}
+                            <button type="submit" class="block text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition mt-2 flex items-center gap-2 w-full text-left">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                {% trans "Log Out" %}
+                            </button>
+                        </form>
                     {% else %}
                         <a href="{% url 'login' %}" class="block text-blue-600 font-semibold py-2 px-3 rounded-lg hover:bg-blue-50 transition flex items-center gap-2">{% trans "Log In" %}</a>
-                        <a href="#" class="block bg-blue-600 text-white text-center font-semibold py-2 px-3 rounded-lg hover:bg-blue-700 transition mt-2">{% trans "Sign Up" %}</a>
+                        <a href="{% url 'signup' %}" class="block bg-blue-600 text-white text-center font-semibold py-2 px-3 rounded-lg hover:bg-blue-700 transition mt-2">{% trans "Sign Up" %}</a>
                     {% endif %}
                 </div>
             </div>
@@ -396,9 +403,6 @@
             
             <div class="flex flex-wrap gap-2 ml-9">
                 <button onclick="sendQuickMessage('What is the cancellation policy?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">{% trans "Cancellation policy" %}</button>
-                <!-- 
-                <button onclick="sendQuickMessage('What are check-in times?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">{% trans "Check-in times" %}</button>
-                -->
                 <button onclick="sendQuickMessage('What should I bring for tours?')" class="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition border border-blue-200">{% trans "Tour essentials" %}</button>
             </div>
         </div>

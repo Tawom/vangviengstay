@@ -13,7 +13,7 @@ class StaticSitemap(Sitemap):
 
     def items(self):
         # Add the names of your main list views here
-        return ['guesthouse_list', 'tour_list', 'motorbike_list', 'buggy_list', 'guide_list']
+        return ['tour_list', 'motorbike_list', 'buggy_list', 'guide_list']
 
     def location(self, item):
         return reverse(item)

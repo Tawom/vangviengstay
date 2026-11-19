@@ -22,7 +22,7 @@ def owner_dashboard(request):
     """Main dashboard overview for owners with stats and pending bookings."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'You do not have permission to access the owner dashboard.')
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     today = timezone.now().date()
     
@@ -120,7 +120,7 @@ def owner_guesthouse_bookings(request, guesthouse_id):
     """View all bookings for a specific guesthouse."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'You do not have permission to access this page.')
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     guesthouse = get_object_or_404(Guesthouse, id=guesthouse_id, owner=request.user)
     today = timezone.now().date()
@@ -144,7 +144,7 @@ def check_in_guest(request, booking_id):
     """Mark a guest as checked in."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'Permission denied.')
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     booking = get_object_or_404(Booking, id=booking_id, guesthouse__owner=request.user)
     
@@ -165,7 +165,7 @@ def owner_tour_bookings(request, tour_id):
     """View all bookings for a specific tour."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'You do not have permission to access this page.')
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     tour = get_object_or_404(Tour, id=tour_id, owner=request.user)
     today = timezone.now().date()
@@ -189,7 +189,7 @@ def mark_attended(request, booking_id):
     """Mark a tour participant as attended."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.error(request, 'Permission denied.')
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     booking = get_object_or_404(TourBooking, id=booking_id, tour__owner=request.user)
     
@@ -269,7 +269,7 @@ def owner_analytics(request):
     """Advanced analytics dashboard for property owners."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.warning(request, "You do not have owner permissions.")
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
     
     # Get date range from URL params (default: last 30 days)
     period = request.GET.get('period', '30')
