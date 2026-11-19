@@ -69,8 +69,8 @@
                     
                     <!-- Brand Text -->
                     <div class="flex flex-col leading-none">
-                        <span class="font-extrabold text-2xl text-gray-900 tracking-tight">VangVieng</span>
-                        <span class="font-bold text-base text-orange-500 tracking-widest uppercase">Stay</span>
+                        <span class="font-extrabold text-2xl text-gray-900 tracking-tight">VangVieng Stay</span>
+                        <span class="font-bold text-sm text-orange-500 tracking-widest uppercase">Laos</span>
                     </div>
                 </a>                
 
@@ -453,10 +453,12 @@
             input.value = '';
             
             const typingId = showTypingIndicator();
-            
-            // ✅ FIX: Dynamically get the language prefix (e.g., '/en' or '/lo') to prevent 302 redirect
+            // ✅ FIX: Smart language prefix detection (prevents '/accounts/ai-assistant/chat/' bug)
             const currentPath = window.location.pathname;
-            const langPrefix = currentPath.split('/')[1] ? '/' + currentPath.split('/')[1] : '/en';
+            const pathParts = currentPath.split('/');
+            const possibleLang = pathParts[1];
+            // Only use it as a language prefix if it's actually 'en' or 'lo'
+            const langPrefix = (possibleLang === 'en' || possibleLang === 'lo') ? `/${possibleLang}` : '/en';
             const chatUrl = `${langPrefix}/ai-assistant/chat/`;
             
             try {
