@@ -87,8 +87,8 @@ urlpatterns += i18n_patterns(
     path('contact/', include('inquiry.urls')),
 
     # --- App URLs ---
-    path('', include('tours.urls')),
-    #path('guesthouses/', include('guesthouse.urls')),
+    path('', include('tours.urls')),                # ✅ TOURS IS NOW THE HOMEPAGE
+    # path('guesthouses/', include('guesthouse.urls')), # ❌ COMMENTED OUT
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
     path('guides/', include('guides.urls')),
