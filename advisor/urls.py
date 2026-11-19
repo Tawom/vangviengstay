@@ -35,6 +35,10 @@ sitemaps = {
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
+    
+        # ✅ Built-in Auth URLs (provides 'login', 'logout', etc.)
+    path('accounts/', include('django.contrib.auth.urls')),
+
 
     # Analytics (no language prefix)
     path('analytics/', include('analytics.urls')),
@@ -48,6 +52,7 @@ urlpatterns = [
 
     # ✅ API endpoints (no language prefix)
     path('api/', include('advisor.api_urls')),
+
 ]
 
 # ==========================================

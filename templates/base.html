@@ -141,7 +141,7 @@
                                 
                                 <!-- Dropdown Menu -->
                                 <div class="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    <a href="{% url 'universal_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition font-semibold border-b border-gray-100 mb-1 pb-2">
+                                    <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition font-semibold border-b border-gray-100 mb-1 pb-2">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                                         {% trans "My Dashboard" %}
                                     </a>
@@ -180,7 +180,7 @@
                             </div>
                         {% else %}
                             <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-600 font-medium px-4 py-2 transition">{% trans "Login" %}</a>
-                            <a href="{% url 'signup_choice' %}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">{% trans "Sign Up" %}</a>
+                            <a href="#" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">{% trans "Sign Up" %}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                 
                 <div class="border-t border-gray-100 pt-3 mt-3">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'universal_dashboard' %}" class="block text-gray-700 font-semibold py-2 px-3 rounded-lg hover:bg-blue-50 transition flex items-center gap-2 mb-2 border-b border-gray-100 pb-2">
+                        <a href="{% url 'owner_dashboard' %}" class="block text-gray-700 font-semibold py-2 px-3 rounded-lg hover:bg-blue-50 transition flex items-center gap-2 mb-2 border-b border-gray-100 pb-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                             {% trans "My Dashboard" %}
                         </a>
@@ -298,7 +298,7 @@
                 <h4 class="text-white font-bold mb-2">{% trans "Support" %}</h4>
                 <ul class="space-y-1">
                     <li><a href="{% url 'inquiry' %}" class="hover:text-white transition">{% trans "Contact Us" %}</a></li>
-                    <li><a href="{% url 'terms_of_service' %}" class="hover:text-white transition">{% trans "Terms of Service" %}</a></li>
+                    <li><a href="#" class="hover:text-white transition">{% trans "Terms of Service" %}</a></li>
                 </ul>
             </div>
         </div>
