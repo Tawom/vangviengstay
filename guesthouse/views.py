@@ -398,7 +398,7 @@ def signup_email(request):
             user = form.save()
             login(request, user)
             messages.success(request, f'Welcome {user.username}! Your account has been created with email.')
-            return redirect('guesthouse_list')
+            return redirect('owner_dashboard')
     else:
         form = EmailSignupForm()
     
@@ -421,7 +421,7 @@ def signup_phone(request):
             login(request, user)
             messages.success(request, f'Welcome {user.username}! Your account has been created with phone.')
             messages.info(request, '📱 OTP verification for your phone number will be available soon.')
-            return redirect('guesthouse_list')
+            return redirect('owner_dashboard')
     else:
         form = PhoneSignupForm()
     
@@ -448,7 +448,7 @@ def user_logout(request):
     """User logout."""
     logout(request)
     messages.info(request, 'You have been logged out successfully.')
-    return redirect('guesthouse_list')
+    return redirect('owner_dashboard')
 
 
 # ==========================================
@@ -460,7 +460,7 @@ def owner_dashboard(request):
     """Main dashboard for property owners."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.warning(request, "You do not have owner permissions.")
-        return redirect('guesthouse_list')
+        return redirect('owner_dashboard')
         
     my_guesthouses = Guesthouse.objects.filter(owner=request.user)
     
