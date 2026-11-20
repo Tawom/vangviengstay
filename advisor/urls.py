@@ -45,6 +45,8 @@ urlpatterns = [
     path('accounts/signup/', guesthouse_views.signup_choice, name='signup_choice'),
     path('accounts/signup/email/', guesthouse_views.signup_email, name='signup_email'),
     path('accounts/signup/phone/', guesthouse_views.signup_phone, name='signup_phone'),
+    path('accounts/verify-email/<str:token>/', guesthouse_views.verify_email, name='verify_email'),
+    path('accounts/resend-verification/', guesthouse_views.resend_verification, name='resend_verification'),
 
     # Analytics (no language prefix)
     path('analytics/', include('analytics.urls')),

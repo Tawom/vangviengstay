@@ -4,12 +4,22 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import Group  # ✅ ADDED: To assign Owner group
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db.models import Q, Min, Max, Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import get_language
+
+from accounts.models import EmailVerificationToken, Profile
+from .models import Booking, Guesthouse, GuesthouseReview
+
+from tours.models import Tour, TourBooking, TourReview
+from guides.models import Guide, GuideBooking, GuideReview
+from motorbike.models import Motorbike, MotorbikeBooking, MotorbikeReview
+from buggy.models import BuggyCar, BuggyCarBooking, BuggyCarReview
 
 from advisor.email_utils import (
     send_booking_confirmation_email, 
@@ -25,13 +35,6 @@ from .forms import (
     EmailSignupForm,
     PhoneSignupForm
 )
-from .models import Booking, Guesthouse, GuesthouseReview
-
-# Import models from other apps for the universal dashboard AND social proof stats
-from tours.models import Tour, TourBooking, TourReview
-from guides.models import Guide, GuideBooking, GuideReview
-from motorbike.models import Motorbike, MotorbikeBooking, MotorbikeReview
-from buggy.models import BuggyCar, BuggyCarBooking, BuggyCarReview
 
 
 # ==========================================
@@ -42,7 +45,6 @@ def guesthouse_list(request):
     """Home page: Lists all active guesthouses with advanced search and filtering."""
     guesthouses = Guesthouse.objects.filter(is_active=True)
     
-    # Get search parameters
     search_query = request.GET.get('search', '').strip()
     check_in = request.GET.get('check_in')
     check_out = request.GET.get('check_out')
@@ -51,7 +53,6 @@ def guesthouse_list(request):
     max_price = request.GET.get('max_price')
     city = request.GET.get('city', '')
     
-    # ✅ Apply text search filter
     if search_query:
         guesthouses = guesthouses.filter(
             Q(name__icontains=search_query) | 
@@ -60,11 +61,9 @@ def guesthouse_list(request):
             Q(description_lo__icontains=search_query)
         )
     
-    # Apply city filter
     if city:
         guesthouses = guesthouses.filter(city__iexact=city)
     
-    # Apply price range filter
     if min_price:
         try:
             guesthouses = guesthouses.filter(price_per_night__gte=float(min_price))
@@ -77,7 +76,6 @@ def guesthouse_list(request):
         except ValueError:
             pass
     
-    # Apply date availability filter
     if check_in and check_out:
         try:
             check_in_date = datetime.strptime(check_in, '%Y-%m-%d').date()
@@ -93,18 +91,13 @@ def guesthouse_list(request):
         except ValueError:
             pass
     
-    # Get unique cities for the dropdown
     available_cities = Guesthouse.objects.filter(is_active=True).values_list('city', flat=True).distinct().order_by('city')
     
-    # Get price range for the slider
     price_stats = Guesthouse.objects.filter(is_active=True).aggregate(
         min_price=Min('price_per_night'),
         max_price=Max('price_per_night')
     )
     
-    # ==========================================
-    # ✅ SOCIAL PROOF STATS CALCULATION
-    # ==========================================
     total_listings = (
         Guesthouse.objects.filter(is_active=True).count() +
         Tour.objects.filter(is_active=True).count() +
@@ -132,7 +125,6 @@ def guesthouse_list(request):
         total_reviews += model.objects.count()
     
     overall_rating = round(sum(all_ratings) / len(all_ratings), 1) if all_ratings else 4.9
-    # ==========================================
     
     context = {
         'guesthouses': guesthouses,
@@ -204,7 +196,7 @@ def guesthouse_detail(request, guesthouse_id):
 
 
 # ==========================================
-# 2. BOOKING & PAYMENT VIEWS (REQUEST & VERIFY)
+# 2. BOOKING & PAYMENT VIEWS
 # ==========================================
 
 @login_required
@@ -244,14 +236,12 @@ def create_booking(request, guesthouse_id):
 
 @login_required
 def booking_request_received(request, booking_id):
-    """Displays a reassuring message that the booking request is being verified."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     return render(request, 'guesthouse/booking_request_received.html', {'booking': booking})
 
 
 @login_required
 def booking_confirmation(request, booking_id):
-    """Displays the booking voucher with a unique reference number."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     booking_reference = f"VV-{booking.pk:04d}"
     
@@ -263,7 +253,6 @@ def booking_confirmation(request, booking_id):
 
 @login_required
 def cancel_booking(request, booking_id):
-    """Allows a user to cancel a pending or confirmed booking."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if request.method == 'POST':
@@ -285,7 +274,6 @@ def cancel_booking(request, booking_id):
 
 @login_required
 def guesthouse_bookings_dashboard(request):
-    """Displays all guesthouse bookings for the logged-in user."""
     today = timezone.now().date()
     
     all_bookings = Booking.objects.filter(guest=request.user).select_related('guesthouse')
@@ -316,7 +304,6 @@ def guesthouse_bookings_dashboard(request):
 
 @login_required
 def universal_dashboard(request):
-    """Universal dashboard showing ALL upcoming bookings for the logged-in user."""
     today = timezone.now().date()
     
     guesthouse_upcoming = Booking.objects.filter(
@@ -370,7 +357,7 @@ def universal_dashboard(request):
 
 
 # ==========================================
-# 3b. SIGNUP VIEWS (EMAIL & PHONE)
+# 3b. SIGNUP & VERIFICATION VIEWS
 # ==========================================
 
 def signup_choice(request):
@@ -379,23 +366,103 @@ def signup_choice(request):
 
 
 def signup_email(request):
-    """User registration with email."""
+    """User registration with email and verification."""
     if request.method == 'POST':
         form = EmailSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
             
-            # ✅ NEW: Automatically add new user to the 'Owner' group
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.email_verified = False
+            profile.save()
+            
             owner_group, created = Group.objects.get_or_create(name='Owner')
             user.groups.add(owner_group)
             
+            token = EmailVerificationToken.objects.create(user=user)
+            
+            verification_link = f"{request.scheme}://{request.get_host()}/accounts/verify-email/{token.token}/"
+            send_mail(
+                subject='Verify your email - Vang Vieng Stay',
+                message=(
+                    f'Hi {user.username},\n\n'
+                    f'Please click the link below to verify your email:\n\n'
+                    f'{verification_link}\n\n'
+                    f'This link will expire in 24 hours.\n\n'
+                    f'Thank you!'
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+            
             login(request, user)
-            messages.success(request, f'Welcome {user.username}! Your account has been created with email.')
+            messages.success(request, f'Welcome {user.username}! Please check your email to verify your account.')
+            messages.warning(request, '⚠️ Please verify your email to unlock all dashboard features.')
             return redirect('owner_dashboard')
     else:
         form = EmailSignupForm()
     
     return render(request, 'guesthouse/signup_email.html', {'form': form})
+
+
+def verify_email(request, token):
+    """Verify user's email address using the token from the email link."""
+    try:
+        verification_token = EmailVerificationToken.objects.get(token=token, is_used=False)
+        
+        if verification_token.is_expired:
+            messages.error(request, 'This verification link has expired. Please request a new one.')
+            return redirect('login')
+        
+        profile, created = Profile.objects.get_or_create(user=verification_token.user)
+        profile.email_verified = True
+        profile.save()
+        
+        verification_token.is_used = True
+        verification_token.save()
+        
+        messages.success(request, '✅ Your email has been verified successfully!')
+        return redirect('owner_dashboard')
+        
+    except EmailVerificationToken.DoesNotExist:
+        messages.error(request, 'Invalid or already used verification link.')
+        return redirect('login')
+
+
+@login_required
+def resend_verification(request):
+    """Resend verification email to the logged-in user."""
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
+    if profile.email_verified:
+        messages.info(request, 'Your email is already verified!')
+        return redirect('owner_dashboard')
+    
+    if not request.user.email:
+        messages.error(request, 'No email address found on your account. Please update your profile.')
+        return redirect('owner_dashboard')
+    
+    EmailVerificationToken.objects.filter(user=request.user, is_used=False).delete()
+    token = EmailVerificationToken.objects.create(user=request.user)
+    
+    verification_link = f"{request.scheme}://{request.get_host()}/accounts/verify-email/{token.token}/"
+    send_mail(
+        subject='Verify your email - Vang Vieng Stay',
+        message=(
+            f'Hi {request.user.username},\n\n'
+            f'You requested a new verification link. Please click below:\n\n'
+            f'{verification_link}\n\n'
+            f'This link will expire in 24 hours.\n\n'
+            f'Thank you!'
+        ),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[request.user.email],
+        fail_silently=False,
+    )
+    
+    messages.success(request, '✅ A new verification email has been sent! Please check your inbox (and spam folder).')
+    return redirect('owner_dashboard')
 
 
 def signup_phone(request):
@@ -405,14 +472,13 @@ def signup_phone(request):
         if form.is_valid():
             user = form.save()
             
-            # ✅ NEW: Automatically add new user to the 'Owner' group
             owner_group, created = Group.objects.get_or_create(name='Owner')
             user.groups.add(owner_group)
             
-            # Save phone number to UserProfile (Ensure UserProfile model exists)
             phone_number = form.cleaned_data.get('phone_number')
             if phone_number and hasattr(user, 'profile'):
                 user.profile.phone_number = phone_number
+                user.profile.phone_verified = False
                 user.profile.save()
             
             login(request, user)
@@ -426,14 +492,13 @@ def signup_phone(request):
 
 
 def user_login(request):
-    """User login."""
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             messages.success(request, f'Welcome back, {user.username}!')
-            next_url = request.GET.get('next', 'tour_list') # ✅ FIXED: was guesthouse_list
+            next_url = request.GET.get('next', 'tour_list')
             return redirect(next_url)
     else:
         form = AuthenticationForm()
@@ -442,10 +507,9 @@ def user_login(request):
 
 
 def user_logout(request):
-    """User logout."""
     logout(request)
     messages.info(request, 'You have been logged out successfully.')
-    return redirect('tour_list') # ✅ FIXED: was owner_dashboard
+    return redirect('tour_list')
 
 
 # ==========================================
@@ -454,10 +518,9 @@ def user_logout(request):
 
 @login_required
 def owner_dashboard(request):
-    """Main dashboard for property owners."""
     if not request.user.groups.filter(name='Owner').exists() and not request.user.is_superuser:
         messages.warning(request, "You do not have owner permissions.")
-        return redirect('tour_list') # ✅ FIXED: Was 'owner_dashboard' (caused infinite loop)
+        return redirect('tour_list')
         
     my_guesthouses = Guesthouse.objects.filter(owner=request.user)
     
@@ -477,7 +540,6 @@ def owner_dashboard(request):
 
 @login_required
 def owner_guesthouse_add(request):
-    """Allows an owner to add a new guesthouse."""
     if request.method == 'POST':
         form = GuesthouseManagementForm(request.POST)
         if form.is_valid():
@@ -497,7 +559,6 @@ def owner_guesthouse_add(request):
 
 @login_required
 def owner_guesthouse_edit(request, pk):
-    """Allows an owner to edit their existing guesthouse."""
     guesthouse = get_object_or_404(Guesthouse, pk=pk, owner=request.user)
     
     if request.method == 'POST':
@@ -517,7 +578,6 @@ def owner_guesthouse_edit(request, pk):
 
 @login_required
 def approve_booking(request, booking_id):
-    """Owner approves a pending booking."""
     booking = get_object_or_404(Booking, pk=booking_id, guesthouse__owner=request.user)
     
     if booking.status == 'pending':
@@ -536,7 +596,6 @@ def approve_booking(request, booking_id):
 
 @login_required
 def decline_booking(request, booking_id):
-    """Owner declines a pending booking with a reason."""
     booking = get_object_or_404(Booking, pk=booking_id, guesthouse__owner=request.user)
     
     if request.method == 'POST':
@@ -565,12 +624,11 @@ def decline_booking(request, booking_id):
 # ==========================================
 
 def terms_of_service(request):
-    """Displays the Terms of Service page."""
     return render(request, 'guesthouse/terms_of_service.html')
+
 
 @login_required
 def submit_guesthouse_review(request, booking_id):
-    """Handles the submission of a guesthouse review."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if booking.status != 'confirmed':
@@ -606,7 +664,6 @@ def submit_guesthouse_review(request, booking_id):
 
 @login_required
 def edit_guesthouse_review(request, booking_id):
-    """Allows a user to edit their existing guesthouse review."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'guesthouse_review'):
@@ -633,7 +690,6 @@ def edit_guesthouse_review(request, booking_id):
 
 @login_required
 def delete_guesthouse_review(request, booking_id):
-    """Allows a user to delete their guesthouse review."""
     booking = get_object_or_404(Booking, pk=booking_id, guest=request.user)
     
     if not hasattr(booking, 'guesthouse_review'):
