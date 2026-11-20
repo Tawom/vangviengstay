@@ -225,19 +225,19 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True 
 
 # ==========================================
-# EMAIL CONFIGURATION (For verification emails)
+# EMAIL CONFIGURATION (Production with Resend)
 # ==========================================
 
-# ✅ DEVELOPMENT MODE: Prints emails to terminal (no real emails sent)
 if DEBUG:
+    # ✅ DEVELOPMENT: Print emails to terminal (no real emails sent)
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
-
-# 🚀 PRODUCTION MODE: Uncomment these when ready to send real emails
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-# DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
+else:
+    # 🚀 PRODUCTION: Use Resend for real email sending
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.resend.com'
+    EMAIL_PORT = 465
+    EMAIL_USE_SSL = True  # Resend uses SSL on port 465
+    EMAIL_HOST_USER = 'resend'  # Resend uses 'resend' as the username
+    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY')  # Your API key from environment
+    DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
