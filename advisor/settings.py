@@ -142,10 +142,11 @@ LANGUAGE_CODE = 'en'  # Default language
 
 # Available languages
 LANGUAGES = [
-    ('en', 'English'),
     ('lo', 'Lao'),
-    ('th', 'ภาษาไทย'),  
-
+    ('vi', 'Tiếng Việt'),
+    ('zh-hans', '中文 (简体)'),  # Simplified Chinese
+    ('ko', '한국어'),  # Korean
+    ('en', 'English'),
 ]
 
 # Where translation files are stored
