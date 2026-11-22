@@ -146,6 +146,7 @@ LANGUAGES = [
     ('vi', 'Tiếng Việt'),
     ('zh-hans', '中文 (简体)'),  # Simplified Chinese
     ('ko', '한국어'),  # Korean
+    ('th', 'ภาษาไทย'),
     ('en', 'English'),
 ]
 
