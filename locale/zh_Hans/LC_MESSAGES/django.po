@@ -1437,3 +1437,12 @@ msgstr "尝试调整您的搜索过滤器或日期"
 #: tours/templates/tours/tour_list.html:227
 msgid "Clear All Filters"
 msgstr "清除所有过滤器"
+
+msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
+msgstr "立即预订，抵达时付款（免费取消）"
+
+msgid "Prefer to chat? We can reserve it for you instantly."
+msgstr "更喜欢聊天？我们可以立即为您预订。"
+
+msgid "Reserve via WhatsApp Instead"
+msgstr "改为通过 WhatsApp 预订"

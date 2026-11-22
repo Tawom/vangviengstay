@@ -1437,3 +1437,12 @@ msgstr "검색 필터나 날짜를 조정해 보세요"
 #: tours/templates/tours/tour_list.html:227
 msgid "Clear All Filters"
 msgstr "모든 필터 지우기"
+
+msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
+msgstr "지금 예약, 도착 시 결제 (무료 취소)"
+
+msgid "Prefer to chat? We can reserve it for you instantly."
+msgstr "채팅을 선호하십니까? 즉시 예약해 드리겠습니다."
+
+msgid "Reserve via WhatsApp Instead"
+msgstr "대신 WhatsApp으로 예약"

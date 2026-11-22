@@ -1437,3 +1437,12 @@ msgstr "Hãy thử điều chỉnh bộ lọc tìm kiếm hoặc ngày của b�
 #: tours/templates/tours/tour_list.html:227
 msgid "Clear All Filters"
 msgstr "Xóa tất cả bộ lọc"
+
+msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
+msgstr "Giữ chỗ trước, thanh toán khi đến (Hủy miễn phí)"
+
+msgid "Prefer to chat? We can reserve it for you instantly."
+msgstr "Thích trò chuyện? Chúng tôi có thể đặt chỗ cho bạn ngay lập tức."
+
+msgid "Reserve via WhatsApp Instead"
+msgstr "Đặt qua WhatsApp thay thế"

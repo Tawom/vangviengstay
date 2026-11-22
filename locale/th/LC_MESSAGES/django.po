@@ -1807,3 +1807,12 @@ msgstr "ลองปรับตัวกรองการค้นหาหร
 #: tours/templates/tours/tour_list.html:227
 msgid "Clear All Filters"
 msgstr "ล้างตัวกรองทั้งหมด"
+
+msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
+msgstr "จองล่วงหน้า จ่ายเงินเมื่อมาถึง (ยกเลิกฟรี)"
+
+msgid "Prefer to chat? We can reserve it for you instantly."
+msgstr "ต้องการแชท? เราสามารถจองให้คุณได้ทันที"
+
+msgid "Reserve via WhatsApp Instead"
+msgstr "จองผ่าน WhatsApp แทน"
