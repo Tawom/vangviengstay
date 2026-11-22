@@ -144,6 +144,8 @@ LANGUAGE_CODE = 'en'  # Default language
 LANGUAGES = [
     ('en', 'English'),
     ('lo', 'Lao'),
+    ('th', 'ภาษาไทย'),  
+
 ]
 
 # Where translation files are stored
@@ -225,19 +227,15 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True 
 
 # ==========================================
-# EMAIL CONFIGURATION (Production with Resend)
+# EMAIL CONFIGURATION (Resend)
 # ==========================================
+DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
 
 if DEBUG:
-    # ✅ DEVELOPMENT: Print emails to terminal (no real emails sent)
+    # ✅ DEVELOPMENT (Mac): Print emails to terminal (no real emails sent)
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
 else:
-    # 🚀 PRODUCTION: Use Resend for real email sending
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.resend.com'
-    EMAIL_PORT = 465
-    EMAIL_USE_SSL = True  # Resend uses SSL on port 465
-    EMAIL_HOST_USER = 'resend'  # Resend uses 'resend' as the username
-    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY')  # Your API key from environment
-    DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
+    # 🚀 PRODUCTION (Server): Use Resend HTTP API (Bypasses DO port blocks)
+    # Note: This requires the 'resend_backend.py' file we created on the server!
+    EMAIL_BACKEND = 'advisor.resend_backend.ResendBackend'
+    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY')
