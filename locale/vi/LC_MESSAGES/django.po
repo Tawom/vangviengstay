@@ -4,11 +4,12 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-22 13:32+0700\n"
+"POT-Creation-Date: 2026-11-23 10:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,1430 +20,2403 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: buggy/templates/buggy/book_buggy.html:5
+#: buggy/templates/buggy/book_buggy.html:15
+#: guesthouse/templates/guesthouse/book.html:5
+#: guides/templates/guides/book_guide.html:5
+#: guides/templates/guides/book_guide.html:15
+#: tours/templates/tours/book_tour.html:5
+
 msgid "Book"
 msgstr "Đặt chỗ"
 
 #: buggy/templates/buggy/book_buggy.html:11
+#: guesthouse/templates/guesthouse/book.html:11
+#: motorbike/templates/motorbike/book_motorbike.html:11
+#: tours/templates/tours/book_tour.html:11
+
 msgid "Back to"
 msgstr "Quay lại"
 
 #: buggy/templates/buggy/book_buggy.html:17
+#: dashboard/templates/dashboard/owner_dashboard.html:517
+
 msgid "From"
 msgstr "Từ"
 
 #: buggy/templates/buggy/book_buggy.html:18
+#: buggy/templates/buggy/buggy_detail.html:166
+#: buggy/templates/buggy/buggy_list.html:71
+#: motorbike/templates/motorbike/book_motorbike.html:18
+#: motorbike/templates/motorbike/motorbike_detail.html:152
+#: motorbike/templates/motorbike/motorbike_list.html:67
+
 msgid "Deposit:"
 msgstr "Tiền đặt cọc:"
 
 #: buggy/templates/buggy/book_buggy.html:27
+
 msgid "Booking Date"
 msgstr "Ngày đặt"
 
 #: buggy/templates/buggy/book_buggy.html:32
+#: guides/templates/guides/book_guide.html:28
+
 msgid "Start Time"
 msgstr "Giờ bắt đầu"
 
 #: buggy/templates/buggy/book_buggy.html:40
+#: buggy/templates/buggy/buggy_detail.html:176
+
 msgid "Rental Duration"
 msgstr "Thời gian thuê"
 
 #: buggy/templates/buggy/book_buggy.html:43
+#: buggy/templates/buggy/buggy_detail.html:89
+#: guides/templates/guides/book_guide.html:37
+
 msgid "2 Hours"
 msgstr "2 giờ"
 
 #: buggy/templates/buggy/book_buggy.html:44
+#: buggy/templates/buggy/buggy_detail.html:93
+#: guides/templates/guides/book_guide.html:38
+
 msgid "3 Hours"
 msgstr "3 giờ"
 
 #: buggy/templates/buggy/book_buggy.html:45
+#: buggy/templates/buggy/buggy_detail.html:97
+
 msgid "4 Hours"
 msgstr "4 giờ"
 
 #: buggy/templates/buggy/book_buggy.html:46
+#: buggy/templates/buggy/buggy_detail.html:101
+#: guides/templates/guides/book_guide.html:40
+
 msgid "5 Hours"
 msgstr "5 giờ"
 
 #: buggy/templates/buggy/book_buggy.html:47
+#: buggy/templates/buggy/buggy_detail.html:105
+#: guides/templates/guides/book_guide.html:41
+
 msgid "6 Hours"
 msgstr "6 giờ"
 
 #: buggy/templates/buggy/book_buggy.html:48
+#: buggy/templates/buggy/buggy_detail.html:109
+
 msgid "Full Day"
 msgstr "Cả ngày"
 
 #: buggy/templates/buggy/book_buggy.html:55
+#: guesthouse/templates/guesthouse/book.html:87
+#: guides/templates/guides/book_guide.html:61
+#: motorbike/templates/motorbike/book_motorbike.html:41
+#: tours/templates/tours/book_tour.html:75
+
 msgid "Contact Information"
 msgstr "Thông tin liên hệ"
 
 #: buggy/templates/buggy/book_buggy.html:57
+#: motorbike/templates/motorbike/book_motorbike.html:43
+
 msgid "Please provide at least one way for the owner to contact you."
 msgstr "Vui lòng cung cấp ít nhất một cách để chủ xe liên hệ với bạn."
 
 #: buggy/templates/buggy/book_buggy.html:63
+#: guesthouse/templates/guesthouse/book.html:96
+#: guides/templates/guides/book_guide.html:69
+#: motorbike/templates/motorbike/book_motorbike.html:49
+#: tours/templates/tours/book_tour.html:84
+
 msgid "your.email@example.com"
 msgstr "your.email@example.com"
 
 #: buggy/templates/buggy/book_buggy.html:70
+#: guesthouse/templates/guesthouse/book.html:104
+#: guides/templates/guides/book_guide.html:76
+#: motorbike/templates/motorbike/book_motorbike.html:56
+#: tours/templates/tours/book_tour.html:92
+
 msgid "+856 20 XXXX XXXX (for WhatsApp)"
 msgstr "+856 20 XXXX XXXX (dùng cho WhatsApp)"
 
 #: buggy/templates/buggy/book_buggy.html:77
+#: guesthouse/templates/guesthouse/book.html:111
+#: guides/templates/guides/book_guide.html:83
+#: motorbike/templates/motorbike/book_motorbike.html:63
+#: tours/templates/tours/book_tour.html:99
+
 msgid "Please provide either an email address or a phone number."
 msgstr "Vui lòng cung cấp địa chỉ email hoặc số điện thoại."
 
 #: buggy/templates/buggy/book_buggy.html:84
+#: motorbike/templates/motorbike/book_motorbike.html:70
+
 msgid "Passport Number"
 msgstr "Số hộ chiếu"
 
 #: buggy/templates/buggy/book_buggy.html:84
+#: guesthouse/templates/guesthouse/book.html:102
+#: motorbike/templates/motorbike/book_motorbike.html:70
+#: tours/templates/tours/book_tour.html:90
+
 msgid "Optional"
 msgstr "Không bắt buộc"
 
 #: buggy/templates/buggy/book_buggy.html:87
+#: motorbike/templates/motorbike/book_motorbike.html:73
+
 msgid "For deposit record"
 msgstr "Dùng để ghi nhận tiền đặt cọc"
 
 #: buggy/templates/buggy/book_buggy.html:89
+#: motorbike/templates/motorbike/book_motorbike.html:75
+
 msgid "You'll need to leave your original passport OR this number as collateral."
 msgstr "Bạn sẽ cần để lại hộ chiếu gốc HOẶC số này làm tài sản thế chấp."
 
 #: buggy/templates/buggy/book_buggy.html:98
+#: motorbike/templates/motorbike/book_motorbike.html:84
+
 msgid "Payment of the rental fee and deposit will be collected in"
 msgstr "Tiền thuê và tiền đặt cọc sẽ được thu bằng"
 
 #: buggy/templates/buggy/book_buggy.html:98
+#: guides/templates/guides/book_guide.html:93
+#: motorbike/templates/motorbike/book_motorbike.html:84
+
 msgid "cash (Lao Kip)"
 msgstr "tiền mặt (Kip Lào)"
 
 #: buggy/templates/buggy/book_buggy.html:98
+
 msgid "at pickup. The deposit will be fully refunded when you return the buggy car."
-msgstr "khi nhận xe. Tiền đặt cọc sẽ được hoàn lại đầy đủ khi bạn trả xe."
+msgstr "khi nhận xe. Tiền đặt cọc sẽ được hoàn lại đầy đủ khi bạn trả xe buggy."
 
 #: buggy/templates/buggy/book_buggy.html:104
-msgid "Confirm Booking (Pay Cash on Pickup)"
-msgstr "Xác nhận đặt chỗ (Thanh toán tiền mặt khi nhận xe)"
-
-#: buggy/templates/buggy/buggy_detail.html:14
-msgid "Back to Buggy Cars"
-msgstr "Quay lại danh sách xe buggy"
-
-#: buggy/templates/buggy/buggy_detail.html:55
-msgid "Operated by:"
-msgstr "Đơn vị vận hành:"
-
-#: buggy/templates/buggy/buggy_detail.html:73
-msgid "About this Buggy Car"
-msgstr "Giới thiệu về xe buggy này"
-
-#: buggy/templates/buggy/buggy_detail.html:86
-msgid "Rental Rates"
-msgstr "Giá thuê"
-
-#: buggy/templates/buggy/buggy_detail.html:123
-msgid "Pickup Location"
-msgstr "Địa điểm nhận xe"
-
-#: buggy/templates/buggy/buggy_detail.html:139
-msgid "Open in Google Maps App"
-msgstr "Mở trong ứng dụng Google Maps"
-
-#: buggy/templates/buggy/buggy_detail.html:148
-msgid "Pickup location map not available"
-msgstr "Bản đồ địa điểm nhận xe không khả dụng"
-
-#: buggy/templates/buggy/buggy_detail.html:149
-msgid "Contact the owner for exact pickup details after booking."
-msgstr "Liên hệ chủ xe để biết chi tiết địa điểm nhận xe chính xác sau khi đặt."
-
-#: buggy/templates/buggy/buggy_detail.html:160
-msgid "Starting from"
-msgstr "Giá bắt đầu từ"
-
-#: buggy/templates/buggy/buggy_detail.html:172
-msgid "Size"
-msgstr "Kích thước"
-
-#: buggy/templates/buggy/buggy_detail.html:177
-msgid "2-6 Hours or Full Day"
-msgstr "2-6 giờ hoặc Cả ngày"
-
-#: buggy/templates/buggy/buggy_detail.html:183
-msgid "Book This Buggy Car"
-msgstr "Đặt xe buggy này"
-
-#: buggy/templates/buggy/buggy_detail.html:187
-msgid "Login to Book"
-msgstr "Đăng nhập để đặt"
-
-#: buggy/templates/buggy/buggy_detail.html:192
-msgid "You won't be charged yet. The owner will verify availability first."
-msgstr "Bạn chưa bị tính phí. Chủ xe sẽ xác nhận tình trạng còn xe trước."
-
-#: buggy/templates/buggy/buggy_list.html:5
-msgid "Buggy Cars for Rent"
-msgstr "Cho thuê xe buggy"
-
-#: buggy/templates/buggy/buggy_list.html:17
-msgid "Rent a Buggy Car"
-msgstr "Thuê xe buggy"
-
-#: buggy/templates/buggy/buggy_list.html:18
-msgid "Perfect for groups and families. Explore Vang Vieng in style and comfort."
-msgstr "Hoàn hảo cho nhóm và gia đình. Khám phá Vang Vieng một cách phong cách và thoải mái."
-
-#: buggy/templates/buggy/buggy_list.html:67
-msgid "Rental Duration:"
-msgstr "Thời gian thuê:"
-
-#: buggy/templates/buggy/buggy_list.html:90
-msgid "View Pickup Location"
-msgstr "Xem địa điểm nhận xe"
-
-#: buggy/templates/buggy/buggy_list.html:95
-msgid "Pickup location pending"
-msgstr "Địa điểm nhận xe đang chờ xác nhận"
-
-#: buggy/templates/buggy/buggy_list.html:111
-msgid "View Details & Rent"
-msgstr "Xem chi tiết và Thuê"
-
-#: buggy/templates/buggy/buggy_list.html:125
-msgid "No buggy cars available at the moment."
-msgstr "Hiện không có xe buggy nào khả dụng."
-
-#: buggy/templates/buggy/buggy_list.html:126
-msgid "Please check back later or contact us for more information."
-msgstr "Vui lòng quay lại sau hoặc liên hệ với chúng tôi để biết thêm thông tin."
-
-#: dashboard/templates/dashboard/owner_analytics.html:5
-msgid "Owner Analytics"
-msgstr "Phân tích dành cho chủ sở hữu"
-
-#: dashboard/templates/dashboard/owner_analytics.html:29
-msgid "Back to Dashboard"
-msgstr "Quay lại Bảng điều khiển"
-
-#: dashboard/templates/dashboard/owner_analytics.html:31
-msgid "Business Analytics"
-msgstr "Phân tích kinh doanh"
-
-#: dashboard/templates/dashboard/owner_analytics.html:32
-msgid "Deep insights into your performance across all listings"
-msgstr "Thông tin chi tiết về hiệu suất trên tất cả các danh sách của bạn"
-
-#: dashboard/templates/dashboard/owner_analytics.html:38
-msgid "Last 7 days"
-msgstr "7 ngày qua"
-
-#: dashboard/templates/dashboard/owner_analytics.html:39
-msgid "Last 30 days"
-msgstr "30 ngày qua"
-
-#: dashboard/templates/dashboard/owner_analytics.html:40
-msgid "Last 90 days"
-msgstr "90 ngày qua"
-
-#: dashboard/templates/dashboard/owner_analytics.html:41
-msgid "Last 12 months"
-msgstr "12 tháng qua"
-
-#: dashboard/templates/dashboard/owner_analytics.html:42
-msgid "All time"
-msgstr "Toàn bộ thời gian"
-
-#: dashboard/templates/dashboard/owner_analytics.html:61
-msgid "Total Revenue"
-msgstr "Tổng doanh thu"
-
-#: dashboard/templates/dashboard/owner_analytics.html:74
-msgid "Total Bookings"
-msgstr "Tổng số lượt đặt"
-
-#: dashboard/templates/dashboard/owner_analytics.html:77
-msgid "confirmed"
-msgstr "đã xác nhận"
-
-#: dashboard/templates/dashboard/owner_analytics.html:78
-msgid "pending"
-msgstr "đang chờ"
-
-#: dashboard/templates/dashboard/owner_analytics.html:91
-msgid "Conversion Rate"
-msgstr "Tỷ lệ chuyển đổi"
-
-#: dashboard/templates/dashboard/owner_analytics.html:93
-msgid "of inquiries confirmed"
-msgstr "số yêu cầu đã được xác nhận"
-
-#: dashboard/templates/dashboard/owner_analytics.html:105
-msgid "Average Rating"
-msgstr "Đánh giá trung bình"
-
-#: dashboard/templates/dashboard/owner_analytics.html:107
-msgid "from"
-msgstr "từ"
-
-#: dashboard/templates/dashboard/owner_analytics.html:107
-msgid "reviews"
-msgstr "đánh giá"
-
-#: dashboard/templates/dashboard/owner_analytics.html:119
-msgid "Revenue by Category"
-msgstr "Doanh thu theo danh mục"
-
-#: dashboard/templates/dashboard/owner_analytics.html:127
-msgid "Booking Status"
-msgstr "Trạng thái đặt chỗ"
-
-#: dashboard/templates/dashboard/owner_analytics.html:139
-msgid "Top Performing Listings"
-msgstr "Danh sách hoạt động tốt nhất"
-
-#: dashboard/templates/dashboard/owner_analytics.html:146
-msgid "Listing"
-msgstr "Danh sách"
-
-#: dashboard/templates/dashboard/owner_analytics.html:147
-msgid "Category"
-msgstr "Danh mục"
-
-#: dashboard/templates/dashboard/owner_analytics.html:148
-msgid "Revenue"
-msgstr "Doanh thu"
-
-#: dashboard/templates/dashboard/owner_analytics.html:149
-msgid "Bookings"
-msgstr "Lượt đặt"
-
-#: dashboard/templates/dashboard/owner_analytics.html:150
-msgid "Rating"
-msgstr "Đánh giá"
-
-#: dashboard/templates/dashboard/owner_analytics.html:188
-msgid "No bookings yet"
-msgstr "Chưa có lượt đặt nào"
-
-#: dashboard/templates/dashboard/owner_analytics.html:189
-msgid "Your analytics will appear here once you receive your first booking."
-msgstr "Dữ liệu phân tích của bạn sẽ xuất hiện ở đây khi bạn nhận được lượt đặt đầu tiên."
-
-#: dashboard/templates/dashboard/owner_analytics.html:202
-msgid "Quick Insights"
-msgstr "Thông tin nhanh"
-
-#: dashboard/templates/dashboard/owner_analytics.html:206
-msgid "Total Properties"
-msgstr "Tổng số cơ sở"
-
-#: dashboard/templates/dashboard/owner_analytics.html:210
-msgid "Pending Actions"
-msgstr "Hành động đang chờ"
-
-#: dashboard/templates/dashboard/owner_analytics.html:214
-msgid "Cancelled"
-msgstr "Đã hủy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:5
-msgid "Owner Dashboard"
-msgstr "Bảng điều khiển chủ sở hữu"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:14
-msgid "Welcome back"
-msgstr "Chào mừng trở lại"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:14
-msgid "Here's your business overview."
-msgstr "Đây là tổng quan về hoạt động kinh doanh của bạn."
-
-#: dashboard/templates/dashboard/owner_dashboard.html:20
-msgid "View Analytics"
-msgstr "Xem phân tích"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:35
-msgid "currently active"
-msgstr "đang hoạt động"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:41
-msgid "Pending Requests"
-msgstr "Yêu cầu đang chờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:47
-msgid "Awaiting your approval"
-msgstr "Đang chờ bạn phê duyệt"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:59
-msgid "From confirmed bookings"
-msgstr "Từ các lượt đặt đã xác nhận"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:64
-msgid "Quick Actions"
-msgstr "Thao tác nhanh"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:66
-msgid "Add Tour"
-msgstr "Thêm Tour"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:67
-msgid "Add Motorbike"
-msgstr "Thêm Xe máy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:68
-msgid "Add Guide"
-msgstr "Thêm Hướng dẫn viên"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:69
-msgid "Add Buggy Car"
-msgstr "Thêm Xe buggy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:146
-msgid "Pending Tour Requests"
-msgstr "Yêu cầu Tour đang chờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:152
-msgid "Guest"
-msgstr "Khách"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:153
-msgid "Tour"
-msgstr "Tour"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:154
-msgid "Date"
-msgstr "Ngày"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:155
-msgid "Total"
-msgstr "Tổng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:156
-msgid "Actions"
-msgstr "Hành động"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:169
-msgid "Approve"
-msgstr "Duyệt"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:171
-msgid "Decline"
-msgstr "Từ chối"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:176
-msgid "Reason for declining:"
-msgstr "Lý do từ chối:"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:178
-msgid "Select a reason"
-msgstr "Chọn một lý do"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:179
-msgid "Date no longer available"
-msgstr "Ngày không còn khả dụng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:180
-msgid "Tour fully booked"
-msgstr "Tour đã hết chỗ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:181
-msgid "Unable to accommodate"
-msgstr "Không thể sắp xếp"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:182
-msgid "Other (please specify)"
-msgstr "Khác (vui lòng nêu rõ)"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:184
-msgid "Please explain..."
-msgstr "Vui lòng giải thích..."
-
-#: dashboard/templates/dashboard/owner_dashboard.html:186
-msgid "Cancel"
-msgstr "Hủy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:187
-msgid "Confirm Decline"
-msgstr "Xác nhận từ chối"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:207
-msgid "Pending Motorbike Requests"
-msgstr "Yêu cầu Xe máy đang chờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:214
-msgid "Motorbike"
-msgstr "Xe máy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:215
-msgid "Dates"
-msgstr "Ngày"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:240
-msgid "Dates no longer available"
-msgstr "Ngày không còn khả dụng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:241
-msgid "Maintenance issue"
-msgstr "Vấn đề bảo trì"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:268
-msgid "Pending Guide Requests"
-msgstr "Yêu cầu Hướng dẫn viên đang chờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:275
-msgid "Guide"
-msgstr "Hướng dẫn viên"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:276
-msgid "Date & Time"
-msgstr "Ngày & Giờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:277
-msgid "Duration"
-msgstr "Thời lượng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:287
-msgid "at"
-msgstr "lúc"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:288
-msgid "hours"
-msgstr "giờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:303
-msgid "Guide unavailable"
-msgstr "Hướng dẫn viên không khả dụng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:304
-msgid "Time slot unavailable"
-msgstr "Khung giờ không khả dụng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:331
-msgid "Pending Buggy Car Requests"
-msgstr "Yêu cầu Xe buggy đang chờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:338
-msgid "Buggy Car"
-msgstr "Xe buggy"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:366
-msgid "Buggy unavailable"
-msgstr "Xe buggy không khả dụng"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:426
-msgid "My Tours"
-msgstr "Tour của tôi"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:434
-msgid "Active"
-msgstr "Đang hoạt động"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:434
-msgid "Inactive"
-msgstr "Không hoạt động"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:436
-msgid "hrs"
-msgstr "giờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:436
-msgid "person"
-msgstr "người"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:437
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:443
-msgid "No tours yet."
-msgstr "Chưa có tour nào."
-
-#: dashboard/templates/dashboard/owner_dashboard.html:453
-msgid "My Motorbikes"
-msgstr "Xe máy của tôi"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:463
-msgid "day"
-msgstr "ngày"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:470
-msgid "No motorbikes yet."
-msgstr "Chưa có xe máy nào."
-
-#: dashboard/templates/dashboard/owner_dashboard.html:480
-msgid "My Guides"
-msgstr "Hướng dẫn viên của tôi"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:497
-msgid "No guides yet."
-msgstr "Chưa có hướng dẫn viên nào."
-
-#: dashboard/templates/dashboard/owner_dashboard.html:507
-msgid "My Buggy Cars"
-msgstr "Xe buggy của tôi"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:517
-msgid "2hrs"
-msgstr "2 giờ"
-
-#: dashboard/templates/dashboard/owner_dashboard.html:524
-msgid "No buggy cars yet."
-msgstr "Chưa có xe buggy nào."
-
-#: guesthouse/templates/guesthouse/book.html:15
-msgid "Book Your Stay"
-msgstr "Đặt chỗ nghỉ của bạn"
-
-#: guesthouse/templates/guesthouse/book.html:17
-msgid "Price:"
-msgstr "Giá:"
-
-#: guesthouse/templates/guesthouse/book.html:17
-msgid "night"
-msgstr "đêm"
-
-#: guesthouse/templates/guesthouse/book.html:23
-msgid "Unable to complete booking:"
-msgstr "Không thể hoàn tất đặt chỗ:"
-
-#: guesthouse/templates/guesthouse/book.html:37
-msgid "Check-in Date"
-msgstr "Ngày nhận phòng"
-
-#: guesthouse/templates/guesthouse/book.html:46
-msgid "Check-out Date"
-msgstr "Ngày trả phòng"
-
-#: guesthouse/templates/guesthouse/book.html:55
-msgid "Number of Guests"
-msgstr "Số lượng khách"
-
-#: guesthouse/templates/guesthouse/book.html:57
-msgid "How many people will be staying?"
-msgstr "Sẽ có bao nhiêu người ở lại?"
-
-#: guesthouse/templates/guesthouse/book.html:66
-msgid "Room Type"
-msgstr "Loại phòng"
-
-#: guesthouse/templates/guesthouse/book.html:68
-msgid "Select your preferred room type."
-msgstr "Chọn loại phòng bạn mong muốn."
-
-#: guesthouse/templates/guesthouse/book.html:79
-msgid "A"
-msgstr "Một"
-
-#: guesthouse/templates/guesthouse/book.html:79
-msgid "standard room"
-msgstr "phòng tiêu chuẩn"
-
-#: guesthouse/templates/guesthouse/book.html:79
-msgid "will be assigned to you upon arrival based on availability."
-msgstr "sẽ được sắp xếp cho bạn khi đến nơi tùy theo tình trạng phòng."
-
-#: guesthouse/templates/guesthouse/book.html:89
-msgid "Please provide at least one way for the guesthouse owner to contact you."
-msgstr "Vui lòng cung cấp ít nhất một cách để chủ nhà nghỉ liên hệ với bạn."
-
-#: guesthouse/templates/guesthouse/book.html:94
-msgid "Email Address"
-msgstr "Địa chỉ Email"
-
-#: guesthouse/templates/guesthouse/book.html:102
-msgid "Phone Number"
-msgstr "Số điện thoại"
-
-#: guesthouse/templates/guesthouse/book.html:121
-msgid "Final payment will be collected in"
-msgstr "Thanh toán cuối cùng sẽ được thu bằng"
-
-#: guesthouse/templates/guesthouse/book.html:121
-msgid "Lao Kip (LAK)"
-msgstr "Kip Lào (LAK)"
-
-#: guesthouse/templates/guesthouse/book.html:121
-msgid "based on the official daily BCEL/LDB exchange rate on the day of your check-in."
-msgstr "dựa trên tỷ giá hối đoái chính thức hàng ngày của BCEL/LDB vào ngày bạn nhận phòng."
-
 #: guesthouse/templates/guesthouse/book.html:127
-msgid "Confirm Booking (Pay Cash on Arrival)"
-msgstr "Xác nhận đặt chỗ (Thanh toán tiền mặt khi đến)"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:30
-msgid "Find Your Perfect Stay"
-msgstr "Tìm nơi nghỉ dưỡng hoàn hảo của bạn"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:31
-msgid "Discover amazing guesthouses in Vang Vieng"
-msgstr "Khám phá những nhà nghỉ tuyệt vời ở Vang Vieng"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:41
-msgid "Check-in"
-msgstr "Nhận phòng"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:50
-msgid "Check-out"
-msgstr "Trả phòng"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:64
-msgid "Guests"
-msgstr "Khách"
-
-#: guesthouse/templates/guesthouse/guesthouse_list.html:123
-msgid "Search"
-msgstr "Tìm kiếm"
-
-#: guesthouse/templates/guesthouse/terms_of_service.html:10
-msgid "Terms of Service"
-msgstr "Điều khoản dịch vụ"
-
-#: guesthouse/templates/guesthouse/terms_of_service.html:11
-msgid "Last Updated: October 2026"
-msgstr "Cập nhật lần cuối: Tháng 10 năm 2026"
-
-#: guesthouse/templates/guesthouse/terms_of_service.html:17
-msgid "Welcome to"
-msgstr "Chào mừng đến với"
-
-#: guesthouse/templates/guesthouse/terms_of_service.html:17
-msgid "Vang Vieng Stay"
-msgstr "Vang Vieng Stay"
-
-#: guesthouse/templates/guesthouse/terms_of_service.html:17
-msgid "By accessing our website and using our booking services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully."
-msgstr "Bằng cách truy cập trang web và sử dụng dịch vụ đặt chỗ của chúng tôi, bạn đồng ý tuân thủ và bị ràng buộc bởi các điều khoản và điều kiện sau. Vui lòng đọc kỹ."
-
-#: guides/templates/guides/book_guide.html:11
-msgid "Back to guide profile"
-msgstr "Quay lại hồ sơ hướng dẫn viên"
-
-#: guides/templates/guides/book_guide.html:16
-msgid "Tell us when and where to meet you."
-msgstr "Cho chúng tôi biết khi nào và ở đâu để gặp bạn."
-
-#: guides/templates/guides/book_guide.html:36
-msgid "1 Hour"
-msgstr "1 giờ"
-
-#: guides/templates/guides/book_guide.html:39
-msgid "Half Day (4 Hours)"
-msgstr "Nửa ngày (4 giờ)"
-
-#: guides/templates/guides/book_guide.html:42
-msgid "7 Hours"
-msgstr "7 giờ"
-
-#: guides/templates/guides/book_guide.html:43
-msgid "Full Day (8 Hours)"
-msgstr "Cả ngày (8 giờ)"
-
-#: guides/templates/guides/book_guide.html:50
-msgid "Where should the guide meet you?"
-msgstr "Hướng dẫn viên nên gặp bạn ở đâu?"
-
-#: guides/templates/guides/book_guide.html:53
-msgid "e.g., Vang Vieng Central Lodge, or near the bus station"
-msgstr "Ví dụ: Vang Vieng Central Lodge, hoặc gần bến xe"
-
-#: guides/templates/guides/book_guide.html:55
-msgid "Your guide will meet you here. You can share a live location via WhatsApp later."
-msgstr "Hướng dẫn viên sẽ gặp bạn tại đây. Bạn có thể chia sẻ vị trí trực tiếp qua WhatsApp sau."
-
-#: guides/templates/guides/book_guide.html:63
-msgid "Please provide at least one way for the guide to contact you."
-msgstr "Vui lòng cung cấp ít nhất một cách để hướng dẫn viên liên hệ với bạn."
-
-#: guides/templates/guides/book_guide.html:93
-msgid "at the meeting point."
-msgstr "tại điểm hẹn."
-
 #: guides/templates/guides/book_guide.html:99
-msgid "Confirm Booking (Pay Cash at Meeting Point)"
-msgstr "Xác nhận đặt chỗ (Thanh toán tiền mặt tại điểm hẹn)"
-
-#: guides/templates/guides/guide_list.html:4
-msgid "Local Guides"
-msgstr "Hướng dẫn viên địa phương"
-
-#: guides/templates/guides/guide_list.html:16
-msgid "Hire a Local Expert"
-msgstr "Thuê chuyên gia địa phương"
-
-#: guides/templates/guides/guide_list.html:17
-msgid "Rent your own motorbike but want someone to show you the hidden waterfalls, safe routes, and best local food? Our certified local guides have you covered."
-msgstr "Tự thuê xe máy nhưng muốn có người chỉ cho bạn những thác nước ẩn, tuyến đường an toàn và món ăn địa phương ngon nhất? Các hướng dẫn viên địa phương được chứng nhận của chúng tôi sẽ hỗ trợ bạn."
-
-#: guides/templates/guides/guide_list.html:23
-msgid "Available Guides"
-msgstr "Hướng dẫn viên khả dụng"
-
-#: guides/templates/guides/guide_list.html:57
-msgid "Lao"
-msgstr "Tiếng Lào"
-
-#: guides/templates/guides/guide_list.html:60
-msgid "English"
-msgstr "Tiếng Anh"
-
-#: guides/templates/guides/guide_list.html:65
-msgid "View Profile & Book"
-msgstr "Xem hồ sơ & Đặt"
-
-#: guides/templates/guides/guide_list.html:73
-msgid "No guides available at the moment."
-msgstr "Hiện không có hướng dẫn viên nào khả dụng."
-
-#: inquiry/models.py:7
-msgid "General Question"
-msgstr "Câu hỏi chung"
-
-#: inquiry/models.py:8
-msgid "Booking Inquiry"
-msgstr "Yêu cầu đặt chỗ"
-
-#: inquiry/models.py:9
-msgid "Guesthouse"
-msgstr "Nhà nghỉ"
-
-#: inquiry/models.py:11
-msgid "Motorbike Rental"
-msgstr "Cho thuê xe máy"
-
-#: inquiry/models.py:12
-msgid "Buggy Car Rental"
-msgstr "Cho thuê xe buggy"
-
-#: inquiry/models.py:13
-msgid "Local Guide"
-msgstr "Hướng dẫn viên địa phương"
-
-#: inquiry/models.py:14
-msgid "Technical Support"
-msgstr "Hỗ trợ kỹ thuật"
-
-#: inquiry/models.py:15
-msgid "Other"
-msgstr "Khác"
-
-#: inquiry/models.py:19
-msgid "New"
-msgstr "Mới"
-
-#: inquiry/models.py:20
-msgid "Read"
-msgstr "Đã đọc"
-
-#: inquiry/models.py:21
-msgid "Responded"
-msgstr "Đã phản hồi"
-
-#: inquiry/models.py:22
-msgid "Closed"
-msgstr "Đã đóng"
-
-#: inquiry/models.py:25
-msgid "Name"
-msgstr "Tên"
-
-#: inquiry/models.py:26
-msgid "Email"
-msgstr "Email"
-
-#: inquiry/models.py:27
-msgid "Phone"
-msgstr "Điện thoại"
-
-#: inquiry/models.py:28
-msgid "Subject"
-msgstr "Chủ đề"
-
-#: inquiry/models.py:29
-msgid "Message"
-msgstr "Tin nhắn"
-
-#: inquiry/models.py:30
-msgid "Status"
-msgstr "Trạng thái"
-
-#: inquiry/models.py:33
-msgid "Customer Email Sent"
-msgstr "Đã gửi email cho khách"
-
-#: inquiry/models.py:34
-msgid "Admin Email Sent"
-msgstr "Đã gửi email cho quản trị viên"
-
-#: inquiry/models.py:36
-msgid "Created At"
-msgstr "Ngày tạo"
-
-#: inquiry/models.py:37
-msgid "Updated At"
-msgstr "Ngày cập nhật"
-
-#: inquiry/models.py:41
-msgid "Inquiry"
-msgstr "Yêu cầu"
-
-#: inquiry/models.py:42
-msgid "Inquiries"
-msgstr "Các yêu cầu"
-
-#: inquiry/templates/inquiry/inquiry.html:10
-msgid "Get in Touch"
-msgstr "Liên hệ với chúng tôi"
-
-#: inquiry/templates/inquiry/inquiry.html:12
-msgid "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours."
-msgstr "Bạn có câu hỏi? Chúng tôi rất muốn nghe từ bạn. Gửi tin nhắn cho chúng tôi và chúng tôi sẽ phản hồi trong vòng 24 giờ."
-
-#: inquiry/templates/inquiry/inquiry.html:33
-msgid "Your Name"
-msgstr "Tên của bạn"
-
-#: inquiry/templates/inquiry/inquiry.html:70
-msgid "Your Message"
-msgstr "Tin nhắn của bạn"
-
-#: inquiry/templates/inquiry/inquiry.html:80
-msgid "Send Message"
-msgstr "Gửi tin nhắn"
-
-#: inquiry/templates/inquiry/inquiry.html:84
-msgid "We respect your privacy. Your information will never be shared."
-msgstr "Chúng tôi tôn trọng quyền riêng tư của bạn. Thông tin của bạn sẽ không bao giờ bị chia sẻ."
-
-#: inquiry/templates/inquiry/inquiry_success.html:10
-msgid "Message Sent Successfully!"
-msgstr "Gửi tin nhắn thành công!"
-
-#: inquiry/templates/inquiry/inquiry_success.html:12
-msgid "Thank you for reaching out. We've received your message and sent a confirmation to your email."
-msgstr "Cảm ơn bạn đã liên hệ. Chúng tôi đã nhận được tin nhắn của bạn và gửi xác nhận đến email của bạn."
-
-#: inquiry/templates/inquiry/inquiry_success.html:15
-msgid "Our team will review your inquiry and get back to you within 24 hours."
-msgstr "Nhóm của chúng tôi sẽ xem xét yêu cầu của bạn và phản hồi trong vòng 24 giờ."
-
-#: inquiry/templates/inquiry/inquiry_success.html:18
-msgid "Return to Homepage"
-msgstr "Quay lại Trang chủ"
-
-#: motorbike/templates/motorbike/book_motorbike.html:5
-msgid "Rent"
-msgstr "Thuê"
-
-#: motorbike/templates/motorbike/book_motorbike.html:27
-msgid "Pickup Date"
-msgstr "Ngày nhận xe"
-
-#: motorbike/templates/motorbike/book_motorbike.html:32
-msgid "Return Date"
-msgstr "Ngày trả xe"
-
-#: motorbike/templates/motorbike/book_motorbike.html:84
-msgid "at pickup. The deposit will be fully refunded when you return the motorbike."
-msgstr "khi nhận xe. Tiền đặt cọc sẽ được hoàn lại đầy đủ khi bạn trả xe máy."
-
-#: motorbike/templates/motorbike/book_motorbike.html:90
-msgid "Confirm Rental (Pay Cash on Pickup)"
-msgstr "Xác nhận thuê (Thanh toán tiền mặt khi nhận xe)"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:4
-msgid "Cancel Motorbike Rental"
-msgstr "Hủy thuê xe máy"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:15
-msgid "Cancel Rental?"
-msgstr "Hủy thuê?"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
-msgid "Are you sure you want to cancel your rental of"
-msgstr "Bạn có chắc chắn muốn hủy việc thuê"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
-msgid "to"
-msgstr "đến"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:18
-msgid "This action cannot be undone, and the motorbike will be released for others to book."
-msgstr "Hành động này không thể hoàn tác và xe máy sẽ được mở khóa để người khác đặt."
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
-msgid "Keep Rental"
-msgstr "Giữ nguyên việc thuê"
-
-#: motorbike/templates/motorbike/cancel_motorbike_booking.html:27
-msgid "Yes, Cancel Rental"
-msgstr "Có, Hủy thuê"
-
-#: motorbike/templates/motorbike/motorbike_detail.html:14
-msgid "Back to Motorbikes"
-msgstr "Quay lại danh sách xe máy"
-
-#: motorbike/templates/motorbike/motorbike_detail.html:73
-msgid "About this Motorbike"
-msgstr "Giới thiệu về xe máy này"
-
-#: motorbike/templates/motorbike/motorbike_detail.html:89
-msgid "Daily Rate"
-msgstr "Giá theo ngày"
-
-#: motorbike/templates/motorbike/motorbike_detail.html:93
-msgid "Deposit Required"
-msgstr "Yêu cầu đặt cọc"
-
-#: motorbike/templates/motorbike/motorbike_detail.html:165
-msgid "Book This Motorbike"
-msgstr "Đặt xe máy này"
-
-#: motorbike/templates/motorbike/motorbike_list.html:5
-msgid "Motorbikes for Rent"
-msgstr "Cho thuê xe máy"
-
-#: motorbike/templates/motorbike/motorbike_list.html:17
-msgid "Rent a Motorbike"
-msgstr "Thuê xe máy"
-
-#: motorbike/templates/motorbike/motorbike_list.html:18
-msgid "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
-msgstr "Khám phá Vang Vieng theo tốc độ của riêng bạn. Những chiếc xe máy đáng tin cậy cho mọi cuộc phiêu lưu."
-
-#: motorbike/templates/motorbike/motorbike_list.html:63
-msgid "Rental Type:"
-msgstr "Loại hình thuê:"
-
-#: motorbike/templates/motorbike/motorbike_list.html:63
-msgid "Daily"
-msgstr "Theo ngày"
-
-#: motorbike/templates/motorbike/motorbike_list.html:120
-msgid "No motorbikes available at the moment."
-msgstr "Hiện không có xe máy nào khả dụng."
-
-#: templates/base.html:81
-msgid "Tours"
-msgstr "Tour du lịch"
-
-#: templates/base.html:89
-msgid "Motorbikes"
-msgstr "Xe máy"
-
-#: templates/base.html:93
-msgid "Buggy Cars"
-msgstr "Xe buggy"
-
-#: templates/base.html:96
-msgid "Contact"
-msgstr "Liên hệ"
-
-#: templates/base.html:161
-msgid "My Dashboard"
-msgstr "Bảng điều khiển của tôi"
-
-#: templates/base.html:165
-msgid "Tour Adventures"
-msgstr "Phiêu lưu Tour"
-
-#: templates/base.html:169
-msgid "Guide Bookings"
-msgstr "Đặt Hướng dẫn viên"
-
-#: templates/base.html:173
-msgid "Motorbike Rentals"
-msgstr "Thuê xe máy"
-
-#: templates/base.html:177
-msgid "Buggy Car Rentals"
-msgstr "Thuê xe buggy"
-
-#: templates/base.html:185
-msgid "Admin Dashboard"
-msgstr "Bảng điều khiển Quản trị viên"
-
-#: templates/base.html:194
-msgid "Log Out"
-msgstr "Đăng xuất"
-
-#: templates/base.html:200
-msgid "Log In"
-msgstr "Đăng nhập"
-
-#: templates/base.html:201
-msgid "Sign Up"
-msgstr "Đăng ký"
-
-#: templates/base.html:217
-msgid "Language"
-msgstr "Ngôn ngữ"
-
-#: templates/base.html:265
-msgid "My Tour Adventures"
-msgstr "Phiêu lưu Tour của tôi"
-
-#: templates/base.html:266
-msgid "My Guide Bookings"
-msgstr "Đặt Hướng dẫn viên của tôi"
-
-#: templates/base.html:267
-msgid "My Motorbike Rentals"
-msgstr "Thuê xe máy của tôi"
-
-#: templates/base.html:268
-msgid "My Buggy Car Rentals"
-msgstr "Thuê xe buggy của tôi"
-
-#: templates/base.html:308
-msgid "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures."
-msgstr "Nền tảng đáng tin cậy của bạn cho các nhà nghỉ địa phương, tour du lịch khó quên, hướng dẫn viên địa phương chuyên nghiệp, cho thuê xe máy và phiêu lưu xe buggy."
-
-#: templates/base.html:311
-msgid "Explore"
-msgstr "Khám phá"
-
-#: templates/base.html:313
-msgid "Tours & Activities"
-msgstr "Tour & Hoạt động"
-
-#: templates/base.html:320
-msgid "Support"
-msgstr "Hỗ trợ"
-
-#: templates/base.html:322
-msgid "Contact Us"
-msgstr "Liên hệ với chúng tôi"
-
-#: templates/base.html:328
-msgid "All rights reserved."
-msgstr "Mọi quyền được bảo lưu."
-
-#: templates/base.html:395
-msgid "Vang Vieng Stay Assistant"
-msgstr "Trợ lý Vang Vieng Stay"
-
-#: templates/base.html:396
-msgid "AI-powered help • Online"
-msgstr "Hỗ trợ bởi AI • Đang trực tuyến"
-
-#: templates/base.html:415
-msgid "Hi! 👋 I'm here to help with questions about bookings, policies and tours in Vang Vieng. What can I help you with?"
-msgstr "Xin chào! 👋 Tôi ở đây để giải đáp các câu hỏi về đặt chỗ, chính sách và tour du lịch tại Vang Vieng. Tôi có thể giúp gì cho bạn?"
-
-#: templates/base.html:420
-msgid "Cancellation policy"
-msgstr "Chính sách hủy"
-
-#: templates/base.html:421
-msgid "Tour essentials"
-msgstr "Những điều cần biết về Tour"
-
-#: templates/base.html:428
-msgid "Type your question..."
-msgstr "Nhập câu hỏi của bạn..."
-
-#: templates/base.html:435
-msgid "Powered by AI • Responses based on official policies"
-msgstr "Được hỗ trợ bởi AI • Phản hồi dựa trên chính sách chính thức"
-
-#: templates/pages/terms_of_service.html:11
-msgid "Welcome to Vang Vieng Stay. By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement."
-msgstr "Chào mừng đến với Vang Vieng Stay. Bằng cách truy cập và sử dụng trang web này, bạn chấp nhận và đồng ý bị ràng buộc bởi các điều khoản và quy định của thỏa thuận này."
-
-#: templates/pages/terms_of_service.html:14
-msgid "Use License"
-msgstr "Giấy phép sử dụng"
-
-#: templates/pages/terms_of_service.html:15
-msgid "Permission is granted to temporarily download one copy of the materials on Vang Vieng Stay's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title."
-msgstr "Bạn được phép tải xuống tạm thời một bản sao các tài liệu trên trang web của Vang Vieng Stay chỉ để xem cá nhân, phi thương mại. Đây là việc cấp giấy phép, không phải chuyển nhượng quyền sở hữu."
-
-#: templates/pages/terms_of_service.html:19
-msgid "Disclaimer"
-msgstr "Miễn trừ trách nhiệm"
-
-#: templates/pages/terms_of_service.html:20
-msgid "The materials on Vang Vieng Stay's website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property."
-msgstr "Các tài liệu trên trang web của Vang Vieng Stay được cung cấp trên cơ sở 'nguyên trạng'. Chúng tôi không đưa ra bất kỳ bảo đảm nào, rõ ràng hay ngụ ý, và bằng đây từ chối và phủ nhận tất cả các bảo đảm khác bao gồm, nhưng không giới hạn, các bảo đảm ngụ ý hoặc điều kiện về khả năng bán được, sự phù hợp cho một mục đích cụ thể, hoặc không vi phạm quyền sở hữu trí tuệ."
-
-#: templates/pages/terms_of_service.html:24
-msgid "Limitations"
-msgstr "Giới hạn"
-
-#: templates/pages/terms_of_service.html:25
-msgid "In no event shall Vang Vieng Stay or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we have been notified orally or in writing of the possibility of such damage."
-msgstr "Trong mọi trường hợp, Vang Vieng Stay hoặc các nhà cung cấp của chúng tôi sẽ không chịu trách nhiệm về bất kỳ thiệt hại nào (bao gồm, nhưng không giới hạn, thiệt hại do mất dữ liệu hoặc lợi nhuận, hoặc do gián đoạn kinh doanh) phát sinh từ việc sử dụng hoặc không thể sử dụng các tài liệu trên trang web của chúng tôi, ngay cả khi chúng tôi đã được thông báo bằng miệng hoặc bằng văn bản về khả năng xảy ra thiệt hại như vậy."
-
-#: templates/pages/terms_of_service.html:29
-msgid "Bookings & Payments"
-msgstr "Đặt chỗ & Thanh toán"
-
-#: templates/pages/terms_of_service.html:30
-msgid "All bookings are subject to availability and confirmation by the property owner or service provider. Prices are listed in Lao Kip (LAK) and are subject to change without notice."
-msgstr "Tất cả các lượt đặt chỗ đều tùy thuộc vào tình trạng còn phòng và được xác nhận bởi chủ sở hữu cơ sở hoặc nhà cung cấp dịch vụ. Giá được liệt kê bằng Kip Lào (LAK) và có thể thay đổi mà không cần báo trước."
-
-#: templates/pages/terms_of_service.html:35
-msgid "If you have any questions about these Terms of Service, please"
-msgstr "Nếu bạn có bất kỳ câu hỏi nào về Điều khoản dịch vụ này, vui lòng"
-
-#: templates/pages/terms_of_service.html:35
-msgid "contact us"
-msgstr "liên hệ với chúng tôi"
-
-#: templates/registration/login.html:11
-msgid "Welcome Back"
-msgstr "Chào mừng trở lại"
-
-#: templates/registration/login.html:14
-msgid "Sign in to manage your bookings and properties."
-msgstr "Đăng nhập để quản lý các lượt đặt và cơ sở của bạn."
-
-#: templates/registration/login.html:24
-msgid "Invalid username or password. Please try again."
-msgstr "Tên đăng nhập hoặc mật khẩu không hợp lệ. Vui lòng thử lại."
-
-#: templates/registration/login.html:31
-msgid "Username or Email"
-msgstr "Tên đăng nhập hoặc Email"
-
-#: templates/registration/login.html:32
-msgid "Enter your username"
-msgstr "Nhập tên đăng nhập của bạn"
-
-#: templates/registration/login.html:35
-msgid "Password"
-msgstr "Mật khẩu"
-
-#: templates/registration/login.html:36
-msgid "Enter your password"
-msgstr "Nhập mật khẩu của bạn"
-
-#: templates/registration/login.html:46
-msgid "Remember me"
-msgstr "Ghi nhớ tôi"
-
-#: templates/registration/login.html:51
-msgid "Forgot your password?"
-msgstr "Quên mật khẩu?"
-
-#: templates/registration/login.html:58
-msgid "Sign in"
-msgstr "Đăng nhập"
-
-#: templates/registration/signup.html:11
-msgid "Create Your Account"
-msgstr "Tạo tài khoản của bạn"
-
-#: templates/registration/signup.html:14
-msgid "Join Vang Vieng Stay and start managing your properties."
-msgstr "Tham gia Vang Vieng Stay và bắt đầu quản lý các cơ sở của bạn."
-
-#: templates/registration/signup.html:26
-msgid "Please correct the errors below:"
-msgstr "Vui lòng sửa các lỗi dưới đây:"
-
-#: templates/registration/signup.html:46
-msgid "Username"
-msgstr "Tên đăng nhập"
-
-#: templates/registration/signup.html:51
-msgid "Choose a username"
-msgstr "Chọn tên đăng nhập"
-
-#: templates/registration/signup.html:52
-msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Bắt buộc. 150 ký tự hoặc ít hơn. Chỉ chứa chữ cái, chữ số và @/./+/-/_."
-
-#: templates/registration/signup.html:61
-msgid "Create a password"
-msgstr "Tạo mật khẩu"
-
-#: templates/registration/signup.html:66
-msgid "Confirm Password"
-msgstr "Xác nhận mật khẩu"
-
-#: templates/registration/signup.html:70
-msgid "Confirm your password"
-msgstr "Xác nhận mật khẩu của bạn"
-
-#: templates/registration/signup.html:76
-msgid "Create Account"
-msgstr "Tạo tài khoản"
-
-#: templates/registration/signup.html:81
-msgid "Already have an account?"
-msgstr "Đã có tài khoản?"
-
-#: templates/registration/signup.html:83
-msgid "Log in"
-msgstr "Đăng nhập"
-
-#: tours/templates/tours/book_tour.html:15
-msgid "Book Your Tour"
-msgstr "Đặt Tour của bạn"
-
-#: tours/templates/tours/book_tour.html:18
-msgid "Departs"
-msgstr "Khởi hành"
-
-#: tours/templates/tours/book_tour.html:26
-msgid "Tour Date"
-msgstr "Ngày đi Tour"
-
-#: tours/templates/tours/book_tour.html:33
-msgid "Number of People"
-msgstr "Số người"
-
-#: tours/templates/tours/book_tour.html:35
-msgid "Maximum"
-msgstr "Tối đa"
-
-#: tours/templates/tours/book_tour.html:35
-msgid "people per tour"
-msgstr "người mỗi tour"
-
-#: tours/templates/tours/book_tour.html:43
-msgid "Pickup Arrangements"
-msgstr "Sắp xếp đón"
-
-#: tours/templates/tours/book_tour.html:48
-msgid "How will you get to the tour?"
-msgstr "Bạn sẽ đến điểm tour bằng cách nào?"
-
-#: tours/templates/tours/book_tour.html:65
-msgid "Your Pickup Location"
-msgstr "Địa điểm đón của bạn"
-
-#: tours/templates/tours/book_tour.html:68
-msgid "Please include your guesthouse name and any helpful landmarks."
-msgstr "Vui lòng bao gồm tên nhà nghỉ của bạn và bất kỳ địa điểm nổi bật nào hữu ích."
-
-#: tours/templates/tours/book_tour.html:77
-msgid "Please provide at least one way for the tour operator to contact you."
-msgstr "Vui lòng cung cấp ít nhất một cách để nhà điều hành tour liên hệ với bạn."
-
-#: tours/templates/tours/book_tour.html:109
-msgid "based on the official daily exchange rate on the day of your tour."
-msgstr "dựa trên tỷ giá hối đoái chính thức hàng ngày vào ngày bạn đi tour."
-
-#: tours/templates/tours/tour_detail.html:15
-msgid "Back to all tours"
-msgstr "Quay lại tất cả các tour"
-
-#: tours/templates/tours/tour_detail.html:52
-msgid "Open Tour Office in Google Maps"
-msgstr "Mở văn phòng Tour trong Google Maps"
-
-#: tours/templates/tours/tour_detail.html:59
-msgid "Exact office map location will be provided upon booking confirmation."
-msgstr "Vị trí bản đồ văn phòng chính xác sẽ được cung cấp khi xác nhận đặt chỗ."
-
-#: tours/templates/tours/tour_detail.html:75
-msgid "Departs daily at"
-msgstr "Khởi hành hàng ngày lúc"
-
-#: tours/templates/tours/tour_detail.html:81
-msgid "Max"
-msgstr "Tối đa"
-
-#: tours/templates/tours/tour_detail.html:81
-msgid "people"
-msgstr "người"
-
-#: tours/templates/tours/tour_detail.html:102
-msgid "Tour Availability (Next 30 Days)"
-msgstr "Tình trạng Tour (30 ngày tới)"
-
-#: tours/templates/tours/tour_detail.html:107
-msgid "spots available"
-msgstr "chỗ trống"
-
-#: tours/templates/tours/tour_detail.html:112
-msgid "left"
-msgstr "còn lại"
-
-#: tours/templates/tours/tour_detail.html:114
-msgid "Full"
-msgstr "Đã đầy"
-
-#: tours/templates/tours/tour_detail.html:123
-msgid "Book This Tour"
-msgstr "Đặt Tour này"
-
-#: tours/templates/tours/tour_detail.html:131
-msgid "Guest Reviews"
-msgstr "Đánh giá của khách"
-
-#: tours/templates/tours/tour_detail.html:169
-msgid "No reviews yet. Be the first to review this tour!"
-msgstr "Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá tour này!"
-
-#: tours/templates/tours/tour_list.html:31
-msgid "Discover Unforgettable Tours"
-msgstr "Khám phá những Tour khó quên"
-
-#: tours/templates/tours/tour_list.html:32
-msgid "Explore Vang Vieng with expert local guides and unique experiences"
-msgstr "Khám phá Vang Vieng với các hướng dẫn viên địa phương chuyên nghiệp và những trải nghiệm độc đáo"
-
-#: tours/templates/tours/tour_list.html:42
-msgid "Search Tours"
-msgstr "Tìm kiếm Tour"
-
-#: tours/templates/tours/tour_list.html:45
-msgid "e.g., Kayaking, Cave, Hot Air Balloon..."
-msgstr "Ví dụ: Chèo thuyền kayak, Hang động, Khinh khí cầu..."
-
-#: tours/templates/tours/tour_list.html:61
-msgid "Min Price"
-msgstr "Giá thấp nhất"
-
-#: tours/templates/tours/tour_list.html:63
-msgid "Min"
-msgstr "Thấp nhất"
-
-#: tours/templates/tours/tour_list.html:68
-msgid "Max Price"
-msgstr "Giá cao nhất"
-
-#: tours/templates/tours/tour_list.html:78
-msgid "Any"
-msgstr "Bất kỳ"
-
-#: tours/templates/tours/tour_list.html:109
-msgid "Tours Found"
-msgstr "Đã tìm thấy Tour"
-
-#: tours/templates/tours/tour_list.html:111
-msgid "No Results"
-msgstr "Không có kết quả"
-
-#: tours/templates/tours/tour_list.html:201
-msgid "View Office on Map"
-msgstr "Xem văn phòng trên bản đồ"
-
-#: tours/templates/tours/tour_list.html:206
-msgid "Map pending"
-msgstr "Bản đồ đang chờ"
-
-#: tours/templates/tours/tour_list.html:213
-msgid "View Details & Book"
-msgstr "Xem chi tiết & Đặt"
-
-#: tours/templates/tours/tour_list.html:224
-msgid "No tours found"
-msgstr "Không tìm thấy tour nào"
-
-#: tours/templates/tours/tour_list.html:225
-msgid "Try adjusting your search filters or dates"
-msgstr "Hãy thử điều chỉnh bộ lọc tìm kiếm hoặc ngày của bạn"
-
-#: tours/templates/tours/tour_list.html:227
-msgid "Clear All Filters"
-msgstr "Xóa tất cả bộ lọc"
+#: tours/templates/tours/book_tour.html:115
 
 msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
 msgstr "Giữ chỗ trước, thanh toán khi đến (Hủy miễn phí)"
 
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:4
+
 msgid "Prefer to chat? We can reserve it for you instantly."
 msgstr "Thích trò chuyện? Chúng tôi có thể đặt chỗ cho bạn ngay lập tức."
 
+#: buggy/templates/buggy/book_buggy.html:113
+#: guesthouse/templates/guesthouse/book.html:136
+#: guides/templates/guides/book_guide.html:108
+#: motorbike/templates/motorbike/book_motorbike.html:99
+#: tours/templates/tours/book_tour.html:124
+
 msgid "Reserve via WhatsApp Instead"
 msgstr "Đặt qua WhatsApp thay thế"
+
+#: buggy/templates/buggy/buggy_detail.html:14
+
+msgid "Back to Buggy Cars"
+msgstr "Quay lại danh sách xe buggy"
+
+#: buggy/templates/buggy/buggy_detail.html:55
+#: motorbike/templates/motorbike/motorbike_detail.html:55
+#: tours/templates/tours/tour_detail.html:41
+
+msgid "Operated by:"
+msgstr "Đơn vị vận hành:"
+
+#: buggy/templates/buggy/buggy_detail.html:73
+
+msgid "About this Buggy Car"
+msgstr "Giới thiệu về xe buggy này"
+
+#: buggy/templates/buggy/buggy_detail.html:86
+#: motorbike/templates/motorbike/motorbike_detail.html:86
+
+msgid "Rental Rates"
+msgstr "Giá thuê"
+
+#: buggy/templates/buggy/buggy_detail.html:123
+#: motorbike/templates/motorbike/motorbike_detail.html:107
+
+msgid "Pickup Location"
+msgstr "Địa điểm nhận xe"
+
+#: buggy/templates/buggy/buggy_detail.html:139
+#: motorbike/templates/motorbike/motorbike_detail.html:125
+
+msgid "Open in Google Maps App"
+msgstr "Mở trong ứng dụng Google Maps"
+
+#: buggy/templates/buggy/buggy_detail.html:148
+#: motorbike/templates/motorbike/motorbike_detail.html:134
+
+msgid "Pickup location map not available"
+msgstr "Bản đồ địa điểm nhận xe không khả dụng"
+
+#: buggy/templates/buggy/buggy_detail.html:149
+#: motorbike/templates/motorbike/motorbike_detail.html:135
+
+msgid "Contact the owner for exact pickup details after booking."
+msgstr "Liên hệ chủ xe để biết chi tiết địa điểm nhận xe chính xác sau khi đặt."
+
+#: buggy/templates/buggy/buggy_detail.html:160
+#: buggy/templates/buggy/buggy_list.html:103
+#: motorbike/templates/motorbike/motorbike_detail.html:146
+
+msgid "Starting from"
+msgstr "Giá bắt đầu từ"
+
+#: buggy/templates/buggy/buggy_detail.html:172
+
+msgid "Size"
+msgstr "Kích thước"
+
+#: buggy/templates/buggy/buggy_detail.html:177
+#: buggy/templates/buggy/buggy_list.html:67
+
+msgid "2-6 Hours or Full Day"
+msgstr "2-6 giờ hoặc Cả ngày"
+
+#: buggy/templates/buggy/buggy_detail.html:183
+
+msgid "Book This Buggy Car"
+msgstr "Đặt xe buggy này"
+
+#: buggy/templates/buggy/buggy_detail.html:187
+#: motorbike/templates/motorbike/motorbike_detail.html:169
+
+msgid "Login to Book"
+msgstr "Đăng nhập để đặt"
+
+#: buggy/templates/buggy/buggy_detail.html:192
+#: motorbike/templates/motorbike/motorbike_detail.html:174
+
+msgid "You won't be charged yet. The owner will verify availability first."
+msgstr "Bạn chưa bị tính phí. Chủ xe sẽ xác nhận tình trạng còn xe trước."
+
+#: buggy/templates/buggy/buggy_list.html:5
+
+msgid "Buggy Cars for Rent"
+msgstr "Cho thuê xe buggy"
+
+#: buggy/templates/buggy/buggy_list.html:17
+
+msgid "Rent a Buggy Car"
+msgstr "Thuê xe buggy"
+
+#: buggy/templates/buggy/buggy_list.html:18
+
+msgid "Perfect for groups and families. Explore Vang Vieng in style and comfort."
+msgstr "Hoàn hảo cho nhóm và gia đình. Khám phá Vang Vieng một cách phong cách và thoải mái."
+
+#: buggy/templates/buggy/buggy_list.html:67
+
+msgid "Rental Duration:"
+msgstr "Thời gian thuê:"
+
+#: buggy/templates/buggy/buggy_list.html:90
+#: motorbike/templates/motorbike/motorbike_list.html:86
+
+msgid "View Pickup Location"
+msgstr "Xem địa điểm nhận xe"
+
+#: buggy/templates/buggy/buggy_list.html:95
+#: motorbike/templates/motorbike/motorbike_list.html:91
+
+msgid "Pickup location pending"
+msgstr "Địa điểm nhận xe đang chờ xác nhận"
+
+#: buggy/templates/buggy/buggy_list.html:111
+#: motorbike/templates/motorbike/motorbike_list.html:106
+
+msgid "View Details & Rent"
+msgstr "Xem chi tiết và Thuê"
+
+#: buggy/templates/buggy/buggy_list.html:125
+
+msgid "No buggy cars available at the moment."
+msgstr "Hiện không có xe buggy nào khả dụng."
+
+#: buggy/templates/buggy/buggy_list.html:126
+#: motorbike/templates/motorbike/motorbike_list.html:121
+
+msgid "Please check back later or contact us for more information."
+msgstr "Vui lòng quay lại sau hoặc liên hệ với chúng tôi để biết thêm thông tin."
+
+#: dashboard/templates/dashboard/owner_analytics.html:5
+
+msgid "Owner Analytics"
+msgstr "Phân tích dành cho chủ sở hữu"
+
+#: dashboard/templates/dashboard/owner_analytics.html:29
+
+msgid "Back to Dashboard"
+msgstr "Quay lại Bảng điều khiển"
+
+#: dashboard/templates/dashboard/owner_analytics.html:31
+
+msgid "Business Analytics"
+msgstr "Phân tích kinh doanh"
+
+#: dashboard/templates/dashboard/owner_analytics.html:32
+
+msgid "Deep insights into your performance across all listings"
+msgstr "Thông tin chi tiết về hiệu suất trên tất cả các danh sách của bạn"
+
+#: dashboard/templates/dashboard/owner_analytics.html:38
+
+msgid "Last 7 days"
+msgstr "7 ngày qua"
+
+#: dashboard/templates/dashboard/owner_analytics.html:39
+
+msgid "Last 30 days"
+msgstr "30 ngày qua"
+
+#: dashboard/templates/dashboard/owner_analytics.html:40
+
+msgid "Last 90 days"
+msgstr "90 ngày qua"
+
+#: dashboard/templates/dashboard/owner_analytics.html:41
+
+msgid "Last 12 months"
+msgstr "12 tháng qua"
+
+#: dashboard/templates/dashboard/owner_analytics.html:42
+
+msgid "All time"
+msgstr "Toàn bộ thời gian"
+
+#: dashboard/templates/dashboard/owner_analytics.html:61
+#: dashboard/templates/dashboard/owner_dashboard.html:53
+
+msgid "Total Revenue"
+msgstr "Tổng doanh thu"
+
+#: dashboard/templates/dashboard/owner_analytics.html:74
+
+msgid "Total Bookings"
+msgstr "Tổng số lượt đặt"
+
+#: dashboard/templates/dashboard/owner_analytics.html:77
+
+msgid "confirmed"
+msgstr "đã xác nhận"
+
+#: dashboard/templates/dashboard/owner_analytics.html:78
+
+msgid "pending"
+msgstr "đang chờ"
+
+#: dashboard/templates/dashboard/owner_analytics.html:91
+
+msgid "Conversion Rate"
+msgstr "Tỷ lệ chuyển đổi"
+
+#: dashboard/templates/dashboard/owner_analytics.html:93
+
+msgid "of inquiries confirmed"
+msgstr "số yêu cầu đã được xác nhận"
+
+#: dashboard/templates/dashboard/owner_analytics.html:105
+
+msgid "Average Rating"
+msgstr "Đánh giá trung bình"
+
+#: dashboard/templates/dashboard/owner_analytics.html:107
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
+
+msgid "from"
+msgstr "từ"
+
+#: dashboard/templates/dashboard/owner_analytics.html:107
+#: tours/templates/tours/tour_detail.html:134
+
+msgid "reviews"
+msgstr "đánh giá"
+
+#: dashboard/templates/dashboard/owner_analytics.html:119
+
+msgid "Revenue by Category"
+msgstr "Doanh thu theo danh mục"
+
+#: dashboard/templates/dashboard/owner_analytics.html:127
+
+msgid "Booking Status"
+msgstr "Trạng thái đặt chỗ"
+
+#: dashboard/templates/dashboard/owner_analytics.html:139
+
+msgid "Top Performing Listings"
+msgstr "Danh sách hoạt động tốt nhất"
+
+#: dashboard/templates/dashboard/owner_analytics.html:146
+
+msgid "Listing"
+msgstr "Danh sách"
+
+#: dashboard/templates/dashboard/owner_analytics.html:147
+#: motorbike/templates/motorbike/motorbike_detail.html:158
+
+msgid "Category"
+msgstr "Danh mục"
+
+#: dashboard/templates/dashboard/owner_analytics.html:148
+
+msgid "Revenue"
+msgstr "Doanh thu"
+
+#: dashboard/templates/dashboard/owner_analytics.html:149
+
+msgid "Bookings"
+msgstr "Lượt đặt"
+
+#: dashboard/templates/dashboard/owner_analytics.html:150
+
+msgid "Rating"
+msgstr "Đánh giá"
+
+#: dashboard/templates/dashboard/owner_analytics.html:188
+
+msgid "No bookings yet"
+msgstr "Chưa có lượt đặt nào"
+
+#: dashboard/templates/dashboard/owner_analytics.html:189
+
+msgid "Your analytics will appear here once you receive your first booking."
+msgstr "Dữ liệu phân tích của bạn sẽ xuất hiện ở đây khi bạn nhận được lượt đặt đầu tiên."
+
+#: dashboard/templates/dashboard/owner_analytics.html:202
+
+msgid "Quick Insights"
+msgstr "Thông tin nhanh"
+
+#: dashboard/templates/dashboard/owner_analytics.html:206
+#: dashboard/templates/dashboard/owner_dashboard.html:29
+
+msgid "Total Properties"
+msgstr "Tổng số cơ sở"
+
+#: dashboard/templates/dashboard/owner_analytics.html:210
+
+msgid "Pending Actions"
+msgstr "Hành động đang chờ"
+
+#: dashboard/templates/dashboard/owner_analytics.html:214
+
+msgid "Cancelled"
+msgstr "Đã hủy"
+
+#: dashboard/templates/dashboard/owner_analytics.html:266
+
+msgid "'Confirmed'"
+msgstr "'Đã xác nhận'"
+
+#: dashboard/templates/dashboard/owner_analytics.html:266
+
+msgid "'Pending'"
+msgstr "'Đang chờ'"
+
+#: dashboard/templates/dashboard/owner_analytics.html:266
+
+msgid "'Cancelled'"
+msgstr "'Đã hủy'"
+
+#: dashboard/templates/dashboard/owner_analytics.html:268
+
+msgid "'Bookings'"
+msgstr "'Lượt đặt'"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:5
+#: dashboard/templates/dashboard/owner_dashboard.html:13
+
+msgid "Owner Dashboard"
+msgstr "Bảng điều khiển chủ sở hữu"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:14
+
+msgid "Welcome back"
+msgstr "Chào mừng trở lại"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:14
+
+msgid "Here's your business overview."
+msgstr "Đây là tổng quan về hoạt động kinh doanh của bạn."
+
+#: dashboard/templates/dashboard/owner_dashboard.html:20
+
+msgid "View Analytics"
+msgstr "Xem phân tích"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:35
+
+msgid "currently active"
+msgstr "đang hoạt động"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:41
+
+msgid "Pending Requests"
+msgstr "Yêu cầu đang chờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:47
+
+msgid "Awaiting your approval"
+msgstr "Đang chờ bạn phê duyệt"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:59
+
+msgid "From confirmed bookings"
+msgstr "Từ các lượt đặt đã xác nhận"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:64
+
+msgid "Quick Actions"
+msgstr "Thao tác nhanh"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:66
+#: dashboard/templates/dashboard/owner_dashboard.html:444
+
+msgid "Add Tour"
+msgstr "Thêm Tour"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:67
+#: dashboard/templates/dashboard/owner_dashboard.html:471
+
+msgid "Add Motorbike"
+msgstr "Thêm Xe máy"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:68
+#: dashboard/templates/dashboard/owner_dashboard.html:498
+
+msgid "Add Guide"
+msgstr "Thêm Hướng dẫn viên"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:69
+#: dashboard/templates/dashboard/owner_dashboard.html:525
+
+msgid "Add Buggy Car"
+msgstr "Thêm Xe buggy"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:146
+
+msgid "Pending Tour Requests"
+msgstr "Yêu cầu Tour đang chờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:152
+#: dashboard/templates/dashboard/owner_dashboard.html:213
+#: dashboard/templates/dashboard/owner_dashboard.html:274
+#: dashboard/templates/dashboard/owner_dashboard.html:337
+#: tours/templates/tours/tour_list.html:79
+
+msgid "Guest"
+msgstr "Khách"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:153 inquiry/models.py:10
+
+msgid "Tour"
+msgstr "Tour"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:154
+#: guides/templates/guides/book_guide.html:22
+
+msgid "Date"
+msgstr "Ngày"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:155
+#: dashboard/templates/dashboard/owner_dashboard.html:216
+#: dashboard/templates/dashboard/owner_dashboard.html:278
+#: dashboard/templates/dashboard/owner_dashboard.html:341
+
+msgid "Total"
+msgstr "Tổng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:156
+#: dashboard/templates/dashboard/owner_dashboard.html:217
+#: dashboard/templates/dashboard/owner_dashboard.html:279
+#: dashboard/templates/dashboard/owner_dashboard.html:342
+
+msgid "Actions"
+msgstr "Hành động"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:169
+#: dashboard/templates/dashboard/owner_dashboard.html:230
+#: dashboard/templates/dashboard/owner_dashboard.html:293
+#: dashboard/templates/dashboard/owner_dashboard.html:356
+
+msgid "Approve"
+msgstr "Duyệt"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:171
+#: dashboard/templates/dashboard/owner_dashboard.html:232
+#: dashboard/templates/dashboard/owner_dashboard.html:295
+#: dashboard/templates/dashboard/owner_dashboard.html:358
+
+msgid "Decline"
+msgstr "Từ chối"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:176
+#: dashboard/templates/dashboard/owner_dashboard.html:237
+#: dashboard/templates/dashboard/owner_dashboard.html:300
+#: dashboard/templates/dashboard/owner_dashboard.html:363
+
+msgid "Reason for declining:"
+msgstr "Lý do từ chối:"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:178
+#: dashboard/templates/dashboard/owner_dashboard.html:239
+#: dashboard/templates/dashboard/owner_dashboard.html:302
+#: dashboard/templates/dashboard/owner_dashboard.html:365
+
+msgid "Select a reason"
+msgstr "Chọn một lý do"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:179
+
+msgid "Date no longer available"
+msgstr "Ngày không còn khả dụng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:180
+
+msgid "Tour fully booked"
+msgstr "Tour đã hết chỗ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:181
+#: dashboard/templates/dashboard/owner_dashboard.html:242
+#: dashboard/templates/dashboard/owner_dashboard.html:305
+#: dashboard/templates/dashboard/owner_dashboard.html:368
+
+msgid "Unable to accommodate"
+msgstr "Không thể sắp xếp"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:182
+#: dashboard/templates/dashboard/owner_dashboard.html:243
+#: dashboard/templates/dashboard/owner_dashboard.html:306
+#: dashboard/templates/dashboard/owner_dashboard.html:369
+
+msgid "Other (please specify)"
+msgstr "Khác (vui lòng nêu rõ)"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:184
+#: dashboard/templates/dashboard/owner_dashboard.html:245
+#: dashboard/templates/dashboard/owner_dashboard.html:308
+#: dashboard/templates/dashboard/owner_dashboard.html:371
+
+msgid "Please explain..."
+msgstr "Vui lòng giải thích..."
+
+#: dashboard/templates/dashboard/owner_dashboard.html:186
+#: dashboard/templates/dashboard/owner_dashboard.html:247
+#: dashboard/templates/dashboard/owner_dashboard.html:310
+#: dashboard/templates/dashboard/owner_dashboard.html:373
+
+msgid "Cancel"
+msgstr "Hủy"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:187
+#: dashboard/templates/dashboard/owner_dashboard.html:248
+#: dashboard/templates/dashboard/owner_dashboard.html:311
+#: dashboard/templates/dashboard/owner_dashboard.html:374
+
+msgid "Confirm Decline"
+msgstr "Xác nhận từ chối"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:207
+
+msgid "Pending Motorbike Requests"
+msgstr "Yêu cầu Xe máy đang chờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:214
+
+msgid "Motorbike"
+msgstr "Xe máy"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:215
+
+msgid "Dates"
+msgstr "Ngày"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:240
+
+msgid "Dates no longer available"
+msgstr "Ngày không còn khả dụng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:241
+
+msgid "Maintenance issue"
+msgstr "Vấn đề bảo trì"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:268
+
+msgid "Pending Guide Requests"
+msgstr "Yêu cầu Hướng dẫn viên đang chờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:275
+
+msgid "Guide"
+msgstr "Hướng dẫn viên"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:276
+#: dashboard/templates/dashboard/owner_dashboard.html:339
+
+msgid "Date & Time"
+msgstr "Ngày & Giờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:277
+#: dashboard/templates/dashboard/owner_dashboard.html:340
+#: guides/templates/guides/book_guide.html:34
+
+msgid "Duration"
+msgstr "Thời lượng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:287
+#: dashboard/templates/dashboard/owner_dashboard.html:350
+
+msgid "at"
+msgstr "lúc"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:288
+#: dashboard/templates/dashboard/owner_dashboard.html:351
+#: tours/templates/tours/tour_detail.html:68
+
+msgid "hours"
+msgstr "giờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:303
+
+msgid "Guide unavailable"
+msgstr "Hướng dẫn viên không khả dụng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:304
+#: dashboard/templates/dashboard/owner_dashboard.html:367
+
+msgid "Time slot unavailable"
+msgstr "Khung giờ không khả dụng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:331
+
+msgid "Pending Buggy Car Requests"
+msgstr "Yêu cầu Xe buggy đang chờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:338
+
+msgid "Buggy Car"
+msgstr "Xe buggy"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:366
+
+msgid "Buggy unavailable"
+msgstr "Xe buggy không khả dụng"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:426
+
+msgid "My Tours"
+msgstr "Tour của tôi"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:434
+#: dashboard/templates/dashboard/owner_dashboard.html:461
+#: dashboard/templates/dashboard/owner_dashboard.html:488
+#: dashboard/templates/dashboard/owner_dashboard.html:515
+
+msgid "Active"
+msgstr "Đang hoạt động"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:434
+#: dashboard/templates/dashboard/owner_dashboard.html:461
+#: dashboard/templates/dashboard/owner_dashboard.html:488
+#: dashboard/templates/dashboard/owner_dashboard.html:515
+
+msgid "Inactive"
+msgstr "Không hoạt động"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:436
+
+msgid "hrs"
+msgstr "giờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:436
+#: tours/templates/tours/book_tour.html:17
+#: tours/templates/tours/tour_detail.html:87
+#: tours/templates/tours/tour_list.html:135
+
+msgid "person"
+msgstr "người"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:437
+#: dashboard/templates/dashboard/owner_dashboard.html:464
+#: dashboard/templates/dashboard/owner_dashboard.html:491
+#: dashboard/templates/dashboard/owner_dashboard.html:518
+
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:443
+
+msgid "No tours yet."
+msgstr "Chưa có tour nào."
+
+#: dashboard/templates/dashboard/owner_dashboard.html:453
+
+msgid "My Motorbikes"
+msgstr "Xe máy của tôi"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:463
+#: motorbike/templates/motorbike/book_motorbike.html:17
+#: motorbike/templates/motorbike/motorbike_detail.html:149
+#: motorbike/templates/motorbike/motorbike_list.html:101
+
+msgid "day"
+msgstr "ngày"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:470
+
+msgid "No motorbikes yet."
+msgstr "Chưa có xe máy nào."
+
+#: dashboard/templates/dashboard/owner_dashboard.html:480
+
+msgid "My Guides"
+msgstr "Hướng dẫn viên của tôi"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:497
+
+msgid "No guides yet."
+msgstr "Chưa có hướng dẫn viên nào."
+
+#: dashboard/templates/dashboard/owner_dashboard.html:507
+
+msgid "My Buggy Cars"
+msgstr "Xe buggy của tôi"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:517
+
+msgid "2hrs"
+msgstr "2 giờ"
+
+#: dashboard/templates/dashboard/owner_dashboard.html:524
+
+msgid "No buggy cars yet."
+msgstr "Chưa có xe buggy nào."
+
+#: guesthouse/templates/guesthouse/book.html:15
+
+msgid "Book Your Stay"
+msgstr "Đặt chỗ nghỉ của bạn"
+
+#: guesthouse/templates/guesthouse/book.html:17
+#: motorbike/templates/motorbike/book_motorbike.html:17
+#: tours/templates/tours/book_tour.html:17
+
+msgid "Price:"
+msgstr "Giá:"
+
+#: guesthouse/templates/guesthouse/book.html:17
+
+msgid "night"
+msgstr "đêm"
+
+#: guesthouse/templates/guesthouse/book.html:23
+
+msgid "Unable to complete booking:"
+msgstr "Không thể hoàn tất đặt chỗ:"
+
+#: guesthouse/templates/guesthouse/book.html:37
+
+msgid "Check-in Date"
+msgstr "Ngày nhận phòng"
+
+#: guesthouse/templates/guesthouse/book.html:46
+
+msgid "Check-out Date"
+msgstr "Ngày trả phòng"
+
+#: guesthouse/templates/guesthouse/book.html:55
+
+msgid "Number of Guests"
+msgstr "Số lượng khách"
+
+#: guesthouse/templates/guesthouse/book.html:57
+
+msgid "How many people will be staying?"
+msgstr "Sẽ có bao nhiêu người ở lại?"
+
+#: guesthouse/templates/guesthouse/book.html:66
+
+msgid "Room Type"
+msgstr "Loại phòng"
+
+#: guesthouse/templates/guesthouse/book.html:68
+
+msgid "Select your preferred room type."
+msgstr "Chọn loại phòng bạn mong muốn."
+
+#: guesthouse/templates/guesthouse/book.html:79
+
+msgid "A"
+msgstr "Một"
+
+#: guesthouse/templates/guesthouse/book.html:79
+
+msgid "standard room"
+msgstr "phòng tiêu chuẩn"
+
+#: guesthouse/templates/guesthouse/book.html:79
+
+msgid "will be assigned to you upon arrival based on availability."
+msgstr "sẽ được sắp xếp cho bạn khi đến nơi tùy theo tình trạng phòng."
+
+#: guesthouse/templates/guesthouse/book.html:89
+
+msgid "Please provide at least one way for the guesthouse owner to contact you."
+msgstr "Vui lòng cung cấp ít nhất một cách để chủ nhà nghỉ liên hệ với bạn."
+
+#: guesthouse/templates/guesthouse/book.html:94
+#: inquiry/templates/inquiry/inquiry.html:42
+#: tours/templates/tours/book_tour.html:82
+
+msgid "Email Address"
+msgstr "Địa chỉ Email"
+
+#: guesthouse/templates/guesthouse/book.html:102
+#: inquiry/templates/inquiry/inquiry.html:55
+#: tours/templates/tours/book_tour.html:90
+
+msgid "Phone Number"
+msgstr "Số điện thoại"
+
+#: guesthouse/templates/guesthouse/book.html:121
+#: guides/templates/guides/book_guide.html:93
+#: tours/templates/tours/book_tour.html:109
+
+msgid "Final payment will be collected in"
+msgstr "Thanh toán cuối cùng sẽ được thu bằng"
+
+#: guesthouse/templates/guesthouse/book.html:121
+#: tours/templates/tours/book_tour.html:109
+
+msgid "Lao Kip (LAK)"
+msgstr "Kip Lào (LAK)"
+
+#: guesthouse/templates/guesthouse/book.html:121
+
+msgid "based on the official daily BCEL/LDB exchange rate on the day of your check-in."
+msgstr "dựa trên tỷ giá hối đoái chính thức hàng ngày của BCEL/LDB vào ngày bạn nhận phòng."
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:30
+
+msgid "Find Your Perfect Stay"
+msgstr "Tìm nơi nghỉ dưỡng hoàn hảo của bạn"
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:31
+
+msgid "Discover amazing guesthouses in Vang Vieng"
+msgstr "Khám phá những nhà nghỉ tuyệt vời ở Vang Vieng"
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:41
+
+msgid "Check-in"
+msgstr "Nhận phòng"
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:50
+
+msgid "Check-out"
+msgstr "Trả phòng"
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:64
+#: tours/templates/tours/tour_list.html:75
+#: tours/templates/tours/tour_list.html:80
+#: tours/templates/tours/tour_list.html:81
+#: tours/templates/tours/tour_list.html:82
+#: tours/templates/tours/tour_list.html:83
+
+msgid "Guests"
+msgstr "Khách"
+
+#: guesthouse/templates/guesthouse/guesthouse_list.html:123
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:10
+#: templates/base.html:333 templates/pages/terms_of_service.html:4
+#: templates/pages/terms_of_service.html:8
+
+msgid "Terms of Service"
+msgstr "Điều khoản dịch vụ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:11
+
+msgid "Last Updated: October 2026"
+msgstr "Cập nhật lần cuối: Tháng 10 năm 2026"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:17
+
+msgid "Welcome to"
+msgstr "Chào mừng đến với"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:17
+#: templates/base.html:317 templates/base.html:338
+
+msgid "Vang Vieng Stay"
+msgstr "Vang Vieng Stay"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:17
+
+msgid "By accessing our website and using our booking services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully."
+msgstr "Bằng cách truy cập trang web và sử dụng dịch vụ đặt chỗ của chúng tôi, bạn đồng ý tuân thủ và bị ràng buộc bởi các điều khoản và điều kiện sau. Vui lòng đọc kỹ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:20
+
+msgid "1. Platform Role"
+msgstr "1. Vai trò của nền tảng"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+
+msgid "Vang Vieng Stay acts solely as an intermediary booking platform connecting travelers with independent local business owners in Vang Vieng, Laos. We facilitate bookings for"
+msgstr "Vang Vieng Stay chỉ đóng vai trò là nền tảng đặt phòng trung gian kết nối du khách với các chủ doanh nghiệp địa phương độc lập tại Vang Vieng, Lào. Chúng tôi hỗ trợ đặt chỗ cho"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+
+msgid "Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
+msgstr "Nhà nghỉ, Tour, Hướng dẫn viên địa phương, Cho thuê xe máy và Cho thuê xe buggy"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+
+msgid "We do not own, manage, or operate these services. The actual service provider"
+msgstr "Chúng tôi không sở hữu, quản lý hoặc vận hành các dịch vụ này. Nhà cung cấp dịch vụ thực tế"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:21
+
+msgid "is solely responsible for the quality, safety, and delivery of the services rendered."
+msgstr "chịu trách nhiệm duy nhất về chất lượng, sự an toàn và việc cung cấp các dịch vụ được cung cấp."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:25
+
+msgid "2. The 'Request & Verify' Booking Process"
+msgstr "2. Quy trình đặt chỗ 'Yêu cầu & Xác minh'"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+
+msgid "Booking Requests:"
+msgstr "Yêu cầu đặt chỗ:"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+
+msgid "Submitting a booking form on our platform does"
+msgstr "Việc gửi biểu mẫu đặt chỗ trên nền tảng của chúng tôi không"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "not"
+msgstr "không"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:27
+
+msgid "guarantee a reservation. It initiates a 'Booking Request' which is sent to the Owner for availability verification."
+msgstr "đảm bảo một chỗ đặt. Nó khởi tạo một 'Yêu cầu đặt chỗ' được gửi đến Chủ sở hữu để xác minh tình trạng còn phòng."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+
+msgid "Confirmation:"
+msgstr "Xác nhận:"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+
+msgid "A booking is only considered"
+msgstr "Một lượt đặt chỗ chỉ được coi là"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+
+msgid "Confirmed"
+msgstr "Đã xác nhận"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:28
+
+msgid "once the Owner approves the request and you receive a final Confirmation Voucher via email."
+msgstr "khi Chủ sở hữu phê duyệt yêu cầu và bạn nhận được Phiếu xác nhận cuối cùng qua email."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+
+msgid "Declined Requests:"
+msgstr "Yêu cầu bị từ chối:"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+
+msgid "If the Owner cannot accommodate your request"
+msgstr "Nếu Chủ sở hữu không thể đáp ứng yêu cầu của bạn"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+
+msgid "e.g., the vehicle or room is no longer available"
+msgstr "(ví dụ: phương tiện hoặc phòng không còn khả dụng)"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:29
+
+msgid "the request will be declined at no cost to you."
+msgstr "yêu cầu sẽ bị từ chối mà không mất chi phí nào cho bạn."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:34
+
+msgid "3. Payment, Currency & Security Deposits"
+msgstr "3. Thanh toán, Tiền tệ & Tiền đặt cọc"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "Cash on Arrival:"
+msgstr "Thanh toán khi đến:"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "Vang Vieng Stay does"
+msgstr "Vang Vieng Stay không"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "process online payments. All payments for services must be made directly to the Owner in"
+msgstr "xử lý thanh toán trực tuyến. Tất cả các khoản thanh toán cho dịch vụ phải được thực hiện trực tiếp cho Chủ sở hữu bằng"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "cash"
+msgstr "tiền mặt"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "Lao Kip - LAK"
+msgstr "Kip Lào - LAK"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:36
+
+msgid "upon check-in, arrival, or vehicle pickup."
+msgstr "khi nhận phòng, đến nơi hoặc nhận xe."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:37
+
+msgid "Pricing:"
+msgstr "Giá cả:"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:37
+
+msgid "All prices displayed on the platform are estimates in LAK and are subject to change based on the Owner's current rates. The final price agreed upon with the Owner at the time of pickup/check-in is the binding price."
+msgstr "Tất cả các giá hiển thị trên nền tảng là ước tính bằng LAK và có thể thay đổi dựa trên mức giá hiện tại của Chủ sở hữu. Giá cuối cùng được thỏa thuận với Chủ sở hữu tại thời điểm nhận xe/nhận phòng là giá ràng buộc."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:38
+
+msgid "Security Deposits (Vehicles): "
+msgstr "Tiền đặt cọc (Phương tiện): "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:38
+
+msgid "For Motorbike and Buggy Car rentals, a cash security deposit and/or the physical surrender of a valid Passport or Government ID is required by the Owner at the time of pickup. This deposit/ID will be returned upon the safe return of the vehicle."
+msgstr "Đối với việc thuê xe máy và xe buggy, Chủ sở hữu yêu cầu một khoản tiền đặt cọc bằng tiền mặt và/hoặc giao nộp hộ chiếu hoặc giấy tờ tùy thân hợp lệ tại thời điểm nhận xe. Khoản tiền đặt cọc/giấy tờ này sẽ được trả lại khi phương tiện được trả lại an toàn."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:43
+
+msgid "4. Cancellations"
+msgstr "4. Hủy bỏ"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:45
+
+msgid "Pending Requests: "
+msgstr "Yêu cầu đang chờ: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:45
+
+msgid "You may cancel any pending booking request instantly via your dashboard at no charge."
+msgstr "Bạn có thể hủy bất kỳ yêu cầu đặt chỗ đang chờ nào ngay lập tức thông qua bảng điều khiển của mình mà không mất phí."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:46
+
+msgid "Confirmed Bookings: "
+msgstr "Đặt chỗ đã xác nhận: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:46
+
+msgid "If you need to cancel a confirmed booking, you must contact the Owner directly. Cancellation policies, including the potential forfeiture of your security deposit for vehicle rentals or late cancellation fees for guesthouses, are determined solely by the individual Owner."
+msgstr "Nếu bạn cần hủy một lượt đặt chỗ đã xác nhận, bạn phải liên hệ trực tiếp với Chủ sở hữu. Các chính sách hủy bỏ, bao gồm khả năng bị mất tiền đặt cọc đối với việc thuê phương tiện hoặc phí hủy bỏ muộn đối với nhà nghỉ, được xác định duy nhất bởi từng Chủ sở hữu."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:51
+
+msgid "5. User Responsibilities & Safety"
+msgstr "5. Trách nhiệm & An toàn của Người dùng"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:53
+
+msgid "Identification: "
+msgstr "Giấy tờ tùy thân: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:53
+
+msgid "You must present a valid Passport or Government ID and your Booking Voucher (digital or printed) upon check-in or vehicle pickup."
+msgstr "Bạn phải xuất trình Hộ chiếu hoặc Giấy tờ tùy thân hợp lệ và Phiếu đặt chỗ của bạn (kỹ thuật số hoặc in) khi nhận phòng hoặc nhận xe."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:54
+
+msgid "Vehicle Rentals: "
+msgstr "Thuê phương tiện: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:54
+
+msgid "For Motorbikes and Buggy Cars, the renter must possess a valid, legally recognized driver's license for Laos. You are fully responsible for the safe operation of the vehicle, adhering to local traffic laws, and wearing appropriate safety gear (e.g., helmets)."
+msgstr "Đối với xe máy và xe buggy, người thuê phải có bằng lái xe hợp lệ, được công nhận hợp pháp tại Lào. Bạn hoàn toàn chịu trách nhiệm về việc vận hành phương tiện an toàn, tuân thủ luật giao thông địa phương và đeo thiết bị an toàn phù hợp (ví dụ: mũ bảo hiểm)."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:55
+
+msgid "Property Respect: "
+msgstr "Tôn trọng tài sản: "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:55
+
+msgid "You agree to respect the property, staff, and local regulations of the service providers."
+msgstr "Bạn đồng ý tôn trọng tài sản, nhân viên và các quy định địa phương của các nhà cung cấp dịch vụ."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:60
+
+msgid "6. Limitation of Liability"
+msgstr "6. Giới hạn trách nhiệm"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:61
+
+msgid "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable for any indirect, incidental, or consequential damages arising from your use of the platform or the services booked. This includes, but is not limited to, traffic accidents, vehicle damage, personal injuries during tours, theft, or travel disruptions. All risks associated with the use of rented vehicles and participation in tours are assumed entirely by the user."
+msgstr "Ở mức độ tối đa được pháp luật cho phép, Vang Vieng Stay sẽ không chịu trách nhiệm về bất kỳ thiệt hại gián tiếp, ngẫu nhiên hoặc do hậu quả nào phát sinh từ việc bạn sử dụng nền tảng hoặc các dịch vụ đã đặt. Điều này bao gồm, nhưng không giới hạn, tai nạn giao thông, hư hỏng phương tiện, thương tích cá nhân trong các tour du lịch, trộm cắp hoặc gián đoạn du lịch. Tất cả các rủi ro liên quan đến việc sử dụng phương tiện thuê và tham gia các tour du lịch hoàn toàn do người dùng chịu."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:65
+
+msgid "7. Governing Law"
+msgstr "7. Luật áp dụng"
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:66
+
+msgid "These terms shall be governed by and construed in accordance with the laws of the Lao People's Democratic Republic. Any disputes arising from these terms or the services booked shall be subject to the exclusive jurisdiction of the local authorities and courts in Vientiane, Laos."
+msgstr "Các điều khoản này sẽ được điều chỉnh và giải thích theo luật pháp của Cộng hòa Dân chủ Nhân dân Lào. Mọi tranh chấp phát sinh từ các điều khoản này hoặc các dịch vụ đã đặt sẽ thuộc thẩm quyền giải quyết độc quyền của chính quyền địa phương và tòa án tại Viêng Chăn, Lào."
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:71
+
+msgid "Questions? "
+msgstr "Có câu hỏi? "
+
+#: guesthouse/templates/guesthouse/terms_of_service.html:71
+
+msgid "If you have any questions about these Terms of Service or your data privacy, please contact us at"
+msgstr "Nếu bạn có bất kỳ câu hỏi nào về Điều khoản dịch vụ này hoặc quyền riêng tư dữ liệu của bạn, vui lòng liên hệ với chúng tôi tại"
+
+#: guides/templates/guides/book_guide.html:11
+
+msgid "Back to guide profile"
+msgstr "Quay lại hồ sơ hướng dẫn viên"
+
+#: guides/templates/guides/book_guide.html:16
+
+msgid "Tell us when and where to meet you."
+msgstr "Cho chúng tôi biết khi nào và ở đâu để gặp bạn."
+
+#: guides/templates/guides/book_guide.html:36
+
+msgid "1 Hour"
+msgstr "1 giờ"
+
+#: guides/templates/guides/book_guide.html:39
+
+msgid "Half Day (4 Hours)"
+msgstr "Nửa ngày (4 giờ)"
+
+#: guides/templates/guides/book_guide.html:42
+
+msgid "7 Hours"
+msgstr "7 giờ"
+
+#: guides/templates/guides/book_guide.html:43
+
+msgid "Full Day (8 Hours)"
+msgstr "Cả ngày (8 giờ)"
+
+#: guides/templates/guides/book_guide.html:50
+
+msgid "Where should the guide meet you?"
+msgstr "Hướng dẫn viên nên gặp bạn ở đâu?"
+
+#: guides/templates/guides/book_guide.html:53
+
+msgid "e.g., Vang Vieng Central Lodge, or near the bus station"
+msgstr "Ví dụ: Vang Vieng Central Lodge, hoặc gần bến xe"
+
+#: guides/templates/guides/book_guide.html:55
+
+msgid "Your guide will meet you here. You can share a live location via WhatsApp later."
+msgstr "Hướng dẫn viên sẽ gặp bạn tại đây. Bạn có thể chia sẻ vị trí trực tiếp qua WhatsApp sau."
+
+#: guides/templates/guides/book_guide.html:63
+
+msgid "Please provide at least one way for the guide to contact you."
+msgstr "Vui lòng cung cấp ít nhất một cách để hướng dẫn viên liên hệ với bạn."
+
+#: guides/templates/guides/book_guide.html:93
+
+msgid "at the meeting point."
+msgstr "tại điểm hẹn."
+
+#: guides/templates/guides/guide_list.html:4 templates/base.html:78
+#: templates/base.html:237 templates/base.html:324
+
+msgid "Local Guides"
+msgstr "Hướng dẫn viên địa phương"
+
+#: guides/templates/guides/guide_list.html:16
+
+msgid "Hire a Local Expert"
+msgstr "Thuê chuyên gia địa phương"
+
+#: guides/templates/guides/guide_list.html:17
+
+msgid "Rent your own motorbike but want someone to show you the hidden waterfalls, safe routes, and best local food? Our certified local guides have you covered."
+msgstr "Tự thuê xe máy nhưng muốn có người chỉ cho bạn những thác nước ẩn, tuyến đường an toàn và món ăn địa phương ngon nhất? Các hướng dẫn viên địa phương được chứng nhận của chúng tôi sẽ hỗ trợ bạn."
+
+#: guides/templates/guides/guide_list.html:23
+
+msgid "Available Guides"
+msgstr "Hướng dẫn viên khả dụng"
+
+#: guides/templates/guides/guide_list.html:57
+
+msgid "Lao"
+msgstr "Tiếng Lào"
+
+#: guides/templates/guides/guide_list.html:60
+
+msgid "English"
+msgstr "Tiếng Anh"
+
+#: guides/templates/guides/guide_list.html:65
+
+msgid "View Profile & Book"
+msgstr "Xem hồ sơ & Đặt"
+
+#: guides/templates/guides/guide_list.html:73
+
+msgid "No guides available at the moment."
+msgstr "Hiện không có hướng dẫn viên nào khả dụng."
+
+#: inquiry/models.py:7
+
+msgid "General Question"
+msgstr "Câu hỏi chung"
+
+#: inquiry/models.py:8
+
+msgid "Booking Inquiry"
+msgstr "Yêu cầu đặt chỗ"
+
+#: inquiry/models.py:9
+
+msgid "Guesthouse"
+msgstr "Nhà nghỉ"
+
+#: inquiry/models.py:11
+
+msgid "Motorbike Rental"
+msgstr "Cho thuê xe máy"
+
+#: inquiry/models.py:12
+
+msgid "Buggy Car Rental"
+msgstr "Cho thuê xe buggy"
+
+#: inquiry/models.py:13
+
+msgid "Local Guide"
+msgstr "Hướng dẫn viên địa phương"
+
+#: inquiry/models.py:14
+
+msgid "Technical Support"
+msgstr "Hỗ trợ kỹ thuật"
+
+#: inquiry/models.py:15
+
+msgid "Other"
+msgstr "Khác"
+
+#: inquiry/models.py:19
+
+msgid "New"
+msgstr "Mới"
+
+#: inquiry/models.py:20
+
+msgid "Read"
+msgstr "Đã đọc"
+
+#: inquiry/models.py:21
+
+msgid "Responded"
+msgstr "Đã phản hồi"
+
+#: inquiry/models.py:22
+
+msgid "Closed"
+msgstr "Đã đóng"
+
+#: inquiry/models.py:25
+
+msgid "Name"
+msgstr "Tên"
+
+#: inquiry/models.py:26 trip_planner/templates/trip_planner/trip_plan.html:286
+#: trip_planner/templates/trip_planner/trip_plan.html:459
+
+msgid "Email"
+msgstr "Email"
+
+#: inquiry/models.py:27
+
+msgid "Phone"
+msgstr "Điện thoại"
+
+#: inquiry/models.py:28 inquiry/templates/inquiry/inquiry.html:61
+
+msgid "Subject"
+msgstr "Chủ đề"
+
+#: inquiry/models.py:29
+
+msgid "Message"
+msgstr "Tin nhắn"
+
+#: inquiry/models.py:30
+
+msgid "Status"
+msgstr "Trạng thái"
+
+#: inquiry/models.py:33
+
+msgid "Customer Email Sent"
+msgstr "Đã gửi email cho khách"
+
+#: inquiry/models.py:34
+
+msgid "Admin Email Sent"
+msgstr "Đã gửi email cho quản trị viên"
+
+#: inquiry/models.py:36
+
+msgid "Created At"
+msgstr "Ngày tạo"
+
+#: inquiry/models.py:37
+
+msgid "Updated At"
+msgstr "Ngày cập nhật"
+
+#: inquiry/models.py:41
+
+msgid "Inquiry"
+msgstr "Yêu cầu"
+
+#: inquiry/models.py:42
+
+msgid "Inquiries"
+msgstr "Các yêu cầu"
+
+#: inquiry/templates/inquiry/inquiry.html:10
+
+msgid "Get in Touch"
+msgstr "Liên hệ với chúng tôi"
+
+#: inquiry/templates/inquiry/inquiry.html:12
+
+msgid "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours."
+msgstr "Bạn có câu hỏi? Chúng tôi rất muốn nghe từ bạn. Gửi tin nhắn cho chúng tôi và chúng tôi sẽ phản hồi trong vòng 24 giờ."
+
+#: inquiry/templates/inquiry/inquiry.html:33
+#: trip_planner/templates/trip_planner/trip_plan.html:275
+#: trip_planner/templates/trip_planner/trip_plan.html:448
+
+msgid "Your Name"
+msgstr "Tên của bạn"
+
+#: inquiry/templates/inquiry/inquiry.html:70
+
+msgid "Your Message"
+msgstr "Tin nhắn của bạn"
+
+#: inquiry/templates/inquiry/inquiry.html:80
+
+msgid "Send Message"
+msgstr "Gửi tin nhắn"
+
+#: inquiry/templates/inquiry/inquiry.html:84
+
+msgid "We respect your privacy. Your information will never be shared."
+msgstr "Chúng tôi tôn trọng quyền riêng tư của bạn. Thông tin của bạn sẽ không bao giờ bị chia sẻ."
+
+#: inquiry/templates/inquiry/inquiry_success.html:10
+
+msgid "Message Sent Successfully!"
+msgstr "Gửi tin nhắn thành công!"
+
+#: inquiry/templates/inquiry/inquiry_success.html:12
+
+msgid "Thank you for reaching out. We've received your message and sent a confirmation to your email."
+msgstr "Cảm ơn bạn đã liên hệ. Chúng tôi đã nhận được tin nhắn của bạn và gửi xác nhận đến email của bạn."
+
+#: inquiry/templates/inquiry/inquiry_success.html:15
+
+msgid "Our team will review your inquiry and get back to you within 24 hours."
+msgstr "Nhóm của chúng tôi sẽ xem xét yêu cầu của bạn và phản hồi trong vòng 24 giờ."
+
+#: inquiry/templates/inquiry/inquiry_success.html:18
+
+msgid "Return to Homepage"
+msgstr "Quay lại Trang chủ"
+
+#: motorbike/templates/motorbike/book_motorbike.html:5
+#: motorbike/templates/motorbike/book_motorbike.html:15
+
+msgid "Rent"
+msgstr "Thuê"
+
+#: motorbike/templates/motorbike/book_motorbike.html:27
+
+msgid "Pickup Date"
+msgstr "Ngày nhận xe"
+
+#: motorbike/templates/motorbike/book_motorbike.html:32
+
+msgid "Return Date"
+msgstr "Ngày trả xe"
+
+#: motorbike/templates/motorbike/book_motorbike.html:84
+
+msgid "at pickup. The deposit will be fully refunded when you return the motorbike."
+msgstr "khi nhận xe. Tiền đặt cọc sẽ được hoàn lại đầy đủ khi bạn trả xe máy."
+
+#: motorbike/templates/motorbike/book_motorbike.html:90
+
+msgid "Cancel Motorbike Rental"
+msgstr "Hủy thuê xe máy"
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:15
+
+msgid "Cancel Rental?"
+msgstr "Hủy thuê?"
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
+
+msgid "Are you sure you want to cancel your rental of"
+msgstr "Bạn có chắc chắn muốn hủy việc thuê"
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
+
+msgid "to"
+msgstr "đến"
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:18
+
+msgid "This action cannot be undone, and the motorbike will be released for others to book."
+msgstr "Hành động này không thể hoàn tác và xe máy sẽ được mở khóa để người khác đặt."
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
+
+msgid "Keep Rental"
+msgstr "Giữ nguyên việc thuê"
+
+#: motorbike/templates/motorbike/cancel_motorbike_booking.html:27
+
+msgid "Yes, Cancel Rental"
+msgstr "Có, Hủy thuê"
+
+#: motorbike/templates/motorbike/motorbike_detail.html:14
+
+msgid "Back to Motorbikes"
+msgstr "Quay lại danh sách xe máy"
+
+#: motorbike/templates/motorbike/motorbike_detail.html:73
+
+msgid "About this Motorbike"
+msgstr "Giới thiệu về xe máy này"
+
+#: motorbike/templates/motorbike/motorbike_detail.html:89
+
+msgid "Daily Rate"
+msgstr "Giá theo ngày"
+
+#: motorbike/templates/motorbike/motorbike_detail.html:93
+
+msgid "Deposit Required"
+msgstr "Yêu cầu đặt cọc"
+
+#: motorbike/templates/motorbike/motorbike_detail.html:165
+
+msgid "Book This Motorbike"
+msgstr "Đặt xe máy này"
+
+#: motorbike/templates/motorbike/motorbike_list.html:5
+
+msgid "Motorbikes for Rent"
+msgstr "Cho thuê xe máy"
+
+#: motorbike/templates/motorbike/motorbike_list.html:17
+
+msgid "Rent a Motorbike"
+msgstr "Thuê xe máy"
+
+#: motorbike/templates/motorbike/motorbike_list.html:18
+
+msgid "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
+msgstr "Khám phá Vang Vieng theo tốc độ của riêng bạn. Những chiếc xe máy đáng tin cậy cho mọi cuộc phiêu lưu."
+
+#: motorbike/templates/motorbike/motorbike_list.html:63
+
+msgid "Rental Type:"
+msgstr "Loại hình thuê:"
+
+#: motorbike/templates/motorbike/motorbike_list.html:63
+
+msgid "Daily"
+msgstr "Theo ngày"
+
+#: motorbike/templates/motorbike/motorbike_list.html:120
+
+msgid "No motorbikes available at the moment."
+msgstr "Hiện không có xe máy nào khả dụng."
+
+#: templates/base.html:74 templates/base.html:233
+
+msgid "Tours"
+msgstr "Tour du lịch"
+
+#: templates/base.html:82 templates/base.html:241
+
+msgid "Motorbikes"
+msgstr "Xe máy"
+
+#: templates/base.html:86 templates/base.html:245
+
+msgid "Buggy Cars"
+msgstr "Xe buggy"
+
+#: templates/base.html:89 templates/base.html:249
+
+msgid "Plan My Trip"
+msgstr "Lên kế hoạch chuyến đi"
+
+#: templates/base.html:92 templates/base.html:253
+
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: templates/base.html:107
+
+msgid "Select language"
+msgstr "Chọn ngôn ngữ"
+
+#: templates/base.html:136
+
+msgid "Email Verified"
+msgstr "Đã xác minh email"
+
+#: templates/base.html:140
+
+msgid "Unverified"
+msgstr "Chưa xác minh"
+
+#: templates/base.html:142
+
+msgid "Verify Now"
+msgstr "Xác minh ngay"
+
+#: templates/base.html:149 templates/base.html:260
+
+msgid "My Dashboard"
+msgstr "Bảng điều khiển của tôi"
+
+#: templates/base.html:153
+
+msgid "Tour Adventures"
+msgstr "Phiêu lưu Tour"
+
+#: templates/base.html:157
+
+msgid "Guide Bookings"
+msgstr "Đặt Hướng dẫn viên"
+
+#: templates/base.html:161 templates/base.html:325
+
+msgid "Motorbike Rentals"
+msgstr "Thuê xe máy"
+
+#: templates/base.html:165 templates/base.html:326
+
+msgid "Buggy Car Rentals"
+msgstr "Thuê xe buggy"
+
+#: templates/base.html:172 templates/base.html:266
+
+msgid "Admin Dashboard"
+msgstr "Bảng điều khiển Quản trị viên"
+
+#: templates/base.html:181 templates/base.html:279
+
+msgid "Log Out"
+msgstr "Đăng xuất"
+
+#: templates/base.html:188 templates/base.html:285
+#: templates/registration/login.html:4
+
+msgid "Log In"
+msgstr "Đăng nhập"
+
+#: templates/base.html:191 templates/base.html:288
+#: templates/registration/signup.html:4
+
+msgid "Sign Up"
+msgstr "Đăng ký"
+
+#: templates/base.html:197
+
+msgid "Toggle menu"
+msgstr "Bật/tắt menu"
+
+#: templates/base.html:213
+
+msgid "Language"
+msgstr "Ngôn ngữ"
+
+#: templates/base.html:270
+
+msgid "My Tour Adventures"
+msgstr "Phiêu lưu Tour của tôi"
+
+#: templates/base.html:271
+
+msgid "My Guide Bookings"
+msgstr "Đặt Hướng dẫn viên của tôi"
+
+#: templates/base.html:272
+
+msgid "My Motorbike Rentals"
+msgstr "Thuê xe máy của tôi"
+
+#: templates/base.html:273
+
+msgid "My Buggy Car Rentals"
+msgstr "Thuê xe buggy của tôi"
+
+#: templates/base.html:318
+
+msgid "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures."
+msgstr "Nền tảng đáng tin cậy của bạn cho các nhà nghỉ địa phương, tour du lịch khó quên, hướng dẫn viên địa phương chuyên nghiệp, cho thuê xe máy và phiêu lưu xe buggy."
+
+#: templates/base.html:321
+
+msgid "Explore"
+msgstr "Khám phá"
+
+#: templates/base.html:323 tours/templates/tours/tour_list.html:5
+
+msgid "Tours & Activities"
+msgstr "Tour & Hoạt động"
+
+#: templates/base.html:330
+
+msgid "Support"
+msgstr "Hỗ trợ"
+
+#: templates/base.html:332 templates/pages/terms_of_service.html:34
+
+msgid "Contact Us"
+msgstr "Liên hệ với chúng tôi"
+
+#: templates/base.html:338
+
+msgid "All rights reserved."
+msgstr "Mọi quyền được bảo lưu."
+
+#: templates/base.html:391
+
+msgid "Vang Vieng Stay Assistant"
+msgstr "Trợ lý Vang Vieng Stay"
+
+#: templates/base.html:392
+
+msgid "AI-powered help • Online"
+msgstr "Hỗ trợ bởi AI • Đang trực tuyến"
+
+#: templates/base.html:411
+
+msgid "Hi! 👋 I'm here to help with questions about bookings, policies and tours in Vang Vieng. What can I help you with?"
+msgstr "Xin chào! 👋 Tôi ở đây để giải đáp các câu hỏi về đặt chỗ, chính sách và tour du lịch tại Vang Vieng. Tôi có thể giúp gì cho bạn?"
+
+#: templates/base.html:416
+
+msgid "Cancellation policy"
+msgstr "Chính sách hủy"
+
+#: templates/base.html:417
+
+msgid "Tour essentials"
+msgstr "Những điều cần biết về Tour"
+
+#: templates/base.html:424
+
+msgid "Type your question..."
+msgstr "Nhập câu hỏi của bạn..."
+
+#: templates/base.html:431
+
+msgid "Powered by AI • Responses based on official policies"
+msgstr "Được hỗ trợ bởi AI • Phản hồi dựa trên chính sách chính thức"
+
+#: templates/pages/terms_of_service.html:11
+
+msgid "Welcome to Vang Vieng Stay. By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement."
+msgstr "Chào mừng đến với Vang Vieng Stay. Bằng cách truy cập và sử dụng trang web này, bạn chấp nhận và đồng ý bị ràng buộc bởi các điều khoản và quy định của thỏa thuận này."
+
+#: templates/pages/terms_of_service.html:14
+
+msgid "Use License"
+msgstr "Giấy phép sử dụng"
+
+#: templates/pages/terms_of_service.html:15
+
+msgid "Permission is granted to temporarily download one copy of the materials on Vang Vieng Stay's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title."
+msgstr "Bạn được phép tải xuống tạm thời một bản sao các tài liệu trên trang web của Vang Vieng Stay chỉ để xem cá nhân, phi thương mại. Đây là việc cấp giấy phép, không phải chuyển nhượng quyền sở hữu."
+
+#: templates/pages/terms_of_service.html:19
+
+msgid "Disclaimer"
+msgstr "Miễn trừ trách nhiệm"
+
+#: templates/pages/terms_of_service.html:20
+
+msgid "The materials on Vang Vieng Stay's website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property."
+msgstr "Các tài liệu trên trang web của Vang Vieng Stay được cung cấp trên cơ sở 'nguyên trạng'. Chúng tôi không đưa ra bất kỳ bảo đảm nào, rõ ràng hay ngụ ý, và bằng đây từ chối và phủ nhận tất cả các bảo đảm khác bao gồm, nhưng không giới hạn, các bảo đảm ngụ ý hoặc điều kiện về khả năng bán được, sự phù hợp cho một mục đích cụ thể, hoặc không vi phạm quyền sở hữu trí tuệ."
+
+#: templates/pages/terms_of_service.html:24
+
+msgid "Limitations"
+msgstr "Giới hạn"
+
+#: templates/pages/terms_of_service.html:25
+
+msgid "In no event shall Vang Vieng Stay or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we have been notified orally or in writing of the possibility of such damage."
+msgstr "Trong mọi trường hợp, Vang Vieng Stay hoặc các nhà cung cấp của chúng tôi sẽ không chịu trách nhiệm về bất kỳ thiệt hại nào (bao gồm, nhưng không giới hạn, thiệt hại do mất dữ liệu hoặc lợi nhuận, hoặc do gián đoạn kinh doanh) phát sinh từ việc sử dụng hoặc không thể sử dụng các tài liệu trên trang web của chúng tôi, ngay cả khi chúng tôi đã được thông báo bằng miệng hoặc bằng văn bản về khả năng xảy ra thiệt hại như vậy."
+
+#: templates/pages/terms_of_service.html:29
+
+msgid "Bookings & Payments"
+msgstr "Đặt chỗ & Thanh toán"
+
+#: templates/pages/terms_of_service.html:30
+
+msgid "All bookings are subject to availability and confirmation by the property owner or service provider. Prices are listed in Lao Kip (LAK) and are subject to change without notice."
+msgstr "Tất cả các lượt đặt chỗ đều tùy thuộc vào tình trạng còn phòng và được xác nhận bởi chủ sở hữu cơ sở hoặc nhà cung cấp dịch vụ. Giá được liệt kê bằng Kip Lào (LAK) và có thể thay đổi mà không cần báo trước."
+
+#: templates/pages/terms_of_service.html:35
+
+msgid "If you have any questions about these Terms of Service, please"
+msgstr "Nếu bạn có bất kỳ câu hỏi nào về Điều khoản dịch vụ này, vui lòng"
+
+#: templates/pages/terms_of_service.html:35
+
+msgid "contact us"
+msgstr "liên hệ với chúng tôi"
+
+#: templates/registration/login.html:11
+
+msgid "Welcome Back"
+msgstr "Chào mừng trở lại"
+
+#: templates/registration/login.html:14
+
+msgid "Sign in to manage your bookings and properties."
+msgstr "Đăng nhập để quản lý các lượt đặt và cơ sở của bạn."
+
+#: templates/registration/login.html:24
+
+msgid "Invalid username or password. Please try again."
+msgstr "Tên đăng nhập hoặc mật khẩu không hợp lệ. Vui lòng thử lại."
+
+#: templates/registration/login.html:31
+
+msgid "Username or Email"
+msgstr "Tên đăng nhập hoặc Email"
+
+#: templates/registration/login.html:32
+
+msgid "Enter your username"
+msgstr "Nhập tên đăng nhập của bạn"
+
+#: templates/registration/login.html:35 templates/registration/signup.html:57
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: templates/registration/login.html:36
+
+msgid "Enter your password"
+msgstr "Nhập mật khẩu của bạn"
+
+#: templates/registration/login.html:46
+
+msgid "Remember me"
+msgstr "Ghi nhớ tôi"
+
+#: templates/registration/login.html:51
+
+msgid "Forgot your password?"
+msgstr "Quên mật khẩu?"
+
+#: templates/registration/login.html:58
+
+msgid "Sign in"
+msgstr "Đăng nhập"
+
+#: templates/registration/signup.html:11
+
+msgid "Create Your Account"
+msgstr "Tạo tài khoản của bạn"
+
+#: templates/registration/signup.html:14
+
+msgid "Join Vang Vieng Stay and start managing your properties."
+msgstr "Tham gia Vang Vieng Stay và bắt đầu quản lý các cơ sở của bạn."
+
+#: templates/registration/signup.html:26
+
+msgid "Please correct the errors below:"
+msgstr "Vui lòng sửa các lỗi dưới đây:"
+
+#: templates/registration/signup.html:46
+
+msgid "Username"
+msgstr "Tên đăng nhập"
+
+#: templates/registration/signup.html:51
+
+msgid "Choose a username"
+msgstr "Chọn tên đăng nhập"
+
+#: templates/registration/signup.html:52
+
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Bắt buộc. 150 ký tự hoặc ít hơn. Chỉ chứa chữ cái, chữ số và @/./+/-/_."
+
+#: templates/registration/signup.html:61
+
+msgid "Create a password"
+msgstr "Tạo mật khẩu"
+
+#: templates/registration/signup.html:66
+
+msgid "Confirm Password"
+msgstr "Xác nhận mật khẩu"
+
+#: templates/registration/signup.html:70
+
+msgid "Confirm your password"
+msgstr "Xác nhận mật khẩu của bạn"
+
+#: templates/registration/signup.html:76
+
+msgid "Create Account"
+msgstr "Tạo tài khoản"
+
+#: templates/registration/signup.html:81
+
+msgid "Already have an account?"
+msgstr "Đã có tài khoản?"
+
+#: templates/registration/signup.html:83
+
+msgid "Log in"
+msgstr "Đăng nhập"
+
+#: tours/templates/tours/book_tour.html:15
+
+msgid "Book Your Tour"
+msgstr "Đặt Tour của bạn"
+
+#: tours/templates/tours/book_tour.html:18
+#: tours/templates/tours/tour_list.html:177
+
+msgid "Departs"
+msgstr "Khởi hành"
+
+#: tours/templates/tours/book_tour.html:26
+#: tours/templates/tours/tour_list.html:50
+
+msgid "Tour Date"
+msgstr "Ngày đi Tour"
+
+#: tours/templates/tours/book_tour.html:33
+
+msgid "Number of People"
+msgstr "Số người"
+
+#: tours/templates/tours/book_tour.html:35
+
+msgid "Maximum"
+msgstr "Tối đa"
+
+#: tours/templates/tours/book_tour.html:35
+
+msgid "people per tour"
+msgstr "người mỗi tour"
+
+#: tours/templates/tours/book_tour.html:43
+
+msgid "Pickup Arrangements"
+msgstr "Sắp xếp đón"
+
+#: tours/templates/tours/book_tour.html:48
+
+msgid "How will you get to the tour?"
+msgstr "Bạn sẽ đến điểm tour bằng cách nào?"
+
+#: tours/templates/tours/book_tour.html:65
+
+msgid "Your Pickup Location"
+msgstr "Địa điểm đón của bạn"
+
+#: tours/templates/tours/book_tour.html:68
+
+msgid "Please include your guesthouse name and any helpful landmarks."
+msgstr "Vui lòng bao gồm tên nhà nghỉ của bạn và bất kỳ địa điểm nổi bật nào hữu ích."
+
+#: tours/templates/tours/book_tour.html:77
+
+msgid "Please provide at least one way for the tour operator to contact you."
+msgstr "Vui lòng cung cấp ít nhất một cách để nhà điều hành tour liên hệ với bạn."
+
+#: tours/templates/tours/book_tour.html:109
+
+msgid "based on the official daily exchange rate on the day of your tour."
+msgstr "dựa trên tỷ giá hối đoái chính thức hàng ngày vào ngày bạn đi tour."
+
+#: tours/templates/tours/tour_detail.html:15
+
+msgid "Back to all tours"
+msgstr "Quay lại tất cả các tour"
+
+#: tours/templates/tours/tour_detail.html:52
+
+msgid "Open Tour Office in Google Maps"
+msgstr "Mở văn phòng Tour trong Google Maps"
+
+#: tours/templates/tours/tour_detail.html:59
+
+msgid "Exact office map location will be provided upon booking confirmation."
+msgstr "Vị trí bản đồ văn phòng chính xác sẽ được cung cấp khi xác nhận đặt chỗ."
+
+#: tours/templates/tours/tour_detail.html:75
+
+msgid "Departs daily at"
+msgstr "Khởi hành hàng ngày lúc"
+
+#: tours/templates/tours/tour_detail.html:81
+#: tours/templates/tours/tour_list.html:70
+#: tours/templates/tours/tour_list.html:183
+
+msgid "Max"
+msgstr "Tối đa"
+
+#: tours/templates/tours/tour_detail.html:81
+
+msgid "people"
+msgstr "người"
+
+#: tours/templates/tours/tour_detail.html:102
+
+msgid "Tour Availability (Next 30 Days)"
+msgstr "Tình trạng Tour (30 ngày tới)"
+
+#: tours/templates/tours/tour_detail.html:107
+
+msgid "spots available"
+msgstr "chỗ trống"
+
+#: tours/templates/tours/tour_detail.html:112
+
+msgid "left"
+msgstr "còn lại"
+
+#: tours/templates/tours/tour_detail.html:114
+
+msgid "Full"
+msgstr "Đã đầy"
+
+#: tours/templates/tours/tour_detail.html:123
+
+msgid "Book This Tour"
+msgstr "Đặt Tour này"
+
+#: tours/templates/tours/tour_detail.html:131
+
+msgid "Guest Reviews"
+msgstr "Đánh giá của khách"
+
+#: tours/templates/tours/tour_detail.html:169
+
+msgid "No reviews yet. Be the first to review this tour!"
+msgstr "Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá tour này!"
+
+#: tours/templates/tours/tour_list.html:31
+
+msgid "Discover Unforgettable Tours"
+msgstr "Khám phá những Tour khó quên"
+
+#: tours/templates/tours/tour_list.html:32
+
+msgid "Explore Vang Vieng with expert local guides and unique experiences"
+msgstr "Khám phá Vang Vieng với các hướng dẫn viên địa phương chuyên nghiệp và những trải nghiệm độc đáo"
+
+#: tours/templates/tours/tour_list.html:42
+#: tours/templates/tours/tour_list.html:95
+
+msgid "Search Tours"
+msgstr "Tìm kiếm Tour"
+
+#: tours/templates/tours/tour_list.html:45
+
+msgid "e.g., Kayaking, Cave, Hot Air Balloon..."
+msgstr "Ví dụ: Chèo thuyền kayak, Hang động, Khinh khí cầu..."
+
+#: tours/templates/tours/tour_list.html:61
+
+msgid "Min Price"
+msgstr "Giá thấp nhất"
+
+#: tours/templates/tours/tour_list.html:63
+
+msgid "Min"
+msgstr "Thấp nhất"
+
+#: tours/templates/tours/tour_list.html:68
+
+msgid "Max Price"
+msgstr "Giá cao nhất"
+
+#: tours/templates/tours/tour_list.html:78
+
+msgid "Any"
+msgstr "Bất kỳ"
+
+#: tours/templates/tours/tour_list.html:109
+
+msgid "Tours Found"
+msgstr "Đã tìm thấy Tour"
+
+#: tours/templates/tours/tour_list.html:111
+
+msgid "No Results"
+msgstr "Không có kết quả"
+
+#: tours/templates/tours/tour_list.html:201
+
+msgid "View Office on Map"
+msgstr "Xem văn phòng trên bản đồ"
+
+#: tours/templates/tours/tour_list.html:206
+
+msgid "Map pending"
+msgstr "Bản đồ đang chờ"
+
+#: tours/templates/tours/tour_list.html:213
+
+msgid "View Details & Book"
+msgstr "Xem chi tiết & Đặt"
+
+#: tours/templates/tours/tour_list.html:224
+
+msgid "No tours found"
+msgstr "Không tìm thấy tour nào"
+
+#: tours/templates/tours/tour_list.html:225
+
+msgid "Try adjusting your search filters or dates"
+msgstr "Hãy thử điều chỉnh bộ lọc tìm kiếm hoặc ngày của bạn"
+
+#: tours/templates/tours/tour_list.html:227
+
+msgid "Clear All Filters"
+msgstr "Xóa tất cả bộ lọc"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:252
+#: trip_planner/templates/trip_planner/trip_plan.html:422
+
+msgid "Plan My Perfect Vang Vieng Trip"
+msgstr "Lên kế hoạch cho chuyến đi Vang Vieng hoàn hảo"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:253
+#: trip_planner/templates/trip_planner/trip_plan.html:423
+
+msgid "Tell us your vibe — our local team will craft a personalized itinerary just for you."
+msgstr "Cho chúng tôi biết phong cách của bạn — đội ngũ địa phương sẽ thiết kế lịch trình riêng cho bạn."
+
+#: trip_planner/templates/trip_planner/trip_plan.html:272
+#: trip_planner/templates/trip_planner/trip_plan.html:445
+
+msgid "👋 Tell us about yourself"
+msgstr "👋 Hãy cho chúng tôi biết về bạn"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:278
+#: trip_planner/templates/trip_planner/trip_plan.html:451
+
+msgid "Enter your full name"
+msgstr "Nhập họ và tên đầy đủ của bạn"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:295
+#: trip_planner/templates/trip_planner/trip_plan.html:468
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:305
+#: trip_planner/templates/trip_planner/trip_plan.html:478
+
+msgid "Provide at least one way for us to reach you."
+msgstr "Cung cấp ít nhất một cách để chúng tôi liên hệ với bạn."
+
+#: trip_planner/templates/trip_planner/trip_plan.html:311
+#: trip_planner/templates/trip_planner/trip_plan.html:484
+
+msgid "📅 Your trip details"
+msgstr "📅 Chi tiết chuyến đi của bạn"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:315
+#: trip_planner/templates/trip_planner/trip_plan.html:488
+
+msgid "Arrival Date"
+msgstr "Ngày đến"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:323
+#: trip_planner/templates/trip_planner/trip_plan.html:496
+
+msgid "Departure Date"
+msgstr "Ngày đi"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:333
+#: trip_planner/templates/trip_planner/trip_plan.html:506
+
+msgid "Group Size"
+msgstr "Quy mô nhóm"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:345
+#: trip_planner/templates/trip_planner/trip_plan.html:518
+
+msgid "✨ What sounds most exciting?"
+msgstr "✨ Điều gì nghe có vẻ thú vị nhất?"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:369
+#: trip_planner/templates/trip_planner/trip_plan.html:542
+
+msgid "💰 Your preferences"
+msgstr "💰 Sở thích của bạn"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:372
+#: trip_planner/templates/trip_planner/trip_plan.html:545
+
+msgid "Budget Level"
+msgstr "Mức ngân sách"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:375
+#: trip_planner/templates/trip_planner/trip_plan.html:548
+
+msgid "Budget-friendly"
+msgstr "Tiết kiệm"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:378
+#: trip_planner/templates/trip_planner/trip_plan.html:551
+
+msgid "Mid-range"
+msgstr "Trung bình"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:381
+#: trip_planner/templates/trip_planner/trip_plan.html:554
+
+msgid "Premium"
+msgstr "Cao cấp"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:387
+#: trip_planner/templates/trip_planner/trip_plan.html:560
+
+msgid "Anything special we should know?"
+msgstr "Có điều gì đặc biệt chúng tôi nên biết không?"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:389
+#: trip_planner/templates/trip_planner/trip_plan.html:562
+
+msgid "Dietary needs, accessibility, celebrations, hidden gems you want to see..."
+msgstr "Nhu cầu ăn uống, khả năng tiếp cận, lễ kỷ niệm, những địa điểm ẩn bạn muốn xem..."
+
+#: trip_planner/templates/trip_planner/trip_plan.html:395
+#: trip_planner/templates/trip_planner/trip_plan.html:568
+
+msgid "Send My Trip Request"
+msgstr "Gửi yêu cầu lên kế hoạch"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:402
+#: trip_planner/templates/trip_planner/trip_plan.html:575
+
+msgid "Free service"
+msgstr "Dịch vụ miễn phí"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:406
+#: trip_planner/templates/trip_planner/trip_plan.html:579
+
+msgid "No commitment"
+msgstr "Không cam kết"
+
+#: trip_planner/templates/trip_planner/trip_plan.html:410
+#: trip_planner/templates/trip_planner/trip_plan.html:583
+
+msgid "Reply within 24h"
+msgstr "Phản hồi trong vòng 24 giờ"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:59
+
+msgid "Trip Request Received!"
+msgstr "Đã nhận yêu cầu lên kế hoạch!"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:67
+
+msgid "Thank you!"
+msgstr "Cảm ơn bạn!"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:69
+
+msgid "Our local team is already crafting your personalized Vang Vieng itinerary."
+msgstr "Đội ngũ địa phương của chúng tôi đang lên lịch trình Vang Vieng được cá nhân hóa cho bạn."
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:73
+
+msgid "What happens next?"
+msgstr "Điều gì xảy ra tiếp theo?"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:75
+
+msgid "We'll get back to you within 24 hours with a custom plan and pricing."
+msgstr "Chúng tôi sẽ phản hồi trong vòng 24 giờ với kế hoạch và báo giá tùy chỉnh."
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:82
+
+msgid "Need us sooner? WhatsApp us directly:"
+msgstr "Cần chúng tôi sớm hơn? Nhắn tin trực tiếp qua WhatsApp:"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:85
+
+msgid "Chat on WhatsApp"
+msgstr "Nhắn tin trên WhatsApp"
+
+#: trip_planner/templates/trip_planner/trip_plan_success.html:90
+
+msgid "Back to Homepage"
+msgstr "Quay lại Trang chủ"

@@ -37,7 +37,7 @@ sitemaps = {
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
-    
+
     # ✅ Built-in Auth URLs (provides 'login', 'logout', etc.)
     path('accounts/', include('django.contrib.auth.urls')),
 
@@ -95,18 +95,19 @@ urlpatterns += i18n_patterns(
          ),
          name='password_reset_complete'),
 
-    # --- Contact / Inquiry ---
+    # --- Specific App URLs (placed before root '' catch-all routes) ---
     path('contact/', include('inquiry.urls')),
-
-    # --- App URLs ---
-    path('', include('tours.urls')),                # ✅ TOURS IS NOW THE HOMEPAGE
     # path('guesthouses/', include('guesthouse.urls')), # ❌ COMMENTED OUT
     path('motorbike/', include('motorbike.urls')),
     path('buggy/', include('buggy.urls')),
     path('guides/', include('guides.urls')),
     path('owner-dashboard/', include('dashboard.urls')),
     path('ai-assistant/', include('ai_assistant.urls')),
+    path('plan-my-trip/', include('trip_planner.urls')),
     path('terms-of-service/', TemplateView.as_view(template_name='pages/terms_of_service.html'), name='terms_of_service'),
+
+    # --- Root Homepage / Catch-All App URLs (keep last) ---
+    path('', include('tours.urls')),                # ✅ TOURS IS NOW THE HOMEPAGE
 
     # ✅ Keyword arguments must come LAST
     prefix_default_language=True,

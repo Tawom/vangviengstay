@@ -5,23 +5,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- 1. SEO & Open Graph Meta Tags -->
     {% include 'includes/meta_tags.html' %}
-    
+
     <!-- 2. Dynamic Page Title -->
     <title>{% block title %}Vang Vieng Stay{% endblock %}</title>
-    
-    <!-- 3. External Libraries (Tailwind & Alpine.js) -->
+
+    <!-- 3. External Libraries (Tailwind, Alpine.js & Font Awesome) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- 4. Custom Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- 4. Base Custom Styles -->
     <style>
         /* Alpine.js cloak to prevent flashing before load */
         [x-cloak] { display: none !important; }
-        
-        /* Performance: Smooth fade-in for lazy-loaded images */
+
+        /* Smooth fade-in for lazy-loaded images */
         img[data-src] {
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
@@ -30,197 +31,192 @@
             opacity: 1;
         }
     </style>
-    <!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- 5. Page-Specific Extra CSS -->
     {% block extra_css %}{% endblock %}
-    
+
     <!-- 6. SEO Schema Markup (JSON-LD) -->
     {% block schema %}{% endblock %}
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen antialiased">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                
+    <!-- Navigation (NEW VERSION) -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 gap-4">
+
                 <!-- Custom "Vang Vieng Stay" Logo -->
-                <a href="{% url 'tour_list' %}" class="flex items-center gap-3 group">
-                    <svg class="w-14 h-14 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Sunset Sun & Glow -->
+                <a href="{% url 'tour_list' %}" class="flex items-center gap-3 group shrink-0">
+                    <svg class="w-12 h-12 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="78" cy="25" r="14" fill="#F97316" />
                         <circle cx="78" cy="25" r="20" fill="#F97316" opacity="0.2" />
-                        
-                        <!-- Background Karst Mountains (Silhouettes) -->
                         <path d="M0 70 L 25 35 L 50 70 Z" fill="#4C1D95" />
                         <path d="M30 70 L 60 40 L 90 70 Z" fill="#5B21B6" />
                         <path d="M70 70 L 85 50 L 100 70 Z" fill="#4C1D95" />
-                        
-                        <!-- Nam Song River -->
                         <path d="M0 70 C 20 60, 30 80, 50 70 C 70 60, 80 75, 100 70 L 100 100 L 0 100 Z" fill="#0EA5E9" />
                         <path d="M0 75 C 20 65, 30 85, 50 75 C 70 65, 80 80, 100 75" fill="none" stroke="#BAE6FD" stroke-width="1.5" opacity="0.6" />
-                        
-                        <!-- The Tuber (Relaxing in an inner tube) -->
                         <ellipse cx="42" cy="76" rx="14" ry="5" fill="#FBBF24" stroke="#D97706" stroke-width="1.5" />
                         <circle cx="46" cy="68" r="3.5" fill="#1E293B" />
                         <path d="M46 68 Q 42 74, 36 74" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
                         <path d="M36 74 L 32 66" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
                     </svg>
-                    
-                    <!-- Brand Text -->
+
                     <div class="flex flex-col leading-none">
-                        <span class="font-extrabold text-2xl text-gray-900 tracking-tight">VangVieng Stay</span>
-                        <span class="font-bold text-sm text-orange-500 tracking-widest uppercase">Laos</span>
+                        <span class="font-extrabold text-xl sm:text-2xl text-gray-900 tracking-tight">VangVieng Stay</span>
+                        <span class="font-bold text-xs text-orange-500 tracking-widest uppercase mt-0.5">Laos</span>
                     </div>
-                </a>                
+                </a>
 
                 <!-- Desktop Navigation Links -->
                 <div class="hidden lg:flex items-center gap-1">
-                    <a href="{% url 'tour_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-[#483D8B]/10 hover:text-[#483D8B] font-medium transition flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <a href="{% url 'tour_list' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-compass text-indigo-600 text-xs"></i>
                         {% trans "Tours" %}
                     </a>
-                    <a href="{% url 'guide_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-amber-50 hover:text-amber-600 font-medium transition flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <a href="{% url 'guide_list' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-check text-amber-600 text-xs"></i>
                         {% trans "Local Guides" %}
                     </a>
-                    <a href="{% url 'motorbike_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-50 hover:text-orange-600 font-medium transition flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <a href="{% url 'motorbike_list' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-motorcycle text-orange-600 text-xs"></i>
                         {% trans "Motorbikes" %}
                     </a>
-                    <a href="{% url 'buggy_list' %}" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-purple-50 hover:text-purple-600 font-medium transition flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                    <a href="{% url 'buggy_list' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-car-side text-purple-600 text-xs"></i>
                         {% trans "Buggy Cars" %}
                     </a>
-                    <a href="{% url 'inquiry' %}" class="text-gray-700 hover:text-indigo-600">
+                    <a href="{% url 'trip_plan' %}" class="px-3 py-2 rounded-lg text-sm font-semibold text-blue-700 bg-blue-50/70 hover:bg-blue-100 transition">
+                        {% trans "Plan My Trip" %}
+                    </a>
+                    <a href="{% url 'inquiry' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition">
                         {% trans "Contact" %}
                     </a>
                 </div>
 
-                <!-- Auth, Language & User Menu -->
-                <div class="flex items-center gap-4">
-                    
+                <!-- Auth, Language & Mobile Trigger -->
+                <div class="flex items-center gap-3 shrink-0">
+
                     <!-- Desktop Language Switcher -->
-                    <div class="hidden md:flex items-center gap-2">
-                        <form action="{% url 'set_language' %}" method="post" class="flex items-center">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.path }}">
-                            
-                            <select name="language" 
-                                    onchange="this.form.submit()" 
-                                    class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer hover:bg-gray-50 transition flex items-center gap-2">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% for lang_code, lang_name in LANGUAGES %}
-                                    <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
-                                        {% if lang_code == 'en' %}🇬🇧 {% endif %}
-                                        {% if lang_code == 'lo' %}🇱🇦 {% endif %}
-                                        {{ lang_name }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </div>
+                    <form action="{% url 'set_language' %}" method="post" class="hidden md:block">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.path }}">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        <select name="language"
+                                onchange="this.form.submit()"
+                                aria-label="{% trans 'Select language' %}"
+                                class="text-sm border border-gray-300 rounded-lg px-2.5 py-1.5 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition">
+                            {% for lang_code, lang_name in LANGUAGES %}
+                                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                    {% if lang_code == 'en' %}🇬🇧 {% endif %}
+                                    {% if lang_code == 'lo' %}🇱🇦 {% endif %}
+                                    {{ lang_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
 
-                    <button id="mobile-menu-btn" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none p-2">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-
-                    <div class="hidden md:flex items-center gap-3">
+                    <!-- Desktop Auth / User Menu -->
+                    <div class="hidden md:flex items-center gap-2.5">
                         {% if user.is_authenticated %}
                             <div class="relative group">
-                                <button class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition">
-                                    <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                                <button type="button" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-lg transition">
+                                    <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                                         {{ user.username|first|upper }}
-                                    </div>
-                                    <span class="hidden sm:inline text-gray-700 font-medium">{{ user.username|title }}</span>
-                                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </span>
+                                    <span class="text-sm text-gray-700 font-medium">{{ user.username|title }}</span>
+                                    <i class="fa-solid fa-chevron-down text-xs text-gray-500"></i>
                                 </button>
-                                
+
                                 <!-- Dropdown Menu -->
-                                <div class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                    
-                                    <!-- ✅ EMAIL VERIFICATION STATUS (Added Here) -->
+                                <div class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
                                     {% if user.profile.email_verified %}
                                         <div class="px-4 py-2.5 bg-green-50 border-b border-green-100 flex items-center gap-2">
-                                            <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            <span class="text-sm font-semibold text-green-700">Email Verified</span>
+                                            <i class="fa-solid fa-circle-check text-green-600"></i>
+                                            <span class="text-sm font-semibold text-green-700">{% trans "Email Verified" %}</span>
                                         </div>
                                     {% else %}
-                                        <div class="px-4 py-2.5 bg-yellow-50 border-b border-yellow-100 flex items-center justify-between">
-                                            <span class="text-sm font-semibold text-yellow-700">⚠️ Unverified</span>
-                                            <a href="{% url 'resend_verification' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 underline">Verify Now</a>
+                                        <div class="px-4 py-2.5 bg-yellow-50 border-b border-yellow-100 flex items-center justify-between gap-2">
+                                            <span class="text-sm font-semibold text-yellow-800">⚠️ {% trans "Unverified" %}</span>
+                                            <a href="{% url 'resend_verification' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 underline">
+                                                {% trans "Verify Now" %}
+                                            </a>
                                         </div>
                                     {% endif %}
-                                    <!-- ✅ END VERIFICATION STATUS -->
 
-                                    <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition font-semibold">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                                    <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-semibold transition">
+                                        <i class="fa-solid fa-gauge w-4 text-center"></i>
                                         {% trans "My Dashboard" %}
                                     </a>
-                                    <a href="{% url 'tour_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-[#483D8B]/10 hover:text-[#483D8B] transition">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                                    <a href="{% url 'tour_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">
+                                        <i class="fa-solid fa-map-location-dot w-4 text-center"></i>
                                         {% trans "Tour Adventures" %}
                                     </a>
-                                    <a href="{% url 'guide_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    <a href="{% url 'guide_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition">
+                                        <i class="fa-solid fa-user w-4 text-center"></i>
                                         {% trans "Guide Bookings" %}
                                     </a>
-                                    <a href="{% url 'motorbike_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    <a href="{% url 'motorbike_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-700 transition">
+                                        <i class="fa-solid fa-motorcycle w-4 text-center"></i>
                                         {% trans "Motorbike Rentals" %}
                                     </a>
-                                    <a href="{% url 'buggy_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                                    <a href="{% url 'buggy_bookings_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition">
+                                        <i class="fa-solid fa-car-side w-4 text-center"></i>
                                         {% trans "Buggy Car Rentals" %}
                                     </a>
-                                    
-                                    <div class="border-t border-gray-200 my-2"></div>
-                                    
+
                                     {% if user.is_superuser or user.groups.filter.name == 'Owner' %}
-                                        <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-purple-700 hover:bg-purple-50 transition font-semibold">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <div class="border-t border-gray-200 my-1.5"></div>
+                                        <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-3 px-4 py-2 text-sm text-purple-700 hover:bg-purple-50 font-semibold transition">
+                                            <i class="fa-solid fa-shield-halved w-4 text-center"></i>
                                             {% trans "Admin Dashboard" %}
                                         </a>
-                                        <div class="border-t border-gray-200 my-2"></div>
                                     {% endif %}
-                                    
-                                    <form method="POST" action="{% url 'logout' %}" class="w-full">
+
+                                    <div class="border-t border-gray-200 my-1.5"></div>
+                                    <form method="POST" action="{% url 'logout' %}" class="px-2">
                                         {% csrf_token %}
-                                        <button type="submit" class="block text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition mt-2 flex items-center gap-2 w-full text-left">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                        <button type="submit" class="flex items-center gap-2.5 text-sm text-red-600 font-semibold py-2 px-2.5 rounded-lg hover:bg-red-50 transition w-full text-left">
+                                            <i class="fa-solid fa-right-from-bracket w-4 text-center"></i>
                                             {% trans "Log Out" %}
                                         </button>
                                     </form>
                                 </div>
                             </div>
                         {% else %}
-                            <a href="{% url 'login' %}" class="text-gray-700 hover:bg-blue-600 hover:text-white font-medium px-4 py-2 rounded-lg transition">{% trans "Log In" %}</a>
-                            <a href="{% url 'signup_choice' %}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg border-2 border-blue-600 hover:bg-white hover:text-blue-600 transition shadow-sm">{% trans "Sign Up" %}</a>
+                            <a href="{% url 'login' %}" class="text-sm font-medium text-gray-700 hover:text-blue-600 px-3.5 py-2 rounded-lg transition">
+                                {% trans "Log In" %}
+                            </a>
+                            <a href="{% url 'signup_choice' %}" class="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">
+                                {% trans "Sign Up" %}
+                            </a>
                         {% endif %}
                     </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button type="button" id="mobile-menu-btn" aria-label="{% trans 'Toggle menu' %}" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-40">
-            <div class="px-4 py-4 space-y-3">
-                
+            <div class="px-4 py-4 space-y-1.5">
+
                 <!-- Mobile Language Switcher -->
-                <div class="pb-3 border-b border-gray-200">
+                <div class="pb-3 mb-2 border-b border-gray-200">
                     <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-2">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ request.path }}">
-                        <label class="text-sm font-semibold text-gray-700">{% trans "Language" %}:</label>
-                        <select name="language" 
-                                onchange="this.form.submit()" 
+                        <label for="mobile-lang-select" class="text-sm font-semibold text-gray-700">{% trans "Language" %}:</label>
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        <select id="mobile-lang-select"
+                                name="language"
+                                onchange="this.form.submit()"
                                 class="flex-1 text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer">
-                            {% get_current_language as LANGUAGE_CODE %}
-                            {% get_available_languages as LANGUAGES %}
                             {% for lang_code, lang_name in LANGUAGES %}
                                 <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
                                     {% if lang_code == 'en' %}🇬🇧 {% endif %}
@@ -232,53 +228,66 @@
                     </form>
                 </div>
 
-                <a href="{% url 'tour_list' %}" class="block text-gray-700 hover:text-[#483D8B] hover:bg-[#483D8B]/10 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <a href="{% url 'tour_list' %}" class="flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-indigo-700 hover:bg-indigo-50 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-compass w-4 text-center text-indigo-600"></i>
                     {% trans "Tours" %}
                 </a>
-                <a href="{% url 'guide_list' %}" class="block text-gray-700 hover:text-amber-600 hover:bg-amber-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <a href="{% url 'guide_list' %}" class="flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-amber-700 hover:bg-amber-50 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-user-check w-4 text-center text-amber-600"></i>
                     {% trans "Local Guides" %}
                 </a>
-                <a href="{% url 'motorbike_list' %}" class="block text-gray-700 hover:text-orange-600 hover:bg-orange-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <a href="{% url 'motorbike_list' %}" class="flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-orange-700 hover:bg-orange-50 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-motorcycle w-4 text-center text-orange-600"></i>
                     {% trans "Motorbikes" %}
                 </a>
-                <a href="{% url 'buggy_list' %}" class="block text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-medium py-2 px-3 rounded-lg transition flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                <a href="{% url 'buggy_list' %}" class="flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:text-purple-700 hover:bg-purple-50 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-car-side w-4 text-center text-purple-600"></i>
                     {% trans "Buggy Cars" %}
                 </a>
-                
-                <div class="border-t border-gray-100 pt-3 mt-3">
+                <a href="{% url 'trip_plan' %}" class="flex items-center gap-2.5 text-sm font-semibold text-blue-700 bg-blue-50/70 hover:bg-blue-100 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-route w-4 text-center"></i>
+                    {% trans "Plan My Trip" %}
+                </a>
+                <a href="{% url 'inquiry' %}" class="flex items-center gap-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 py-2.5 px-3 rounded-lg transition">
+                    <i class="fa-solid fa-envelope w-4 text-center text-gray-500"></i>
+                    {% trans "Contact" %}
+                </a>
+
+                <div class="border-t border-gray-200 pt-3 mt-2 space-y-1.5">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'owner_dashboard' %}" class="block text-gray-700 font-semibold py-2 px-3 rounded-lg hover:bg-blue-50 transition flex items-center gap-2 mb-2 border-b border-gray-100 pb-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-2.5 text-sm font-semibold text-gray-800 py-2 px-3 rounded-lg hover:bg-blue-50 transition">
+                            <i class="fa-solid fa-gauge w-4 text-center text-blue-600"></i>
                             {% trans "My Dashboard" %}
                         </a>
-                        
+
                         {% if user.is_superuser or user.groups.filter.name == 'Owner' %}
-                            <a href="{% url 'owner_dashboard' %}" class="block text-purple-700 font-semibold py-2 px-3 rounded-lg hover:bg-purple-50 transition flex items-center gap-2 mb-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <a href="{% url 'owner_dashboard' %}" class="flex items-center gap-2.5 text-sm font-semibold text-purple-700 py-2 px-3 rounded-lg hover:bg-purple-50 transition">
+                                <i class="fa-solid fa-shield-halved w-4 text-center"></i>
                                 {% trans "Admin Dashboard" %}
                             </a>
                         {% endif %}
 
-                        <a href="{% url 'tour_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🎯 {% trans "My Tour Adventures" %}</a>
-                        <a href="{% url 'guide_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🧑‍🤝‍🧑 {% trans "My Guide Bookings" %}</a>
-                        <a href="{% url 'motorbike_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏍️ {% trans "My Motorbike Rentals" %}</a>
-                        <a href="{% url 'buggy_bookings_dashboard' %}" class="block text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50 flex items-center gap-2">🏎️ {% trans "My Buggy Car Rentals" %}</a>
-                        
-                        <!-- ✅ FIXED: Mobile logout is now a POST form -->
-                        <form method="POST" action="{% url 'logout' %}" class="w-full">
+                        <a href="{% url 'tour_bookings_dashboard' %}" class="block text-sm text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50">🎯 {% trans "My Tour Adventures" %}</a>
+                        <a href="{% url 'guide_bookings_dashboard' %}" class="block text-sm text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50">🧑‍🤝‍🧑 {% trans "My Guide Bookings" %}</a>
+                        <a href="{% url 'motorbike_bookings_dashboard' %}" class="block text-sm text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50">🏍️ {% trans "My Motorbike Rentals" %}</a>
+                        <a href="{% url 'buggy_bookings_dashboard' %}" class="block text-sm text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-50">🏎️ {% trans "My Buggy Car Rentals" %}</a>
+
+                        <form method="POST" action="{% url 'logout' %}" class="pt-1">
                             {% csrf_token %}
-                            <button type="submit" class="block text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition mt-2 flex items-center gap-2 w-full text-left">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                            <button type="submit" class="flex items-center gap-2.5 text-sm text-red-600 font-semibold py-2 px-3 rounded-lg hover:bg-red-50 transition w-full text-left">
+                                <i class="fa-solid fa-right-from-bracket w-4 text-center"></i>
                                 {% trans "Log Out" %}
                             </button>
                         </form>
                     {% else %}
-                        <a href="{% url 'login' %}" class="block text-gray-700 hover:bg-blue-600 hover:text-white font-semibold py-2 px-3 rounded-lg transition flex items-center gap-2">{% trans "Log In" %}</a>
-                        <a href="{% url 'signup_choice' %}" class="block bg-blue-600 text-white text-center font-semibold py-2 px-3 rounded-lg border-2 border-blue-600 hover:bg-white hover:text-blue-600 transition mt-2">{% trans "Sign Up" %}</a>
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <a href="{% url 'login' %}" class="text-center text-sm font-semibold text-gray-700 border border-gray-300 hover:bg-gray-50 py-2 px-3 rounded-lg transition">
+                                {% trans "Log In" %}
+                            </a>
+                            <a href="{% url 'signup_choice' %}" class="text-center text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 py-2 px-3 rounded-lg transition">
+                                {% trans "Sign Up" %}
+                            </a>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -287,9 +296,9 @@
 
     <!-- Flash Messages -->
     {% if messages %}
-        <div class="max-w-7xl mx-auto px-4 mt-4 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 w-full space-y-2">
             {% for message in messages %}
-                <div class="p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-700 border-l-4 border-green-500{% elif message.tags == 'error' %}bg-red-100 text-red-700 border-l-4 border-red-500{% else %}bg-blue-100 text-blue-700 border-l-4 border-blue-500{% endif %}">
+                <div class="p-4 rounded-lg text-sm font-medium {% if message.tags == 'success' %}bg-green-100 text-green-800 border-l-4 border-green-500{% elif message.tags == 'error' %}bg-red-100 text-red-800 border-l-4 border-red-500{% else %}bg-blue-100 text-blue-800 border-l-4 border-blue-500{% endif %}">
                     {{ message }}
                 </div>
             {% endfor %}
@@ -302,15 +311,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+    <footer class="bg-gray-900 text-gray-400 py-10 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
             <div>
                 <h4 class="text-white font-bold text-lg mb-2">{% trans "Vang Vieng Stay" %}</h4>
-                <p>{% trans "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures." %}</p>
+                <p class="leading-relaxed">{% trans "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures." %}</p>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-2">{% trans "Explore" %}</h4>
-                <ul class="space-y-1">
+                <ul class="space-y-1.5">
                     <li><a href="{% url 'tour_list' %}" class="hover:text-white transition">{% trans "Tours & Activities" %}</a></li>
                     <li><a href="{% url 'guide_list' %}" class="hover:text-white transition">{% trans "Local Guides" %}</a></li>
                     <li><a href="{% url 'motorbike_list' %}" class="hover:text-white transition">{% trans "Motorbike Rentals" %}</a></li>
@@ -319,35 +328,21 @@
             </div>
             <div>
                 <h4 class="text-white font-bold mb-2">{% trans "Support" %}</h4>
-                <ul class="space-y-1">
+                <ul class="space-y-1.5">
                     <li><a href="{% url 'inquiry' %}" class="hover:text-white transition">{% trans "Contact Us" %}</a></li>
                     <li><a href="{% url 'terms_of_service' %}" class="hover:text-white transition">{% trans "Terms of Service" %}</a></li>
                 </ul>
             </div>
         </div>
-        <div class="text-center mt-8 pt-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-8 pt-8 border-t border-gray-800 text-xs">
             <p>&copy; 2026 {% trans "Vang Vieng Stay" %}. {% trans "All rights reserved." %}</p>
         </div>
     </footer>
 
     {% block extra_js %}{% endblock %}
 
-    <!-- Mobile Menu Toggle Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            if (menuBtn && mobileMenu) {
-                menuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        });
-    </script>
-
     <!-- ========================================== -->
-    <!-- AI ASSISTANT CHAT WIDGET                   -->
+    <!-- AI ASSISTANT CHAT WIDGET (OLD VERSION - Bottom Right) -->
     <!-- ========================================== -->
     <style>
         #chat-widget { animation: slideIn 0.3s ease-out; }
@@ -373,7 +368,7 @@
         }
     </style>
 
-    <!-- Floating Chat Button -->
+    <!-- Floating Chat Button (Bottom Right) -->
     <div id="chat-widget" class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleChat()" id="chat-toggle-btn" class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full p-4 shadow-2xl hover:shadow-blue-500/50 hover:scale-110 transition-all duration-300 flex items-center justify-center group">
             <svg class="w-6 h-6 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -382,7 +377,7 @@
         </button>
     </div>
 
-    <!-- Chat Window -->
+    <!-- Chat Window (Bottom Right) -->
     <div id="chat-window" class="hidden fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-96 h-[600px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl z-50 flex flex-col border border-gray-200 overflow-hidden">
         <!-- Header -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 flex justify-between items-center shadow-md">
@@ -469,12 +464,12 @@
             input.value = '';
             
             const typingId = showTypingIndicator();
-            // ✅ FIX: Smart language prefix detection (prevents '/accounts/ai-assistant/chat/' bug)
+            
+            // Smart language prefix detection (includes all your languages)
             const currentPath = window.location.pathname;
             const pathParts = currentPath.split('/');
             const possibleLang = pathParts[1];
-            // Only use it as a language prefix if it's actually 'en' or 'lo'
-            const langPrefix = (possibleLang === 'en' || possibleLang === 'lo') ? `/${possibleLang}` : '/en';
+            const langPrefix = (possibleLang === 'en' || possibleLang === 'lo' || possibleLang === 'th' || possibleLang === 'vi' || possibleLang === 'ko' || possibleLang === 'zh-hans') ? `/${possibleLang}` : '/en';
             const chatUrl = `${langPrefix}/ai-assistant/chat/`;
             
             try {
