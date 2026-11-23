@@ -3,8 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
-
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -25,7 +23,6 @@ msgstr ""
 #: guides/templates/guides/book_guide.html:5
 #: guides/templates/guides/book_guide.html:15
 #: tours/templates/tours/book_tour.html:5
-
 msgid "Book"
 msgstr "예약"
 
@@ -33,13 +30,11 @@ msgstr "예약"
 #: guesthouse/templates/guesthouse/book.html:11
 #: motorbike/templates/motorbike/book_motorbike.html:11
 #: tours/templates/tours/book_tour.html:11
-
 msgid "Back to"
 msgstr "돌아가기"
 
 #: buggy/templates/buggy/book_buggy.html:17
 #: dashboard/templates/dashboard/owner_dashboard.html:517
-
 msgid "From"
 msgstr "시작"
 
@@ -49,64 +44,54 @@ msgstr "시작"
 #: motorbike/templates/motorbike/book_motorbike.html:18
 #: motorbike/templates/motorbike/motorbike_detail.html:152
 #: motorbike/templates/motorbike/motorbike_list.html:67
-
 msgid "Deposit:"
 msgstr "보증금:"
 
 #: buggy/templates/buggy/book_buggy.html:27
-
 msgid "Booking Date"
 msgstr "예약 날짜"
 
 #: buggy/templates/buggy/book_buggy.html:32
 #: guides/templates/guides/book_guide.html:28
-
 msgid "Start Time"
 msgstr "시작 시간"
 
 #: buggy/templates/buggy/book_buggy.html:40
 #: buggy/templates/buggy/buggy_detail.html:176
-
 msgid "Rental Duration"
 msgstr "대여 기간"
 
 #: buggy/templates/buggy/book_buggy.html:43
 #: buggy/templates/buggy/buggy_detail.html:89
 #: guides/templates/guides/book_guide.html:37
-
 msgid "2 Hours"
 msgstr "2시간"
 
 #: buggy/templates/buggy/book_buggy.html:44
 #: buggy/templates/buggy/buggy_detail.html:93
 #: guides/templates/guides/book_guide.html:38
-
 msgid "3 Hours"
 msgstr "3시간"
 
 #: buggy/templates/buggy/book_buggy.html:45
 #: buggy/templates/buggy/buggy_detail.html:97
-
 msgid "4 Hours"
 msgstr "4시간"
 
 #: buggy/templates/buggy/book_buggy.html:46
 #: buggy/templates/buggy/buggy_detail.html:101
 #: guides/templates/guides/book_guide.html:40
-
 msgid "5 Hours"
 msgstr "5시간"
 
 #: buggy/templates/buggy/book_buggy.html:47
 #: buggy/templates/buggy/buggy_detail.html:105
 #: guides/templates/guides/book_guide.html:41
-
 msgid "6 Hours"
 msgstr "6시간"
 
 #: buggy/templates/buggy/book_buggy.html:48
 #: buggy/templates/buggy/buggy_detail.html:109
-
 msgid "Full Day"
 msgstr "종일"
 
@@ -115,13 +100,11 @@ msgstr "종일"
 #: guides/templates/guides/book_guide.html:61
 #: motorbike/templates/motorbike/book_motorbike.html:41
 #: tours/templates/tours/book_tour.html:75
-
 msgid "Contact Information"
 msgstr "연락처 정보"
 
 #: buggy/templates/buggy/book_buggy.html:57
 #: motorbike/templates/motorbike/book_motorbike.html:43
-
 msgid "Please provide at least one way for the owner to contact you."
 msgstr "소유자가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
@@ -130,7 +113,6 @@ msgstr "소유자가 연락할 수 있는 방법을 최소 한 가지 제공해 
 #: guides/templates/guides/book_guide.html:69
 #: motorbike/templates/motorbike/book_motorbike.html:49
 #: tours/templates/tours/book_tour.html:84
-
 msgid "your.email@example.com"
 msgstr "your.email@example.com"
 
@@ -139,7 +121,6 @@ msgstr "your.email@example.com"
 #: guides/templates/guides/book_guide.html:76
 #: motorbike/templates/motorbike/book_motorbike.html:56
 #: tours/templates/tours/book_tour.html:92
-
 msgid "+856 20 XXXX XXXX (for WhatsApp)"
 msgstr "+856 20 XXXX XXXX (WhatsApp용)"
 
@@ -148,13 +129,11 @@ msgstr "+856 20 XXXX XXXX (WhatsApp용)"
 #: guides/templates/guides/book_guide.html:83
 #: motorbike/templates/motorbike/book_motorbike.html:63
 #: tours/templates/tours/book_tour.html:99
-
 msgid "Please provide either an email address or a phone number."
 msgstr "이메일 주소 또는 전화번호를 제공해 주세요."
 
 #: buggy/templates/buggy/book_buggy.html:84
 #: motorbike/templates/motorbike/book_motorbike.html:70
-
 msgid "Passport Number"
 msgstr "여권 번호"
 
@@ -162,45 +141,40 @@ msgstr "여권 번호"
 #: guesthouse/templates/guesthouse/book.html:102
 #: motorbike/templates/motorbike/book_motorbike.html:70
 #: tours/templates/tours/book_tour.html:90
-
 msgid "Optional"
 msgstr "선택사항"
 
 #: buggy/templates/buggy/book_buggy.html:87
 #: motorbike/templates/motorbike/book_motorbike.html:73
-
 msgid "For deposit record"
 msgstr "보증금 기록용"
 
 #: buggy/templates/buggy/book_buggy.html:89
 #: motorbike/templates/motorbike/book_motorbike.html:75
-
-msgid "You'll need to leave your original passport OR this number as collateral."
+msgid ""
+"You'll need to leave your original passport OR this number as collateral."
 msgstr "원본 여권 또는 이 번호를 담보로 맡겨야 합니다."
 
 #: buggy/templates/buggy/book_buggy.html:98
 #: motorbike/templates/motorbike/book_motorbike.html:84
-
 msgid "Payment of the rental fee and deposit will be collected in"
 msgstr "대여료와 보증금은 다음으로 수취됩니다:"
 
 #: buggy/templates/buggy/book_buggy.html:98
 #: guides/templates/guides/book_guide.html:93
 #: motorbike/templates/motorbike/book_motorbike.html:84
-
 msgid "cash (Lao Kip)"
 msgstr "현금 (라오스 킵)"
 
 #: buggy/templates/buggy/book_buggy.html:98
-
-msgid "at pickup. The deposit will be fully refunded when you return the buggy car."
+msgid ""
+"at pickup. The deposit will be fully refunded when you return the buggy car."
 msgstr "차량 수령 시. 버기카를 반납할 때 보증금이 전액 환불됩니다."
 
 #: buggy/templates/buggy/book_buggy.html:104
 #: guesthouse/templates/guesthouse/book.html:127
 #: guides/templates/guides/book_guide.html:99
 #: tours/templates/tours/book_tour.html:115
-
 msgid "Reserve Now, Pay on Arrival (Free Cancellation)"
 msgstr "지금 예약, 도착 시 결제 (무료 취소)"
 
@@ -209,7 +183,6 @@ msgstr "지금 예약, 도착 시 결제 (무료 취소)"
 #: guides/templates/guides/book_guide.html:103
 #: motorbike/templates/motorbike/book_motorbike.html:94
 #: tours/templates/tours/book_tour.html:119
-
 msgid "Prefer to chat? We can reserve it for you instantly."
 msgstr "채팅을 선호하십니까? 즉시 예약해 드리겠습니다."
 
@@ -218,398 +191,325 @@ msgstr "채팅을 선호하십니까? 즉시 예약해 드리겠습니다."
 #: guides/templates/guides/book_guide.html:108
 #: motorbike/templates/motorbike/book_motorbike.html:99
 #: tours/templates/tours/book_tour.html:124
-
 msgid "Reserve via WhatsApp Instead"
 msgstr "대신 WhatsApp으로 예약"
 
 #: buggy/templates/buggy/buggy_detail.html:14
-
 msgid "Back to Buggy Cars"
 msgstr "버기카 목록으로 돌아가기"
 
 #: buggy/templates/buggy/buggy_detail.html:55
 #: motorbike/templates/motorbike/motorbike_detail.html:55
 #: tours/templates/tours/tour_detail.html:41
-
 msgid "Operated by:"
 msgstr "운영자:"
 
 #: buggy/templates/buggy/buggy_detail.html:73
-
 msgid "About this Buggy Car"
 msgstr "이 버기카 정보"
 
 #: buggy/templates/buggy/buggy_detail.html:86
 #: motorbike/templates/motorbike/motorbike_detail.html:86
-
 msgid "Rental Rates"
 msgstr "대여 요금"
 
 #: buggy/templates/buggy/buggy_detail.html:123
 #: motorbike/templates/motorbike/motorbike_detail.html:107
-
 msgid "Pickup Location"
 msgstr "수령 장소"
 
 #: buggy/templates/buggy/buggy_detail.html:139
 #: motorbike/templates/motorbike/motorbike_detail.html:125
-
 msgid "Open in Google Maps App"
 msgstr "Google Maps 앱에서 열기"
 
 #: buggy/templates/buggy/buggy_detail.html:148
 #: motorbike/templates/motorbike/motorbike_detail.html:134
-
 msgid "Pickup location map not available"
 msgstr "수령 장소 지도를 사용할 수 없음"
 
 #: buggy/templates/buggy/buggy_detail.html:149
 #: motorbike/templates/motorbike/motorbike_detail.html:135
-
 msgid "Contact the owner for exact pickup details after booking."
 msgstr "예약 후 정확한 수령 장소는 소유자에게 문의하세요."
 
 #: buggy/templates/buggy/buggy_detail.html:160
 #: buggy/templates/buggy/buggy_list.html:103
 #: motorbike/templates/motorbike/motorbike_detail.html:146
-
 msgid "Starting from"
 msgstr "시작 가격"
 
 #: buggy/templates/buggy/buggy_detail.html:172
-
 msgid "Size"
 msgstr "크기"
 
 #: buggy/templates/buggy/buggy_detail.html:177
 #: buggy/templates/buggy/buggy_list.html:67
-
 msgid "2-6 Hours or Full Day"
 msgstr "2-6시간 또는 종일"
 
 #: buggy/templates/buggy/buggy_detail.html:183
-
 msgid "Book This Buggy Car"
 msgstr "이 버기카 예약하기"
 
 #: buggy/templates/buggy/buggy_detail.html:187
 #: motorbike/templates/motorbike/motorbike_detail.html:169
-
 msgid "Login to Book"
 msgstr "예약하려면 로그인"
 
 #: buggy/templates/buggy/buggy_detail.html:192
 #: motorbike/templates/motorbike/motorbike_detail.html:174
-
 msgid "You won't be charged yet. The owner will verify availability first."
 msgstr "아직 요금이 청구되지 않습니다. 소유자가 먼저 이용 가능 여부를 확인합니다."
 
 #: buggy/templates/buggy/buggy_list.html:5
-
 msgid "Buggy Cars for Rent"
 msgstr "버기카 대여"
 
 #: buggy/templates/buggy/buggy_list.html:17
-
 msgid "Rent a Buggy Car"
 msgstr "버기카 대여하기"
 
 #: buggy/templates/buggy/buggy_list.html:18
-
-msgid "Perfect for groups and families. Explore Vang Vieng in style and comfort."
+msgid ""
+"Perfect for groups and families. Explore Vang Vieng in style and comfort."
 msgstr "그룹과 가족에게 완벽합니다. 스타일과 편안함으로 방비엥을 탐험하세요."
 
 #: buggy/templates/buggy/buggy_list.html:67
-
 msgid "Rental Duration:"
 msgstr "대여 기간:"
 
 #: buggy/templates/buggy/buggy_list.html:90
 #: motorbike/templates/motorbike/motorbike_list.html:86
-
 msgid "View Pickup Location"
 msgstr "수령 장소 보기"
 
 #: buggy/templates/buggy/buggy_list.html:95
 #: motorbike/templates/motorbike/motorbike_list.html:91
-
 msgid "Pickup location pending"
 msgstr "수령 장소 대기 중"
 
 #: buggy/templates/buggy/buggy_list.html:111
 #: motorbike/templates/motorbike/motorbike_list.html:106
-
 msgid "View Details & Rent"
 msgstr "상세 정보 보기 및 대여"
 
 #: buggy/templates/buggy/buggy_list.html:125
-
 msgid "No buggy cars available at the moment."
 msgstr "현재 대여 가능한 버기카가 없습니다."
 
 #: buggy/templates/buggy/buggy_list.html:126
 #: motorbike/templates/motorbike/motorbike_list.html:121
-
 msgid "Please check back later or contact us for more information."
 msgstr "나중에 다시 확인하거나 자세한 정보는 문의해 주세요."
 
 #: dashboard/templates/dashboard/owner_analytics.html:5
-
 msgid "Owner Analytics"
 msgstr "소유자 분석"
 
 #: dashboard/templates/dashboard/owner_analytics.html:29
-
 msgid "Back to Dashboard"
 msgstr "대시보드로 돌아가기"
 
 #: dashboard/templates/dashboard/owner_analytics.html:31
-
 msgid "Business Analytics"
 msgstr "비즈니스 분석"
 
 #: dashboard/templates/dashboard/owner_analytics.html:32
-
 msgid "Deep insights into your performance across all listings"
 msgstr "모든 리스팅에 대한 성과 심층 분석"
 
 #: dashboard/templates/dashboard/owner_analytics.html:38
-
 msgid "Last 7 days"
 msgstr "최근 7일"
 
 #: dashboard/templates/dashboard/owner_analytics.html:39
-
 msgid "Last 30 days"
 msgstr "최근 30일"
 
 #: dashboard/templates/dashboard/owner_analytics.html:40
-
 msgid "Last 90 days"
 msgstr "최근 90일"
 
 #: dashboard/templates/dashboard/owner_analytics.html:41
-
 msgid "Last 12 months"
 msgstr "최근 12개월"
 
 #: dashboard/templates/dashboard/owner_analytics.html:42
-
 msgid "All time"
 msgstr "전체 기간"
 
 #: dashboard/templates/dashboard/owner_analytics.html:61
 #: dashboard/templates/dashboard/owner_dashboard.html:53
-
 msgid "Total Revenue"
 msgstr "총 수익"
 
 #: dashboard/templates/dashboard/owner_analytics.html:74
-
 msgid "Total Bookings"
 msgstr "총 예약 수"
 
 #: dashboard/templates/dashboard/owner_analytics.html:77
-
 msgid "confirmed"
 msgstr "확인됨"
 
 #: dashboard/templates/dashboard/owner_analytics.html:78
-
 msgid "pending"
 msgstr "대기 중"
 
 #: dashboard/templates/dashboard/owner_analytics.html:91
-
 msgid "Conversion Rate"
 msgstr "전환율"
 
 #: dashboard/templates/dashboard/owner_analytics.html:93
-
 msgid "of inquiries confirmed"
 msgstr "문의 중 확인됨"
 
 #: dashboard/templates/dashboard/owner_analytics.html:105
-
 msgid "Average Rating"
 msgstr "평균 평점"
 
 #: dashboard/templates/dashboard/owner_analytics.html:107
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
-
 msgid "from"
 msgstr "출처"
 
 #: dashboard/templates/dashboard/owner_analytics.html:107
 #: tours/templates/tours/tour_detail.html:134
-
 msgid "reviews"
 msgstr "리뷰"
 
 #: dashboard/templates/dashboard/owner_analytics.html:119
-
 msgid "Revenue by Category"
 msgstr "카테고리별 수익"
 
 #: dashboard/templates/dashboard/owner_analytics.html:127
-
 msgid "Booking Status"
 msgstr "예약 상태"
 
 #: dashboard/templates/dashboard/owner_analytics.html:139
-
 msgid "Top Performing Listings"
 msgstr "성과가 좋은 리스팅"
 
 #: dashboard/templates/dashboard/owner_analytics.html:146
-
 msgid "Listing"
 msgstr "리스팅"
 
 #: dashboard/templates/dashboard/owner_analytics.html:147
 #: motorbike/templates/motorbike/motorbike_detail.html:158
-
 msgid "Category"
 msgstr "카테고리"
 
 #: dashboard/templates/dashboard/owner_analytics.html:148
-
 msgid "Revenue"
 msgstr "수익"
 
 #: dashboard/templates/dashboard/owner_analytics.html:149
-
 msgid "Bookings"
 msgstr "예약"
 
 #: dashboard/templates/dashboard/owner_analytics.html:150
-
 msgid "Rating"
 msgstr "평점"
 
 #: dashboard/templates/dashboard/owner_analytics.html:188
-
 msgid "No bookings yet"
 msgstr "아직 예약이 없습니다"
 
 #: dashboard/templates/dashboard/owner_analytics.html:189
-
 msgid "Your analytics will appear here once you receive your first booking."
 msgstr "첫 예약을 받으면 분석 결과가 여기에 표시됩니다."
 
 #: dashboard/templates/dashboard/owner_analytics.html:202
-
 msgid "Quick Insights"
 msgstr "빠른 인사이트"
 
 #: dashboard/templates/dashboard/owner_analytics.html:206
 #: dashboard/templates/dashboard/owner_dashboard.html:29
-
 msgid "Total Properties"
 msgstr "총 숙소 수"
 
 #: dashboard/templates/dashboard/owner_analytics.html:210
-
 msgid "Pending Actions"
 msgstr "대기 중인 작업"
 
 #: dashboard/templates/dashboard/owner_analytics.html:214
-
 msgid "Cancelled"
 msgstr "취소됨"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
-
 msgid "'Confirmed'"
 msgstr "'확인됨'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
-
 msgid "'Pending'"
 msgstr "'대기 중'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:266
-
 msgid "'Cancelled'"
 msgstr "'취소됨'"
 
 #: dashboard/templates/dashboard/owner_analytics.html:268
-
 msgid "'Bookings'"
 msgstr "'예약'"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:5
 #: dashboard/templates/dashboard/owner_dashboard.html:13
-
 msgid "Owner Dashboard"
 msgstr "소유자 대시보드"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:14
-
 msgid "Welcome back"
 msgstr "다시 오신 것을 환영합니다"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:14
-
 msgid "Here's your business overview."
 msgstr "비즈니스 개요입니다."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:20
-
 msgid "View Analytics"
 msgstr "분석 보기"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:35
-
 msgid "currently active"
 msgstr "현재 활성"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:41
-
 msgid "Pending Requests"
 msgstr "대기 중인 요청"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:47
-
 msgid "Awaiting your approval"
 msgstr "승인을 기다리고 있습니다"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:59
-
 msgid "From confirmed bookings"
 msgstr "확인된 예약에서"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:64
-
 msgid "Quick Actions"
 msgstr "빠른 작업"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:66
 #: dashboard/templates/dashboard/owner_dashboard.html:444
-
 msgid "Add Tour"
 msgstr "투어 추가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:67
 #: dashboard/templates/dashboard/owner_dashboard.html:471
-
 msgid "Add Motorbike"
 msgstr "오토바이 추가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:68
 #: dashboard/templates/dashboard/owner_dashboard.html:498
-
 msgid "Add Guide"
 msgstr "가이드 추가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:69
 #: dashboard/templates/dashboard/owner_dashboard.html:525
-
 msgid "Add Buggy Car"
 msgstr "버기카 추가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:146
-
 msgid "Pending Tour Requests"
 msgstr "대기 중인 투어 요청"
 
@@ -618,18 +518,15 @@ msgstr "대기 중인 투어 요청"
 #: dashboard/templates/dashboard/owner_dashboard.html:274
 #: dashboard/templates/dashboard/owner_dashboard.html:337
 #: tours/templates/tours/tour_list.html:79
-
 msgid "Guest"
 msgstr "고객"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:153 inquiry/models.py:10
-
 msgid "Tour"
 msgstr "투어"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:154
 #: guides/templates/guides/book_guide.html:22
-
 msgid "Date"
 msgstr "날짜"
 
@@ -637,7 +534,6 @@ msgstr "날짜"
 #: dashboard/templates/dashboard/owner_dashboard.html:216
 #: dashboard/templates/dashboard/owner_dashboard.html:278
 #: dashboard/templates/dashboard/owner_dashboard.html:341
-
 msgid "Total"
 msgstr "합계"
 
@@ -645,7 +541,6 @@ msgstr "합계"
 #: dashboard/templates/dashboard/owner_dashboard.html:217
 #: dashboard/templates/dashboard/owner_dashboard.html:279
 #: dashboard/templates/dashboard/owner_dashboard.html:342
-
 msgid "Actions"
 msgstr "작업"
 
@@ -653,7 +548,6 @@ msgstr "작업"
 #: dashboard/templates/dashboard/owner_dashboard.html:230
 #: dashboard/templates/dashboard/owner_dashboard.html:293
 #: dashboard/templates/dashboard/owner_dashboard.html:356
-
 msgid "Approve"
 msgstr "승인"
 
@@ -661,7 +555,6 @@ msgstr "승인"
 #: dashboard/templates/dashboard/owner_dashboard.html:232
 #: dashboard/templates/dashboard/owner_dashboard.html:295
 #: dashboard/templates/dashboard/owner_dashboard.html:358
-
 msgid "Decline"
 msgstr "거절"
 
@@ -669,7 +562,6 @@ msgstr "거절"
 #: dashboard/templates/dashboard/owner_dashboard.html:237
 #: dashboard/templates/dashboard/owner_dashboard.html:300
 #: dashboard/templates/dashboard/owner_dashboard.html:363
-
 msgid "Reason for declining:"
 msgstr "거절 사유:"
 
@@ -677,17 +569,14 @@ msgstr "거절 사유:"
 #: dashboard/templates/dashboard/owner_dashboard.html:239
 #: dashboard/templates/dashboard/owner_dashboard.html:302
 #: dashboard/templates/dashboard/owner_dashboard.html:365
-
 msgid "Select a reason"
 msgstr "사유 선택"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:179
-
 msgid "Date no longer available"
 msgstr "날짜를 더 이상 사용할 수 없음"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:180
-
 msgid "Tour fully booked"
 msgstr "투어 마감"
 
@@ -695,7 +584,6 @@ msgstr "투어 마감"
 #: dashboard/templates/dashboard/owner_dashboard.html:242
 #: dashboard/templates/dashboard/owner_dashboard.html:305
 #: dashboard/templates/dashboard/owner_dashboard.html:368
-
 msgid "Unable to accommodate"
 msgstr "수용할 수 없음"
 
@@ -703,7 +591,6 @@ msgstr "수용할 수 없음"
 #: dashboard/templates/dashboard/owner_dashboard.html:243
 #: dashboard/templates/dashboard/owner_dashboard.html:306
 #: dashboard/templates/dashboard/owner_dashboard.html:369
-
 msgid "Other (please specify)"
 msgstr "기타 (구체적으로 명시)"
 
@@ -711,7 +598,6 @@ msgstr "기타 (구체적으로 명시)"
 #: dashboard/templates/dashboard/owner_dashboard.html:245
 #: dashboard/templates/dashboard/owner_dashboard.html:308
 #: dashboard/templates/dashboard/owner_dashboard.html:371
-
 msgid "Please explain..."
 msgstr "설명해 주세요..."
 
@@ -719,7 +605,6 @@ msgstr "설명해 주세요..."
 #: dashboard/templates/dashboard/owner_dashboard.html:247
 #: dashboard/templates/dashboard/owner_dashboard.html:310
 #: dashboard/templates/dashboard/owner_dashboard.html:373
-
 msgid "Cancel"
 msgstr "취소"
 
@@ -727,99 +612,81 @@ msgstr "취소"
 #: dashboard/templates/dashboard/owner_dashboard.html:248
 #: dashboard/templates/dashboard/owner_dashboard.html:311
 #: dashboard/templates/dashboard/owner_dashboard.html:374
-
 msgid "Confirm Decline"
 msgstr "거절 확인"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:207
-
 msgid "Pending Motorbike Requests"
 msgstr "대기 중인 오토바이 요청"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:214
-
 msgid "Motorbike"
 msgstr "오토바이"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:215
-
 msgid "Dates"
 msgstr "날짜"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:240
-
 msgid "Dates no longer available"
 msgstr "날짜를 더 이상 사용할 수 없음"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:241
-
 msgid "Maintenance issue"
 msgstr "정비 문제"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:268
-
 msgid "Pending Guide Requests"
 msgstr "대기 중인 가이드 요청"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:275
-
 msgid "Guide"
 msgstr "가이드"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:276
 #: dashboard/templates/dashboard/owner_dashboard.html:339
-
 msgid "Date & Time"
 msgstr "날짜 및 시간"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:277
 #: dashboard/templates/dashboard/owner_dashboard.html:340
 #: guides/templates/guides/book_guide.html:34
-
 msgid "Duration"
 msgstr "기간"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:287
 #: dashboard/templates/dashboard/owner_dashboard.html:350
-
 msgid "at"
 msgstr "시간"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:288
 #: dashboard/templates/dashboard/owner_dashboard.html:351
 #: tours/templates/tours/tour_detail.html:68
-
 msgid "hours"
 msgstr "시간"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:303
-
 msgid "Guide unavailable"
 msgstr "가이드 사용 불가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:304
 #: dashboard/templates/dashboard/owner_dashboard.html:367
-
 msgid "Time slot unavailable"
 msgstr "시간대 사용 불가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:331
-
 msgid "Pending Buggy Car Requests"
 msgstr "대기 중인 버기카 요청"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:338
-
 msgid "Buggy Car"
 msgstr "버기카"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:366
-
 msgid "Buggy unavailable"
 msgstr "버기카 사용 불가"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:426
-
 msgid "My Tours"
 msgstr "내 투어"
 
@@ -827,7 +694,6 @@ msgstr "내 투어"
 #: dashboard/templates/dashboard/owner_dashboard.html:461
 #: dashboard/templates/dashboard/owner_dashboard.html:488
 #: dashboard/templates/dashboard/owner_dashboard.html:515
-
 msgid "Active"
 msgstr "활성"
 
@@ -835,12 +701,10 @@ msgstr "활성"
 #: dashboard/templates/dashboard/owner_dashboard.html:461
 #: dashboard/templates/dashboard/owner_dashboard.html:488
 #: dashboard/templates/dashboard/owner_dashboard.html:515
-
 msgid "Inactive"
 msgstr "비활성"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:436
-
 msgid "hrs"
 msgstr "시간"
 
@@ -848,7 +712,6 @@ msgstr "시간"
 #: tours/templates/tours/book_tour.html:17
 #: tours/templates/tours/tour_detail.html:87
 #: tours/templates/tours/tour_list.html:135
-
 msgid "person"
 msgstr "명"
 
@@ -856,17 +719,14 @@ msgstr "명"
 #: dashboard/templates/dashboard/owner_dashboard.html:464
 #: dashboard/templates/dashboard/owner_dashboard.html:491
 #: dashboard/templates/dashboard/owner_dashboard.html:518
-
 msgid "Edit"
 msgstr "편집"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:443
-
 msgid "No tours yet."
 msgstr "아직 투어가 없습니다."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:453
-
 msgid "My Motorbikes"
 msgstr "내 오토바이"
 
@@ -874,161 +734,134 @@ msgstr "내 오토바이"
 #: motorbike/templates/motorbike/book_motorbike.html:17
 #: motorbike/templates/motorbike/motorbike_detail.html:149
 #: motorbike/templates/motorbike/motorbike_list.html:101
-
 msgid "day"
 msgstr "일"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:470
-
 msgid "No motorbikes yet."
 msgstr "아직 오토바이가 없습니다."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:480
-
 msgid "My Guides"
 msgstr "내 가이드"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:497
-
 msgid "No guides yet."
 msgstr "아직 가이드가 없습니다."
 
 #: dashboard/templates/dashboard/owner_dashboard.html:507
-
 msgid "My Buggy Cars"
 msgstr "내 버기카"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:517
-
 msgid "2hrs"
 msgstr "2시간"
 
 #: dashboard/templates/dashboard/owner_dashboard.html:524
-
 msgid "No buggy cars yet."
 msgstr "아직 버기카가 없습니다."
 
 #: guesthouse/templates/guesthouse/book.html:15
-
 msgid "Book Your Stay"
 msgstr "숙박 예약하기"
 
 #: guesthouse/templates/guesthouse/book.html:17
 #: motorbike/templates/motorbike/book_motorbike.html:17
 #: tours/templates/tours/book_tour.html:17
-
 msgid "Price:"
 msgstr "가격:"
 
 #: guesthouse/templates/guesthouse/book.html:17
-
 msgid "night"
 msgstr "박"
 
 #: guesthouse/templates/guesthouse/book.html:23
-
 msgid "Unable to complete booking:"
 msgstr "예약을 완료할 수 없습니다:"
 
 #: guesthouse/templates/guesthouse/book.html:37
-
 msgid "Check-in Date"
 msgstr "체크인 날짜"
 
 #: guesthouse/templates/guesthouse/book.html:46
-
 msgid "Check-out Date"
 msgstr "체크아웃 날짜"
 
 #: guesthouse/templates/guesthouse/book.html:55
-
 msgid "Number of Guests"
 msgstr "투숙객 수"
 
 #: guesthouse/templates/guesthouse/book.html:57
-
 msgid "How many people will be staying?"
 msgstr "몇 명이 숙박합니까?"
 
 #: guesthouse/templates/guesthouse/book.html:66
-
 msgid "Room Type"
 msgstr "객실 유형"
 
 #: guesthouse/templates/guesthouse/book.html:68
-
 msgid "Select your preferred room type."
 msgstr "원하는 객실 유형을 선택하세요."
 
 #: guesthouse/templates/guesthouse/book.html:79
-
 msgid "A"
 msgstr "하나의"
 
 #: guesthouse/templates/guesthouse/book.html:79
-
 msgid "standard room"
 msgstr "표준 객실"
 
 #: guesthouse/templates/guesthouse/book.html:79
-
 msgid "will be assigned to you upon arrival based on availability."
 msgstr "도착 시 이용 가능한 객실에 따라 배정됩니다."
 
 #: guesthouse/templates/guesthouse/book.html:89
-
-msgid "Please provide at least one way for the guesthouse owner to contact you."
+msgid ""
+"Please provide at least one way for the guesthouse owner to contact you."
 msgstr "게스트하우스 소유자가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
 #: guesthouse/templates/guesthouse/book.html:94
 #: inquiry/templates/inquiry/inquiry.html:42
 #: tours/templates/tours/book_tour.html:82
-
 msgid "Email Address"
 msgstr "이메일 주소"
 
 #: guesthouse/templates/guesthouse/book.html:102
 #: inquiry/templates/inquiry/inquiry.html:55
 #: tours/templates/tours/book_tour.html:90
-
 msgid "Phone Number"
 msgstr "전화번호"
 
 #: guesthouse/templates/guesthouse/book.html:121
 #: guides/templates/guides/book_guide.html:93
 #: tours/templates/tours/book_tour.html:109
-
 msgid "Final payment will be collected in"
 msgstr "최종 결제는 다음으로 수취됩니다:"
 
 #: guesthouse/templates/guesthouse/book.html:121
 #: tours/templates/tours/book_tour.html:109
-
 msgid "Lao Kip (LAK)"
 msgstr "라오스 킵 (LAK)"
 
 #: guesthouse/templates/guesthouse/book.html:121
-
-msgid "based on the official daily BCEL/LDB exchange rate on the day of your check-in."
+msgid ""
+"based on the official daily BCEL/LDB exchange rate on the day of your check-"
+"in."
 msgstr "체크인 당일 BCEL/LDB 공식 일일 환율을 기준으로 합니다."
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:30
-
 msgid "Find Your Perfect Stay"
 msgstr "완벽한 숙박 찾기"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:31
-
 msgid "Discover amazing guesthouses in Vang Vieng"
 msgstr "방비엥의 놀라운 게스트하우스를 발견하세요"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:41
-
 msgid "Check-in"
 msgstr "체크인"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:50
-
 msgid "Check-out"
 msgstr "체크아웃"
 
@@ -1038,1394 +871,1240 @@ msgstr "체크아웃"
 #: tours/templates/tours/tour_list.html:81
 #: tours/templates/tours/tour_list.html:82
 #: tours/templates/tours/tour_list.html:83
-
 msgid "Guests"
 msgstr "투숙객"
 
 #: guesthouse/templates/guesthouse/guesthouse_list.html:123
-
 msgid "Search"
 msgstr "검색"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:10
 #: templates/base.html:333 templates/pages/terms_of_service.html:4
 #: templates/pages/terms_of_service.html:8
-
 msgid "Terms of Service"
 msgstr "서비스 약관"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:11
-
 msgid "Last Updated: October 2026"
 msgstr "마지막 업데이트: 2026년 10월"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
-
 msgid "Welcome to"
 msgstr "환영합니다"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
 #: templates/base.html:317 templates/base.html:338
-
 msgid "Vang Vieng Stay"
 msgstr "방비엥 스테이"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
-
-msgid "By accessing our website and using our booking services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully."
+msgid ""
+"By accessing our website and using our booking services, you agree to comply"
+" with and be bound by the following terms and conditions. Please read them "
+"carefully."
 msgstr "웹사이트에 접속하고 예약 서비스를 사용함으로써 다음 이용약관을 준수하고 구속되는 데 동의합니다. 주의해서 읽어주세요."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:20
-
 msgid "1. Platform Role"
 msgstr "1. 플랫폼의 역할"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
-
-msgid "Vang Vieng Stay acts solely as an intermediary booking platform connecting travelers with independent local business owners in Vang Vieng, Laos. We facilitate bookings for"
-msgstr "Vang Vieng Stay는 라오스 방비엥의 독립적인 현지 사업주와 여행자를 연결하는 중개 예약 플랫폼으로서만 활동합니다. 당사는 다음에 대한 예약을 지원합니다:"
+msgid ""
+"Vang Vieng Stay acts solely as an intermediary booking platform connecting "
+"travelers with independent local business owners in Vang Vieng, Laos. We "
+"facilitate bookings for"
+msgstr ""
+"Vang Vieng Stay는 라오스 방비엥의 독립적인 현지 사업주와 여행자를 연결하는 중개 예약 플랫폼으로서만 활동합니다. 당사는 "
+"다음에 대한 예약을 지원합니다:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
-
-msgid "Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
+msgid ""
+"Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
 msgstr "게스트하우스, 투어, 현지 가이드, 오토바이 대여 및 버기카 대여"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
-
-msgid "We do not own, manage, or operate these services. The actual service provider"
+msgid ""
+"We do not own, manage, or operate these services. The actual service "
+"provider"
 msgstr "당사는 이러한 서비스를 소유, 관리 또는 운영하지 않습니다. 실제 서비스 제공자"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
-
-msgid "is solely responsible for the quality, safety, and delivery of the services rendered."
+msgid ""
+"is solely responsible for the quality, safety, and delivery of the services "
+"rendered."
 msgstr "는 제공된 서비스의 품질, 안전 및 제공에 대해 전적으로 책임을 집니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:25
-
 msgid "2. The 'Request & Verify' Booking Process"
 msgstr "2. '요청 및 확인' 예약 프로세스"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:27
-
 msgid "Booking Requests:"
 msgstr "예약 요청:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:27
-
 msgid "Submitting a booking form on our platform does"
 msgstr "당사 플랫폼에서 예약 양식을 제출하는 것은"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:27
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "not"
 msgstr "아니며,"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:27
-
-msgid "guarantee a reservation. It initiates a 'Booking Request' which is sent to the Owner for availability verification."
+msgid ""
+"guarantee a reservation. It initiates a 'Booking Request' which is sent to "
+"the Owner for availability verification."
 msgstr "예약을 보장하지 않습니다. 이는 소유자가 이용 가능 여부를 확인할 수 있도록 '예약 요청'을 시작합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
-
 msgid "Confirmation:"
 msgstr "확인:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
-
 msgid "A booking is only considered"
 msgstr "예약은"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
-
 msgid "Confirmed"
 msgstr "확인됨"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
-
-msgid "once the Owner approves the request and you receive a final Confirmation Voucher via email."
+msgid ""
+"once the Owner approves the request and you receive a final Confirmation "
+"Voucher via email."
 msgstr "소유자가 요청을 승인하고 이메일로 최종 확인 바우처를 받은 경우에만 확정된 것으로 간주됩니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:29
-
 msgid "Declined Requests:"
 msgstr "거절된 요청:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:29
-
 msgid "If the Owner cannot accommodate your request"
 msgstr "소유자가 귀하의 요청을 수용할 수 없는 경우"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:29
-
 msgid "e.g., the vehicle or room is no longer available"
 msgstr "(예: 차량이나 객실을 더 이상 사용할 수 없는 경우)"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:29
-
 msgid "the request will be declined at no cost to you."
 msgstr "요청은 귀하에게 비용 없이 거절됩니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:34
-
 msgid "3. Payment, Currency & Security Deposits"
 msgstr "3. 결제, 통화 및 보증금"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "Cash on Arrival:"
 msgstr "도착 시 현금 결제:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "Vang Vieng Stay does"
 msgstr "Vang Vieng Stay는"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
-msgid "process online payments. All payments for services must be made directly to the Owner in"
+msgid ""
+"process online payments. All payments for services must be made directly to "
+"the Owner in"
 msgstr "온라인 결제를 처리하지 않습니다. 모든 서비스 결제는"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "cash"
 msgstr "현금"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "Lao Kip - LAK"
 msgstr "라오스 킵(LAK)"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
-
 msgid "upon check-in, arrival, or vehicle pickup."
 msgstr "으로 체크인, 도착 또는 차량 수령 시 소유자에게 직접 이루어져야 합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:37
-
 msgid "Pricing:"
 msgstr "가격:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:37
-
-msgid "All prices displayed on the platform are estimates in LAK and are subject to change based on the Owner's current rates. The final price agreed upon with the Owner at the time of pickup/check-in is the binding price."
-msgstr "플랫폼에 표시된 모든 가격은 LAK 추정치이며 소유자의 현재 요율에 따라 변경될 수 있습니다. 수령/체크인 시 소유자와 합의한 최종 가격이 구속력 있는 가격입니다."
+msgid ""
+"All prices displayed on the platform are estimates in LAK and are subject to"
+" change based on the Owner's current rates. The final price agreed upon with"
+" the Owner at the time of pickup/check-in is the binding price."
+msgstr ""
+"플랫폼에 표시된 모든 가격은 LAK 추정치이며 소유자의 현재 요율에 따라 변경될 수 있습니다. 수령/체크인 시 소유자와 합의한 최종 "
+"가격이 구속력 있는 가격입니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:38
-
 msgid "Security Deposits (Vehicles): "
 msgstr "보증금(차량): "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:38
-
-msgid "For Motorbike and Buggy Car rentals, a cash security deposit and/or the physical surrender of a valid Passport or Government ID is required by the Owner at the time of pickup. This deposit/ID will be returned upon the safe return of the vehicle."
-msgstr "오토바이 및 버기카 대여의 경우, 수령 시 소유자가 현금 보증금 및/또는 유효한 여권 또는 정부 발급 신분증의 실물 제출을 요구합니다. 이 보증금/신분증은 차량을 안전하게 반납할 때 반환됩니다."
+msgid ""
+"For Motorbike and Buggy Car rentals, a cash security deposit and/or the "
+"physical surrender of a valid Passport or Government ID is required by the "
+"Owner at the time of pickup. This deposit/ID will be returned upon the safe "
+"return of the vehicle."
+msgstr ""
+"오토바이 및 버기카 대여의 경우, 수령 시 소유자가 현금 보증금 및/또는 유효한 여권 또는 정부 발급 신분증의 실물 제출을 요구합니다. "
+"이 보증금/신분증은 차량을 안전하게 반납할 때 반환됩니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:43
-
 msgid "4. Cancellations"
 msgstr "4. 취소"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:45
-
 msgid "Pending Requests: "
 msgstr "대기 중인 요청: "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:45
-
-msgid "You may cancel any pending booking request instantly via your dashboard at no charge."
+msgid ""
+"You may cancel any pending booking request instantly via your dashboard at "
+"no charge."
 msgstr "대시보드를 통해 수수료가 없이 대기 중인 예약 요청을 즉시 취소할 수 있습니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:46
-
 msgid "Confirmed Bookings: "
 msgstr "확인된 예약: "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:46
-
-msgid "If you need to cancel a confirmed booking, you must contact the Owner directly. Cancellation policies, including the potential forfeiture of your security deposit for vehicle rentals or late cancellation fees for guesthouses, are determined solely by the individual Owner."
-msgstr "확인된 예약을 취소해야 하는 경우 소유자에게 직접 연락해야 합니다. 차량 대여 보증금 몰수 가능성이나 게스트하우스의 늦은 취소 수수료 등을 포함한 취소 정책은 개별 소유자가 전적으로 결정합니다."
+msgid ""
+"If you need to cancel a confirmed booking, you must contact the Owner "
+"directly. Cancellation policies, including the potential forfeiture of your "
+"security deposit for vehicle rentals or late cancellation fees for "
+"guesthouses, are determined solely by the individual Owner."
+msgstr ""
+"확인된 예약을 취소해야 하는 경우 소유자에게 직접 연락해야 합니다. 차량 대여 보증금 몰수 가능성이나 게스트하우스의 늦은 취소 수수료 "
+"등을 포함한 취소 정책은 개별 소유자가 전적으로 결정합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:51
-
 msgid "5. User Responsibilities & Safety"
 msgstr "5. 사용자의 책임 및 안전"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:53
-
 msgid "Identification: "
 msgstr "신분증: "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:53
-
-msgid "You must present a valid Passport or Government ID and your Booking Voucher (digital or printed) upon check-in or vehicle pickup."
+msgid ""
+"You must present a valid Passport or Government ID and your Booking Voucher "
+"(digital or printed) upon check-in or vehicle pickup."
 msgstr "체크인 또는 차량 수령 시 유효한 여권 또는 정부 발급 신분증과 예약 바우처(디지털 또는 인쇄본)를 제시해야 합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
-
 msgid "Vehicle Rentals: "
 msgstr "차량 대여: "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
-
-msgid "For Motorbikes and Buggy Cars, the renter must possess a valid, legally recognized driver's license for Laos. You are fully responsible for the safe operation of the vehicle, adhering to local traffic laws, and wearing appropriate safety gear (e.g., helmets)."
-msgstr "오토바이 및 버기카의 경우, 대여자는 라오스에서 법적으로 인정되는 유효한 운전면허증을 소지해야 합니다. 차량의 안전한 운행, 현지 교통 법규 준수 및 적절한 안전 장비(예: 헬멧) 착용에 대한 전적인 책임은 사용자에게 있습니다."
+msgid ""
+"For Motorbikes and Buggy Cars, the renter must possess a valid, legally "
+"recognized driver's license for Laos. You are fully responsible for the safe"
+" operation of the vehicle, adhering to local traffic laws, and wearing "
+"appropriate safety gear (e.g., helmets)."
+msgstr ""
+"오토바이 및 버기카의 경우, 대여자는 라오스에서 법적으로 인정되는 유효한 운전면허증을 소지해야 합니다. 차량의 안전한 운행, 현지 교통 "
+"법규 준수 및 적절한 안전 장비(예: 헬멧) 착용에 대한 전적인 책임은 사용자에게 있습니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:55
-
 msgid "Property Respect: "
 msgstr "재산 존중: "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:55
-
-msgid "You agree to respect the property, staff, and local regulations of the service providers."
+msgid ""
+"You agree to respect the property, staff, and local regulations of the "
+"service providers."
 msgstr "귀하는 서비스 제공자의 재산, 직원 및 현지 규정을 존중하기로 동의합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:60
-
 msgid "6. Limitation of Liability"
 msgstr "6. 책임의 한계"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:61
-
-msgid "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable for any indirect, incidental, or consequential damages arising from your use of the platform or the services booked. This includes, but is not limited to, traffic accidents, vehicle damage, personal injuries during tours, theft, or travel disruptions. All risks associated with the use of rented vehicles and participation in tours are assumed entirely by the user."
-msgstr "법률이 허용하는 최대 범위 내에서, Vang Vieng Stay는 플랫폼 또는 예약된 서비스 사용으로 인해 발생하는 간접적, 우발적 또는 결과적 손해에 대해 책임지지 않습니다. 여기에는 교통 사고, 차량 손상, 투어 중 개인 부상, 도난 또는 여행 차질이 포함되지만 이에 국한되지 않습니다. 대여 차량 사용 및 투어 참여와 관련된 모든 위험은 전적으로 사용자가 부담합니다."
+msgid ""
+"To the maximum extent permitted by law, Vang Vieng Stay shall not be liable "
+"for any indirect, incidental, or consequential damages arising from your use"
+" of the platform or the services booked. This includes, but is not limited "
+"to, traffic accidents, vehicle damage, personal injuries during tours, "
+"theft, or travel disruptions. All risks associated with the use of rented "
+"vehicles and participation in tours are assumed entirely by the user."
+msgstr ""
+"법률이 허용하는 최대 범위 내에서, Vang Vieng Stay는 플랫폼 또는 예약된 서비스 사용으로 인해 발생하는 간접적, 우발적 또는"
+" 결과적 손해에 대해 책임지지 않습니다. 여기에는 교통 사고, 차량 손상, 투어 중 개인 부상, 도난 또는 여행 차질이 포함되지만 이에 "
+"국한되지 않습니다. 대여 차량 사용 및 투어 참여와 관련된 모든 위험은 전적으로 사용자가 부담합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:65
-
 msgid "7. Governing Law"
 msgstr "7. 준거법"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:66
-
-msgid "These terms shall be governed by and construed in accordance with the laws of the Lao People's Democratic Republic. Any disputes arising from these terms or the services booked shall be subject to the exclusive jurisdiction of the local authorities and courts in Vientiane, Laos."
-msgstr "본 약관은 라오스 인민 민주 공화국의 법률에 따라 규율되고 해석됩니다. 본 약관 또는 예약된 서비스에서 발생하는 모든 분쟁은 라오스 비엔티안의 현지 당국 및 법원의 전속 관할에 따릅니다."
+msgid ""
+"These terms shall be governed by and construed in accordance with the laws "
+"of the Lao People's Democratic Republic. Any disputes arising from these "
+"terms or the services booked shall be subject to the exclusive jurisdiction "
+"of the local authorities and courts in Vientiane, Laos."
+msgstr ""
+"본 약관은 라오스 인민 민주 공화국의 법률에 따라 규율되고 해석됩니다. 본 약관 또는 예약된 서비스에서 발생하는 모든 분쟁은 라오스 "
+"비엔티안의 현지 당국 및 법원의 전속 관할에 따릅니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
-
 msgid "Questions? "
 msgstr "질문이 있으신가요? "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
-
-msgid "If you have any questions about these Terms of Service or your data privacy, please contact us at"
+msgid ""
+"If you have any questions about these Terms of Service or your data privacy,"
+" please contact us at"
 msgstr "본 서비스 약관 또는 데이터 개인정보 보호에 대해 질문이 있으시면 다음으로 연락해 주세요:"
 
 #: guides/templates/guides/book_guide.html:11
-
 msgid "Back to guide profile"
 msgstr "가이드 프로필로 돌아가기"
 
 #: guides/templates/guides/book_guide.html:16
-
 msgid "Tell us when and where to meet you."
 msgstr "언제 어디서 만날지 알려주세요."
 
 #: guides/templates/guides/book_guide.html:36
-
 msgid "1 Hour"
 msgstr "1시간"
 
 #: guides/templates/guides/book_guide.html:39
-
 msgid "Half Day (4 Hours)"
 msgstr "반나절 (4시간)"
 
 #: guides/templates/guides/book_guide.html:42
-
 msgid "7 Hours"
 msgstr "7시간"
 
 #: guides/templates/guides/book_guide.html:43
-
 msgid "Full Day (8 Hours)"
 msgstr "종일 (8시간)"
 
 #: guides/templates/guides/book_guide.html:50
-
 msgid "Where should the guide meet you?"
 msgstr "가이드가 어디서 만나야 합니까?"
 
 #: guides/templates/guides/book_guide.html:53
-
 msgid "e.g., Vang Vieng Central Lodge, or near the bus station"
 msgstr "예: 방비엥 센트럴 롯지 또는 버스 정류장 근처"
 
 #: guides/templates/guides/book_guide.html:55
-
-msgid "Your guide will meet you here. You can share a live location via WhatsApp later."
+msgid ""
+"Your guide will meet you here. You can share a live location via WhatsApp "
+"later."
 msgstr "가이드가 여기서 만날 것입니다. 나중에 WhatsApp으로 실시간 위치를 공유할 수 있습니다."
 
 #: guides/templates/guides/book_guide.html:63
-
 msgid "Please provide at least one way for the guide to contact you."
 msgstr "가이드가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
 #: guides/templates/guides/book_guide.html:93
-
 msgid "at the meeting point."
 msgstr "만남의 장소에서."
 
 #: guides/templates/guides/guide_list.html:4 templates/base.html:78
 #: templates/base.html:237 templates/base.html:324
-
 msgid "Local Guides"
 msgstr "현지 가이드"
 
 #: guides/templates/guides/guide_list.html:16
-
 msgid "Hire a Local Expert"
 msgstr "현지 전문가 고용"
 
 #: guides/templates/guides/guide_list.html:17
-
-msgid "Rent your own motorbike but want someone to show you the hidden waterfalls, safe routes, and best local food? Our certified local guides have you covered."
-msgstr "자신의 오토바이를 빌리지만 숨겨진 폭포, 안전한 경로, 최고의 현지 음식을 보여줄 사람이 필요합니까? 인증된 현지 가이드가 도와드립니다."
+msgid ""
+"Rent your own motorbike but want someone to show you the hidden waterfalls, "
+"safe routes, and best local food? Our certified local guides have you "
+"covered."
+msgstr ""
+"자신의 오토바이를 빌리지만 숨겨진 폭포, 안전한 경로, 최고의 현지 음식을 보여줄 사람이 필요합니까? 인증된 현지 가이드가 도와드립니다."
 
 #: guides/templates/guides/guide_list.html:23
-
 msgid "Available Guides"
 msgstr "이용 가능한 가이드"
 
 #: guides/templates/guides/guide_list.html:57
-
 msgid "Lao"
 msgstr "라오어"
 
 #: guides/templates/guides/guide_list.html:60
-
 msgid "English"
 msgstr "영어"
 
 #: guides/templates/guides/guide_list.html:65
-
 msgid "View Profile & Book"
 msgstr "프로필 보기 및 예약"
 
 #: guides/templates/guides/guide_list.html:73
-
 msgid "No guides available at the moment."
 msgstr "현재 이용 가능한 가이드가 없습니다."
 
 #: inquiry/models.py:7
-
 msgid "General Question"
 msgstr "일반 질문"
 
 #: inquiry/models.py:8
-
 msgid "Booking Inquiry"
 msgstr "예약 문의"
 
 #: inquiry/models.py:9
-
 msgid "Guesthouse"
 msgstr "게스트하우스"
 
 #: inquiry/models.py:11
-
 msgid "Motorbike Rental"
 msgstr "오토바이 대여"
 
 #: inquiry/models.py:12
-
 msgid "Buggy Car Rental"
 msgstr "버기카 대여"
 
 #: inquiry/models.py:13
-
 msgid "Local Guide"
 msgstr "현지 가이드"
 
 #: inquiry/models.py:14
-
 msgid "Technical Support"
 msgstr "기술 지원"
 
 #: inquiry/models.py:15
-
 msgid "Other"
 msgstr "기타"
 
 #: inquiry/models.py:19
-
 msgid "New"
 msgstr "신규"
 
 #: inquiry/models.py:20
-
 msgid "Read"
 msgstr "읽음"
 
 #: inquiry/models.py:21
-
 msgid "Responded"
 msgstr "응답함"
 
 #: inquiry/models.py:22
-
 msgid "Closed"
 msgstr "닫힘"
 
 #: inquiry/models.py:25
-
 msgid "Name"
 msgstr "이름"
 
 #: inquiry/models.py:26 trip_planner/templates/trip_planner/trip_plan.html:286
 #: trip_planner/templates/trip_planner/trip_plan.html:459
-
 msgid "Email"
 msgstr "이메일"
 
 #: inquiry/models.py:27
-
 msgid "Phone"
 msgstr "전화"
 
 #: inquiry/models.py:28 inquiry/templates/inquiry/inquiry.html:61
-
 msgid "Subject"
 msgstr "제목"
 
 #: inquiry/models.py:29
-
 msgid "Message"
 msgstr "메시지"
 
 #: inquiry/models.py:30
-
 msgid "Status"
 msgstr "상태"
 
 #: inquiry/models.py:33
-
 msgid "Customer Email Sent"
 msgstr "고객 이메일 발송됨"
 
 #: inquiry/models.py:34
-
 msgid "Admin Email Sent"
 msgstr "관리자 이메일 발송됨"
 
 #: inquiry/models.py:36
-
 msgid "Created At"
 msgstr "생성일"
 
 #: inquiry/models.py:37
-
 msgid "Updated At"
 msgstr "업데이트일"
 
 #: inquiry/models.py:41
-
 msgid "Inquiry"
 msgstr "문의"
 
 #: inquiry/models.py:42
-
 msgid "Inquiries"
 msgstr "문의들"
 
 #: inquiry/templates/inquiry/inquiry.html:10
-
 msgid "Get in Touch"
 msgstr "연락하기"
 
 #: inquiry/templates/inquiry/inquiry.html:12
-
-msgid "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours."
+msgid ""
+"Have a question? We'd love to hear from you. Send us a message and we'll "
+"respond within 24 hours."
 msgstr "질문이 있으신가요? 여러분의 의견을 듣고 싶습니다. 메시지를 보내주시면 24시간 이내에 답변드리겠습니다."
 
 #: inquiry/templates/inquiry/inquiry.html:33
 #: trip_planner/templates/trip_planner/trip_plan.html:275
 #: trip_planner/templates/trip_planner/trip_plan.html:448
-
 msgid "Your Name"
 msgstr "이름"
 
 #: inquiry/templates/inquiry/inquiry.html:70
-
 msgid "Your Message"
 msgstr "메시지"
 
 #: inquiry/templates/inquiry/inquiry.html:80
-
 msgid "Send Message"
 msgstr "메시지 보내기"
 
 #: inquiry/templates/inquiry/inquiry.html:84
-
 msgid "We respect your privacy. Your information will never be shared."
 msgstr "우리는 귀하의 개인정보를 존중합니다. 귀하의 정보는 절대 공유되지 않습니다."
 
 #: inquiry/templates/inquiry/inquiry_success.html:10
-
 msgid "Message Sent Successfully!"
 msgstr "메시지가 성공적으로 전송되었습니다!"
 
 #: inquiry/templates/inquiry/inquiry_success.html:12
-
-msgid "Thank you for reaching out. We've received your message and sent a confirmation to your email."
+msgid ""
+"Thank you for reaching out. We've received your message and sent a "
+"confirmation to your email."
 msgstr "연락해 주셔서 감사합니다. 메시지를 받았으며 이메일로 확인서를 보냈습니다."
 
 #: inquiry/templates/inquiry/inquiry_success.html:15
-
 msgid "Our team will review your inquiry and get back to you within 24 hours."
 msgstr "팀이 문의를 검토하고 24시간 이내에 답변드리겠습니다."
 
 #: inquiry/templates/inquiry/inquiry_success.html:18
-
 msgid "Return to Homepage"
 msgstr "홈페이지로 돌아가기"
 
 #: motorbike/templates/motorbike/book_motorbike.html:5
 #: motorbike/templates/motorbike/book_motorbike.html:15
-
 msgid "Rent"
 msgstr "대여"
 
 #: motorbike/templates/motorbike/book_motorbike.html:27
-
 msgid "Pickup Date"
 msgstr "수령 날짜"
 
 #: motorbike/templates/motorbike/book_motorbike.html:32
-
 msgid "Return Date"
 msgstr "반납 날짜"
 
 #: motorbike/templates/motorbike/book_motorbike.html:84
-
-msgid "at pickup. The deposit will be fully refunded when you return the motorbike."
+msgid ""
+"at pickup. The deposit will be fully refunded when you return the motorbike."
 msgstr "수령 시. 오토바이를 반납할 때 보증금이 전액 환불됩니다."
 
 #: motorbike/templates/motorbike/book_motorbike.html:90
-
 msgid "Reserve Now, Pay on Arival (Free Cancellation)"
 msgstr "지금 예약, 도착 시 결제 (무료 취소)"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:4
-
 msgid "Cancel Motorbike Rental"
 msgstr "오토바이 대여 취소"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:15
-
 msgid "Cancel Rental?"
 msgstr "대여를 취소하시겠습니까?"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
-
 msgid "Are you sure you want to cancel your rental of"
 msgstr "대여를 취소하시겠습니까:"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:17
-
 msgid "to"
 msgstr "부터"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:18
-
-msgid "This action cannot be undone, and the motorbike will be released for others to book."
+msgid ""
+"This action cannot be undone, and the motorbike will be released for others "
+"to book."
 msgstr "이 작업은 취소할 수 없으며 오토바이는 다른 사람이 예약할 수 있도록 해제됩니다."
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
-
 msgid "Keep Rental"
 msgstr "대여 유지"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:27
-
 msgid "Yes, Cancel Rental"
 msgstr "네, 대여 취소"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:14
-
 msgid "Back to Motorbikes"
 msgstr "오토바이 목록으로 돌아가기"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:73
-
 msgid "About this Motorbike"
 msgstr "이 오토바이 정보"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:89
-
 msgid "Daily Rate"
 msgstr "일일 요금"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:93
-
 msgid "Deposit Required"
 msgstr "보증금 필요"
 
 #: motorbike/templates/motorbike/motorbike_detail.html:165
-
 msgid "Book This Motorbike"
 msgstr "이 오토바이 예약하기"
 
 #: motorbike/templates/motorbike/motorbike_list.html:5
-
 msgid "Motorbikes for Rent"
 msgstr "오토바이 대여"
 
 #: motorbike/templates/motorbike/motorbike_list.html:17
-
 msgid "Rent a Motorbike"
 msgstr "오토바이 대여하기"
 
 #: motorbike/templates/motorbike/motorbike_list.html:18
-
-msgid "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
+msgid ""
+"Explore Vang Vieng at your own pace. Reliable motorbikes for every "
+"adventure."
 msgstr "자신의 속도로 방비엥을 탐험하세요. 모든 모험을 위한 신뢰할 수 있는 오토바이."
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
-
 msgid "Rental Type:"
 msgstr "대여 유형:"
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
-
 msgid "Daily"
 msgstr "일일"
 
 #: motorbike/templates/motorbike/motorbike_list.html:120
-
 msgid "No motorbikes available at the moment."
 msgstr "현재 대여 가능한 오토바이가 없습니다."
 
 #: templates/base.html:74 templates/base.html:233
-
 msgid "Tours"
 msgstr "투어"
 
 #: templates/base.html:82 templates/base.html:241
-
 msgid "Motorbikes"
 msgstr "오토바이"
 
 #: templates/base.html:86 templates/base.html:245
-
 msgid "Buggy Cars"
 msgstr "버기카"
 
 #: templates/base.html:89 templates/base.html:249
-
 msgid "Plan My Trip"
 msgstr "내 여행 계획하기"
 
 #: templates/base.html:92 templates/base.html:253
-
 msgid "Contact"
 msgstr "연락처"
 
 #: templates/base.html:107
-
 msgid "Select language"
 msgstr "언어 선택"
 
 #: templates/base.html:136
-
 msgid "Email Verified"
 msgstr "이메일 인증됨"
 
 #: templates/base.html:140
-
 msgid "Unverified"
 msgstr "인증 안 됨"
 
 #: templates/base.html:142
-
 msgid "Verify Now"
 msgstr "지금 인증하기"
 
 #: templates/base.html:149 templates/base.html:260
-
 msgid "My Dashboard"
 msgstr "내 대시보드"
 
 #: templates/base.html:153
-
 msgid "Tour Adventures"
 msgstr "투어 모험"
 
 #: templates/base.html:157
-
 msgid "Guide Bookings"
 msgstr "가이드 예약"
 
 #: templates/base.html:161 templates/base.html:325
-
 msgid "Motorbike Rentals"
 msgstr "오토바이 대여"
 
 #: templates/base.html:165 templates/base.html:326
-
 msgid "Buggy Car Rentals"
 msgstr "버기카 대여"
 
 #: templates/base.html:172 templates/base.html:266
-
 msgid "Admin Dashboard"
 msgstr "관리자 대시보드"
 
 #: templates/base.html:181 templates/base.html:279
-
 msgid "Log Out"
 msgstr "로그아웃"
 
 #: templates/base.html:188 templates/base.html:285
 #: templates/registration/login.html:4
-
 msgid "Log In"
 msgstr "로그인"
 
 #: templates/base.html:191 templates/base.html:288
 #: templates/registration/signup.html:4
-
 msgid "Sign Up"
 msgstr "회원가입"
 
 #: templates/base.html:197
-
 msgid "Toggle menu"
 msgstr "메뉴 토글"
 
 #: templates/base.html:213
-
 msgid "Language"
 msgstr "언어"
 
 #: templates/base.html:270
-
 msgid "My Tour Adventures"
 msgstr "내 투어 모험"
 
 #: templates/base.html:271
-
 msgid "My Guide Bookings"
 msgstr "내 가이드 예약"
 
 #: templates/base.html:272
-
 msgid "My Motorbike Rentals"
 msgstr "내 오토바이 대여"
 
 #: templates/base.html:273
-
 msgid "My Buggy Car Rentals"
 msgstr "내 버기카 대여"
 
 #: templates/base.html:318
-
-msgid "Your trusted platform for local guesthouses, unforgettable tours, expert local guides, motorbike rentals, and buggy car adventures."
+msgid ""
+"Your trusted platform for local guesthouses, unforgettable tours, expert "
+"local guides, motorbike rentals, and buggy car adventures."
 msgstr "현지 게스트하우스, 잊을 수 없는 투어, 전문 현지 가이드, 오토바이 대여 및 버기카 모험을 위한 신뢰할 수 있는 플랫폼."
 
 #: templates/base.html:321
-
 msgid "Explore"
 msgstr "탐색"
 
 #: templates/base.html:323 tours/templates/tours/tour_list.html:5
-
 msgid "Tours & Activities"
 msgstr "투어 및 활동"
 
 #: templates/base.html:330
-
 msgid "Support"
 msgstr "지원"
 
 #: templates/base.html:332 templates/pages/terms_of_service.html:34
-
 msgid "Contact Us"
 msgstr "문의하기"
 
 #: templates/base.html:338
-
 msgid "All rights reserved."
 msgstr "모든 권리 보유."
 
 #: templates/base.html:391
-
 msgid "Vang Vieng Stay Assistant"
 msgstr "방비엥 스테이 도우미"
 
 #: templates/base.html:392
-
 msgid "AI-powered help • Online"
 msgstr "AI 기반 도움말 • 온라인"
 
 #: templates/base.html:411
-
-msgid "Hi! 👋 I'm here to help with questions about bookings, policies and tours in Vang Vieng. What can I help you with?"
+msgid ""
+"Hi! 👋 I'm here to help with questions about bookings, policies and tours in "
+"Vang Vieng. What can I help you with?"
 msgstr "안녕하세요! 👋 방비엥의 예약, 정책 및 투어에 대한 질문을 도와드리겠습니다. 무엇을 도와드릴까요?"
 
 #: templates/base.html:416
-
 msgid "Cancellation policy"
 msgstr "취소 정책"
 
 #: templates/base.html:417
-
 msgid "Tour essentials"
 msgstr "투어 필수품"
 
 #: templates/base.html:424
-
 msgid "Type your question..."
 msgstr "질문을 입력하세요..."
 
 #: templates/base.html:431
-
 msgid "Powered by AI • Responses based on official policies"
 msgstr "AI 기반 • 공식 정책에 따른 응답"
 
 #: templates/pages/terms_of_service.html:11
-
-msgid "Welcome to Vang Vieng Stay. By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement."
-msgstr "방비엥 스테이에 오신 것을 환영합니다. 이 웹사이트에 접속하고 사용함으로써 본 계약의 조항과 조건에 구속되는 것을 수락하고 동의합니다."
+msgid ""
+"Welcome to Vang Vieng Stay. By accessing and using this website, you accept "
+"and agree to be bound by the terms and provisions of this agreement."
+msgstr ""
+"방비엥 스테이에 오신 것을 환영합니다. 이 웹사이트에 접속하고 사용함으로써 본 계약의 조항과 조건에 구속되는 것을 수락하고 동의합니다."
 
 #: templates/pages/terms_of_service.html:14
-
 msgid "Use License"
 msgstr "사용 라이선스"
 
 #: templates/pages/terms_of_service.html:15
-
-msgid "Permission is granted to temporarily download one copy of the materials on Vang Vieng Stay's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title."
-msgstr "방비엥 스테이 웹사이트의 자료를 개인적이고 비상업적인 일시적 viewing 용도로 한 부를 일시적으로 다운로드할 수 있는 권한이 부여됩니다. 이는 라이선스의 부여이지 소유권의 양도가 아닙니다."
+msgid ""
+"Permission is granted to temporarily download one copy of the materials on "
+"Vang Vieng Stay's website for personal, non-commercial transitory viewing "
+"only. This is the grant of a license, not a transfer of title."
+msgstr ""
+"방비엥 스테이 웹사이트의 자료를 개인적이고 비상업적인 일시적 viewing 용도로 한 부를 일시적으로 다운로드할 수 있는 권한이 "
+"부여됩니다. 이는 라이선스의 부여이지 소유권의 양도가 아닙니다."
 
 #: templates/pages/terms_of_service.html:19
-
 msgid "Disclaimer"
 msgstr "면책 조항"
 
 #: templates/pages/terms_of_service.html:20
-
-msgid "The materials on Vang Vieng Stay's website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property."
-msgstr "방비엥 스테이 웹사이트의 자료는 '있는 그대로' 제공됩니다. 명시적이거나 묵시적인 보증을 하지 않으며, 여기에는 상품성, 특정 목적에의 적합성 또는 지적 재산권 비침해에 대한 묵시적 보증 또는 조건을 포함하되 이에 국한되지 않는 모든 기타 보증을 명시적으로 부인하고 무효화합니다."
+msgid ""
+"The materials on Vang Vieng Stay's website are provided on an 'as is' basis."
+" We make no warranties, expressed or implied, and hereby disclaim and negate"
+" all other warranties including, without limitation, implied warranties or "
+"conditions of merchantability, fitness for a particular purpose, or non-"
+"infringement of intellectual property."
+msgstr ""
+"방비엥 스테이 웹사이트의 자료는 '있는 그대로' 제공됩니다. 명시적이거나 묵시적인 보증을 하지 않으며, 여기에는 상품성, 특정 목적에의 "
+"적합성 또는 지적 재산권 비침해에 대한 묵시적 보증 또는 조건을 포함하되 이에 국한되지 않는 모든 기타 보증을 명시적으로 부인하고 "
+"무효화합니다."
 
 #: templates/pages/terms_of_service.html:24
-
 msgid "Limitations"
 msgstr "제한"
 
 #: templates/pages/terms_of_service.html:25
-
-msgid "In no event shall Vang Vieng Stay or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website, even if we have been notified orally or in writing of the possibility of such damage."
-msgstr "어떠한 경우에도 방비엥 스테이 또는 공급자는 당사 웹사이트 자료의 사용 또는 사용 불능으로 인해 발생하는 어떠한 손해(데이터 또는 이익 손실, 사업 중단으로 인한 손해를 포함하되 이에 국한되지 않음)에 대해 책임을 지지 않습니다. 구두 또는 서면으로 그러한 손해의 가능성을 통보받은 경우에도 마찬가지입니다."
+msgid ""
+"In no event shall Vang Vieng Stay or its suppliers be liable for any damages"
+" (including, without limitation, damages for loss of data or profit, or due "
+"to business interruption) arising out of the use or inability to use the "
+"materials on our website, even if we have been notified orally or in writing"
+" of the possibility of such damage."
+msgstr ""
+"어떠한 경우에도 방비엥 스테이 또는 공급자는 당사 웹사이트 자료의 사용 또는 사용 불능으로 인해 발생하는 어떠한 손해(데이터 또는 이익 "
+"손실, 사업 중단으로 인한 손해를 포함하되 이에 국한되지 않음)에 대해 책임을 지지 않습니다. 구두 또는 서면으로 그러한 손해의 가능성을"
+" 통보받은 경우에도 마찬가지입니다."
 
 #: templates/pages/terms_of_service.html:29
-
 msgid "Bookings & Payments"
 msgstr "예약 및 결제"
 
 #: templates/pages/terms_of_service.html:30
-
-msgid "All bookings are subject to availability and confirmation by the property owner or service provider. Prices are listed in Lao Kip (LAK) and are subject to change without notice."
-msgstr "모든 예약은 숙소 소유자 또는 서비스 제공자의 이용 가능 여부와 확인에 따라 달라집니다. 가격은 라오스 킵(LAK)으로 표시되며 예고 없이 변경될 수 있습니다."
+msgid ""
+"All bookings are subject to availability and confirmation by the property "
+"owner or service provider. Prices are listed in Lao Kip (LAK) and are "
+"subject to change without notice."
+msgstr ""
+"모든 예약은 숙소 소유자 또는 서비스 제공자의 이용 가능 여부와 확인에 따라 달라집니다. 가격은 라오스 킵(LAK)으로 표시되며 예고 "
+"없이 변경될 수 있습니다."
 
 #: templates/pages/terms_of_service.html:35
-
 msgid "If you have any questions about these Terms of Service, please"
 msgstr "본 서비스 약관에 대해 질문이 있으시면"
 
 #: templates/pages/terms_of_service.html:35
-
 msgid "contact us"
 msgstr "문의해 주세요"
 
 #: templates/registration/login.html:11
-
 msgid "Welcome Back"
 msgstr "다시 오신 것을 환영합니다"
 
 #: templates/registration/login.html:14
-
 msgid "Sign in to manage your bookings and properties."
 msgstr "예약과 숙소를 관리하려면 로그인하세요."
 
 #: templates/registration/login.html:24
-
 msgid "Invalid username or password. Please try again."
 msgstr "잘못된 사용자 이름 또는 비밀번호입니다. 다시 시도해 주세요."
 
 #: templates/registration/login.html:31
-
 msgid "Username or Email"
 msgstr "사용자 이름 또는 이메일"
 
 #: templates/registration/login.html:32
-
 msgid "Enter your username"
 msgstr "사용자 이름을 입력하세요"
 
 #: templates/registration/login.html:35 templates/registration/signup.html:57
-
 msgid "Password"
 msgstr "비밀번호"
 
 #: templates/registration/login.html:36
-
 msgid "Enter your password"
 msgstr "비밀번호를 입력하세요"
 
 #: templates/registration/login.html:46
-
 msgid "Remember me"
 msgstr "로그인 상태 유지"
 
 #: templates/registration/login.html:51
-
 msgid "Forgot your password?"
 msgstr "비밀번호를 잊으셨나요?"
 
 #: templates/registration/login.html:58
-
 msgid "Sign in"
 msgstr "로그인"
 
 #: templates/registration/signup.html:11
-
 msgid "Create Your Account"
 msgstr "계정 만들기"
 
 #: templates/registration/signup.html:14
-
 msgid "Join Vang Vieng Stay and start managing your properties."
 msgstr "방비엥 스테이에 가입하고 숙소 관리를 시작하세요."
 
 #: templates/registration/signup.html:26
-
 msgid "Please correct the errors below:"
 msgstr "아래 오류를 수정해 주세요:"
 
 #: templates/registration/signup.html:46
-
 msgid "Username"
 msgstr "사용자 이름"
 
 #: templates/registration/signup.html:51
-
 msgid "Choose a username"
 msgstr "사용자 이름을 선택하세요"
 
 #: templates/registration/signup.html:52
-
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "필수. 150자 이하. 문자, 숫자 및 @/./+/-/_만 사용 가능."
 
 #: templates/registration/signup.html:61
-
 msgid "Create a password"
 msgstr "비밀번호 만들기"
 
 #: templates/registration/signup.html:66
-
 msgid "Confirm Password"
 msgstr "비밀번호 확인"
 
 #: templates/registration/signup.html:70
-
 msgid "Confirm your password"
 msgstr "비밀번호를 확인하세요"
 
 #: templates/registration/signup.html:76
-
 msgid "Create Account"
 msgstr "계정 만들기"
 
 #: templates/registration/signup.html:81
-
 msgid "Already have an account?"
 msgstr "이미 계정이 있으신가요?"
 
 #: templates/registration/signup.html:83
-
 msgid "Log in"
 msgstr "로그인"
 
 #: tours/templates/tours/book_tour.html:15
-
 msgid "Book Your Tour"
 msgstr "투어 예약하기"
 
 #: tours/templates/tours/book_tour.html:18
 #: tours/templates/tours/tour_list.html:177
-
 msgid "Departs"
 msgstr "출발"
 
 #: tours/templates/tours/book_tour.html:26
 #: tours/templates/tours/tour_list.html:50
-
 msgid "Tour Date"
 msgstr "투어 날짜"
 
 #: tours/templates/tours/book_tour.html:33
-
 msgid "Number of People"
 msgstr "인원 수"
 
 #: tours/templates/tours/book_tour.html:35
-
 msgid "Maximum"
 msgstr "최대"
 
 #: tours/templates/tours/book_tour.html:35
-
 msgid "people per tour"
 msgstr "투어당 인원"
 
 #: tours/templates/tours/book_tour.html:43
-
 msgid "Pickup Arrangements"
 msgstr "픽업 안내"
 
 #: tours/templates/tours/book_tour.html:48
-
 msgid "How will you get to the tour?"
 msgstr "투어 장소까지 어떻게 가시겠습니까?"
 
 #: tours/templates/tours/book_tour.html:65
-
 msgid "Your Pickup Location"
 msgstr "픽업 장소"
 
 #: tours/templates/tours/book_tour.html:68
-
 msgid "Please include your guesthouse name and any helpful landmarks."
 msgstr "게스트하우스 이름과 유용한 랜드마크를 포함해 주세요."
 
 #: tours/templates/tours/book_tour.html:77
-
 msgid "Please provide at least one way for the tour operator to contact you."
 msgstr "투어 운영자가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
 #: tours/templates/tours/book_tour.html:109
-
 msgid "based on the official daily exchange rate on the day of your tour."
 msgstr "투어 당일 공식 일일 환율을 기준으로 합니다."
 
 #: tours/templates/tours/tour_detail.html:15
-
 msgid "Back to all tours"
 msgstr "모든 투어 목록으로 돌아가기"
 
 #: tours/templates/tours/tour_detail.html:52
-
 msgid "Open Tour Office in Google Maps"
 msgstr "Google Maps에서 투어 사무실 열기"
 
 #: tours/templates/tours/tour_detail.html:59
-
 msgid "Exact office map location will be provided upon booking confirmation."
 msgstr "정확한 사무실 지도 위치는 예약 확인 시 제공됩니다."
 
 #: tours/templates/tours/tour_detail.html:75
-
 msgid "Departs daily at"
 msgstr "매일 출발 시간"
 
 #: tours/templates/tours/tour_detail.html:81
 #: tours/templates/tours/tour_list.html:70
 #: tours/templates/tours/tour_list.html:183
-
 msgid "Max"
 msgstr "최대"
 
 #: tours/templates/tours/tour_detail.html:81
-
 msgid "people"
 msgstr "명"
 
 #: tours/templates/tours/tour_detail.html:102
-
 msgid "Tour Availability (Next 30 Days)"
 msgstr "투어 이용 가능 여부 (향후 30일)"
 
 #: tours/templates/tours/tour_detail.html:107
-
 msgid "spots available"
 msgstr "자리 이용 가능"
 
 #: tours/templates/tours/tour_detail.html:112
-
 msgid "left"
 msgstr "남음"
 
 #: tours/templates/tours/tour_detail.html:114
-
 msgid "Full"
 msgstr "마감"
 
 #: tours/templates/tours/tour_detail.html:123
-
 msgid "Book This Tour"
 msgstr "이 투어 예약하기"
 
 #: tours/templates/tours/tour_detail.html:131
-
 msgid "Guest Reviews"
 msgstr "고객 리뷰"
 
 #: tours/templates/tours/tour_detail.html:169
-
 msgid "No reviews yet. Be the first to review this tour!"
 msgstr "아직 리뷰가 없습니다. 이 투어의 첫 번째 리뷰어가 되세요!"
 
 #: tours/templates/tours/tour_list.html:31
-
 msgid "Discover Unforgettable Tours"
 msgstr "잊을 수 없는 투어 발견하기"
 
 #: tours/templates/tours/tour_list.html:32
-
 msgid "Explore Vang Vieng with expert local guides and unique experiences"
 msgstr "전문 현지 가이드와 독특한 경험으로 방비엥 탐험"
 
 #: tours/templates/tours/tour_list.html:42
 #: tours/templates/tours/tour_list.html:95
-
 msgid "Search Tours"
 msgstr "투어 검색"
 
 #: tours/templates/tours/tour_list.html:45
-
 msgid "e.g., Kayaking, Cave, Hot Air Balloon..."
 msgstr "예: 카약, 동굴, 열기구..."
 
 #: tours/templates/tours/tour_list.html:61
-
 msgid "Min Price"
 msgstr "최저 가격"
 
 #: tours/templates/tours/tour_list.html:63
-
 msgid "Min"
 msgstr "최저"
 
 #: tours/templates/tours/tour_list.html:68
-
 msgid "Max Price"
 msgstr "최고 가격"
 
 #: tours/templates/tours/tour_list.html:78
-
 msgid "Any"
 msgstr "모두"
 
 #: tours/templates/tours/tour_list.html:109
-
 msgid "Tours Found"
 msgstr "찾은 투어"
 
 #: tours/templates/tours/tour_list.html:111
-
 msgid "No Results"
 msgstr "결과 없음"
 
 #: tours/templates/tours/tour_list.html:201
-
 msgid "View Office on Map"
 msgstr "지도에서 사무실 보기"
 
 #: tours/templates/tours/tour_list.html:206
-
 msgid "Map pending"
 msgstr "지도 대기 중"
 
 #: tours/templates/tours/tour_list.html:213
-
 msgid "View Details & Book"
 msgstr "상세 정보 보기 및 예약"
 
 #: tours/templates/tours/tour_list.html:224
-
 msgid "No tours found"
 msgstr "투어를 찾을 수 없습니다"
 
 #: tours/templates/tours/tour_list.html:225
-
 msgid "Try adjusting your search filters or dates"
 msgstr "검색 필터나 날짜를 조정해 보세요"
 
 #: tours/templates/tours/tour_list.html:227
-
 msgid "Clear All Filters"
 msgstr "모든 필터 지우기"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:252
 #: trip_planner/templates/trip_planner/trip_plan.html:422
-
 msgid "Plan My Perfect Vang Vieng Trip"
 msgstr "완벽한 방비엥 여행 계획하기"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:253
 #: trip_planner/templates/trip_planner/trip_plan.html:423
-
-msgid "Tell us your vibe — our local team will craft a personalized itinerary just for you."
+msgid ""
+"Tell us your vibe — our local team will craft a personalized itinerary just "
+"for you."
 msgstr "당신의 스타일을 알려주세요. 현지 팀이 맞춤형 일정을 만들어 드립니다."
 
 #: trip_planner/templates/trip_planner/trip_plan.html:272
 #: trip_planner/templates/trip_planner/trip_plan.html:445
-
 msgid "👋 Tell us about yourself"
 msgstr "👋 본인에 대해 알려주세요"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:278
 #: trip_planner/templates/trip_planner/trip_plan.html:451
-
 msgid "Enter your full name"
 msgstr "전체 이름을 입력하세요"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:295
 #: trip_planner/templates/trip_planner/trip_plan.html:468
-
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:305
 #: trip_planner/templates/trip_planner/trip_plan.html:478
-
 msgid "Provide at least one way for us to reach you."
 msgstr "당사에게 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
 #: trip_planner/templates/trip_planner/trip_plan.html:311
 #: trip_planner/templates/trip_planner/trip_plan.html:484
-
 msgid "📅 Your trip details"
 msgstr "📅 여행 세부 정보"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:315
 #: trip_planner/templates/trip_planner/trip_plan.html:488
-
 msgid "Arrival Date"
 msgstr "도착 날짜"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:323
 #: trip_planner/templates/trip_planner/trip_plan.html:496
-
 msgid "Departure Date"
 msgstr "출발 날짜"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:333
 #: trip_planner/templates/trip_planner/trip_plan.html:506
-
 msgid "Group Size"
 msgstr "그룹 인원"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:345
 #: trip_planner/templates/trip_planner/trip_plan.html:518
-
 msgid "✨ What sounds most exciting?"
 msgstr "✨ 어떤 것이 가장 기대되시나요?"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:369
 #: trip_planner/templates/trip_planner/trip_plan.html:542
-
 msgid "💰 Your preferences"
 msgstr "💰 선호도"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:372
 #: trip_planner/templates/trip_planner/trip_plan.html:545
-
 msgid "Budget Level"
 msgstr "예산 수준"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:375
 #: trip_planner/templates/trip_planner/trip_plan.html:548
-
 msgid "Budget-friendly"
 msgstr "저렴한"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:378
 #: trip_planner/templates/trip_planner/trip_plan.html:551
-
 msgid "Mid-range"
 msgstr "중간"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:381
 #: trip_planner/templates/trip_planner/trip_plan.html:554
-
 msgid "Premium"
 msgstr "고급"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:387
 #: trip_planner/templates/trip_planner/trip_plan.html:560
-
 msgid "Anything special we should know?"
 msgstr "특별히 알아야 할 사항이 있으신가요?"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:389
 #: trip_planner/templates/trip_planner/trip_plan.html:562
-
-msgid "Dietary needs, accessibility, celebrations, hidden gems you want to see..."
+msgid ""
+"Dietary needs, accessibility, celebrations, hidden gems you want to see..."
 msgstr "식단 요구 사항, 접근성, 기념일, 보고 싶은 숨겨진 명소 등..."
 
 #: trip_planner/templates/trip_planner/trip_plan.html:395
 #: trip_planner/templates/trip_planner/trip_plan.html:568
-
 msgid "Send My Trip Request"
 msgstr "여행 계획 요청 보내기"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:402
 #: trip_planner/templates/trip_planner/trip_plan.html:575
-
 msgid "Free service"
 msgstr "무료 서비스"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:406
 #: trip_planner/templates/trip_planner/trip_plan.html:579
-
 msgid "No commitment"
 msgstr "약속 없음"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:410
 #: trip_planner/templates/trip_planner/trip_plan.html:583
-
 msgid "Reply within 24h"
 msgstr "24시간 내 답변"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:59
-
 msgid "Trip Request Received!"
 msgstr "여행 계획 요청이 접수되었습니다!"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:67
-
 msgid "Thank you!"
 msgstr "감사합니다!"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:69
-
-msgid "Our local team is already crafting your personalized Vang Vieng itinerary."
+msgid ""
+"Our local team is already crafting your personalized Vang Vieng itinerary."
 msgstr "현지 팀이 이미 맞춤형 방비엥 일정을 준비하고 있습니다."
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:73
-
 msgid "What happens next?"
 msgstr "다음 단계는 무엇인가요?"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:75
-
 msgid "We'll get back to you within 24 hours with a custom plan and pricing."
 msgstr "24시간 이내에 맞춤형 계획과 가격으로 답변드리겠습니다."
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:82
-
 msgid "Need us sooner? WhatsApp us directly:"
 msgstr "더 빨리 필요하신가요? WhatsApp으로 직접 연락주세요:"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:85
-
 msgid "Chat on WhatsApp"
 msgstr "WhatsApp으로 채팅하기"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
-
 msgid "Back to Homepage"
 msgstr "홈페이지로 돌아가기"
