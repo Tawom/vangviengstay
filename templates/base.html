@@ -194,7 +194,7 @@
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button type="button" id="mobile-menu-btn" aria-label="{% trans 'Toggle menu' %}" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
+                    <button type="button" id="mobile-menu-btn" aria-label="{% trans 'Toggle menu' %}" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -341,6 +341,28 @@
 
     {% block extra_js %}{% endblock %}
 
+    <!-- Mobile Menu Toggle Logic -->
+    <script>
+        (function () {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenuBtn || !mobileMenu) return;
+
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', function () {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden', isOpen);
+                mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
+
+                if (icon) {
+                    icon.classList.toggle('fa-bars', isOpen);
+                    icon.classList.toggle('fa-xmark', !isOpen);
+                }
+            });
+        })();
+    </script>
+
     <!-- ========================================== -->
     <!-- AI ASSISTANT CHAT WIDGET (OLD VERSION - Bottom Right) -->
     <!-- ========================================== -->
@@ -432,6 +454,7 @@
         </div>
     </div>
 
+    
     <!-- Chat Widget Logic -->
     <script>
         let isChatOpen = false;
