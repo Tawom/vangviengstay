@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block extra_css %}
+<style>
+    .success-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 5rem 0;
+        text-align: center;
+    }
+    
+    .success-icon {
+        font-size: 5rem;
+        margin-bottom: 2rem;
+        animation: bounce 1s ease infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .success-card {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        margin-top: -3rem;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .whatsapp-link {
+        display: inline-block;
+        background: #25D366;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .whatsapp-link:hover {
+        background: #20ba5a;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="success-hero">
+    <div class="container">
+        <div class="success-icon">🌟</div>
+        <h1 class="display-4 fw-bold">{% trans "Trip Request Received!" %}</h1>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="success-card text-center">
+                <h2 class="fw-bold mb-3">{% trans "Thank you!" %}</h2>
+                <p class="lead text-muted mb-4">
+                    {% trans "Our local team is already crafting your personalized Vang Vieng itinerary." %}
+                </p>
+                
+                <div class="bg-light rounded-3 p-4 mb-4">
+                    <p class="mb-2"><strong>{% trans "What happens next?" %}</strong></p>
+                    <p class="text-muted mb-0">
+                        {% trans "We'll get back to you within 24 hours with a custom plan and pricing." %}
+                    </p>
+                </div>
+
+                <hr class="my-4">
+                
+                <p class="text-muted">
+                    {% trans "Need us sooner? WhatsApp us directly:" %}
+                </p>
+                <a href="https://wa.me/8562097925169" class="whatsapp-link">
+                    💬 {% trans "Chat on WhatsApp" %}
+                </a>
+                
+                <div class="mt-4">
+                    <a href="/" class="btn btn-outline-primary btn-lg">
+                        {% trans "Back to Homepage" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
