@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'ai_assistant',
     'analytics',
     'inquiry',
+    'trip_planner',
 ]
 # Add REST Framework settings at the bottom of the file
 REST_FRAMEWORK = {
@@ -231,13 +232,18 @@ CORS_ALLOW_ALL_ORIGINS = True
 # ==========================================
 # EMAIL CONFIGURATION (Resend)
 # ==========================================
-DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
+
+# Use Resend's pre-verified sandbox domain for 100% reliable delivery.
+# (You can safely change this to noreply@vangviengstay.com later, 
+# but ONLY after you add the DNS records in your Resend dashboard).
+DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <onboarding@resend.dev>'
 
 if DEBUG:
-    # ✅ DEVELOPMENT (Mac): Print emails to terminal (no real emails sent)
+    # ✅ DEVELOPMENT (Mac): Print emails to the terminal. 
+    # No real emails are sent. Look at your terminal output to find the verification link!
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    # 🚀 PRODUCTION (Server): Use Resend HTTP API (Bypasses DO port blocks)
-    # Note: This requires the 'resend_backend.py' file we created on the server!
+    # 🚀 PRODUCTION (Server): Use Resend HTTP API to bypass DigitalOcean port blocks.
     EMAIL_BACKEND = 'advisor.resend_backend.ResendBackend'
-    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY')
+    EMAIL_HOST_USER = 'resend'
+    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY', '')
