@@ -29,8 +29,13 @@
                     
                     <!-- Image -->
                     <div class="h-56 bg-gray-200 relative overflow-hidden">
-                        {% if buggy.main_image_url %}
-                            <img src="{{ buggy.main_image_url }}" alt="{{ buggy.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        {% if buggy.image_url %}
+                            <img 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" 
+                                data-src="{{ buggy.image_url }}" 
+                                alt="{{ buggy.name }}" 
+                                loading="lazy" 
+                                class="lazy-load w-full h-64 md:h-96 object-cover">
                         {% else %}
                             <div class="flex items-center justify-center h-full text-gray-400 bg-[#9333EA]/10">
                                 <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
