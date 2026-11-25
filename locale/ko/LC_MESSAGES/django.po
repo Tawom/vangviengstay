@@ -260,7 +260,8 @@ msgstr "예약하려면 로그인"
 #: buggy/templates/buggy/buggy_detail.html:192
 #: motorbike/templates/motorbike/motorbike_detail.html:174
 msgid "You won't be charged yet. The owner will verify availability first."
-msgstr "아직 요금이 청구되지 않습니다. 소유자가 먼저 이용 가능 여부를 확인합니다."
+msgstr ""
+"아직 요금이 청구되지 않습니다. 소유자가 먼저 이용 가능 여부를 확인합니다."
 
 #: buggy/templates/buggy/buggy_list.html:5
 msgid "Buggy Cars for Rent"
@@ -818,7 +819,8 @@ msgstr "도착 시 이용 가능한 객실에 따라 배정됩니다."
 #: guesthouse/templates/guesthouse/book.html:89
 msgid ""
 "Please provide at least one way for the guesthouse owner to contact you."
-msgstr "게스트하우스 소유자가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
+msgstr ""
+"게스트하우스 소유자가 연락할 수 있는 방법을 최소 한 가지 제공해 주세요."
 
 #: guesthouse/templates/guesthouse/book.html:94
 #: inquiry/templates/inquiry/inquiry.html:42
@@ -899,10 +901,12 @@ msgstr "방비엥 스테이"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
 msgid ""
-"By accessing our website and using our booking services, you agree to comply"
-" with and be bound by the following terms and conditions. Please read them "
+"By accessing our website and using our booking services, you agree to comply "
+"with and be bound by the following terms and conditions. Please read them "
 "carefully."
-msgstr "웹사이트에 접속하고 예약 서비스를 사용함으로써 다음 이용약관을 준수하고 구속되는 데 동의합니다. 주의해서 읽어주세요."
+msgstr ""
+"웹사이트에 접속하고 예약 서비스를 사용함으로써 다음 이용약관을 준수하고 구속"
+"되는 데 동의합니다. 주의해서 읽어주세요."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:20
 msgid "1. Platform Role"
@@ -914,8 +918,8 @@ msgid ""
 "travelers with independent local business owners in Vang Vieng, Laos. We "
 "facilitate bookings for"
 msgstr ""
-"Vang Vieng Stay는 라오스 방비엥의 독립적인 현지 사업주와 여행자를 연결하는 중개 예약 플랫폼으로서만 활동합니다. 당사는 "
-"다음에 대한 예약을 지원합니다:"
+"Vang Vieng Stay는 라오스 방비엥의 독립적인 현지 사업주와 여행자를 연결하는 중"
+"개 예약 플랫폼으로서만 활동합니다. 당사는 다음에 대한 예약을 지원합니다:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
@@ -924,9 +928,9 @@ msgstr "게스트하우스, 투어, 현지 가이드, 오토바이 대여 및 �
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
-"We do not own, manage, or operate these services. The actual service "
-"provider"
-msgstr "당사는 이러한 서비스를 소유, 관리 또는 운영하지 않습니다. 실제 서비스 제공자"
+"We do not own, manage, or operate these services. The actual service provider"
+msgstr ""
+"당사는 이러한 서비스를 소유, 관리 또는 운영하지 않습니다. 실제 서비스 제공자"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
@@ -955,7 +959,9 @@ msgstr "아니며,"
 msgid ""
 "guarantee a reservation. It initiates a 'Booking Request' which is sent to "
 "the Owner for availability verification."
-msgstr "예약을 보장하지 않습니다. 이는 소유자가 이용 가능 여부를 확인할 수 있도록 '예약 요청'을 시작합니다."
+msgstr ""
+"예약을 보장하지 않습니다. 이는 소유자가 이용 가능 여부를 확인할 수 있도록 '예"
+"약 요청'을 시작합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
 msgid "Confirmation:"
@@ -973,7 +979,9 @@ msgstr "확인됨"
 msgid ""
 "once the Owner approves the request and you receive a final Confirmation "
 "Voucher via email."
-msgstr "소유자가 요청을 승인하고 이메일로 최종 확인 바우처를 받은 경우에만 확정된 것으로 간주됩니다."
+msgstr ""
+"소유자가 요청을 승인하고 이메일로 최종 확인 바우처를 받은 경우에만 확정된 것"
+"으로 간주됩니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:29
 msgid "Declined Requests:"
@@ -1027,12 +1035,13 @@ msgstr "가격:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:37
 msgid ""
-"All prices displayed on the platform are estimates in LAK and are subject to"
-" change based on the Owner's current rates. The final price agreed upon with"
-" the Owner at the time of pickup/check-in is the binding price."
+"All prices displayed on the platform are estimates in LAK and are subject to "
+"change based on the Owner's current rates. The final price agreed upon with "
+"the Owner at the time of pickup/check-in is the binding price."
 msgstr ""
-"플랫폼에 표시된 모든 가격은 LAK 추정치이며 소유자의 현재 요율에 따라 변경될 수 있습니다. 수령/체크인 시 소유자와 합의한 최종 "
-"가격이 구속력 있는 가격입니다."
+"플랫폼에 표시된 모든 가격은 LAK 추정치이며 소유자의 현재 요율에 따라 변경될 "
+"수 있습니다. 수령/체크인 시 소유자와 합의한 최종 가격이 구속력 있는 가격입니"
+"다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:38
 msgid "Security Deposits (Vehicles): "
@@ -1045,8 +1054,9 @@ msgid ""
 "Owner at the time of pickup. This deposit/ID will be returned upon the safe "
 "return of the vehicle."
 msgstr ""
-"오토바이 및 버기카 대여의 경우, 수령 시 소유자가 현금 보증금 및/또는 유효한 여권 또는 정부 발급 신분증의 실물 제출을 요구합니다. "
-"이 보증금/신분증은 차량을 안전하게 반납할 때 반환됩니다."
+"오토바이 및 버기카 대여의 경우, 수령 시 소유자가 현금 보증금 및/또는 유효한 "
+"여권 또는 정부 발급 신분증의 실물 제출을 요구합니다. 이 보증금/신분증은 차량"
+"을 안전하게 반납할 때 반환됩니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:43
 msgid "4. Cancellations"
@@ -1060,7 +1070,8 @@ msgstr "대기 중인 요청: "
 msgid ""
 "You may cancel any pending booking request instantly via your dashboard at "
 "no charge."
-msgstr "대시보드를 통해 수수료가 없이 대기 중인 예약 요청을 즉시 취소할 수 있습니다."
+msgstr ""
+"대시보드를 통해 수수료가 없이 대기 중인 예약 요청을 즉시 취소할 수 있습니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:46
 msgid "Confirmed Bookings: "
@@ -1073,8 +1084,9 @@ msgid ""
 "security deposit for vehicle rentals or late cancellation fees for "
 "guesthouses, are determined solely by the individual Owner."
 msgstr ""
-"확인된 예약을 취소해야 하는 경우 소유자에게 직접 연락해야 합니다. 차량 대여 보증금 몰수 가능성이나 게스트하우스의 늦은 취소 수수료 "
-"등을 포함한 취소 정책은 개별 소유자가 전적으로 결정합니다."
+"확인된 예약을 취소해야 하는 경우 소유자에게 직접 연락해야 합니다. 차량 대여 "
+"보증금 몰수 가능성이나 게스트하우스의 늦은 취소 수수료 등을 포함한 취소 정책"
+"은 개별 소유자가 전적으로 결정합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:51
 msgid "5. User Responsibilities & Safety"
@@ -1088,7 +1100,9 @@ msgstr "신분증: "
 msgid ""
 "You must present a valid Passport or Government ID and your Booking Voucher "
 "(digital or printed) upon check-in or vehicle pickup."
-msgstr "체크인 또는 차량 수령 시 유효한 여권 또는 정부 발급 신분증과 예약 바우처(디지털 또는 인쇄본)를 제시해야 합니다."
+msgstr ""
+"체크인 또는 차량 수령 시 유효한 여권 또는 정부 발급 신분증과 예약 바우처(디지"
+"털 또는 인쇄본)를 제시해야 합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
 msgid "Vehicle Rentals: "
@@ -1097,12 +1111,13 @@ msgstr "차량 대여: "
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
 msgid ""
 "For Motorbikes and Buggy Cars, the renter must possess a valid, legally "
-"recognized driver's license for Laos. You are fully responsible for the safe"
-" operation of the vehicle, adhering to local traffic laws, and wearing "
+"recognized driver's license for Laos. You are fully responsible for the safe "
+"operation of the vehicle, adhering to local traffic laws, and wearing "
 "appropriate safety gear (e.g., helmets)."
 msgstr ""
-"오토바이 및 버기카의 경우, 대여자는 라오스에서 법적으로 인정되는 유효한 운전면허증을 소지해야 합니다. 차량의 안전한 운행, 현지 교통 "
-"법규 준수 및 적절한 안전 장비(예: 헬멧) 착용에 대한 전적인 책임은 사용자에게 있습니다."
+"오토바이 및 버기카의 경우, 대여자는 라오스에서 법적으로 인정되는 유효한 운전"
+"면허증을 소지해야 합니다. 차량의 안전한 운행, 현지 교통 법규 준수 및 적절한 "
+"안전 장비(예: 헬멧) 착용에 대한 전적인 책임은 사용자에게 있습니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:55
 msgid "Property Respect: "
@@ -1112,7 +1127,8 @@ msgstr "재산 존중: "
 msgid ""
 "You agree to respect the property, staff, and local regulations of the "
 "service providers."
-msgstr "귀하는 서비스 제공자의 재산, 직원 및 현지 규정을 존중하기로 동의합니다."
+msgstr ""
+"귀하는 서비스 제공자의 재산, 직원 및 현지 규정을 존중하기로 동의합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:60
 msgid "6. Limitation of Liability"
@@ -1121,15 +1137,17 @@ msgstr "6. 책임의 한계"
 #: guesthouse/templates/guesthouse/terms_of_service.html:61
 msgid ""
 "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable "
-"for any indirect, incidental, or consequential damages arising from your use"
-" of the platform or the services booked. This includes, but is not limited "
+"for any indirect, incidental, or consequential damages arising from your use "
+"of the platform or the services booked. This includes, but is not limited "
 "to, traffic accidents, vehicle damage, personal injuries during tours, "
 "theft, or travel disruptions. All risks associated with the use of rented "
 "vehicles and participation in tours are assumed entirely by the user."
 msgstr ""
-"법률이 허용하는 최대 범위 내에서, Vang Vieng Stay는 플랫폼 또는 예약된 서비스 사용으로 인해 발생하는 간접적, 우발적 또는"
-" 결과적 손해에 대해 책임지지 않습니다. 여기에는 교통 사고, 차량 손상, 투어 중 개인 부상, 도난 또는 여행 차질이 포함되지만 이에 "
-"국한되지 않습니다. 대여 차량 사용 및 투어 참여와 관련된 모든 위험은 전적으로 사용자가 부담합니다."
+"법률이 허용하는 최대 범위 내에서, Vang Vieng Stay는 플랫폼 또는 예약된 서비"
+"스 사용으로 인해 발생하는 간접적, 우발적 또는 결과적 손해에 대해 책임지지 않"
+"습니다. 여기에는 교통 사고, 차량 손상, 투어 중 개인 부상, 도난 또는 여행 차질"
+"이 포함되지만 이에 국한되지 않습니다. 대여 차량 사용 및 투어 참여와 관련된 모"
+"든 위험은 전적으로 사용자가 부담합니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:65
 msgid "7. Governing Law"
@@ -1142,8 +1160,9 @@ msgid ""
 "terms or the services booked shall be subject to the exclusive jurisdiction "
 "of the local authorities and courts in Vientiane, Laos."
 msgstr ""
-"본 약관은 라오스 인민 민주 공화국의 법률에 따라 규율되고 해석됩니다. 본 약관 또는 예약된 서비스에서 발생하는 모든 분쟁은 라오스 "
-"비엔티안의 현지 당국 및 법원의 전속 관할에 따릅니다."
+"본 약관은 라오스 인민 민주 공화국의 법률에 따라 규율되고 해석됩니다. 본 약관 "
+"또는 예약된 서비스에서 발생하는 모든 분쟁은 라오스 비엔티안의 현지 당국 및 법"
+"원의 전속 관할에 따릅니다."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
 msgid "Questions? "
@@ -1151,9 +1170,11 @@ msgstr "질문이 있으신가요? "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
 msgid ""
-"If you have any questions about these Terms of Service or your data privacy,"
-" please contact us at"
-msgstr "본 서비스 약관 또는 데이터 개인정보 보호에 대해 질문이 있으시면 다음으로 연락해 주세요:"
+"If you have any questions about these Terms of Service or your data privacy, "
+"please contact us at"
+msgstr ""
+"본 서비스 약관 또는 데이터 개인정보 보호에 대해 질문이 있으시면 다음으로 연락"
+"해 주세요:"
 
 #: guides/templates/guides/book_guide.html:11
 msgid "Back to guide profile"
@@ -1191,7 +1212,9 @@ msgstr "예: 방비엥 센트럴 롯지 또는 버스 정류장 근처"
 msgid ""
 "Your guide will meet you here. You can share a live location via WhatsApp "
 "later."
-msgstr "가이드가 여기서 만날 것입니다. 나중에 WhatsApp으로 실시간 위치를 공유할 수 있습니다."
+msgstr ""
+"가이드가 여기서 만날 것입니다. 나중에 WhatsApp으로 실시간 위치를 공유할 수 있"
+"습니다."
 
 #: guides/templates/guides/book_guide.html:63
 msgid "Please provide at least one way for the guide to contact you."
@@ -1216,7 +1239,8 @@ msgid ""
 "safe routes, and best local food? Our certified local guides have you "
 "covered."
 msgstr ""
-"자신의 오토바이를 빌리지만 숨겨진 폭포, 안전한 경로, 최고의 현지 음식을 보여줄 사람이 필요합니까? 인증된 현지 가이드가 도와드립니다."
+"자신의 오토바이를 빌리지만 숨겨진 폭포, 안전한 경로, 최고의 현지 음식을 보여"
+"줄 사람이 필요합니까? 인증된 현지 가이드가 도와드립니다."
 
 #: guides/templates/guides/guide_list.html:23
 msgid "Available Guides"
@@ -1343,7 +1367,9 @@ msgstr "연락하기"
 msgid ""
 "Have a question? We'd love to hear from you. Send us a message and we'll "
 "respond within 24 hours."
-msgstr "질문이 있으신가요? 여러분의 의견을 듣고 싶습니다. 메시지를 보내주시면 24시간 이내에 답변드리겠습니다."
+msgstr ""
+"질문이 있으신가요? 여러분의 의견을 듣고 싶습니다. 메시지를 보내주시면 24시간 "
+"이내에 답변드리겠습니다."
 
 #: inquiry/templates/inquiry/inquiry.html:33
 #: trip_planner/templates/trip_planner/trip_plan.html:275
@@ -1361,7 +1387,8 @@ msgstr "메시지 보내기"
 
 #: inquiry/templates/inquiry/inquiry.html:84
 msgid "We respect your privacy. Your information will never be shared."
-msgstr "우리는 귀하의 개인정보를 존중합니다. 귀하의 정보는 절대 공유되지 않습니다."
+msgstr ""
+"우리는 귀하의 개인정보를 존중합니다. 귀하의 정보는 절대 공유되지 않습니다."
 
 #: inquiry/templates/inquiry/inquiry_success.html:10
 msgid "Message Sent Successfully!"
@@ -1371,7 +1398,8 @@ msgstr "메시지가 성공적으로 전송되었습니다!"
 msgid ""
 "Thank you for reaching out. We've received your message and sent a "
 "confirmation to your email."
-msgstr "연락해 주셔서 감사합니다. 메시지를 받았으며 이메일로 확인서를 보냈습니다."
+msgstr ""
+"연락해 주셔서 감사합니다. 메시지를 받았으며 이메일로 확인서를 보냈습니다."
 
 #: inquiry/templates/inquiry/inquiry_success.html:15
 msgid "Our team will review your inquiry and get back to you within 24 hours."
@@ -1423,7 +1451,9 @@ msgstr "부터"
 msgid ""
 "This action cannot be undone, and the motorbike will be released for others "
 "to book."
-msgstr "이 작업은 취소할 수 없으며 오토바이는 다른 사람이 예약할 수 있도록 해제됩니다."
+msgstr ""
+"이 작업은 취소할 수 없으며 오토바이는 다른 사람이 예약할 수 있도록 해제됩니"
+"다."
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
 msgid "Keep Rental"
@@ -1463,9 +1493,9 @@ msgstr "오토바이 대여하기"
 
 #: motorbike/templates/motorbike/motorbike_list.html:18
 msgid ""
-"Explore Vang Vieng at your own pace. Reliable motorbikes for every "
-"adventure."
-msgstr "자신의 속도로 방비엥을 탐험하세요. 모든 모험을 위한 신뢰할 수 있는 오토바이."
+"Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
+msgstr ""
+"자신의 속도로 방비엥을 탐험하세요. 모든 모험을 위한 신뢰할 수 있는 오토바이."
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
 msgid "Rental Type:"
@@ -1581,7 +1611,9 @@ msgstr "내 버기카 대여"
 msgid ""
 "Your trusted platform for local guesthouses, unforgettable tours, expert "
 "local guides, motorbike rentals, and buggy car adventures."
-msgstr "현지 게스트하우스, 잊을 수 없는 투어, 전문 현지 가이드, 오토바이 대여 및 버기카 모험을 위한 신뢰할 수 있는 플랫폼."
+msgstr ""
+"현지 게스트하우스, 잊을 수 없는 투어, 전문 현지 가이드, 오토바이 대여 및 버기"
+"카 모험을 위한 신뢰할 수 있는 플랫폼."
 
 #: templates/base.html:321
 msgid "Explore"
@@ -1615,7 +1647,9 @@ msgstr "AI 기반 도움말 • 온라인"
 msgid ""
 "Hi! 👋 I'm here to help with questions about bookings, policies and tours in "
 "Vang Vieng. What can I help you with?"
-msgstr "안녕하세요! 👋 방비엥의 예약, 정책 및 투어에 대한 질문을 도와드리겠습니다. 무엇을 도와드릴까요?"
+msgstr ""
+"안녕하세요! 👋 방비엥의 예약, 정책 및 투어에 대한 질문을 도와드리겠습니다. 무"
+"엇을 도와드릴까요?"
 
 #: templates/base.html:416
 msgid "Cancellation policy"
@@ -1638,7 +1672,8 @@ msgid ""
 "Welcome to Vang Vieng Stay. By accessing and using this website, you accept "
 "and agree to be bound by the terms and provisions of this agreement."
 msgstr ""
-"방비엥 스테이에 오신 것을 환영합니다. 이 웹사이트에 접속하고 사용함으로써 본 계약의 조항과 조건에 구속되는 것을 수락하고 동의합니다."
+"방비엥 스테이에 오신 것을 환영합니다. 이 웹사이트에 접속하고 사용함으로써 본 "
+"계약의 조항과 조건에 구속되는 것을 수락하고 동의합니다."
 
 #: templates/pages/terms_of_service.html:14
 msgid "Use License"
@@ -1650,8 +1685,9 @@ msgid ""
 "Vang Vieng Stay's website for personal, non-commercial transitory viewing "
 "only. This is the grant of a license, not a transfer of title."
 msgstr ""
-"방비엥 스테이 웹사이트의 자료를 개인적이고 비상업적인 일시적 viewing 용도로 한 부를 일시적으로 다운로드할 수 있는 권한이 "
-"부여됩니다. 이는 라이선스의 부여이지 소유권의 양도가 아닙니다."
+"방비엥 스테이 웹사이트의 자료를 개인적이고 비상업적인 일시적 viewing 용도로 "
+"한 부를 일시적으로 다운로드할 수 있는 권한이 부여됩니다. 이는 라이선스의 부여"
+"이지 소유권의 양도가 아닙니다."
 
 #: templates/pages/terms_of_service.html:19
 msgid "Disclaimer"
@@ -1659,15 +1695,16 @@ msgstr "면책 조항"
 
 #: templates/pages/terms_of_service.html:20
 msgid ""
-"The materials on Vang Vieng Stay's website are provided on an 'as is' basis."
-" We make no warranties, expressed or implied, and hereby disclaim and negate"
-" all other warranties including, without limitation, implied warranties or "
+"The materials on Vang Vieng Stay's website are provided on an 'as is' basis. "
+"We make no warranties, expressed or implied, and hereby disclaim and negate "
+"all other warranties including, without limitation, implied warranties or "
 "conditions of merchantability, fitness for a particular purpose, or non-"
 "infringement of intellectual property."
 msgstr ""
-"방비엥 스테이 웹사이트의 자료는 '있는 그대로' 제공됩니다. 명시적이거나 묵시적인 보증을 하지 않으며, 여기에는 상품성, 특정 목적에의 "
-"적합성 또는 지적 재산권 비침해에 대한 묵시적 보증 또는 조건을 포함하되 이에 국한되지 않는 모든 기타 보증을 명시적으로 부인하고 "
-"무효화합니다."
+"방비엥 스테이 웹사이트의 자료는 '있는 그대로' 제공됩니다. 명시적이거나 묵시적"
+"인 보증을 하지 않으며, 여기에는 상품성, 특정 목적에의 적합성 또는 지적 재산"
+"권 비침해에 대한 묵시적 보증 또는 조건을 포함하되 이에 국한되지 않는 모든 기"
+"타 보증을 명시적으로 부인하고 무효화합니다."
 
 #: templates/pages/terms_of_service.html:24
 msgid "Limitations"
@@ -1675,15 +1712,16 @@ msgstr "제한"
 
 #: templates/pages/terms_of_service.html:25
 msgid ""
-"In no event shall Vang Vieng Stay or its suppliers be liable for any damages"
-" (including, without limitation, damages for loss of data or profit, or due "
+"In no event shall Vang Vieng Stay or its suppliers be liable for any damages "
+"(including, without limitation, damages for loss of data or profit, or due "
 "to business interruption) arising out of the use or inability to use the "
-"materials on our website, even if we have been notified orally or in writing"
-" of the possibility of such damage."
+"materials on our website, even if we have been notified orally or in writing "
+"of the possibility of such damage."
 msgstr ""
-"어떠한 경우에도 방비엥 스테이 또는 공급자는 당사 웹사이트 자료의 사용 또는 사용 불능으로 인해 발생하는 어떠한 손해(데이터 또는 이익 "
-"손실, 사업 중단으로 인한 손해를 포함하되 이에 국한되지 않음)에 대해 책임을 지지 않습니다. 구두 또는 서면으로 그러한 손해의 가능성을"
-" 통보받은 경우에도 마찬가지입니다."
+"어떠한 경우에도 방비엥 스테이 또는 공급자는 당사 웹사이트 자료의 사용 또는 사"
+"용 불능으로 인해 발생하는 어떠한 손해(데이터 또는 이익 손실, 사업 중단으로 인"
+"한 손해를 포함하되 이에 국한되지 않음)에 대해 책임을 지지 않습니다. 구두 또"
+"는 서면으로 그러한 손해의 가능성을 통보받은 경우에도 마찬가지입니다."
 
 #: templates/pages/terms_of_service.html:29
 msgid "Bookings & Payments"
@@ -1695,8 +1733,8 @@ msgid ""
 "owner or service provider. Prices are listed in Lao Kip (LAK) and are "
 "subject to change without notice."
 msgstr ""
-"모든 예약은 숙소 소유자 또는 서비스 제공자의 이용 가능 여부와 확인에 따라 달라집니다. 가격은 라오스 킵(LAK)으로 표시되며 예고 "
-"없이 변경될 수 있습니다."
+"모든 예약은 숙소 소유자 또는 서비스 제공자의 이용 가능 여부와 확인에 따라 달"
+"라집니다. 가격은 라오스 킵(LAK)으로 표시되며 예고 없이 변경될 수 있습니다."
 
 #: templates/pages/terms_of_service.html:35
 msgid "If you have any questions about these Terms of Service, please"

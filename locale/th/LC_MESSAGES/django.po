@@ -814,8 +814,7 @@ msgstr "จะถูกจัดให้คุณเมื่อเดินท
 #: guesthouse/templates/guesthouse/book.html:89
 msgid ""
 "Please provide at least one way for the guesthouse owner to contact you."
-msgstr ""
-"กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้เจ้าของเกสต์เฮาส์ติดต่อคุณได้"
+msgstr "กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้เจ้าของเกสต์เฮาส์ติดต่อคุณได้"
 
 #: guesthouse/templates/guesthouse/book.html:94
 #: inquiry/templates/inquiry/inquiry.html:42
@@ -896,13 +895,12 @@ msgstr "Vang Vieng Stay"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:17
 msgid ""
-"By accessing our website and using our booking services, you agree to comply"
-" with and be bound by the following terms and conditions. Please read them "
+"By accessing our website and using our booking services, you agree to comply "
+"with and be bound by the following terms and conditions. Please read them "
 "carefully."
 msgstr ""
 "โดยการเข้าถึงเว็บไซต์ของเราและใช้บริการการจองของเรา "
-"คุณตกลงที่จะปฏิบัติตามและผูกพันกับข้อกำหนดและเงื่อนไขต่อไปนี้ "
-"กรุณาอ่านอย่างละเอียด"
+"คุณตกลงที่จะปฏิบัติตามและผูกพันกับข้อกำหนดและเงื่อนไขต่อไปนี้ กรุณาอ่านอย่างละเอียด"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:20
 msgid "1. Platform Role"
@@ -915,30 +913,24 @@ msgid ""
 "facilitate bookings for"
 msgstr ""
 "Vang Vieng Stay "
-"ทำหน้าที่เป็นเพียงแพลตฟอร์มการจองตัวกลางที่เชื่อมต่อนักเดินทางกับผู้ประกอบการท้องถิ่นอิสระในวังเวียง"
-" ลาว เราอำนวยความสะดวกในการจองสำหรับ"
+"ทำหน้าที่เป็นเพียงแพลตฟอร์มการจองตัวกลางที่เชื่อมต่อนักเดินทางกับผู้ประกอบการท้องถิ่นอิสระในวังเวียง "
+"ลาว เราอำนวยความสะดวกในการจองสำหรับ"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
 "Guesthouses, Tours, Local Guides, Motorbike Rentals, and Buggy Car Rentals"
-msgstr ""
-"เกสต์เฮาส์, ทัวร์, มัคคุเทศก์ท้องถิ่น, การเช่ารถมอเตอร์ไซค์ "
-"และการเช่ารถบั๊กกี้"
+msgstr "เกสต์เฮาส์, ทัวร์, มัคคุเทศก์ท้องถิ่น, การเช่ารถมอเตอร์ไซค์ และการเช่ารถบั๊กกี้"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
-"We do not own, manage, or operate these services. The actual service "
-"provider"
-msgstr ""
-"เราไม่ได้เป็นเจ้าของ จัดการ หรือดำเนินการบริการเหล่านี้ ผู้ให้บริการจริง"
+"We do not own, manage, or operate these services. The actual service provider"
+msgstr "เราไม่ได้เป็นเจ้าของ จัดการ หรือดำเนินการบริการเหล่านี้ ผู้ให้บริการจริง"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:21
 msgid ""
 "is solely responsible for the quality, safety, and delivery of the services "
 "rendered."
-msgstr ""
-"เป็นผู้รับผิดชอบแต่เพียงผู้เดียวต่อคุณภาพ ความปลอดภัย "
-"และการส่งมอบบริการที่ให้"
+msgstr "เป็นผู้รับผิดชอบแต่เพียงผู้เดียวต่อคุณภาพ ความปลอดภัย และการส่งมอบบริการที่ให้"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:25
 msgid "2. The 'Request & Verify' Booking Process"
@@ -962,8 +954,7 @@ msgid ""
 "guarantee a reservation. It initiates a 'Booking Request' which is sent to "
 "the Owner for availability verification."
 msgstr ""
-"รับประกันการจอง มันจะเริ่มต้น 'คำขอจอง' "
-"ซึ่งจะถูกส่งไปยังเจ้าของเพื่อตรวจสอบความพร้อมใช้งาน"
+"รับประกันการจอง มันจะเริ่มต้น 'คำขอจอง' ซึ่งจะถูกส่งไปยังเจ้าของเพื่อตรวจสอบความพร้อมใช้งาน"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:28
 msgid "Confirmation:"
@@ -1015,9 +1006,7 @@ msgstr "Vang Vieng Stay ไม่"
 msgid ""
 "process online payments. All payments for services must be made directly to "
 "the Owner in"
-msgstr ""
-"ดำเนินการชำระเงินออนไลน์ "
-"การชำระเงินทั้งหมดสำหรับบริการต้องทำโดยตรงกับเจ้าของเป็น"
+msgstr "ดำเนินการชำระเงินออนไลน์ การชำระเงินทั้งหมดสำหรับบริการต้องทำโดยตรงกับเจ้าของเป็น"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:36
 msgid "cash"
@@ -1037,13 +1026,13 @@ msgstr "การกำหนดราคา:"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:37
 msgid ""
-"All prices displayed on the platform are estimates in LAK and are subject to"
-" change based on the Owner's current rates. The final price agreed upon with"
-" the Owner at the time of pickup/check-in is the binding price."
+"All prices displayed on the platform are estimates in LAK and are subject to "
+"change based on the Owner's current rates. The final price agreed upon with "
+"the Owner at the time of pickup/check-in is the binding price."
 msgstr ""
 "ราคาทั้งหมดที่แสดงบนแพลตฟอร์มเป็นราคาโดยประมาณในหน่วย LAK "
-"และอาจมีการเปลี่ยนแปลงตามอัตราปัจจุบันของเจ้าของ "
-"ราคาสุดท้ายที่ตกลงกับเจ้าของในเวลารับรถ/เช็คอินคือราคาที่ผูกพัน"
+"และอาจมีการเปลี่ยนแปลงตามอัตราปัจจุบันของเจ้าของ ราคาสุดท้ายที่ตกลงกับเจ้าของในเวลารับรถ/"
+"เช็คอินคือราคาที่ผูกพัน"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:38
 msgid "Security Deposits (Vehicles): "
@@ -1056,10 +1045,9 @@ msgid ""
 "Owner at the time of pickup. This deposit/ID will be returned upon the safe "
 "return of the vehicle."
 msgstr ""
-"สำหรับการเช่ารถมอเตอร์ไซค์และรถบั๊กกี้ "
-"เจ้าของกำหนดให้ต้องมีเงินมัดจำเป็นเงินสด และ/หรือ "
-"การมอบหนังสือเดินทางหรือบัตรประชาชนที่ถูกต้องตัวจริงในเวลารับรถ "
-"เงินมัดจำ/บัตรประจำตัวนี้จะถูกคืนเมื่อคืนยานพาหนะอย่างปลอดภัย"
+"สำหรับการเช่ารถมอเตอร์ไซค์และรถบั๊กกี้ เจ้าของกำหนดให้ต้องมีเงินมัดจำเป็นเงินสด และ/หรือ "
+"การมอบหนังสือเดินทางหรือบัตรประชาชนที่ถูกต้องตัวจริงในเวลารับรถ เงินมัดจำ/"
+"บัตรประจำตัวนี้จะถูกคืนเมื่อคืนยานพาหนะอย่างปลอดภัย"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:43
 msgid "4. Cancellations"
@@ -1073,9 +1061,7 @@ msgstr "คำขอที่รอดำเนินการ: "
 msgid ""
 "You may cancel any pending booking request instantly via your dashboard at "
 "no charge."
-msgstr ""
-"คุณสามารถยกเลิกคำขอจองที่รอดำเนินการใดๆ "
-"ได้ทันทีผ่านแดชบอร์ดของคุณโดยไม่มีค่าใช้จ่าย"
+msgstr "คุณสามารถยกเลิกคำขอจองที่รอดำเนินการใดๆ ได้ทันทีผ่านแดชบอร์ดของคุณโดยไม่มีค่าใช้จ่าย"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:46
 msgid "Confirmed Bookings: "
@@ -1088,10 +1074,9 @@ msgid ""
 "security deposit for vehicle rentals or late cancellation fees for "
 "guesthouses, are determined solely by the individual Owner."
 msgstr ""
-"หากคุณต้องการยกเลิกการจองที่ยืนยันแล้ว คุณต้องติดต่อเจ้าของโดยตรง "
-"นโยบายการยกเลิก "
-"รวมถึงการริบเงินมัดจำสำหรับการเช่ายานพาหนะหรือค่าธรรมเนียมการยกเลิกช้าสำหรับเกสต์เฮาส์"
-" ถูกกำหนดโดยเจ้าของแต่ละรายแต่เพียงผู้เดียว"
+"หากคุณต้องการยกเลิกการจองที่ยืนยันแล้ว คุณต้องติดต่อเจ้าของโดยตรง นโยบายการยกเลิก "
+"รวมถึงการริบเงินมัดจำสำหรับการเช่ายานพาหนะหรือค่าธรรมเนียมการยกเลิกช้าสำหรับเกสต์เฮาส์ "
+"ถูกกำหนดโดยเจ้าของแต่ละรายแต่เพียงผู้เดียว"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:51
 msgid "5. User Responsibilities & Safety"
@@ -1106,8 +1091,8 @@ msgid ""
 "You must present a valid Passport or Government ID and your Booking Voucher "
 "(digital or printed) upon check-in or vehicle pickup."
 msgstr ""
-"คุณต้องแสดงหนังสือเดินทางหรือบัตรประชาชนที่ถูกต้องและ voucher การจองของคุณ "
-"(ดิจิทัลหรือพิมพ์) เมื่อเช็คอินหรือรับรถ"
+"คุณต้องแสดงหนังสือเดินทางหรือบัตรประชาชนที่ถูกต้องและ voucher การจองของคุณ (ดิจิทัลหรือพิมพ์) "
+"เมื่อเช็คอินหรือรับรถ"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
 msgid "Vehicle Rentals: "
@@ -1116,15 +1101,13 @@ msgstr "การเช่ายานพาหนะ: "
 #: guesthouse/templates/guesthouse/terms_of_service.html:54
 msgid ""
 "For Motorbikes and Buggy Cars, the renter must possess a valid, legally "
-"recognized driver's license for Laos. You are fully responsible for the safe"
-" operation of the vehicle, adhering to local traffic laws, and wearing "
+"recognized driver's license for Laos. You are fully responsible for the safe "
+"operation of the vehicle, adhering to local traffic laws, and wearing "
 "appropriate safety gear (e.g., helmets)."
 msgstr ""
-"สำหรับรถมอเตอร์ไซค์และรถบั๊กกี้ "
-"ผู้เช่าต้องมีใบขับขี่ที่ถูกต้องและได้รับการยอมรับตามกฎหมายสำหรับลาว "
+"สำหรับรถมอเตอร์ไซค์และรถบั๊กกี้ ผู้เช่าต้องมีใบขับขี่ที่ถูกต้องและได้รับการยอมรับตามกฎหมายสำหรับลาว "
 "คุณมีความรับผิดชอบอย่างเต็มที่ต่อการใช้งานยานพาหนะอย่างปลอดภัย "
-"การปฏิบัติตามกฎหมายจราจรท้องถิ่น และการสวมใส่อุปกรณ์ความปลอดภัยที่เหมาะสม "
-"(เช่น หมวกกันน็อค)"
+"การปฏิบัติตามกฎหมายจราจรท้องถิ่น และการสวมใส่อุปกรณ์ความปลอดภัยที่เหมาะสม (เช่น หมวกกันน็อค)"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:55
 msgid "Property Respect: "
@@ -1134,8 +1117,7 @@ msgstr "การเคารพทรัพย์สิน: "
 msgid ""
 "You agree to respect the property, staff, and local regulations of the "
 "service providers."
-msgstr ""
-"คุณตกลงที่จะเคารพทรัพย์สิน พนักงาน และข้อบังคับท้องถิ่นของผู้ให้บริการ"
+msgstr "คุณตกลงที่จะเคารพทรัพย์สิน พนักงาน และข้อบังคับท้องถิ่นของผู้ให้บริการ"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:60
 msgid "6. Limitation of Liability"
@@ -1144,17 +1126,17 @@ msgstr "6. ข้อจำกัดความรับผิดชอบ"
 #: guesthouse/templates/guesthouse/terms_of_service.html:61
 msgid ""
 "To the maximum extent permitted by law, Vang Vieng Stay shall not be liable "
-"for any indirect, incidental, or consequential damages arising from your use"
-" of the platform or the services booked. This includes, but is not limited "
+"for any indirect, incidental, or consequential damages arising from your use "
+"of the platform or the services booked. This includes, but is not limited "
 "to, traffic accidents, vehicle damage, personal injuries during tours, "
 "theft, or travel disruptions. All risks associated with the use of rented "
 "vehicles and participation in tours are assumed entirely by the user."
 msgstr ""
 "ภายใต้ขอบเขตที่กฎหมายอนุญาตสูงสุด Vang Vieng Stay จะไม่รับผิดชอบต่อบุคคลใดๆ "
 "สำหรับความเสียหายทางอ้อม เป็นเหตุบังเอิญ "
-"หรือเป็นผลสืบเนื่องที่เกิดขึ้นจากการใช้แพลตฟอร์มหรือบริการที่จองไว้ "
-"ซึ่งรวมถึงแต่ไม่จำกัดเพียง อุบัติเหตุทางจราจร ความเสียหายต่อยานพาหนะ "
-"การบาดเจ็บส่วนบุคคลระหว่างทัวร์ การโจรกรรม หรือการหยุดชะงักของการเดินทาง "
+"หรือเป็นผลสืบเนื่องที่เกิดขึ้นจากการใช้แพลตฟอร์มหรือบริการที่จองไว้ ซึ่งรวมถึงแต่ไม่จำกัดเพียง "
+"อุบัติเหตุทางจราจร ความเสียหายต่อยานพาหนะ การบาดเจ็บส่วนบุคคลระหว่างทัวร์ การโจรกรรม "
+"หรือการหยุดชะงักของการเดินทาง "
 "ความเสี่ยงทั้งหมดที่เกี่ยวข้องกับการใช้ยานพาหนะที่เช่าและการเข้าร่วมทัวร์ถือเป็นความรับผิดชอบของผู้ใช้แต่เพียงผู้เดียว"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:65
@@ -1168,10 +1150,10 @@ msgid ""
 "terms or the services booked shall be subject to the exclusive jurisdiction "
 "of the local authorities and courts in Vientiane, Laos."
 msgstr ""
-"ข้อกำหนดเหล่านี้จะอยู่ภายใต้การกำกับดูแลและตีความตามกฎหมายของสาธารณรัฐประชาธิปไตยประชาชนลาว"
-" ข้อพิพาทใดๆ "
-"ที่เกิดขึ้นจากข้อกำหนดเหล่านี้หรือบริการที่จองไว้จะอยู่ภายใต้เขตอำนาจศาลเฉพาะของเจ้าหน้าที่ท้องถิ่นและศาลในเวียงจันทน์"
-" ลาว"
+"ข้อกำหนดเหล่านี้จะอยู่ภายใต้การกำกับดูแลและตีความตามกฎหมายของสาธารณรัฐประชาธิปไตยประชาชนลาว "
+"ข้อพิพาทใดๆ "
+"ที่เกิดขึ้นจากข้อกำหนดเหล่านี้หรือบริการที่จองไว้จะอยู่ภายใต้เขตอำนาจศาลเฉพาะของเจ้าหน้าที่ท้องถิ่นและศาลในเวียงจันทน์ "
+"ลาว"
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
 msgid "Questions? "
@@ -1179,11 +1161,11 @@ msgstr "มีคำถาม? "
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
 msgid ""
-"If you have any questions about these Terms of Service or your data privacy,"
-" please contact us at"
+"If you have any questions about these Terms of Service or your data privacy, "
+"please contact us at"
 msgstr ""
-"หากคุณมีคำถามเกี่ยวกับข้อกำหนดการให้บริการเหล่านี้หรือความเป็นส่วนตัวของข้อมูลของคุณ"
-" กรุณาติดต่อเราที่"
+"หากคุณมีคำถามเกี่ยวกับข้อกำหนดการให้บริการเหล่านี้หรือความเป็นส่วนตัวของข้อมูลของคุณ "
+"กรุณาติดต่อเราที่"
 
 #: guides/templates/guides/book_guide.html:11
 msgid "Back to guide profile"
@@ -1221,14 +1203,11 @@ msgstr "เช่น Vang Vieng Central Lodge หรือใกล้สถา�
 msgid ""
 "Your guide will meet you here. You can share a live location via WhatsApp "
 "later."
-msgstr ""
-"มัคคุเทศก์ของคุณจะพบคุณที่นี่ คุณสามารถแชร์ตำแหน่งปัจจุบันผ่าน WhatsApp "
-"ในภายหลังได้"
+msgstr "มัคคุเทศก์ของคุณจะพบคุณที่นี่ คุณสามารถแชร์ตำแหน่งปัจจุบันผ่าน WhatsApp ในภายหลังได้"
 
 #: guides/templates/guides/book_guide.html:63
 msgid "Please provide at least one way for the guide to contact you."
-msgstr ""
-"กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้มัคคุเทศก์ติดต่อคุณได้"
+msgstr "กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้มัคคุเทศก์ติดต่อคุณได้"
 
 #: guides/templates/guides/book_guide.html:93
 msgid "at the meeting point."
@@ -1249,9 +1228,8 @@ msgid ""
 "safe routes, and best local food? Our certified local guides have you "
 "covered."
 msgstr ""
-"เช่ารถมอเตอร์ไซค์ของคุณเองแต่ต้องการใครสักคนเพื่อแสดงน้ำตกที่ซ่อนอยู่ "
-"เส้นทางที่ปลอดภัย และอาหารท้องถิ่นที่ดีที่สุด? "
-"มัคคุเทศก์ท้องถิ่นที่ได้รับการรับรองของเรามีให้คุณ"
+"เช่ารถมอเตอร์ไซค์ของคุณเองแต่ต้องการใครสักคนเพื่อแสดงน้ำตกที่ซ่อนอยู่ เส้นทางที่ปลอดภัย "
+"และอาหารท้องถิ่นที่ดีที่สุด? มัคคุเทศก์ท้องถิ่นที่ได้รับการรับรองของเรามีให้คุณ"
 
 #: guides/templates/guides/guide_list.html:23
 msgid "Available Guides"
@@ -1378,9 +1356,7 @@ msgstr "ติดต่อเรา"
 msgid ""
 "Have a question? We'd love to hear from you. Send us a message and we'll "
 "respond within 24 hours."
-msgstr ""
-"มีคำถาม? เรายินดีรับฟังจากคุณ ส่งข้อความถึงเราและเราจะตอบกลับภายใน 24 "
-"ชั่วโมง"
+msgstr "มีคำถาม? เรายินดีรับฟังจากคุณ ส่งข้อความถึงเราและเราจะตอบกลับภายใน 24 ชั่วโมง"
 
 #: inquiry/templates/inquiry/inquiry.html:33
 #: trip_planner/templates/trip_planner/trip_plan.html:275
@@ -1408,8 +1384,7 @@ msgstr "ส่งข้อความสำเร็จ!"
 msgid ""
 "Thank you for reaching out. We've received your message and sent a "
 "confirmation to your email."
-msgstr ""
-"ขอบคุณที่ติดต่อเรา เราได้รับข้อความของคุณและส่งการยืนยันไปยังอีเมลของคุณแล้ว"
+msgstr "ขอบคุณที่ติดต่อเรา เราได้รับข้อความของคุณและส่งการยืนยันไปยังอีเมลของคุณแล้ว"
 
 #: inquiry/templates/inquiry/inquiry_success.html:15
 msgid "Our team will review your inquiry and get back to you within 24 hours."
@@ -1457,8 +1432,7 @@ msgstr "ถึง"
 msgid ""
 "This action cannot be undone, and the motorbike will be released for others "
 "to book."
-msgstr ""
-"การกระทำนี้ไม่สามารถยกเลิกได้ และรถมอเตอร์ไซค์จะถูกปล่อยให้ผู้จองรายอื่น"
+msgstr "การกระทำนี้ไม่สามารถยกเลิกได้ และรถมอเตอร์ไซค์จะถูกปล่อยให้ผู้จองรายอื่น"
 
 #: motorbike/templates/motorbike/cancel_motorbike_booking.html:24
 msgid "Keep Rental"
@@ -1498,10 +1472,8 @@ msgstr "เช่ารถมอเตอร์ไซค์"
 
 #: motorbike/templates/motorbike/motorbike_list.html:18
 msgid ""
-"Explore Vang Vieng at your own pace. Reliable motorbikes for every "
-"adventure."
-msgstr ""
-"สำรวจวังเวียงในจังหวะของคุณเอง รถมอเตอร์ไซค์ที่เชื่อถือได้สำหรับทุกการผจญภัย"
+"Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure."
+msgstr "สำรวจวังเวียงในจังหวะของคุณเอง รถมอเตอร์ไซค์ที่เชื่อถือได้สำหรับทุกการผจญภัย"
 
 #: motorbike/templates/motorbike/motorbike_list.html:63
 msgid "Rental Type:"
@@ -1618,9 +1590,8 @@ msgid ""
 "Your trusted platform for local guesthouses, unforgettable tours, expert "
 "local guides, motorbike rentals, and buggy car adventures."
 msgstr ""
-"แพลตฟอร์มที่คุณไว้วางใจสำหรับเกสต์เฮาส์ท้องถิ่น ทัวร์ที่น่าจดจำ "
-"มัคคุเทศก์ท้องถิ่นผู้เชี่ยวชาญ การเช่ารถมอเตอร์ไซค์ "
-"และการผจญภัยด้วยรถบั๊กกี้"
+"แพลตฟอร์มที่คุณไว้วางใจสำหรับเกสต์เฮาส์ท้องถิ่น ทัวร์ที่น่าจดจำ มัคคุเทศก์ท้องถิ่นผู้เชี่ยวชาญ "
+"การเช่ารถมอเตอร์ไซค์ และการผจญภัยด้วยรถบั๊กกี้"
 
 #: templates/base.html:321
 msgid "Explore"
@@ -1655,8 +1626,8 @@ msgid ""
 "Hi! 👋 I'm here to help with questions about bookings, policies and tours in "
 "Vang Vieng. What can I help you with?"
 msgstr ""
-"สวัสดี! 👋 ฉันอยู่ที่นี่เพื่อช่วยตอบคำถามเกี่ยวกับการจอง นโยบาย "
-"และทัวร์ในวังเวียง ฉันช่วยอะไรคุณได้บ้าง?"
+"สวัสดี! 👋 ฉันอยู่ที่นี่เพื่อช่วยตอบคำถามเกี่ยวกับการจอง นโยบาย และทัวร์ในวังเวียง "
+"ฉันช่วยอะไรคุณได้บ้าง?"
 
 #: templates/base.html:416
 msgid "Cancellation policy"
@@ -1693,8 +1664,7 @@ msgid ""
 "only. This is the grant of a license, not a transfer of title."
 msgstr ""
 "ได้รับอนุญาตให้ดาวน์โหลดวัสดุบนเว็บไซต์ของ Vang Vieng Stay "
-"ชั่วคราวหนึ่งชุดสำหรับการดูส่วนตัวที่ไม่ใช่เชิงพาณิชย์เท่านั้น "
-"นี่คือการให้ใบอนุญาต ไม่ใช่การโอนสิทธิ์"
+"ชั่วคราวหนึ่งชุดสำหรับการดูส่วนตัวที่ไม่ใช่เชิงพาณิชย์เท่านั้น นี่คือการให้ใบอนุญาต ไม่ใช่การโอนสิทธิ์"
 
 #: templates/pages/terms_of_service.html:19
 msgid "Disclaimer"
@@ -1702,15 +1672,14 @@ msgstr "ข้อจำกัดความรับผิดชอบ"
 
 #: templates/pages/terms_of_service.html:20
 msgid ""
-"The materials on Vang Vieng Stay's website are provided on an 'as is' basis."
-" We make no warranties, expressed or implied, and hereby disclaim and negate"
-" all other warranties including, without limitation, implied warranties or "
+"The materials on Vang Vieng Stay's website are provided on an 'as is' basis. "
+"We make no warranties, expressed or implied, and hereby disclaim and negate "
+"all other warranties including, without limitation, implied warranties or "
 "conditions of merchantability, fitness for a particular purpose, or non-"
 "infringement of intellectual property."
 msgstr ""
-"วัสดุบนเว็บไซต์ของ Vang Vieng Stay จัดเตรียมบนพื้นฐาน 'ตามที่เป็น' "
-"เราไม่มีการรับประกันใดๆ ไม่ว่าโดยชัดแจ้งหรือโดยนัย "
-"และขอปฏิเสธและลบล้างการรับประกันอื่นๆ ทั้งหมด รวมถึงแต่ไม่จำกัดเพียง "
+"วัสดุบนเว็บไซต์ของ Vang Vieng Stay จัดเตรียมบนพื้นฐาน 'ตามที่เป็น' เราไม่มีการรับประกันใดๆ "
+"ไม่ว่าโดยชัดแจ้งหรือโดยนัย และขอปฏิเสธและลบล้างการรับประกันอื่นๆ ทั้งหมด รวมถึงแต่ไม่จำกัดเพียง "
 "การรับประกันโดยนัยหรือเงื่อนไขของการค้า ความเหมาะสมสำหรับวัตถุประสงค์เฉพาะ "
 "หรือการไม่ละเมิดทรัพย์สินทางปัญญา"
 
@@ -1720,16 +1689,15 @@ msgstr "ข้อจำกัด"
 
 #: templates/pages/terms_of_service.html:25
 msgid ""
-"In no event shall Vang Vieng Stay or its suppliers be liable for any damages"
-" (including, without limitation, damages for loss of data or profit, or due "
+"In no event shall Vang Vieng Stay or its suppliers be liable for any damages "
+"(including, without limitation, damages for loss of data or profit, or due "
 "to business interruption) arising out of the use or inability to use the "
-"materials on our website, even if we have been notified orally or in writing"
-" of the possibility of such damage."
+"materials on our website, even if we have been notified orally or in writing "
+"of the possibility of such damage."
 msgstr ""
 "ในกรณีใดๆ Vang Vieng Stay หรือผู้จัดหาของเราจะไม่รับผิดชอบต่อบุคคลใดๆ "
-"สำหรับความเสียหายใดๆ (รวมถึงแต่ไม่จำกัดเพียง "
-"ความเสียหายจากการสูญเสียข้อมูลหรือผลกำไร หรือเนื่องจากการหยุดชะงักของธุรกิจ)"
-" ที่เกิดขึ้นจากการใช้หรือไม่สามารถใช้วัสดุบนเว็บไซต์ของเรา "
+"สำหรับความเสียหายใดๆ (รวมถึงแต่ไม่จำกัดเพียง ความเสียหายจากการสูญเสียข้อมูลหรือผลกำไร "
+"หรือเนื่องจากการหยุดชะงักของธุรกิจ) ที่เกิดขึ้นจากการใช้หรือไม่สามารถใช้วัสดุบนเว็บไซต์ของเรา "
 "แม้ว่าเราจะได้รับการแจ้งเตือนด้วยวาจาหรือลายลักษณ์อักษรเกี่ยวกับความเป็นไปได้ของความเสียหายดังกล่าว"
 
 #: templates/pages/terms_of_service.html:29
@@ -1742,9 +1710,8 @@ msgid ""
 "owner or service provider. Prices are listed in Lao Kip (LAK) and are "
 "subject to change without notice."
 msgstr ""
-"การจองทั้งหมดอยู่ภายใต้ความพร้อมใช้งานและการยืนยันโดยเจ้าของทรัพย์สินหรือผู้ให้บริการ"
-" ราคาแสดงเป็นกีบลาว (LAK) "
-"และอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งให้ทราบล่วงหน้า"
+"การจองทั้งหมดอยู่ภายใต้ความพร้อมใช้งานและการยืนยันโดยเจ้าของทรัพย์สินหรือผู้ให้บริการ "
+"ราคาแสดงเป็นกีบลาว (LAK) และอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งให้ทราบล่วงหน้า"
 
 #: templates/pages/terms_of_service.html:35
 msgid "If you have any questions about these Terms of Service, please"
@@ -1886,8 +1853,7 @@ msgstr "กรุณาระบุชื่อเกสต์เฮาส์ข
 
 #: tours/templates/tours/book_tour.html:77
 msgid "Please provide at least one way for the tour operator to contact you."
-msgstr ""
-"กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้ผู้ดำเนินการทัวร์ติดต่อคุณได้"
+msgstr "กรุณาให้ช่องทางติดต่ออย่างน้อยหนึ่งช่องทางเพื่อให้ผู้ดำเนินการทัวร์ติดต่อคุณได้"
 
 #: tours/templates/tours/book_tour.html:109
 msgid "based on the official daily exchange rate on the day of your tour."
@@ -1953,8 +1919,7 @@ msgstr "ค้นพบทัวร์ที่น่าจดจำ"
 
 #: tours/templates/tours/tour_list.html:32
 msgid "Explore Vang Vieng with expert local guides and unique experiences"
-msgstr ""
-"สำรวจวังเวียงกับมัคคุเทศก์ท้องถิ่นผู้เชี่ยวชาญและประสบการณ์ที่ไม่เหมือนใคร"
+msgstr "สำรวจวังเวียงกับมัคคุเทศก์ท้องถิ่นผู้เชี่ยวชาญและประสบการณ์ที่ไม่เหมือนใคร"
 
 #: tours/templates/tours/tour_list.html:42
 #: tours/templates/tours/tour_list.html:95
@@ -2104,8 +2069,7 @@ msgstr "มีอะไรพิเศษที่เราควรรู้ไ
 #: trip_planner/templates/trip_planner/trip_plan.html:562
 msgid ""
 "Dietary needs, accessibility, celebrations, hidden gems you want to see..."
-msgstr ""
-"ความต้องการด้านอาหาร, การเข้าถึง, การเฉลิมฉลอง, สถานที่ลับที่คุณอยากเห็น..."
+msgstr "ความต้องการด้านอาหาร, การเข้าถึง, การเฉลิมฉลอง, สถานที่ลับที่คุณอยากเห็น..."
 
 #: trip_planner/templates/trip_planner/trip_plan.html:395
 #: trip_planner/templates/trip_planner/trip_plan.html:568

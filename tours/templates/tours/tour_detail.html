@@ -97,10 +97,11 @@
                 <span class="text-3xl font-bold text-[#483D8B]">₭{{ tour.price_per_person|intcomma }}</span>
                 <span class="text-gray-500"> /{% trans "person" %}</span>
             {% else %}
-                <span class="text-2xl font-bold text-[#483D8B]">{% trans "Contact for Price" %}</span>
+                <span class="text-2xl font-bold text-[#483D8B]">{% trans "View Price Options" %}</span>
             {% endif %}
             </div>
             </div>
+
             <!-- ✅ MULTI-LANGUAGE DESCRIPTION (Safe filter allows rich HTML content from the admin) -->
             <div class="text-gray-700 leading-relaxed mb-8">
                 {% if LANGUAGE_CODE == 'lo' and tour.description_lo %}
