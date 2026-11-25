@@ -1948,7 +1948,7 @@ msgstr "ຈອງທົວນີ້"
 
 #: tours/templates/tours/tour_detail.html:131
 msgid "Guest Reviews"
-msgstr "ການທົບທວນຈາກຜູ້ພັກ"
+msgstr "ການທົບທວນຈາກຜູ້ໃຊ້ບໍລິການ"
 
 #: tours/templates/tours/tour_detail.html:169
 msgid "No reviews yet. Be the first to review this tour!"
