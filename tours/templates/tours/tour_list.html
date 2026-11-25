@@ -139,10 +139,6 @@
                             <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                                 ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
                             </div>
-                        {% else %}
-                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                                {% trans "Contact for Price" %}
-                            </div>
                         {% endif %}
                         
                         <!-- Duration Badge 

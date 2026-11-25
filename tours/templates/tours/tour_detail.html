@@ -89,12 +89,12 @@
                 </div>
              -->
             <div class="text-left md:text-right flex-shrink-0">
-                {% if tour.price_per_person and tour.price_per_person > 0 %}
-                    <span class="text-3xl font-bold text-[#483D8B]">₭{{ tour.price_per_person|intcomma }}</span>
-                    <span class="text-gray-500"> /{% trans "person" %}</span>
-                {% else %}
-                    <span class="text-2xl font-bold text-[#483D8B]">{% trans "Contact for Price" %}</span>
-                {% endif %}
+                <!-- Price Badge -->
+            {% if tour.price_per_person and tour.price_per_person > 0 %}
+                <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                    ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
+                </div>
+            {% endif %}
             </div>
             </div>
             <!-- ✅ MULTI-LANGUAGE DESCRIPTION (Safe filter allows rich HTML content from the admin) -->
