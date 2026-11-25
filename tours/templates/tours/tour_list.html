@@ -130,18 +130,37 @@
                             </div>
                         {% endif %}
                         
-                        <!-- Price Badge -->
+                        <!-- Price Badge 
                         <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
                             ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
-                        </div>
+                        </div> -->
+                        <!-- Price Badge -->
+                        {% if tour.price_per_person and tour.price_per_person > 0 %}
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                                ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
+                            </div>
+                        {% else %}
+                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                                {% trans "Contact for Price" %}
+                            </div>
+                        {% endif %}
                         
-                        <!-- Duration Badge -->
+                        <!-- Duration Badge 
                         <div class="absolute top-4 left-4 bg-[#483D8B] text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             {{ tour.duration_hours }}h
-                        </div>
+                        </div> -->
+                        <!-- Duration Badge -->
+                        {% if tour.duration_hours and tour.duration_hours > 0 and tour.price_per_person and tour.price_per_person > 0 %}
+                            <div class="absolute top-4 left-4 bg-[#483D8B] text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ tour.duration_hours }}h
+                            </div>
+                        {% endif %}
                         
                         <!-- Rating Badge (if reviews exist) -->
                         {% if tour.review_count > 0 %}

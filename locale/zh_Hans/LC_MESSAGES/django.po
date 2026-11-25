@@ -2097,3 +2097,6 @@ msgstr ""
 #, fuzzy
 msgid "Back to Homepage"
 msgstr "返回首页"
+
+msgid "Contact for Price"
+msgstr "请联系我们获取报价"

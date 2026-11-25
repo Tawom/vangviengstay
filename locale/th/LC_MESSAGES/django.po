@@ -2159,3 +2159,6 @@ msgstr "แชทบน WhatsApp"
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
 msgid "Back to Homepage"
 msgstr "กลับไปที่หน้าแรก"
+
+msgid "Contact for Price"
+msgstr "กรุณาสอบถามราคา"

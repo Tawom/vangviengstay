@@ -2189,3 +2189,6 @@ msgstr "Nhắn tin trên WhatsApp"
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
 msgid "Back to Homepage"
 msgstr "Quay lại Trang chủ"
+
+msgid "Contact for Price"
+msgstr "Vui lòng liên hệ để biết giá"

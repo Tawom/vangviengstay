@@ -2108,3 +2108,6 @@ msgstr "WhatsApp으로 채팅하기"
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
 msgid "Back to Homepage"
 msgstr "홈페이지로 돌아가기"
+
+msgid "Contact for Price"
+msgstr "가격은 별도로 문의해 주세요"

@@ -2171,3 +2171,6 @@ msgstr "ຊາດຜ່ານ WhatsApp"
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
 msgid "Back to Homepage"
 msgstr "ກັບໄປໜ້າຫຼັກ"
+
+msgid "Contact for Price"
+msgstr "ສອບຖາມລາຄາ"
