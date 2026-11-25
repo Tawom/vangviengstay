@@ -137,7 +137,11 @@
                         <!-- Price Badge -->
                         {% if tour.price_per_person and tour.price_per_person > 0 %}
                             <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                                ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
+                                {% if not tour.duration_hours or tour.duration_hours == 0 %}
+                                    <span class="text-gray-500 text-xs">{% trans "From" %}</span> ₭{{ tour.price_per_person|intcomma }}
+                                {% else %}
+                                    ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
+                                {% endif %}
                             </div>
                         {% endif %}
                         
@@ -148,7 +152,7 @@
                             </svg>
                             {{ tour.duration_hours }}h
                         </div> -->
-                        <!-- Duration Badge -->
+                        <!-- Duration Badge 
                         {% if tour.duration_hours and tour.duration_hours > 0 and tour.price_per_person and tour.price_per_person > 0 %}
                             <div class="absolute top-4 left-4 bg-[#483D8B] text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +161,7 @@
                                 {{ tour.duration_hours }}h
                             </div>
                         {% endif %}
-                        
+                        -->
                         <!-- Rating Badge (if reviews exist) -->
                         {% if tour.review_count > 0 %}
                             <div class="absolute bottom-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
