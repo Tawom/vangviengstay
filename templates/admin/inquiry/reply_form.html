@@ -1,48 +1,206 @@
 {% extends "admin/base_site.html" %}
-{% load i18n %}
+{% load i18n admin_urls static %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <style>
+    .reply-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    @media (max-width: 960px) {
+      .reply-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .reply-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .field-row {
+      margin-bottom: 14px;
+    }
+    .field-row label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .field-row input[type="text"],
+    .field-row select,
+    .field-row textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .field-row textarea {
+      min-height: 200px;
+      line-height: 1.5;
+    }
+    .inquiry-meta {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+    .preview-frame {
+      background: #f4f5f7;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .preview-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      color: #333333;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+    }
+    .btn-primary {
+      background: #483D8B;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #1e293b;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}
 
 {% block content %}
-<div style="max-width: 760px;">
-    <h1>Reply to Inquiry from {{ inquiry.name }}</h1>
+<div id="content-main">
+  <div class="inquiry-meta">
+    <strong>From:</strong> {{ inquiry.name }} &lt;{{ inquiry.email }}&gt;
+    {% if inquiry.phone %} | <strong>Phone:</strong> {{ inquiry.phone }}{% endif %}
+    | <strong>Subject:</strong> {{ inquiry.get_subject_display }}
+    | <strong>Status:</strong> {{ inquiry.get_status_display }}
+    <div style="margin-top: 8px;"><strong>Customer Message:</strong><br>{{ inquiry.message|linebreaksbr }}</div>
+  </div>
 
-    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #483D8B; padding: 16px 20px; border-radius: 6px; margin-bottom: 24px;">
-        <p style="margin: 0 0 6px;"><strong>To:</strong> {{ inquiry.name }} &lt;{{ inquiry.email }}&gt;</p>
-        {% if inquiry.phone %}
-            <p style="margin: 0 0 6px;"><strong>Phone / WhatsApp:</strong> {{ inquiry.phone }}</p>
-        {% endif %}
-        <p style="margin: 0 0 6px;"><strong>Received:</strong> {{ inquiry.created_at|date:"M d, Y H:i" }}</p>
-        <p style="margin: 0 0 10px;"><strong>Original Subject:</strong> {{ inquiry.subject }}</p>
-        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 10px 0;">
-        <p style="margin: 0; white-space: pre-line; color: #334155;">{{ inquiry.message }}</p>
+  <div class="reply-grid">
+    <!-- Left: Compose Form -->
+    <div class="reply-card">
+      <form method="post" id="inquiry-reply-form">
+        {% csrf_token %}
+
+        <div class="field-row">
+          <label for="id_template_id">{% trans "Email Template" %}</label>
+          <select name="template_id" id="id_template_id">
+            <option value="">{% trans "-- Default / Fallback Template --" %}</option>
+            {% for tpl in templates %}
+              <option value="{{ tpl.pk }}" {% if active_template and active_template.pk == tpl.pk %}selected{% endif %}>
+                {{ tpl.name }} ({{ tpl.get_subject_category_display }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field-row">
+          <label for="id_signature_id">{% trans "Email Signature" %}</label>
+          <select name="signature_id" id="id_signature_id">
+            <option value="">{% trans "-- Default Signature --" %}</option>
+            {% for sig in signatures %}
+              <option value="{{ sig.pk }}" {% if active_signature and active_signature.pk == sig.pk %}selected{% endif %}>
+                {{ sig.name }} — {{ sig.sender_name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field-row">
+          <button type="submit" name="action" value="load_template" class="btn-secondary">
+            {% trans "Apply Selected Template & Signature" %}
+          </button>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 16px 0;">
+
+        <div class="field-row">
+          <label for="id_reply_subject">{% trans "Email Subject" %}</label>
+          <input type="text" name="reply_subject" id="id_reply_subject" value="{{ default_subject }}" required>
+        </div>
+
+        <div class="field-row">
+          <label for="id_reply_message">{% trans "Reply Body (HTML or Plain Text)" %}</label>
+          <textarea name="reply_message" id="id_reply_message" required>{{ default_message }}</textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" name="action" value="send_email" class="btn-primary">
+            {% trans "Send Reply Email" %}
+          </button>
+          <a href="{% url 'admin:inquiry_inquiry_changelist' %}" class="button" style="padding: 9px 14px;">
+            {% trans "Cancel" %}
+          </a>
+        </div>
+      </form>
     </div>
 
-    <form method="post">
-        {% csrf_token %}
-        <fieldset class="module aligned">
-            <div class="form-row">
-                <label for="id_reply_subject" style="font-weight: 600;">Email Subject:</label>
-                <input type="text"
-                       id="id_reply_subject"
-                       name="reply_subject"
-                       value="Re: {{ inquiry.subject }}"
-                       required
-                       style="width: 100%; max-width: 600px; padding: 8px 10px;">
-            </div>
-            <div class="form-row">
-                <label for="id_reply_message" style="font-weight: 600;">Your Reply Message:</label>
-                <textarea id="id_reply_message"
-                          name="reply_message"
-                          rows="10"
-                          required
-                          placeholder="Write your response to {{ inquiry.name }}..."
-                          style="width: 100%; max-width: 600px; padding: 10px;">{{ inquiry.admin_reply }}</textarea>
-            </div>
-        </fieldset>
-
-        <div class="submit-row" style="display: flex; gap: 12px; align-items: center;">
-            <input type="submit" value="Send Email Reply" class="default">
-            <a href="{% url 'admin:inquiry_inquiry_change' inquiry.pk %}" class="closelink">Cancel</a>
+    <!-- Right: Live Preview -->
+    <div class="reply-card">
+      <h3 style="margin-top: 0;">{% trans "Email Preview" %}</h3>
+      <div style="font-size: 13px; color: #475569; margin-bottom: 10px;">
+        <strong>To:</strong> {{ inquiry.email }}<br>
+        <strong>Subject:</strong> <span id="preview-subject">{{ default_subject }}</span>
+      </div>
+      <div class="preview-frame">
+        <div class="preview-box">
+          <div id="preview-body">{{ default_message|safe }}</div>
+          {% if active_signature %}
+            {{ active_signature.render_html|safe }}
+          {% endif %}
         </div>
-    </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  (function () {
+    const subjInput = document.getElementById('id_reply_subject');
+    const bodyInput = document.getElementById('id_reply_message');
+    const subjPreview = document.getElementById('preview-subject');
+    const bodyPreview = document.getElementById('preview-body');
+
+    if (subjInput && subjPreview) {
+      subjInput.addEventListener('input', () => {
+        subjPreview.textContent = subjInput.value;
+      });
+    }
+    if (bodyInput && bodyPreview) {
+      bodyInput.addEventListener('input', () => {
+        bodyPreview.innerHTML = bodyInput.value;
+      });
+    }
+  })();
+</script>
 {% endblock %}

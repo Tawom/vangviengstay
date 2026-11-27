@@ -186,13 +186,30 @@ class InquiryAdmin(admin.ModelAdmin):
 
             if not reply_subject or not reply_message:
                 messages.error(request, 'Both subject and reply message are required.')
+                default_subject = reply_subject or default_subject
+                default_message = reply_message or default_message
             else:
                 ctx_with_reply = {
                     **render_ctx,
                     'reply_message': reply_message,
                 }
                 if active_template:
-                    _, html_content = active_template.render_full_html(ctx_with_reply)
+                    rendered_body = Template(reply_message).render(Context(ctx_with_reply))
+                    sig_html = render_ctx['signature_html']
+                    html_content = f"""<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:24px;background:#f4f5f7;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0"
+         style="max-width:600px;width:100%;margin:0 auto;background:#ffffff;border-radius:8px;padding:32px;">
+    <tr>
+      <td style="color:#333333;font-size:16px;line-height:1.6;">
+        {rendered_body}
+        {sig_html}
+      </td>
+    </tr>
+  </table>
+</body>
+</html>"""
                 else:
                     html_content = render_to_string('emails/inquiry_reply.html', ctx_with_reply)
 
@@ -229,6 +246,8 @@ class InquiryAdmin(admin.ModelAdmin):
                     return redirect('admin:inquiry_inquiry_changelist')
                 except Exception as exc:
                     messages.error(request, f'Failed to send email: {exc}')
+                    default_subject = reply_subject
+                    default_message = reply_message
 
         context = {
             **self.admin_site.each_context(request),

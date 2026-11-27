@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Re: {{ inquiry.subject }}</title>
+    <title>Re: {{ inquiry.get_subject_display }}</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f1f5f9; color: #1e293b;">
     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f1f5f9; padding: 28px 12px;">
@@ -39,7 +39,7 @@
                                             Your Original Message ({{ inquiry.created_at|date:"M d, Y" }})
                                         </p>
                                         <p style="color: #0f172a; font-size: 13.5px; font-weight: 600; margin: 0 0 6px 0;">
-                                            {{ inquiry.subject }}
+                                            {{ inquiry.get_subject_display }}
                                         </p>
                                         <p style="color: #475569; font-size: 13.5px; line-height: 1.55; margin: 0;">
                                             {{ inquiry.message|linebreaksbr }}
@@ -51,6 +51,10 @@
                             <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 20px 0 0 0;">
                                 Need faster assistance? Message us anytime on WhatsApp at <strong>+856 20 979 25169</strong> or simply reply to this email.
                             </p>
+
+                            {% if signature_html %}
+                                {{ signature_html|safe }}
+                            {% endif %}
                         </td>
                     </tr>
 
