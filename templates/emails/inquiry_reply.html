@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re: {{ inquiry.subject }}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f1f5f9; color: #1e293b;">
+    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f1f5f9; padding: 28px 12px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); border: 1px solid #e2e8f0;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #483D8B 0%, #6d28d9 100%); padding: 30px 24px; text-align: center;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700;">Vang Vieng Stay</h1>
+                            <p style="color: #ede9fe; margin: 6px 0 0 0; font-size: 13.5px;">Response to Your Inquiry</p>
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding: 32px 24px;">
+                            <p style="color: #0f172a; font-size: 16px; font-weight: 600; margin: 0 0 14px 0;">
+                                Hi {{ inquiry.name }},
+                            </p>
+
+                            <!-- Admin Reply Body -->
+                            <div style="color: #1e293b; font-size: 15px; line-height: 1.7; margin: 0 0 26px 0;">
+                                {{ reply_message|linebreaksbr }}
+                            </div>
+
+                            <!-- Original Inquiry Quote -->
+                            <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #94a3b8; border-radius: 8px; padding: 16px 18px; margin: 20px 0;">
+                                <tr>
+                                    <td>
+                                        <p style="color: #64748b; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 8px 0;">
+                                            Your Original Message ({{ inquiry.created_at|date:"M d, Y" }})
+                                        </p>
+                                        <p style="color: #0f172a; font-size: 13.5px; font-weight: 600; margin: 0 0 6px 0;">
+                                            {{ inquiry.subject }}
+                                        </p>
+                                        <p style="color: #475569; font-size: 13.5px; line-height: 1.55; margin: 0;">
+                                            {{ inquiry.message|linebreaksbr }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 20px 0 0 0;">
+                                Need faster assistance? Message us anytime on WhatsApp at <strong>+856 20 979 25169</strong> or simply reply to this email.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8fafc; padding: 20px 24px; text-align: center; border-top: 1px solid #e2e8f0;">
+                            <p style="color: #475569; font-size: 13px; margin: 0 0 6px 0;">
+                                <strong>Vang Vieng Stay</strong> • <a href="mailto:info@vangviengstay.com" style="color: #483D8B; font-weight: 600; text-decoration: none;">info@vangviengstay.com</a>
+                            </p>
+                            <p style="color: #94a3b8; font-size: 12px; margin: 0;">
+                                &copy; 2026 Vang Vieng Stay. All rights reserved.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

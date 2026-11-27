@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<div style="max-width: 760px;">
+    <h1>Reply to Inquiry from {{ inquiry.name }}</h1>
+
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #483D8B; padding: 16px 20px; border-radius: 6px; margin-bottom: 24px;">
+        <p style="margin: 0 0 6px;"><strong>To:</strong> {{ inquiry.name }} &lt;{{ inquiry.email }}&gt;</p>
+        {% if inquiry.phone %}
+            <p style="margin: 0 0 6px;"><strong>Phone / WhatsApp:</strong> {{ inquiry.phone }}</p>
+        {% endif %}
+        <p style="margin: 0 0 6px;"><strong>Received:</strong> {{ inquiry.created_at|date:"M d, Y H:i" }}</p>
+        <p style="margin: 0 0 10px;"><strong>Original Subject:</strong> {{ inquiry.subject }}</p>
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 10px 0;">
+        <p style="margin: 0; white-space: pre-line; color: #334155;">{{ inquiry.message }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="module aligned">
+            <div class="form-row">
+                <label for="id_reply_subject" style="font-weight: 600;">Email Subject:</label>
+                <input type="text"
+                       id="id_reply_subject"
+                       name="reply_subject"
+                       value="Re: {{ inquiry.subject }}"
+                       required
+                       style="width: 100%; max-width: 600px; padding: 8px 10px;">
+            </div>
+            <div class="form-row">
+                <label for="id_reply_message" style="font-weight: 600;">Your Reply Message:</label>
+                <textarea id="id_reply_message"
+                          name="reply_message"
+                          rows="10"
+                          required
+                          placeholder="Write your response to {{ inquiry.name }}..."
+                          style="width: 100%; max-width: 600px; padding: 10px;">{{ inquiry.admin_reply }}</textarea>
+            </div>
+        </fieldset>
+
+        <div class="submit-row" style="display: flex; gap: 12px; align-items: center;">
+            <input type="submit" value="Send Email Reply" class="default">
+            <a href="{% url 'admin:inquiry_inquiry_change' inquiry.pk %}" class="closelink">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
