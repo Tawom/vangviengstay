@@ -1155,7 +1155,7 @@ msgstr ""
 "ເງື່ອນໄຂເຫຼົ່ານີ້ຈະຖືກຄຸ້ມຄອງ ແລະ ຕີຄວາມໝາຍຕາມກົດໝາຍຂອງສາທາລະນະລັດປະຊາທິປະໄຕປະຊາຊົນລາວ. "
 "ຂໍ້ຂັດແຍ່ງໃດໆທີ່ເກີດຂຶ້ນຈາກເງື່ອນໄຂເຫຼົ່ານີ້ ຫຼື "
 "ການບໍລິການທີ່ໄດ້ຈອງໄວ້ແມ່ນຂຶ້ນກັບອຳນາດຕັດສິນຂອງອຳນາດການປົກຄອງທ້ອງຖິ່ນ ແລະ "
-"ສານໃນນະຄອນຫຼວງວຽງຈັນ, ລາວ."
+"ສານໃນນະຄອນຫຼວງວຽງຈັນ, ປະເທດລາວ."
 
 #: guesthouse/templates/guesthouse/terms_of_service.html:71
 msgid "Questions? "
@@ -1658,7 +1658,7 @@ msgstr ""
 
 #: templates/pages/terms_of_service.html:14
 msgid "Use License"
-msgstr "ໃບອະນຸຍາດການໃຊ້ງານ"
+msgstr "ການນໍາໃຊ້ທີ່ຖືກຕ້ອງ"
 
 #: templates/pages/terms_of_service.html:15
 msgid ""
@@ -1666,8 +1666,8 @@ msgid ""
 "Vang Vieng Stay's website for personal, non-commercial transitory viewing "
 "only. This is the grant of a license, not a transfer of title."
 msgstr ""
-"ອະນຸຍາດໃຫ້ດາວໂຫຼດວັດຖຸດິບໜຶ່ງສຳເນົາຊົ່ວຄາວເທິງເວັບໄຊທ໌ຂອງ Vang Vieng Stay ເພື່ອການຊົມສ່ວນຕົວ, "
-"ບໍ່ແມ່ນການຄ້າເທົ່ານັ້ນ. ນີ້ແມ່ນການມອບໃບອະນຸຍາດ, ບໍ່ແມ່ນການໂອນກຳມະສິດ."
+"ອະນຸຍາດໃຫ້ດາວໂຫຼດຂໍ້ມູນ ໜຶ່ງສຳເນົາແບບຊົ່ວຄາວ ເທິງເວັບໄຊທ໌ຂອງ Vang Vieng Stay ເພື່ອການຊົມໃຊ້ສ່ວນຕົວເທົ່ານັ້ນ, "
+"ບໍ່ແມ່ນເພື່ອການຄ້າ. ນີ້ແມ່ນການອະນຸຍາດນໍາໃຊ້, ບໍ່ແມ່ນການໂອນກຳມະສິດ."
 
 #: templates/pages/terms_of_service.html:19
 msgid "Disclaimer"
@@ -2052,17 +2052,17 @@ msgstr "ລະດັບງົບປະມານ"
 #: trip_planner/templates/trip_planner/trip_plan.html:375
 #: trip_planner/templates/trip_planner/trip_plan.html:548
 msgid "Budget-friendly"
-msgstr "ປະຢັດ"
+msgstr "ງົບປະຢັດ"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:378
 #: trip_planner/templates/trip_planner/trip_plan.html:551
 msgid "Mid-range"
-msgstr "ປານກາງ"
+msgstr "ງົບປານກາງ"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:381
 #: trip_planner/templates/trip_planner/trip_plan.html:554
 msgid "Premium"
-msgstr "ພຣີເມຍມ"
+msgstr "ງົບສູງ"
 
 #: trip_planner/templates/trip_planner/trip_plan.html:387
 #: trip_planner/templates/trip_planner/trip_plan.html:560
@@ -2122,7 +2122,7 @@ msgstr "ຕ້ອງການພວກເຮົາໄວຂຶ້ນບໍ? ສ�
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:85
 msgid "Chat on WhatsApp"
-msgstr "ຊາດຜ່ານ WhatsApp"
+msgstr "ສົນທະນາຜ່ານ WhatsApp"
 
 #: trip_planner/templates/trip_planner/trip_plan_success.html:90
 msgid "Back to Homepage"
