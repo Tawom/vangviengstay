@@ -1,260 +1,282 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load humanize %}
 {% load i18n %}
 
 {% block title %}{% trans "Tours & Activities" %} - Vang Vieng Stay{% endblock %}
 
-{% block content %}
-<!-- Hero Section with Advanced Search -->
-<div class="bg-[#483D8B] text-white py-16 relative overflow-hidden">
-    <!-- Decorative background pattern -->
-    <div class="absolute inset-0 opacity-10">
-        <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100">
-            <circle cx="10" cy="10" r="2" />
-            <circle cx="30" cy="20" r="1.5" />
-            <circle cx="50" cy="15" r="2" />
-            <circle cx="70" cy="25" r="1" />
-            <circle cx="90" cy="10" r="2" />
-            <circle cx="20" cy="40" r="1.5" />
-            <circle cx="40" cy="50" r="2" />
-            <circle cx="60" cy="45" r="1" />
-            <circle cx="80" cy="55" r="2" />
-            <circle cx="15" cy="70" r="1.5" />
-            <circle cx="35" cy="80" r="2" />
-            <circle cx="55" cy="75" r="1" />
-            <circle cx="75" cy="85" r="2" />
-            <circle cx="95" cy="70" r="1.5" />
-        </svg>
-    </div>
-    
-    <div class="max-w-6xl mx-auto px-4 relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3 text-center">{% trans "Discover Unforgettable Tours" %}</h1>
-        <p class="text-white/80 mb-10 text-center text-lg">{% trans "Explore Vang Vieng with expert local guides and unique experiences" %}</p>
-        
-        <!-- Search Widget -->
-        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-5xl mx-auto">
-            <form method="GET" action="{% url 'tour_list' %}" class="space-y-6">
-                
-                <!-- Search + Date -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="md:col-span-2">
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Search Tours" %}
-                        </label>
-                        <input type="text" name="search" value="{{ search_query }}" 
-                               placeholder="{% trans 'e.g., Kayaking, Cave, Hot Air Balloon...' %}"
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Tour Date" %}
-                        </label>
-                        <input type="date" name="tour_date" value="{{ tour_date }}" 
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-gray-800">
-                    </div>
-                </div>
-                
-                <!-- Price + Guests -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Min Price" %}
-                        </label>
-                        <input type="number" name="min_price" value="{{ min_price }}" placeholder="{% trans 'Min' %}" min="0"
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Max Price" %}
-                        </label>
-                        <input type="number" name="max_price" value="{{ max_price }}" placeholder="{% trans 'Max' %}" min="0"
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-gray-800">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Guests" %}
-                        </label>
-                        <select name="guests" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-gray-800 bg-white">
-                            <option value="">{% trans "Any" %}</option>
-                            <option value="1" {% if guests == '1' %}selected{% endif %}>1 {% trans "Guest" %}</option>
-                            <option value="2" {% if guests == '2' %}selected{% endif %}>2 {% trans "Guests" %}</option>
-                            <option value="3" {% if guests == '3' %}selected{% endif %}>3 {% trans "Guests" %}</option>
-                            <option value="4" {% if guests == '4' %}selected{% endif %}>4 {% trans "Guests" %}</option>
-                            <option value="5" {% if guests == '5' %}selected{% endif %}>5+ {% trans "Guests" %}</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Search Button -->
-                <div>
-                    <button type="submit" 
-                            class="w-full bg-[#483D8B] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#3a3170] transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+{% block hero_bg %}{% static 'images/vangvieng-hero.png' %}{% endblock %}
+{% block hero_alt %}{% trans 'Vang Vieng limestone karst mountains and Nam Song River, Laos' %}{% endblock %}
+{% block hero_title %}{% trans "Discover Unforgettable Tours" %}{% endblock %}
+{% block hero_subtitle %}{% trans "Explore Vang Vieng with expert local guides and unique experiences" %}{% endblock %}
+
+{% block hero_extra %}
+    <!-- Search Widget -->
+    <div class="mt-10 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-8 max-w-5xl mx-auto border border-white/40">
+        <form method="GET" action="{% url 'tour_list' %}" class="space-y-5">
+
+            <!-- Row 1: Search + Date -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="md:col-span-2">
+                    <label for="id_search" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
                         {% trans "Search Tours" %}
-                    </button>
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        <input id="id_search"
+                               type="text"
+                               name="search"
+                               value="{{ search_query }}"
+                               placeholder="{% trans 'e.g., Kayaking, Cave, Hot Air Balloon...' %}"
+                               class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
+                    </div>
                 </div>
-                
-            </form>
+
+                <div>
+                    <label for="id_tour_date" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Tour Date" %}
+                    </label>
+                    <input id="id_tour_date"
+                           type="date"
+                           name="tour_date"
+                           value="{{ tour_date }}"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Row 2: Price + Guests -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label for="id_min_price" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Min Price (₭)" %}
+                    </label>
+                    <input id="id_min_price"
+                           type="number"
+                           name="min_price"
+                           value="{{ min_price }}"
+                           placeholder="{% trans 'Min' %}"
+                           min="0"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
+                </div>
+
+                <div>
+                    <label for="id_max_price" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Max Price (₭)" %}
+                    </label>
+                    <input id="id_max_price"
+                           type="number"
+                           name="max_price"
+                           value="{{ max_price }}"
+                           placeholder="{% trans 'Max' %}"
+                           min="0"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
+                </div>
+
+                <div>
+                    <label for="id_guests" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Guests" %}
+                    </label>
+                    <select id="id_guests"
+                            name="guests"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer">
+                        <option value="">{% trans "Any" %}</option>
+                        <option value="1" {% if guests == '1' %}selected{% endif %}>1 {% trans "Guest" %}</option>
+                        <option value="2" {% if guests == '2' %}selected{% endif %}>2 {% trans "Guests" %}</option>
+                        <option value="3" {% if guests == '3' %}selected{% endif %}>3 {% trans "Guests" %}</option>
+                        <option value="4" {% if guests == '4' %}selected{% endif %}>4 {% trans "Guests" %}</option>
+                        <option value="5" {% if guests == '5' %}selected{% endif %}>5+ {% trans "Guests" %}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 3: Submit & Reset -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 pt-1">
+                <button type="submit"
+                        class="w-full sm:flex-1 bg-[#483D8B] hover:bg-[#3a3170] text-white font-bold py-3.5 px-6 rounded-xl transition shadow-lg shadow-[#483D8B]/25 hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    {% trans "Search Tours" %}
+                </button>
+
+                {% if search_query or tour_date or min_price or max_price or guests %}
+                    <a href="{% url 'tour_list' %}"
+                       class="w-full sm:w-auto text-center px-5 py-3.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-sm transition">
+                        {% trans "Reset" %}
+                    </a>
+                {% endif %}
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Quick Category Navigation Strip -->
+    <div class="mt-8 max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <a href="{% url 'guide_list' %}" class="bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3 transition">
+            <i class="fa-solid fa-user-check text-amber-300"></i>
+            <span class="text-xs sm:text-sm font-semibold text-white">{% trans "Local Guides" %}</span>
+        </a>
+        <a href="{% url 'motorbike_list' %}" class="bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3 transition">
+            <i class="fa-solid fa-motorcycle text-orange-300"></i>
+            <span class="text-xs sm:text-sm font-semibold text-white">{% trans "Motorbikes" %}</span>
+        </a>
+        <a href="{% url 'buggy_list' %}" class="bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex items-center gap-3 transition">
+            <i class="fa-solid fa-car-side text-purple-300"></i>
+            <span class="text-xs sm:text-sm font-semibold text-white">{% trans "Buggy Cars" %}</span>
+        </a>
+        <a href="{% url 'trip_plan' %}" class="bg-orange-500/90 hover:bg-orange-500 border border-orange-400/40 rounded-xl px-4 py-3 flex items-center gap-3 transition shadow-sm">
+            <i class="fa-solid fa-route text-white"></i>
+            <span class="text-xs sm:text-sm font-bold text-white">{% trans "Plan My Trip" %}</span>
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<!-- Results Section -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600">{% trans "Vang Vieng Adventures" %}</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-0.5">
+                {% if tours %}
+                    {{ tours|length }} {% trans "Tours Found" %}
+                {% else %}
+                    {% trans "No Results" %}
+                {% endif %}
+            </h2>
         </div>
     </div>
-</div>
 
-<!-- Results Section -->
-<div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">
-            {% if tours %}
-                {{ tours|length }} {% trans "Tours Found" %}
-            {% else %}
-                {% trans "No Results" %}
-            {% endif %}
-        </h2>
-    </div>
-    
     {% if tours %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {% for tour in tours %}
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col">
+                <article class="pro-card overflow-hidden group flex flex-col">
                     <!-- Image -->
-                    <div class="h-56 bg-gray-200 relative overflow-hidden">
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
                         {% if tour.main_image_url %}
-                            <img src="{{ tour.main_image_url }}" alt="{{ tour.name }}" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <img src="{{ tour.main_image_url }}"
+                                 alt="{{ tour.name }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         {% else %}
-                            <div class="flex items-center justify-center h-full text-gray-400">
+                            <div class="flex items-center justify-center h-full text-slate-400 bg-slate-100">
                                 <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
                         {% endif %}
-                        
-                        <!-- Price Badge 
-                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                            ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
-                        </div> -->
+
+                        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+
                         <!-- Price Badge -->
                         {% if tour.price_per_person and tour.price_per_person > 0 %}
-                            <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                            <div class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-slate-900 px-3.5 py-1.5 rounded-full text-sm font-extrabold shadow-md">
                                 {% if not tour.duration_hours or tour.duration_hours == 0 %}
-                                    <span class="text-gray-500 text-xs">{% trans "From" %}</span> ₭{{ tour.price_per_person|intcomma }}
+                                    <span class="text-slate-500 font-medium text-xs">{% trans "From" %}</span> ₭{{ tour.price_per_person|intcomma }}
                                 {% else %}
-                                    ₭{{ tour.price_per_person|intcomma }}<span class="text-gray-500 text-xs">/{% trans "person" %}</span>
+                                    ₭{{ tour.price_per_person|intcomma }}<span class="text-slate-500 font-medium text-xs">/{% trans "person" %}</span>
                                 {% endif %}
                             </div>
                         {% endif %}
-                        
-                        <!-- Duration Badge 
-                        <div class="absolute top-4 left-4 bg-[#483D8B] text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            {{ tour.duration_hours }}h
-                        </div> -->
-                        <!-- Duration Badge 
-                        {% if tour.duration_hours and tour.duration_hours > 0 and tour.price_per_person and tour.price_per_person > 0 %}
-                            <div class="absolute top-4 left-4 bg-[#483D8B] text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                {{ tour.duration_hours }}h
-                            </div>
-                        {% endif %}
-                        -->
+
                         <!-- Rating Badge (if reviews exist) -->
                         {% if tour.review_count > 0 %}
-                            <div class="absolute bottom-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
-                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <div class="absolute bottom-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-slate-900 px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
+                                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                 </svg>
                                 {{ tour.average_rating }}
-                                <span class="text-gray-500 text-xs">({{ tour.review_count }})</span>
+                                <span class="text-slate-500 font-normal">({{ tour.review_count }})</span>
                             </div>
                         {% endif %}
                     </div>
-                    
+
                     <!-- Content -->
                     <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-1 text-gray-900 group-hover:text-[#483D8B] transition">
-                            {{ tour.name }}
+                        <h3 class="font-display text-xl font-bold mb-1.5 text-slate-900 group-hover:text-[#483D8B] transition">
+                            <a href="{% url 'tour_detail' tour.id %}">{{ tour.name }}</a>
                         </h3>
-                        
+
                         <!-- Tour Operator Name Badge -->
-                        <p class="text-sm text-[#483D8B] font-semibold mb-3 flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <p class="text-xs text-[#483D8B] font-semibold mb-3.5 flex items-center gap-1.5">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
-                            {{ tour.operator_name }}
+                            <span>{{ tour.operator_name }}</span>
                         </p>
-                        
-                        <div class="flex flex-wrap gap-3 text-sm text-gray-500 mb-3">
-                            <p class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                        <!-- Meta Info Pills -->
+                        <div class="flex flex-wrap gap-2 text-xs font-medium text-slate-600 mb-4">
+                            <span class="inline-flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 {% trans "Departs" %} {{ tour.departure_time|time:"H:i" }}
-                            </p>
-                            <p class="flex items-center gap-1">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
                                 {% trans "Max" %} {{ tour.max_capacity }}
-                            </p>
+                            </span>
                         </div>
-        
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
+
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5 line-clamp-2 flex-grow">
                             {{ tour.description|striptags|truncatewords:25 }}
                         </p>
 
-                        <!-- Map Link -->
-                        <div class="mb-4">
-                            {% if tour.latitude and tour.longitude %}
-                                <a href="https://www.google.com/maps?q={{ tour.latitude }},{{ tour.longitude }}" 
-                                   target="_blank" 
-                                   class="inline-flex items-center gap-1 text-sm text-[#483D8B] hover:text-[#3a3170] font-medium bg-[#483D8B]/10 px-3 py-2 rounded-lg hover:bg-[#483D8B]/20 transition w-fit">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    {% trans "View Office on Map" %}
-                                </a>
-                            {% else %}
-                                <span class="text-sm text-gray-400 italic flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    {% trans "Map pending" %}
-                                </span>
-                            {% endif %}
+                        <!-- Map Link & CTA -->
+                        <div class="pt-4 border-t border-slate-100 space-y-3 mt-auto">
+                            <div>
+                                {% if tour.latitude and tour.longitude %}
+                                    <a href="https://www.google.com/maps?q={{ tour.latitude }},{{ tour.longitude }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="inline-flex items-center gap-1.5 text-xs text-[#483D8B] hover:text-[#3a3170] font-semibold bg-[#483D8B]/10 px-3 py-1.5 rounded-lg hover:bg-[#483D8B]/15 transition">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "View Office on Map" %}
+                                    </a>
+                                {% else %}
+                                    <span class="text-xs text-slate-400 italic flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "Map pending" %}
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <a href="{% url 'tour_detail' tour.id %}"
+                               class="block w-full text-center bg-[#483D8B] hover:bg-[#3a3170] text-white font-semibold text-sm py-3 rounded-xl transition shadow-sm">
+                                {% trans "View Details & Book" %}
+                            </a>
                         </div>
-                        
-                        <a href="{% url 'tour_detail' tour.id %}" 
-                           class="block w-full text-center bg-[#483D8B] text-white font-semibold py-3 rounded-lg hover:bg-[#3a3170] transition mt-auto">
-                            {% trans "View Details & Book" %}
-                        </a>
                     </div>
-                </div>
+                </article>
             {% endfor %}
         </div>
     {% else %}
-        <div class="text-center py-16 bg-white rounded-xl shadow-md">
-            <svg class="w-24 h-24 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <div class="text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <svg class="w-20 h-20 mx-auto text-slate-300 mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">{% trans "No tours found" %}</h3>
-            <p class="text-gray-600 mb-6">{% trans "Try adjusting your search filters or dates" %}</p>
-            <a href="{% url 'tour_list' %}" class="inline-block bg-[#483D8B] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#3a3170] transition">
+            <h3 class="font-display text-2xl font-bold text-slate-900 mb-2">{% trans "No tours found" %}</h3>
+            <p class="text-slate-600 mb-6">{% trans "Try adjusting your search filters or dates" %}</p>
+            <a href="{% url 'tour_list' %}" class="inline-block bg-[#483D8B] hover:bg-[#3a3170] text-white font-semibold px-6 py-3 rounded-xl transition shadow-sm">
                 {% trans "Clear All Filters" %}
             </a>
         </div>
     {% endif %}
-</div>
+</section>
+{% endblock %}
 
-<!-- JavaScript for Date Validation -->
+{% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const tourDateInput = document.querySelector('input[name="tour_date"]');
-        
-        // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         if (tourDateInput) {
             tourDateInput.setAttribute('min', today);

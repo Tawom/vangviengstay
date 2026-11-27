@@ -1,35 +1,90 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
 
-{% block title %}Contact Us - Vang Vieng Stay{% endblock %}
+{% block title %}{% trans "Contact Us" %} - Vang Vieng Stay{% endblock %}
+
+{% block hero_bg %}{% static 'images/vangvieng-hero.png' %}{% endblock %}
+{% block hero_alt %}{% trans 'Vang Vieng limestone karst mountains and Nam Song River, Laos' %}{% endblock %}
+{% block hero_title %}{% trans "Get in Touch" %}{% endblock %}
+{% block hero_subtitle %}{% trans "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours." %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-card {
+        margin-top: -3.5rem;
+        position: relative;
+        z-index: 20;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form input[type="tel"],
+    .contact-form input[type="number"],
+    .contact-form select,
+    .contact-form textarea {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #0f172a;
+        background-color: #f8fafc;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-form input:hover,
+    .contact-form select:hover,
+    .contact-form textarea:hover {
+        border-color: #94a3b8;
+        background-color: #ffffff;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: #483D8B;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(72, 61, 139, 0.14);
+    }
+
+    .contact-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    @media (max-width: 768px) {
+        .contact-card {
+            margin-top: -2.25rem;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto px-4 py-12">
-    
-    <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-3">{% trans "Get in Touch" %}</h1>
-        <p class="text-lg text-gray-600">
-            {% trans "Have a question? We'd love to hear from you. Send us a message and we'll respond within 24 hours." %}
-        </p>
-    </div>
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
 
-    <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-        
+    <div class="contact-card bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 border border-slate-200/90">
+
         {% if messages %}
             {% for message in messages %}
-                <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
+                <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm font-medium">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endif %}
 
-        <form method="post" class="space-y-5">
+        <form method="post" class="contact-form space-y-5">
             {% csrf_token %}
-            
+
             <!-- Name & Email Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
                         {% trans "Your Name" %} *
                     </label>
                     {{ form.name }}
@@ -38,7 +93,7 @@
                     {% endif %}
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <label for="{{ form.email.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
                         {% trans "Email Address" %} *
                     </label>
                     {{ form.email }}
@@ -51,22 +106,28 @@
             <!-- Phone & Subject Row -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <label for="{{ form.phone.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
                         {% trans "Phone Number" %}
                     </label>
                     {{ form.phone }}
+                    {% if form.phone.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.phone.errors.0 }}</p>
+                    {% endif %}
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <label for="{{ form.subject.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
                         {% trans "Subject" %} *
                     </label>
                     {{ form.subject }}
+                    {% if form.subject.errors %}
+                        <p class="text-red-600 text-sm mt-1">{{ form.subject.errors.0 }}</p>
+                    {% endif %}
                 </div>
             </div>
 
             <!-- Message -->
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                <label for="{{ form.message.id_for_label }}" class="block text-sm font-semibold text-slate-700 mb-2">
                     {% trans "Your Message" %} *
                 </label>
                 {{ form.message }}
@@ -76,11 +137,11 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition shadow-md">
+            <button type="submit" class="w-full bg-[#483D8B] hover:bg-[#3a3170] text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md hover:shadow-lg cursor-pointer">
                 {% trans "Send Message" %}
             </button>
 
-            <p class="text-xs text-gray-500 text-center">
+            <p class="text-xs text-slate-500 text-center">
                 {% trans "We respect your privacy. Your information will never be shared." %}
             </p>
         </form>
@@ -88,20 +149,20 @@
 
     <!-- Contact Info Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-        <div class="bg-white rounded-lg p-5 border border-gray-100 text-center">
+        <div class="pro-card p-5 text-center">
             <div class="text-2xl mb-2">📧</div>
-            <p class="text-sm text-gray-600">Email</p>
-            <p class="font-semibold text-gray-900">info@vangviengstay.com</p>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">{% trans "Email" %}</p>
+            <p class="font-semibold text-slate-900 mt-1 text-sm">info@vangviengstay.com</p>
         </div>
-        <div class="bg-white rounded-lg p-5 border border-gray-100 text-center">
+        <div class="pro-card p-5 text-center">
             <div class="text-2xl mb-2">📱</div>
-            <p class="text-sm text-gray-600">WhatsApp</p>
-            <p class="font-semibold text-gray-900">+856 20 979 25169</p>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">{% trans "WhatsApp" %}</p>
+            <p class="font-semibold text-slate-900 mt-1 text-sm">+856 20 979 25169</p>
         </div>
-        <div class="bg-white rounded-lg p-5 border border-gray-100 text-center">
+        <div class="pro-card p-5 text-center">
             <div class="text-2xl mb-2">⏰</div>
-            <p class="text-sm text-gray-600">Response Time</p>
-            <p class="font-semibold text-gray-900">Within 24 hours</p>
+            <p class="text-xs font-medium uppercase tracking-wider text-slate-500">{% trans "Response Time" %}</p>
+            <p class="font-semibold text-slate-900 mt-1 text-sm">{% trans "Within 24 hours" %}</p>
         </div>
     </div>
 </div>

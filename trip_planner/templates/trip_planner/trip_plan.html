@@ -1,73 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
+
+{% block title %}{% trans "Plan My Trip" %} - Vang Vieng Stay{% endblock %}
+
+{% block hero_bg %}{% static 'images/vangvieng-hero.png' %}{% endblock %}
+{% block hero_alt %}{% trans 'Vang Vieng limestone karst mountains and Nam Song River, Laos' %}{% endblock %}
+{% block hero_title %}{% trans "Plan My Perfect Vang Vieng Trip" %}{% endblock %}
+{% block hero_subtitle %}{% trans "Tell us your vibe — our local team will craft a personalized itinerary just for you." %}{% endblock %}
+
 {% block extra_css %}
 <style>
-    /* Page Wrapper */
-    .trip-page-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Hero Section */
-    .trip-hero {
-        width: 100%;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
-        color: #ffffff;
-        padding: 4.5rem 1rem 6.5rem;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    .trip-hero h1 {
-        font-size: clamp(2rem, 4vw, 2.85rem);
-        font-weight: 800;
-        margin: 0 auto 0.75rem;
-        max-width: 780px;
-    }
-
-    .trip-hero p {
-        font-size: clamp(1rem, 1.8vw, 1.2rem);
-        opacity: 0.95;
-        max-width: 640px;
-        margin: 0 auto;
-    }
-
-    /* Centered Form Container */
-    .trip-form-section {
-        width: 100%;
-        max-width: 820px;
-        margin: 0 auto;
-        padding: 0 1rem 3.5rem;
-        box-sizing: border-box;
-    }
-
-    /* Form Card Centered in Middle of Page */
     .trip-form-card {
         width: 100%;
         max-width: 780px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        margin-top: -4rem !important;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -3.5rem;
         background: #ffffff;
         border-radius: 24px;
         box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
         position: relative;
-        z-index: 10;
-        padding: 2.5rem;
-        border: 1px solid #edf2f7;
-        box-sizing: border-box;
+        z-index: 20;
+        padding: 2.25rem;
+        border: 1px solid #e2e8f0;
     }
 
-    /* Proper Form Typography & Spacing */
     .trip-form-card .form-label {
         display: block;
         font-weight: 600;
         color: #1e293b;
-        font-size: 0.925rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.45rem;
     }
 
     .trip-form-card .form-control,
@@ -82,14 +46,13 @@
         display: block;
         width: 100%;
         box-sizing: border-box;
-        border: 1.5px solid #cbd5e1 !important;
-        border-radius: 12px !important;
-        padding: 0.8rem 1rem !important;
-        font-size: 0.975rem !important;
-        line-height: 1.45 !important;
-        color: #0f172a !important;
-        background-color: #f8fafc !important;
-        box-shadow: none !important;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #0f172a;
+        background-color: #f8fafc;
         transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -98,8 +61,8 @@
     .trip-form-card input:hover,
     .trip-form-card select:hover,
     .trip-form-card textarea:hover {
-        border-color: #94a3b8 !important;
-        background-color: #ffffff !important;
+        border-color: #94a3b8;
+        background-color: #ffffff;
     }
 
     .trip-form-card .form-control:focus,
@@ -107,10 +70,10 @@
     .trip-form-card input:focus,
     .trip-form-card select:focus,
     .trip-form-card textarea:focus {
-        outline: none !important;
-        border-color: #2563eb !important;
-        background-color: #ffffff !important;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14) !important;
+        outline: none;
+        border-color: #483D8B;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(72, 61, 139, 0.14);
     }
 
     .trip-form-card textarea {
@@ -133,56 +96,55 @@
     }
 
     .interest-option label {
-        display: flex !important;
+        display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
-        margin-bottom: 0 !important;
-        padding: 1rem 1.25rem !important;
+        margin-bottom: 0;
+        padding: 0.95rem 1.15rem;
         border: 1.5px solid #cbd5e1;
         border-radius: 14px;
         background-color: #ffffff;
         color: #1e293b;
         font-weight: 500;
-        font-size: 0.95rem;
+        font-size: 0.925rem;
         cursor: pointer;
         transition: all 0.2s ease;
     }
 
     .interest-option label:hover {
-        border-color: #2563eb;
+        border-color: #483D8B;
         background-color: #f8fafc;
     }
 
     .interest-option input[type="checkbox"]:checked + label {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
-        color: #ffffff !important;
-        border-color: #1e3c72 !important;
-        box-shadow: 0 8px 20px rgba(30, 60, 114, 0.22);
+        background: linear-gradient(135deg, #483D8B 0%, #3730a3 100%);
+        color: #ffffff;
+        border-color: #483D8B;
+        box-shadow: 0 8px 20px rgba(72, 61, 139, 0.22);
     }
 
     /* Submit Button */
     .trip-form-card .btn-trip-submit {
         display: block;
         width: 100%;
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 14px !important;
-        padding: 1rem 1.75rem !important;
-        font-size: 1.05rem !important;
-        font-weight: 700 !important;
+        background: linear-gradient(135deg, #483D8B 0%, #3730a3 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 14px;
+        padding: 1rem 1.75rem;
+        font-size: 1.025rem;
+        font-weight: 700;
         cursor: pointer;
-        box-shadow: 0 10px 25px rgba(30, 60, 114, 0.25);
+        box-shadow: 0 10px 25px rgba(72, 61, 139, 0.25);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .trip-form-card .btn-trip-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(30, 60, 114, 0.35);
+        box-shadow: 0 14px 30px rgba(72, 61, 139, 0.35);
     }
 
-    /* Sections & Errors */
     .form-section {
         padding-bottom: 1.75rem;
         margin-bottom: 1.75rem;
@@ -232,13 +194,9 @@
     }
 
     @media (max-width: 768px) {
-        .trip-hero {
-            padding: 3rem 1rem 4.5rem;
-        }
-
         .trip-form-card {
             padding: 1.5rem 1.15rem;
-            margin-top: -2.5rem !important;
+            margin-top: -2.25rem;
             border-radius: 18px;
         }
     }
@@ -246,345 +204,161 @@
 {% endblock %}
 
 {% block content %}
-<div class="trip-page-wrapper">
-    <!-- Hero Section -->
-    <div class="trip-hero">
-        <h1>{% trans "Plan My Perfect Vang Vieng Trip" %}</h1>
-        <p>{% trans "Tell us your vibe — our local team will craft a personalized itinerary just for you." %}</p>
-    </div>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+    <div class="trip-form-card">
+        {% if form.non_field_errors %}
+            <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-medium mb-6">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    <!-- Centered Form Section -->
-    <div class="trip-form-section">
-        <div class="trip-form-card">
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger mb-4">
-                    {% for error in form.non_field_errors %}
-                        <p class="mb-0">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
+        <form method="post" novalidate>
+            {% csrf_token %}
 
-            <form method="post" novalidate>
-                {% csrf_token %}
+            <!-- Contact Section -->
+            <div class="form-section">
+                <h2 class="font-display font-bold text-lg text-slate-900 mb-4">{% trans "👋 Tell us about yourself" %}</h2>
 
-                <!-- Contact Section -->
-                <div class="form-section">
-                    <h5 class="fw-bold mb-3">{% trans "👋 Tell us about yourself" %}</h5>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">{% trans "Your Name" %} *</label>
-                        <input type="text" name="name" class="form-control"
-                               value="{{ form.name.value|default:'' }}" 
-                               placeholder="{% trans 'Enter your full name' %}" required>
-                        {% if form.name.errors %}
-                            <div class="error-message">{{ form.name.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">{% trans "Email" %}</label>
-                            <input type="email" name="email" class="form-control"
-                                   value="{{ form.email.value|default:'' }}" 
-                                   placeholder="you@example.com">
-                            {% if form.email.errors %}
-                                <div class="error-message">{{ form.email.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">{% trans "WhatsApp" %}</label>
-                            <input type="tel" name="whatsapp" class="form-control"
-                                   value="{{ form.whatsapp.value|default:'' }}" 
-                                   placeholder="+856 20 XXXX XXXX">
-                            {% if form.whatsapp.errors %}
-                                <div class="error-message">{{ form.whatsapp.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <p class="text-muted small mt-2 mb-0">
-                        {% trans "Provide at least one way for us to reach you." %}
-                    </p>
-                </div>
-
-                <!-- Trip Details Section -->
-                <div class="form-section">
-                    <h5 class="fw-bold mb-3">{% trans "📅 Your trip details" %}</h5>
-                    
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">{% trans "Arrival Date" %} *</label>
-                            <input type="date" name="travel_date_start" class="form-control"
-                                   value="{{ form.travel_date_start.value|default:'' }}" required>
-                            {% if form.travel_date_start.errors %}
-                                <div class="error-message">{{ form.travel_date_start.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">{% trans "Departure Date" %} *</label>
-                            <input type="date" name="travel_date_end" class="form-control"
-                                   value="{{ form.travel_date_end.value|default:'' }}" required>
-                            {% if form.travel_date_end.errors %}
-                                <div class="error-message">{{ form.travel_date_end.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">{% trans "Group Size" %} *</label>
-                        <input type="number" name="group_size" class="form-control" 
-                               min="1" max="50"
-                               value="{{ form.group_size.value|default:'1' }}" required>
-                        {% if form.group_size.errors %}
-                            <div class="error-message">{{ form.group_size.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <!-- Interests Section -->
-                <div class="form-section">
-                    <h5 class="fw-bold mb-3">{% trans "✨ What sounds most exciting?" %} *</h5>
-                    <div class="row g-3">
-                        {% for value, label in form.fields.interests.choices %}
-                            <div class="col-md-6">
-                                <div class="interest-option">
-                                    <input type="checkbox" 
-                                           name="interests" 
-                                           value="{{ value }}" 
-                                           id="interest_{{ value }}"
-                                           {% if value in form.interests.value|default:'' %}checked{% endif %}>
-                                    <label for="interest_{{ value }}">
-                                        {{ label }}
-                                    </label>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {% if form.interests.errors %}
-                        <div class="error-message mt-2">{{ form.interests.errors.0 }}</div>
+                <div class="mb-4">
+                    <label for="id_name" class="form-label">{% trans "Your Name" %} *</label>
+                    <input id="id_name" type="text" name="name" class="form-control"
+                           value="{{ form.name.value|default:'' }}"
+                           placeholder="{% trans 'Enter your full name' %}" required>
+                    {% if form.name.errors %}
+                        <div class="error-message">{{ form.name.errors.0 }}</div>
                     {% endif %}
                 </div>
 
-                <!-- Budget & Notes Section -->
-                <div class="form-section">
-                    <h5 class="fw-bold mb-3">{% trans "💰 Your preferences" %}</h5>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">{% trans "Budget Level" %}</label>
-                        <select name="budget" class="form-select">
-                            <option value="budget" {% if form.budget.value == 'budget' %}selected{% endif %}>
-                                💰 {% trans "Budget-friendly" %}
-                            </option>
-                            <option value="mid" {% if form.budget.value == 'mid' %}selected{% endif %}>
-                                💰💰 {% trans "Mid-range" %}
-                            </option>
-                            <option value="premium" {% if form.budget.value == 'premium' %}selected{% endif %}>
-                                💰💰💰 {% trans "Premium" %}
-                            </option>
-                        </select>
-                    </div>
-
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="form-label">{% trans "Anything special we should know?" %}</label>
-                        <textarea name="special_requests" class="form-control" rows="3"
-                                  placeholder="{% trans 'Dietary needs, accessibility, celebrations, hidden gems you want to see...' %}">{{ form.special_requests.value|default:'' }}</textarea>
+                        <label for="id_email" class="form-label">{% trans "Email" %}</label>
+                        <input id="id_email" type="email" name="email" class="form-control"
+                               value="{{ form.email.value|default:'' }}"
+                               placeholder="you@example.com">
+                        {% if form.email.errors %}
+                            <div class="error-message">{{ form.email.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="id_whatsapp" class="form-label">{% trans "WhatsApp" %}</label>
+                        <input id="id_whatsapp" type="tel" name="whatsapp" class="form-control"
+                               value="{{ form.whatsapp.value|default:'' }}"
+                               placeholder="+856 20 XXXX XXXX">
+                        {% if form.whatsapp.errors %}
+                            <div class="error-message">{{ form.whatsapp.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-slate-500 text-xs mt-2.5">
+                    {% trans "Provide at least one way for us to reach you." %}
+                </p>
+            </div>
+
+            <!-- Trip Details Section -->
+            <div class="form-section">
+                <h2 class="font-display font-bold text-lg text-slate-900 mb-4">{% trans "📅 Your trip details" %}</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="id_travel_date_start" class="form-label">{% trans "Arrival Date" %} *</label>
+                        <input id="id_travel_date_start" type="date" name="travel_date_start" class="form-control"
+                               value="{{ form.travel_date_start.value|default:'' }}" required>
+                        {% if form.travel_date_start.errors %}
+                            <div class="error-message">{{ form.travel_date_start.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="id_travel_date_end" class="form-label">{% trans "Departure Date" %} *</label>
+                        <input id="id_travel_date_end" type="date" name="travel_date_end" class="form-control"
+                               value="{{ form.travel_date_end.value|default:'' }}" required>
+                        {% if form.travel_date_end.errors %}
+                            <div class="error-message">{{ form.travel_date_end.errors.0 }}</div>
+                        {% endif %}
                     </div>
                 </div>
 
-                <!-- Submit -->
-                <button type="submit" class="btn btn-trip-submit w-100">
-                    {% trans "Send My Trip Request" %} 🚀
-                </button>
-
-                <!-- Trust Badges -->
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <div class="trust-badge-icon">✓</div>
-                        <span>{% trans "Free service" %}</span>
-                    </div>
-                    <div class="trust-badge">
-                        <div class="trust-badge-icon">✓</div>
-                        <span>{% trans "No commitment" %}</span>
-                    </div>
-                    <div class="trust-badge">
-                        <div class="trust-badge-icon">✓</div>
-                        <span>{% trans "Reply within 24h" %}</span>
-                    </div>
+                <div>
+                    <label for="id_group_size" class="form-label">{% trans "Group Size" %} *</label>
+                    <input id="id_group_size" type="number" name="group_size" class="form-control"
+                           min="1" max="50"
+                           value="{{ form.group_size.value|default:'1' }}" required>
+                    {% if form.group_size.errors %}
+                        <div class="error-message">{{ form.group_size.errors.0 }}</div>
+                    {% endif %}
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <!-- Interests Section -->
+            <div class="form-section">
+                <h2 class="font-display font-bold text-lg text-slate-900 mb-4">{% trans "✨ What sounds most exciting?" %} *</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {% for value, label in form.fields.interests.choices %}
+                        <div class="interest-option">
+                            <input type="checkbox"
+                                   name="interests"
+                                   value="{{ value }}"
+                                   id="interest_{{ value }}"
+                                   {% if value in form.interests.value|default:'' %}checked{% endif %}>
+                            <label for="interest_{{ value }}">
+                                {{ label }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if form.interests.errors %}
+                    <div class="error-message mt-2">{{ form.interests.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Budget & Notes Section -->
+            <div class="form-section">
+                <h2 class="font-display font-bold text-lg text-slate-900 mb-4">{% trans "💰 Your preferences" %}</h2>
+
+                <div class="mb-4">
+                    <label for="id_budget" class="form-label">{% trans "Budget Level" %}</label>
+                    <select id="id_budget" name="budget" class="form-select">
+                        <option value="budget" {% if form.budget.value == 'budget' %}selected{% endif %}>
+                            💰 {% trans "Budget-friendly" %}
+                        </option>
+                        <option value="mid" {% if form.budget.value == 'mid' %}selected{% endif %}>
+                            💰💰 {% trans "Mid-range" %}
+                        </option>
+                        <option value="premium" {% if form.budget.value == 'premium' %}selected{% endif %}>
+                            💰💰💰 {% trans "Premium" %}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="id_special_requests" class="form-label">{% trans "Anything special we should know?" %}</label>
+                    <textarea id="id_special_requests" name="special_requests" class="form-control" rows="3"
+                              placeholder="{% trans 'Dietary needs, accessibility, celebrations, hidden gems you want to see...' %}">{{ form.special_requests.value|default:'' }}</textarea>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-trip-submit">
+                {% trans "Send My Trip Request" %} 🚀
+            </button>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <span>{% trans "Free service" %}</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <span>{% trans "No commitment" %}</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <span>{% trans "Reply within 24h" %}</span>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
-
-<!-- Hero Section -->
-<div class="trip-hero">
-    <div class="container text-center">
-        <h1>{% trans "Plan My Perfect Vang Vieng Trip" %}</h1>
-        <p>{% trans "Tell us your vibe — our local team will craft a personalized itinerary just for you." %}</p>
-    </div>
-</div>
-
-<!-- Form Section -->
-<div class="container pb-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="trip-form-card">
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger mb-4">
-                        {% for error in form.non_field_errors %}
-                            <p class="mb-0">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
-                <form method="post" novalidate>
-                    {% csrf_token %}
-
-                    <!-- Contact Section -->
-                    <div class="form-section">
-                        <h5 class="fw-bold mb-3">{% trans "👋 Tell us about yourself" %}</h5>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">{% trans "Your Name" %} *</label>
-                            <input type="text" name="name" class="form-control"
-                                   value="{{ form.name.value|default:'' }}" 
-                                   placeholder="{% trans 'Enter your full name' %}" required>
-                            {% if form.name.errors %}
-                                <div class="error-message">{{ form.name.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">{% trans "Email" %}</label>
-                                <input type="email" name="email" class="form-control"
-                                       value="{{ form.email.value|default:'' }}" 
-                                       placeholder="you@example.com">
-                                {% if form.email.errors %}
-                                    <div class="error-message">{{ form.email.errors.0 }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">{% trans "WhatsApp" %}</label>
-                                <input type="tel" name="whatsapp" class="form-control"
-                                       value="{{ form.whatsapp.value|default:'' }}" 
-                                       placeholder="+856 20 XXXX XXXX">
-                                {% if form.whatsapp.errors %}
-                                    <div class="error-message">{{ form.whatsapp.errors.0 }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <p class="text-muted small mt-2 mb-0">
-                            {% trans "Provide at least one way for us to reach you." %}
-                        </p>
-                    </div>
-
-                    <!-- Trip Details Section -->
-                    <div class="form-section">
-                        <h5 class="fw-bold mb-3">{% trans "📅 Your trip details" %}</h5>
-                        
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">{% trans "Arrival Date" %} *</label>
-                                <input type="date" name="travel_date_start" class="form-control"
-                                       value="{{ form.travel_date_start.value|default:'' }}" required>
-                                {% if form.travel_date_start.errors %}
-                                    <div class="error-message">{{ form.travel_date_start.errors.0 }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">{% trans "Departure Date" %} *</label>
-                                <input type="date" name="travel_date_end" class="form-control"
-                                       value="{{ form.travel_date_end.value|default:'' }}" required>
-                                {% if form.travel_date_end.errors %}
-                                    <div class="error-message">{{ form.travel_date_end.errors.0 }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">{% trans "Group Size" %} *</label>
-                            <input type="number" name="group_size" class="form-control" 
-                                   min="1" max="50"
-                                   value="{{ form.group_size.value|default:'1' }}" required>
-                            {% if form.group_size.errors %}
-                                <div class="error-message">{{ form.group_size.errors.0 }}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <!-- Interests Section -->
-                    <div class="form-section">
-                        <h5 class="fw-bold mb-3">{% trans "✨ What sounds most exciting?" %} *</h5>
-                        <div class="row g-3">
-                            {% for value, label in form.fields.interests.choices %}
-                                <div class="col-md-6">
-                                    <div class="interest-option">
-                                        <input type="checkbox" 
-                                               name="interests" 
-                                               value="{{ value }}" 
-                                               id="interest_{{ value }}"
-                                               {% if value in form.interests.value|default:'' %}checked{% endif %}>
-                                        <label for="interest_{{ value }}">
-                                            {{ label }}
-                                        </label>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        {% if form.interests.errors %}
-                            <div class="error-message mt-2">{{ form.interests.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <!-- Budget & Notes Section -->
-                    <div class="form-section">
-                        <h5 class="fw-bold mb-3">{% trans "💰 Your preferences" %}</h5>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">{% trans "Budget Level" %}</label>
-                            <select name="budget" class="form-select">
-                                <option value="budget" {% if form.budget.value == 'budget' %}selected{% endif %}>
-                                    💰 {% trans "Budget-friendly" %}
-                                </option>
-                                <option value="mid" {% if form.budget.value == 'mid' %}selected{% endif %}>
-                                    💰💰 {% trans "Mid-range" %}
-                                </option>
-                                <option value="premium" {% if form.budget.value == 'premium' %}selected{% endif %}>
-                                    💰💰💰 {% trans "Premium" %}
-                                </option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="form-label">{% trans "Anything special we should know?" %}</label>
-                            <textarea name="special_requests" class="form-control" rows="3"
-                                      placeholder="{% trans 'Dietary needs, accessibility, celebrations, hidden gems you want to see...' %}">{{ form.special_requests.value|default:'' }}</textarea>
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-trip-submit w-100">
-                        {% trans "Send My Trip Request" %} 🚀
-                    </button>
-
-                    <!-- Trust Badges -->
-                    <div class="trust-badges">
-                        <div class="trust-badge">
-                            <div class="trust-badge-icon">✓</div>
-                            <span>{% trans "Free service" %}</span>
-                        </div>
-                        <div class="trust-badge">
-                            <div class="trust-badge-icon">✓</div>
-                            <span>{% trans "No commitment" %}</span>
-                        </div>
-                        <div class="trust-badge">
-                            <div class="trust-badge-icon">✓</div>
-                            <span>{% trans "Reply within 24h" %}</span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

@@ -1,124 +1,153 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load humanize %}
 {% load i18n %}
 
 {% block title %}{% trans "Motorbikes for Rent" %} - Vang Vieng Stay{% endblock %}
 
-{% block content %}
-<!-- Hero Section -->
-<div class="bg-[#9A3412] text-white py-16 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100">
-            <circle cx="20" cy="20" r="2"/><circle cx="50" cy="30" r="3"/><circle cx="80" cy="20" r="2"/>
-            <circle cx="30" cy="60" r="2"/><circle cx="70" cy="70" r="3"/><circle cx="90" cy="80" r="2"/>
-        </svg>
-    </div>
-    <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3">{% trans "Rent a Motorbike" %}</h1>
-        <p class="text-white/80 mb-8 text-lg max-w-2xl mx-auto">{% trans "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure." %}</p>
-    </div>
-</div>
+{% block hero_bg %}{% static 'images/vangvieng-hero.png' %}{% endblock %}
+{% block hero_alt %}{% trans 'Vang Vieng limestone karst mountains and Nam Song River, Laos' %}{% endblock %}
+{% block hero_title %}{% trans "Rent a Motorbike" %}{% endblock %}
+{% block hero_subtitle %}{% trans "Explore Vang Vieng at your own pace. Reliable motorbikes for every adventure." %}{% endblock %}
 
-<div class="max-w-6xl mx-auto px-4 py-12">
-    
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Section Header -->
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#9A3412]">{% trans "Vang Vieng Rentals" %}</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-0.5">
+                {% if motorbikes %}
+                    {{ motorbikes|length }} {% trans "Motorbikes Available" %}
+                {% else %}
+                    {% trans "No Motorbikes Available" %}
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
     <!-- Motorbike Grid -->
     {% if motorbikes %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {% for motorbike in motorbikes %}
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group border border-gray-100 flex flex-col">
-                    
+                <article class="pro-card overflow-hidden group flex flex-col">
+
                     <!-- Image -->
-                    <div class="h-56 bg-gray-200 relative overflow-hidden">
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
                         {% if motorbike.main_image_url %}
-                            <img src="{{ motorbike.main_image_url }}" alt="{{ motorbike.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <img src="{{ motorbike.main_image_url }}"
+                                 alt="{{ motorbike.name }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         {% else %}
-                            <div class="flex items-center justify-center h-full text-gray-400 bg-[#9A3412]/10">
-                                <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            <div class="flex items-center justify-center h-full text-slate-400 bg-orange-50">
+                                <svg class="w-20 h-20 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
                         {% endif %}
-                        
+
+                        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+
+                        <!-- Daily Rate Badge -->
+                        {% if motorbike.price_per_day %}
+                            <div class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-slate-900 px-3.5 py-1.5 rounded-full text-sm font-extrabold shadow-md">
+                                ₭{{ motorbike.price_per_day|intcomma }}<span class="text-slate-500 font-medium text-xs">/{% trans "day" %}</span>
+                            </div>
+                        {% endif %}
                     </div>
 
                     <!-- Content -->
                     <div class="p-6 flex flex-col flex-grow">
-                        
-                        <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-[#9A3412] transition">{{ motorbike.name }}</h3>
-                        
+
+                        <h3 class="font-display text-xl font-bold mb-2 text-slate-900 group-hover:text-[#9A3412] transition">
+                            <a href="{% url 'motorbike_detail' motorbike.id %}">{{ motorbike.name }}</a>
+                        </h3>
+
                         <!-- Operator Badge -->
                         {% if motorbike.operator_name %}
-                        <div class="inline-flex items-center gap-1.5 bg-[#9A3412]/10 text-[#9A3412] text-xs font-semibold px-2.5 py-1 rounded-md mb-3 border border-[#9A3412]/20 w-fit">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                            </svg>
-                            {{ motorbike.operator_name }}
-                        </div>
+                            <div class="inline-flex items-center gap-1.5 bg-[#9A3412]/10 text-[#9A3412] text-xs font-semibold px-2.5 py-1 rounded-lg mb-4 border border-[#9A3412]/20 w-fit">
+                                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                                <span>{{ motorbike.operator_name }}</span>
+                            </div>
                         {% endif %}
 
                         <!-- Key Specs -->
-                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                        <div class="space-y-2 mb-4 text-sm text-slate-600">
                             <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>{% trans "Rental Type:" %} <strong class="text-gray-900">{% trans "Daily" %}</strong></span>
+                                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>{% trans "Rental Type:" %} <strong class="text-slate-900">{% trans "Daily" %}</strong></span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                                <span>{% trans "Deposit:" %} <strong class="text-gray-900">₭{{ motorbike.deposit_amount|intcomma }}</strong></span>
+                                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                                <span>{% trans "Deposit:" %} <strong class="text-slate-900">₭{{ motorbike.deposit_amount|intcomma }}</strong></span>
                             </div>
                         </div>
 
                         <!-- Description -->
                         {% if motorbike.description %}
-                            <p class="text-sm text-gray-600 mb-4 line-clamp-2 flex-grow">{{ motorbike.description|striptags }}</p>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-4 line-clamp-2 flex-grow">
+                                {{ motorbike.description|striptags }}
+                            </p>
                         {% endif %}
 
-                        <!-- Map Link -->
-                        <div class="mb-4">
-                            {% if motorbike.latitude and motorbike.longitude %}
-                                <a href="https://www.google.com/maps?q={{ motorbike.latitude }},{{ motorbike.longitude }}" 
-                                   target="_blank" 
-                                   class="inline-flex items-center gap-1 text-sm text-[#9A3412] hover:text-[#7C2D12] font-medium bg-[#9A3412]/10 px-3 py-2 rounded-lg hover:bg-[#9A3412]/20 transition w-fit">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    {% trans "View Pickup Location" %}
-                                </a>
-                            {% else %}
-                                <span class="text-sm text-gray-400 italic flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    {% trans "Pickup location pending" %}
-                                </span>
-                            {% endif %}
-                        </div>
+                        <!-- Map Link & CTA -->
+                        <div class="pt-4 border-t border-slate-100 space-y-3 mt-auto">
+                            <div>
+                                {% if motorbike.latitude and motorbike.longitude %}
+                                    <a href="https://www.google.com/maps?q={{ motorbike.latitude }},{{ motorbike.longitude }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="inline-flex items-center gap-1.5 text-xs text-[#9A3412] hover:text-[#7C2D12] font-semibold bg-[#9A3412]/10 px-3 py-1.5 rounded-lg hover:bg-[#9A3412]/15 transition">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "View Pickup Location" %}
+                                    </a>
+                                {% else %}
+                                    <span class="text-xs text-slate-400 italic flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "Pickup location pending" %}
+                                    </span>
+                                {% endif %}
+                            </div>
 
-                        <!-- Price & Button (Pushed to bottom) -->
-                        <div class="mt-auto">
-                            <div class="border-t border-gray-200 pt-4 mb-4">
-                                <p class="text-2xl font-bold text-[#9A3412]">
+                            <div class="flex items-baseline justify-between pt-1">
+                                <span class="text-xs font-medium text-slate-500">{% trans "Daily Rate" %}</span>
+                                <p class="text-2xl font-display font-extrabold text-[#9A3412]">
                                     ₭{{ motorbike.price_per_day|intcomma }}
-                                    <span class="text-sm font-normal text-gray-500">/{% trans "day" %}</span>
+                                    <span class="text-xs font-medium text-slate-500">/{% trans "day" %}</span>
                                 </p>
                             </div>
 
-                            <a href="{% url 'motorbike_detail' motorbike.id %}" class="block w-full text-center bg-[#9A3412] text-white font-semibold py-3 px-4 rounded-lg hover:bg-[#7C2D12] transition shadow-md">
+                            <a href="{% url 'motorbike_detail' motorbike.id %}"
+                               class="block w-full text-center bg-[#9A3412] hover:bg-[#7C2D12] text-white font-semibold text-sm py-3 px-4 rounded-xl transition shadow-sm">
                                 {% trans "View Details & Rent" %}
                             </a>
                         </div>
 
                     </div>
-                </div>
+                </article>
             {% endfor %}
         </div>
     {% else %}
         <!-- Empty State -->
-        <div class="text-center py-16 bg-white rounded-xl shadow-md border border-gray-200">
-            <svg class="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        <div class="text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <svg class="w-20 h-20 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
             </svg>
-            <p class="text-gray-500 text-lg mb-2">{% trans "No motorbikes available at the moment." %}</p>
-            <p class="text-gray-400 text-sm">{% trans "Please check back later or contact us for more information." %}</p>
+            <h3 class="font-display text-xl font-bold text-slate-900 mb-1">{% trans "No motorbikes available at the moment." %}</h3>
+            <p class="text-slate-500 text-sm">{% trans "Please check back later or contact us for more information." %}</p>
         </div>
     {% endif %}
 
