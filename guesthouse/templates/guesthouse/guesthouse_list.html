@@ -1,336 +1,351 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load humanize %}
 {% load i18n %}
-{% block title %}Guesthouses - Vang Vieng Stay{% endblock %}
 
-{% block content %}
-<!-- Hero Section with Advanced Search -->
-<div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-16 relative overflow-hidden">
-    <!-- Decorative background pattern -->
-    <div class="absolute inset-0 opacity-10">
-        <svg class="w-full h-full" fill="currentColor" viewBox="0 0 100 100">
-            <circle cx="10" cy="10" r="2" />
-            <circle cx="30" cy="20" r="1.5" />
-            <circle cx="50" cy="15" r="2" />
-            <circle cx="70" cy="25" r="1" />
-            <circle cx="90" cy="10" r="2" />
-            <circle cx="20" cy="40" r="1.5" />
-            <circle cx="40" cy="50" r="2" />
-            <circle cx="60" cy="45" r="1" />
-            <circle cx="80" cy="55" r="2" />
-            <circle cx="15" cy="70" r="1.5" />
-            <circle cx="35" cy="80" r="2" />
-            <circle cx="55" cy="75" r="1" />
-            <circle cx="75" cy="85" r="2" />
-            <circle cx="95" cy="70" r="1.5" />
-        </svg>
-    </div>
-    
-    <div class="max-w-6xl mx-auto px-4 relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3 text-center">{% trans "Find Your Perfect Stay" %}</h1>
-        <p class="text-blue-100 mb-10 text-center text-lg">{% trans "Discover amazing guesthouses in Vang Vieng" %}</p>
-        
-        <!-- Advanced Search Widget -->
-        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-5xl mx-auto">
-            <form method="GET" action="{% url 'guesthouse_list' %}" class="space-y-6">
-                
-                <!-- Row 1: Dates -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Check-in" %}
-                        </label>
+{% block title %}{% trans "Guesthouses" %} - Vang Vieng Stay{% endblock %}
 
-                        <input type="date" name="check_in" value="{{ check_in|default:'' }}" 
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800"
-                               required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Check-out" %}
-                        </label>
+{% block hero_bg %}{% static 'images/vangvieng-hero.png' %}{% endblock %}
+{% block hero_alt %}{% trans 'Vang Vieng limestone karst mountains and Nam Song River, Laos' %}{% endblock %}
+{% block hero_title %}{% trans "Find Your Perfect Stay" %}{% endblock %}
+{% block hero_subtitle %}{% trans "Discover amazing guesthouses in Vang Vieng" %}{% endblock %}
 
-                        <input type="date" name="check_out" value="{{ check_out|default:'' }}" 
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800"
-                               required>
+{% block hero_extra %}
+    <!-- Advanced Search Widget -->
+    <div class="mt-10 bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-8 max-w-5xl mx-auto border border-white/40 text-slate-800">
+        <form method="GET" action="{% url 'guesthouse_list' %}" class="space-y-5">
+
+            <!-- Row 1: Dates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="id_check_in" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Check-in" %}
+                    </label>
+                    <input id="id_check_in"
+                           type="date"
+                           name="check_in"
+                           value="{{ check_in|default:'' }}"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer"
+                           required>
+                </div>
+                <div>
+                    <label for="id_check_out" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Check-out" %}
+                    </label>
+                    <input id="id_check_out"
+                           type="date"
+                           name="check_out"
+                           value="{{ check_out|default:'' }}"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer"
+                           required>
+                </div>
+            </div>
+
+            <!-- Row 2: Guests, Price Range, City -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Guests -->
+                <div>
+                    <label for="id_guests" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Guests" %}
+                    </label>
+                    <select id="id_guests"
+                            name="guests"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer">
+                        <option value="1" {% if guests == '1' %}selected{% endif %}>1 {% trans "Guest" %}</option>
+                        <option value="2" {% if guests == '2' %}selected{% endif %}>2 {% trans "Guests" %}</option>
+                        <option value="3" {% if guests == '3' %}selected{% endif %}>3 {% trans "Guests" %}</option>
+                        <option value="4" {% if guests == '4' %}selected{% endif %}>4 {% trans "Guests" %}</option>
+                        <option value="5" {% if guests == '5' %}selected{% endif %}>5+ {% trans "Guests" %}</option>
+                    </select>
+                </div>
+
+                <!-- Price Range -->
+                <div>
+                    <label class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Price per Night (₭)" %}
+                    </label>
+                    <div class="flex gap-2 items-center">
+                        <input type="number"
+                               name="min_price"
+                               value="{{ min_price }}"
+                               placeholder="{% trans 'Min' %}"
+                               min="0"
+                               aria-label="{% trans 'Minimum price per night' %}"
+                               class="w-full px-3 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
+                        <span class="text-slate-400 font-semibold">-</span>
+                        <input type="number"
+                               name="max_price"
+                               value="{{ max_price }}"
+                               placeholder="{% trans 'Max' %}"
+                               min="0"
+                               aria-label="{% trans 'Maximum price per night' %}"
+                               class="w-full px-3 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
                     </div>
                 </div>
-                
-                <!-- Row 2: Guests, Price Range, City -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Guests -->
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            {% trans "Guests" %}
-                        </label>
 
-                        <select name="guests" 
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800 bg-white">
-                            <option value="1" {% if guests == '1' %}selected{% endif %}>1 Guest</option>
-                            <option value="2" {% if guests == '2' %}selected{% endif %}>2 Guests</option>
-                            <option value="3" {% if guests == '3' %}selected{% endif %}>3 Guests</option>
-                            <option value="4" {% if guests == '4' %}selected{% endif %}>4 Guests</option>
-                            <option value="5" {% if guests == '5' %}selected{% endif %}>5+ Guests</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Price Range -->
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            Price per Night
-                        </label>
-                        <div class="flex gap-2 items-center">
-                            <input type="number" name="min_price" value="{{ min_price }}" placeholder="Min" min="0"
-                                   class="w-full px-3 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800">
-                            <span class="text-gray-400">-</span>
-                            <input type="number" name="max_price" value="{{ max_price }}" placeholder="Max" min="0"
-                                   class="w-full px-3 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800">
-                        </div>
-                    </div>
-                    
-                    <!-- City -->
-                    <div>
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            Location
-                        </label>
-                        <select name="city" 
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800 bg-white">
-                            <option value="">All Locations</option>
-                            {% for city_name in available_cities %}
-                                <option value="{{ city_name }}" {% if selected_city == city_name %}selected{% endif %}>
-                                    {{ city_name }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                <!-- City -->
+                <div>
+                    <label for="id_city" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Location" %}
+                    </label>
+                    <select id="id_city"
+                            name="city"
+                            class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium cursor-pointer">
+                        <option value="">{% trans "All Locations" %}</option>
+                        {% for city_name in available_cities %}
+                            <option value="{{ city_name }}" {% if selected_city == city_name %}selected{% endif %}>
+                                {{ city_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 3: Search Text + Button -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                <div class="md:col-span-9">
+                    <label for="id_search" class="block text-slate-700 font-bold mb-1.5 text-xs uppercase tracking-wider">
+                        {% trans "Search by Name or Keyword" %}
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                        <input id="id_search"
+                               type="text"
+                               name="search"
+                               value="{{ search_query }}"
+                               placeholder="{% trans 'e.g., Riverside, Mountain View, Pool...' %}"
+                               class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:border-[#483D8B] focus:ring-2 focus:ring-[#483D8B]/20 outline-none transition text-slate-800 bg-white text-sm font-medium">
                     </div>
                 </div>
-                
-                <!-- Row 3: Search Text + Button -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-                    <div class="md:col-span-9">
-                        <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wide">
-                            Search by Name or Keyword
-                        </label>
-                        <input type="text" name="search" value="{{ search_query }}" 
-                               placeholder="e.g., Riverside, Mountain View, Pool..."
-                               class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition text-gray-800">
-                    </div>
-                    <div class="md:col-span-3">
-                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                                {% trans "Search" %}
-                        </button>
-
-                    </div>
+                <div class="md:col-span-3">
+                    <button type="submit"
+                            class="w-full bg-[#483D8B] hover:bg-[#3a3170] text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-[#483D8B]/25 hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        {% trans "Search" %}
+                    </button>
                 </div>
-                
-                <!-- Active Filters Display -->
-                {% if search_query or check_in or check_out or selected_city or min_price or max_price %}
-                    <div class="pt-4 border-t border-gray-200">
-                        <div class="flex flex-wrap gap-2 items-center">
-                            <span class="text-sm text-gray-600 font-semibold">Active Filters:</span>
-                            {% if search_query %}
-                                <span class="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
-                                    Search: "{{ search_query }}"
-                                    <a href="{% url 'guesthouse_list' %}?check_in={{ check_in }}&check_out={{ check_out }}&guests={{ guests }}&city={{ selected_city }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-blue-900">✕</a>
-                                </span>
-                            {% endif %}
-                            {% if check_in and check_out %}
-                                <span class="inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
-                                    {{ check_in }} to {{ check_out }}
-                                    <a href="{% url 'guesthouse_list' %}?search={{ search_query }}&guests={{ guests }}&city={{ selected_city }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-green-900">✕</a>
-                                </span>
-                            {% endif %}
-                            {% if selected_city %}
-                                <span class="inline-flex items-center gap-1 bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">
-                                    {{ selected_city }}
-                                    <a href="{% url 'guesthouse_list' %}?search={{ search_query }}&check_in={{ check_in }}&check_out={{ check_out }}&guests={{ guests }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-purple-900">✕</a>
-                                </span>
-                            {% endif %}
-                            <a href="{% url 'guesthouse_list' %}" class="text-sm text-red-600 hover:text-red-800 font-semibold ml-auto">
-                                Clear All Filters
-                            </a>
-                        </div>
-                    </div>
-                {% endif %}
-                
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- ========================================== -->
-<!-- ✅ SOCIAL PROOF STATS BAR (NEWLY ADDED)    -->
-<!-- ========================================== -->
-<div class="bg-white shadow-xl rounded-2xl max-w-5xl mx-auto -mt-16 relative z-20 border border-gray-100 mb-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
-        
-        <!-- Stat 1: Happy Travelers -->
-        <div class="p-6 text-center">
-            <div class="flex items-center justify-center mb-2">
-                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
             </div>
-            <p class="text-3xl font-bold text-gray-900">{{ total_travelers|default:"1,200" }}+</p>
-            <p class="text-sm text-gray-500 font-medium mt-1">Happy Travelers</p>
-        </div>
 
-        <!-- Stat 2: Average Rating -->
-        <div class="p-6 text-center">
-            <div class="flex items-center justify-center mb-2">
-                <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                </svg>
-            </div>
-            <p class="text-3xl font-bold text-gray-900">{{ overall_rating|default:"4.9" }}</p>
-            <p class="text-sm text-gray-500 font-medium mt-1">Average Rating ({{ total_reviews|default:"350" }}+ reviews)</p>
-        </div>
-
-        <!-- Stat 3: Local Experiences -->
-        <div class="p-6 text-center">
-            <div class="flex items-center justify-center mb-2">
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-            </div>
-            <p class="text-3xl font-bold text-gray-900">{{ total_listings|default:"50" }}+</p>
-            <p class="text-sm text-gray-500 font-medium mt-1">Local Experiences</p>
-        </div>
-
-        <!-- Stat 4: Secure & Verified -->
-        <div class="p-6 text-center">
-            <div class="flex items-center justify-center mb-2">
-                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                </svg>
-            </div>
-            <p class="text-3xl font-bold text-gray-900">100%</p>
-            <p class="text-sm text-gray-500 font-medium mt-1">Secure & Verified</p>
-        </div>
-
-    </div>
-</div>
-
-<!-- Results Section -->
-<div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">
-            {% if guesthouses %}
-                {{ guesthouses|length }} {{ guesthouses|length|pluralize:"Guesthouse,Guesthouses" }} Found
-            {% else %}
-                No Results
-            {% endif %}
-        </h2>
-    </div>
-    
-    {% if guesthouses %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for guesthouse in guesthouses %}
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col">
-                    <!-- Image -->
-                    <div class="h-56 bg-gray-200 relative overflow-hidden">
-                        {% if guesthouse.main_image_url %}
-                            <img src="{{ guesthouse.main_image_url }}" alt="{{ guesthouse.name }}" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        {% else %}
-                            <div class="flex items-center justify-center h-full text-gray-400">
-                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
+            <!-- Active Filters Display -->
+            {% if search_query or check_in or check_out or selected_city or min_price or max_price %}
+                <div class="pt-4 border-t border-slate-200">
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <span class="text-xs text-slate-600 font-bold uppercase tracking-wider">{% trans "Active Filters" %}:</span>
+                        {% if search_query %}
+                            <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-800 border border-indigo-200 text-xs font-semibold px-3 py-1 rounded-full">
+                                {% trans "Search" %}: "{{ search_query }}"
+                                <a href="{% url 'guesthouse_list' %}?check_in={{ check_in }}&check_out={{ check_out }}&guests={{ guests }}&city={{ selected_city }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-indigo-950">✕</a>
+                            </span>
                         {% endif %}
-                        
-                        <!-- Price Badge (Updated to LAK) -->
-                        <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
-                            ₭{{ guesthouse.price_per_night | intcomma }}<span class="text-gray-500 text-xs">/night</span>
-                        </div>
-                        
-                        <!-- Rating Badge (if reviews exist) -->
-                        {% if guesthouse.review_count > 0 %}
-                            <div class="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
-                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                                {{ guesthouse.average_rating }}
-                                <span class="text-gray-500 text-xs">({{ guesthouse.review_count }})</span>
-                            </div>
+                        {% if check_in and check_out %}
+                            <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold px-3 py-1 rounded-full">
+                                {{ check_in }} {% trans "to" %} {{ check_out }}
+                                <a href="{% url 'guesthouse_list' %}?search={{ search_query }}&guests={{ guests }}&city={{ selected_city }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-emerald-950">✕</a>
+                            </span>
                         {% endif %}
-                    </div>
-                    
-                    <!-- Content -->
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition">
-                            {{ guesthouse.name }}
-                        </h3>
-                        
-                        <p class="text-gray-500 text-sm mb-3 flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            {{ guesthouse.city }}
-                        </p>
-                        
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 flex-grow">
-                            {{ guesthouse.description }}
-                        </p>
-                        
-                        <!-- NEW: Map Link (Only shows if coordinates exist) -->
-                        <div class="mb-4">
-                            {% if guesthouse.latitude and guesthouse.longitude %}
-                                <a href="https://www.google.com/maps?q={{ guesthouse.latitude }},{{ guesthouse.longitude }}" 
-                                   target="_blank" 
-                                   class="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 font-medium bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100 transition w-fit">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    View on Map
-                                </a>
-                            {% else %}
-                                <span class="text-sm text-gray-400 italic flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    Map pending
-                                </span>
-                            {% endif %}
-                        </div>
-                        
-                        <a href="{% url 'guesthouse_detail' guesthouse.id %}" 
-                           class="block w-full text-center bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition mt-auto">
-                            View Details & Book
+                        {% if selected_city %}
+                            <span class="inline-flex items-center gap-1.5 bg-purple-50 text-purple-800 border border-purple-200 text-xs font-semibold px-3 py-1 rounded-full">
+                                {{ selected_city }}
+                                <a href="{% url 'guesthouse_list' %}?search={{ search_query }}&check_in={{ check_in }}&check_out={{ check_out }}&guests={{ guests }}&min_price={{ min_price }}&max_price={{ max_price }}" class="hover:text-purple-950">✕</a>
+                            </span>
+                        {% endif %}
+                        <a href="{% url 'guesthouse_list' %}" class="text-xs text-red-600 hover:text-red-800 font-semibold ml-auto">
+                            {% trans "Clear All Filters" %}
                         </a>
                     </div>
                 </div>
+            {% endif %}
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block content %}
+<!-- Social Proof Stats Bar -->
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20 mb-10">
+    <div class="pro-card shadow-xl overflow-hidden">
+        <div class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+
+            <!-- Stat 1: Happy Travelers -->
+            <div class="p-5 sm:p-6 text-center">
+                <div class="flex items-center justify-center mb-2">
+                    <svg class="w-7 h-7 text-[#483D8B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">{{ total_travelers|default:"1,200" }}+</p>
+                <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">{% trans "Happy Travelers" %}</p>
+            </div>
+
+            <!-- Stat 2: Average Rating -->
+            <div class="p-5 sm:p-6 text-center">
+                <div class="flex items-center justify-center mb-2">
+                    <svg class="w-7 h-7 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                </div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">{{ overall_rating|default:"4.9" }}</p>
+                <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">{% trans "Average Rating" %} ({{ total_reviews|default:"350" }}+ {% trans "reviews" %})</p>
+            </div>
+
+            <!-- Stat 3: Local Experiences -->
+            <div class="p-5 sm:p-6 text-center">
+                <div class="flex items-center justify-center mb-2">
+                    <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">{{ total_listings|default:"50" }}+</p>
+                <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">{% trans "Local Experiences" %}</p>
+            </div>
+
+            <!-- Stat 4: Secure & Verified -->
+            <div class="p-5 sm:p-6 text-center">
+                <div class="flex items-center justify-center mb-2">
+                    <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                </div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">100%</p>
+                <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">{% trans "Secure & Verified" %}</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Results Section -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+        <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600">{% trans "Vang Vieng Stays" %}</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 mt-0.5">
+                {% if guesthouses %}
+                    {{ guesthouses|length }} {{ guesthouses|length|pluralize:"Guesthouse,Guesthouses" }} {% trans "Found" %}
+                {% else %}
+                    {% trans "No Results" %}
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+
+    {% if guesthouses %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {% for guesthouse in guesthouses %}
+                <article class="pro-card overflow-hidden group flex flex-col">
+                    <!-- Image -->
+                    <div class="h-56 bg-slate-200 relative overflow-hidden">
+                        {% if guesthouse.main_image_url %}
+                            <img src="{{ guesthouse.main_image_url }}"
+                                 alt="{{ guesthouse.name }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% else %}
+                            <div class="flex items-center justify-center h-full text-slate-400 bg-slate-100">
+                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                        {% endif %}
+
+                        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+
+                        <!-- Price Badge (LAK) -->
+                        <div class="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-sm text-slate-900 px-3.5 py-1.5 rounded-full text-sm font-extrabold shadow-md">
+                            ₭{{ guesthouse.price_per_night|intcomma }}<span class="text-slate-500 font-medium text-xs">/{% trans "night" %}</span>
+                        </div>
+
+                        <!-- Rating Badge (if reviews exist) -->
+                        {% if guesthouse.review_count > 0 %}
+                            <div class="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-sm text-slate-900 px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1">
+                                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                {{ guesthouse.average_rating }}
+                                <span class="text-slate-500 font-normal">({{ guesthouse.review_count }})</span>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-display text-xl font-bold mb-1.5 text-slate-900 group-hover:text-[#483D8B] transition">
+                            <a href="{% url 'guesthouse_detail' guesthouse.id %}">{{ guesthouse.name }}</a>
+                        </h3>
+
+                        <p class="text-slate-500 text-sm mb-3 flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>{{ guesthouse.city }}</span>
+                        </p>
+
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5 line-clamp-2 flex-grow">
+                            {{ guesthouse.description|striptags }}
+                        </p>
+
+                        <!-- Map Link & CTA -->
+                        <div class="pt-4 border-t border-slate-100 space-y-3 mt-auto">
+                            <div>
+                                {% if guesthouse.latitude and guesthouse.longitude %}
+                                    <a href="https://www.google.com/maps?q={{ guesthouse.latitude }},{{ guesthouse.longitude }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="inline-flex items-center gap-1.5 text-xs text-[#483D8B] hover:text-[#3a3170] font-semibold bg-[#483D8B]/10 px-3 py-1.5 rounded-lg hover:bg-[#483D8B]/15 transition">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "View on Map" %}
+                                    </a>
+                                {% else %}
+                                    <span class="text-xs text-slate-400 italic flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {% trans "Map pending" %}
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <a href="{% url 'guesthouse_detail' guesthouse.id %}"
+                               class="block w-full text-center bg-[#483D8B] hover:bg-[#3a3170] text-white font-semibold text-sm py-3 rounded-xl transition shadow-sm">
+                                {% trans "View Details & Book" %}
+                            </a>
+                        </div>
+                    </div>
+                </article>
             {% endfor %}
         </div>
     {% else %}
-        <div class="text-center py-16 bg-white rounded-xl shadow-md">
-            <svg class="w-24 h-24 mx-auto text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <div class="text-center py-16 px-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <svg class="w-20 h-20 mx-auto text-slate-300 mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">No guesthouses found</h3>
-            <p class="text-gray-600 mb-6">Try adjusting your search filters or dates</p>
-            <a href="{% url 'guesthouse_list' %}" class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-                Clear All Filters
+            <h3 class="font-display text-2xl font-bold text-slate-900 mb-2">{% trans "No guesthouses found" %}</h3>
+            <p class="text-slate-600 mb-6">{% trans "Try adjusting your search filters or dates" %}</p>
+            <a href="{% url 'guesthouse_list' %}" class="inline-block bg-[#483D8B] hover:bg-[#3a3170] text-white font-semibold px-6 py-3 rounded-xl transition shadow-sm">
+                {% trans "Clear All Filters" %}
             </a>
         </div>
     {% endif %}
-</div>
+</section>
+{% endblock %}
 
-<!-- JavaScript for Date Validation -->
+{% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const checkInInput = document.querySelector('input[name="check_in"]');
         const checkOutInput = document.querySelector('input[name="check_out"]');
-        
+
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         if (checkInInput) checkInInput.setAttribute('min', today);
         if (checkOutInput) checkOutInput.setAttribute('min', today);
-        
+
         // Update check-out minimum when check-in changes
         if (checkInInput && checkOutInput) {
             checkInInput.addEventListener('change', function() {
