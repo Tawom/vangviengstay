@@ -229,21 +229,25 @@ CORS_ALLOWED_ORIGINS = [
 # Optional: For local development only, you can allow all origins to avoid port changes
 CORS_ALLOW_ALL_ORIGINS = True 
 
+import os
+
 # ==========================================
 # EMAIL CONFIGURATION (Resend)
 # ==========================================
 
-# Use Resend's pre-verified sandbox domain for 100% reliable delivery.
-# (You can safely change this to noreply@vangviengstay.com later, 
-# but ONLY after you add the DNS records in your Resend dashboard).
-DEFAULT_FROM_EMAIL = 'Vang Vieng Stay <onboarding@resend.dev>'
+# Use onboarding@resend.dev ONLY before domain verification (sends only to sonnousith.tawon8@gmail.com).
+# Once vangviengstay.com is verified in Resend DNS, switch to an address on that domain:
+VERIFIED_FROM_EMAIL = 'Vang Vieng Stay <noreply@vangviengstay.com>'
+SANDBOX_FROM_EMAIL = 'Vang Vieng Stay <onboarding@resend.dev>'
+
+USE_VERIFIED_DOMAIN = os.getenv('RESEND_DOMAIN_VERIFIED', 'true').lower() == 'true'
+DEFAULT_FROM_EMAIL = VERIFIED_FROM_EMAIL if USE_VERIFIED_DOMAIN else SANDBOX_FROM_EMAIL
+
+RESEND_API_KEY = os.getenv('RESEND_API_KEY', '')
 
 if DEBUG:
-    # ✅ DEVELOPMENT (Mac): Print emails to the terminal. 
-    # No real emails are sent. Look at your terminal output to find the verification link!
+    # ✅ DEVELOPMENT: Print emails to the terminal.
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    # 🚀 PRODUCTION (Server): Use Resend HTTP API to bypass DigitalOcean port blocks.
+    # 🚀 PRODUCTION: Use Resend HTTP API to bypass SMTP port blocks.
     EMAIL_BACKEND = 'advisor.resend_backend.ResendBackend'
-    EMAIL_HOST_USER = 'resend'
-    EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY', '')
