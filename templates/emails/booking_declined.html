@@ -1,21 +1,148 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Request Declined</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333333; background-color: #f4f4f5; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .header { background-color: #dc2626; color: #ffffff; padding: 30px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
-        .content { padding: 30px 20px; }
-        .reason-box { background-color: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin: 20px 0; border-radius: 4px; }
-        .detail-row { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb; }
-        .detail-label { font-weight: 600; color: #6b7280; font-size: 14px; }
-        .detail-value { font-weight: 600; color: #111827; font-size: 14px; text-align: right; }
-        .button { display: inline-block; background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: 600; margin-top: 20px; text-align: center; }
-        .footer { background-color: #f9fafb; padding: 20px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.65;
+            color: #1e293b;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 24px 12px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .header {
+            background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+            color: #ffffff;
+            padding: 30px 24px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .header p {
+            margin: 6px 0 0 0;
+            font-size: 13.5px;
+            color: #fee2e2;
+        }
+        .content {
+            padding: 28px 24px;
+        }
+        .greeting {
+            margin: 0 0 14px 0;
+            font-size: 15.5px;
+            color: #1e293b;
+        }
+        .intro {
+            margin: 0 0 20px 0;
+            font-size: 15px;
+            color: #334155;
+        }
+        .reason-box {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-left: 4px solid #dc2626;
+            padding: 16px 18px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .reason-title {
+            margin: 0;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #991b1b;
+        }
+        .reason-text {
+            margin: 6px 0 0 0;
+            font-size: 14.5px;
+            color: #7f1d1d;
+        }
+        .section-heading {
+            margin: 24px 0 12px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .details-table td {
+            padding: 11px 14px;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .details-table tr:last-child td {
+            border-bottom: none;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #64748b;
+            width: 40%;
+        }
+        .detail-value {
+            font-weight: 600;
+            color: #0f172a;
+            text-align: right;
+            width: 60%;
+        }
+        .notice-text {
+            margin: 20px 0 0 0;
+            font-size: 14px;
+            color: #475569;
+        }
+        .cta-wrap {
+            text-align: center;
+            margin-top: 26px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #483D8B;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14.5px;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer p {
+            margin: 0;
+        }
+        .footer a {
+            color: #483D8B;
+            font-weight: 600;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -25,48 +152,52 @@
             <p>Reference: {{ booking_reference }}</p>
         </div>
         <div class="content">
-            <p>Dear {{ booking.guest.username|title }},</p>
-            <p>We regret to inform you that your booking request for <strong>{{ property_name }}</strong> could not be accommodated at this time.</p>
-            
+            <p class="greeting">Dear {{ booking.guest.username|title }},</p>
+            <p class="intro">We regret to inform you that your booking request for <strong>{{ property_name }}</strong> could not be accommodated at this time.</p>
+
             <div class="reason-box">
-                <p style="margin: 0; font-weight: 600; color: #991b1b;">Reason for decline:</p>
-                <p style="margin: 5px 0 0; color: #7f1d1d;">{{ reason }}</p>
+                <p class="reason-title">Reason for decline</p>
+                <p class="reason-text">{{ reason }}</p>
             </div>
 
-            <h3 style="margin-top: 25px; margin-bottom: 15px; color: #111827;">Original Request Details</h3>
-            
-            {% if booking_type == 'guesthouse' %}
-                <div class="detail-row"><span class="detail-label">Property</span><span class="detail-value">{{ booking.guesthouse.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Dates</span><span class="detail-value">{{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</span></div>
-            {% elif booking_type == 'tour' %}
-                <div class="detail-row"><span class="detail-label">Tour</span><span class="detail-value">{{ booking.tour.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</span></div>
-            {% elif booking_type == 'guide' %}
-                <div class="detail-row"><span class="detail-label">Guide</span><span class="detail-value">{{ booking.guide.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date & Time</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }} at {{ booking.start_time|time:"H:i" }}</span></div>
-            {% elif booking_type == 'motorbike' %}
-                <div class="detail-row"><span class="detail-label">Motorbike</span><span class="detail-value">{{ booking.motorbike.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Dates</span><span class="detail-value">{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</span></div>
-            {% elif booking_type == 'buggy' %}
-                <div class="detail-row"><span class="detail-label">Buggy Car</span><span class="detail-value">{{ booking.buggy_car.name }}</span></div>
-                <div class="detail-row"><span class="detail-label">Size</span><span class="detail-value">{{ booking.buggy_car.get_size_display }}</span></div>
-                <div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Start Time</span><span class="detail-value">{{ booking.start_time|time:"H:i" }}</span></div>
-                <div class="detail-row"><span class="detail-label">Duration</span><span class="detail-value">{{ booking.duration_hours }} hours</span></div>
-                <div class="detail-row"><span class="detail-label">Security Deposit</span><span class="detail-value">₭{{ booking.deposit_amount }}</span></div>
-            {% endif %}
+            <h3 class="section-heading">Original Request Details</h3>
 
-            <p style="margin-top: 20px; font-size: 14px; color: #6b7280;">
+            <table class="details-table" role="presentation">
+                {% if booking_type == 'guesthouse' %}
+                    <tr><td class="detail-label">Property</td><td class="detail-value">{{ booking.guesthouse.name }}</td></tr>
+                    <tr><td class="detail-label">Dates</td><td class="detail-value">{{ booking.check_in|date:"M d" }} - {{ booking.check_out|date:"M d, Y" }}</td></tr>
+                {% elif booking_type == 'tour' %}
+                    <tr><td class="detail-label">Tour</td><td class="detail-value">{{ booking.tour.name }}</td></tr>
+                    <tr><td class="detail-label">Date</td><td class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</td></tr>
+                {% elif booking_type == 'guide' %}
+                    <tr><td class="detail-label">Guide</td><td class="detail-value">{{ booking.guide.name }}</td></tr>
+                    <tr><td class="detail-label">Date &amp; Time</td><td class="detail-value">{{ booking.booking_date|date:"M d, Y" }} at {{ booking.start_time|time:"H:i" }}</td></tr>
+                {% elif booking_type == 'motorbike' %}
+                    <tr><td class="detail-label">Motorbike</td><td class="detail-value">{{ booking.motorbike.name }}</td></tr>
+                    <tr><td class="detail-label">Dates</td><td class="detail-value">{{ booking.start_date|date:"M d" }} - {{ booking.end_date|date:"M d, Y" }}</td></tr>
+                {% elif booking_type == 'buggy' %}
+                    <tr><td class="detail-label">Buggy Car</td><td class="detail-value">{{ booking.buggy_car.name }}</td></tr>
+                    <tr><td class="detail-label">Size</td><td class="detail-value">{{ booking.buggy_car.get_size_display }}</td></tr>
+                    <tr><td class="detail-label">Date</td><td class="detail-value">{{ booking.booking_date|date:"M d, Y" }}</td></tr>
+                    <tr><td class="detail-label">Start Time</td><td class="detail-value">{{ booking.start_time|time:"H:i" }}</td></tr>
+                    <tr><td class="detail-label">Duration</td><td class="detail-value">{{ booking.duration_hours }} hours</td></tr>
+                    <tr><td class="detail-label">Security Deposit</td><td class="detail-value">₭{{ booking.deposit_amount|intcomma }}</td></tr>
+                {% endif %}
+            </table>
+
+            <p class="notice-text">
                 No charges have been applied to your account. We apologize for any inconvenience this may cause and encourage you to browse our other available options.
             </p>
 
-            <div style="text-align: center; margin-top: 30px;">
+            <div class="cta-wrap">
                 <a href="https://vangviengstay.com" class="button">Browse Other Options</a>
             </div>
         </div>
         <div class="footer">
-            <p>Thank you for your understanding.</p>
-            <p>Vang Vieng Stay Team</p>
+            <p>
+                Thank you for your understanding.<br>
+                <strong>Vang Vieng Stay</strong> • <a href="mailto:info@vangviengstay.com">info@vangviengstay.com</a>
+            </p>
         </div>
     </div>
 </body>
