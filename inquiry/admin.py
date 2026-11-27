@@ -2,12 +2,48 @@ from django.conf import settings
 from django.contrib import admin, messages
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template import Context, Template
 from django.template.loader import render_to_string
 from django.urls import path, reverse
 from django.utils import timezone
 from django.utils.html import format_html, strip_tags
 
-from .models import Inquiry
+from .models import EmailSignature, Inquiry, InquiryEmailTemplate
+
+
+def _get_default_template_for_inquiry(inquiry: Inquiry) -> InquiryEmailTemplate | None:
+    return (
+        InquiryEmailTemplate.objects.filter(subject_category=inquiry.subject, is_active=True)
+        .select_related('signature')
+        .first()
+        or InquiryEmailTemplate.objects.filter(subject_category='all', is_active=True)
+        .select_related('signature')
+        .first()
+    )
+
+
+def _get_signature(selected_sig_id: str | None, template: InquiryEmailTemplate | None) -> EmailSignature | None:
+    if selected_sig_id:
+        sig = EmailSignature.objects.filter(pk=selected_sig_id).first()
+        if sig:
+            return sig
+    if template and template.signature:
+        return template.signature
+    return EmailSignature.objects.filter(is_default=True).first()
+
+
+@admin.register(EmailSignature)
+class EmailSignatureAdmin(admin.ModelAdmin):
+    list_display = ('name', 'sender_name', 'sender_title', 'email', 'is_default')
+    list_editable = ('is_default',)
+    search_fields = ('name', 'sender_name', 'email')
+
+
+@admin.register(InquiryEmailTemplate)
+class InquiryEmailTemplateAdmin(admin.ModelAdmin):
+    list_display = ('name', 'subject_category', 'email_subject', 'signature', 'is_active')
+    list_filter = ('subject_category', 'is_active')
+    search_fields = ('name', 'email_subject', 'body_html')
 
 
 @admin.register(Inquiry)
@@ -108,21 +144,58 @@ class InquiryAdmin(admin.ModelAdmin):
 
     def reply_view(self, request, inquiry_id):
         inquiry = get_object_or_404(Inquiry, pk=inquiry_id)
+        templates = InquiryEmailTemplate.objects.filter(is_active=True).select_related('signature')
+        signatures = EmailSignature.objects.all()
+        matched_template = _get_default_template_for_inquiry(inquiry)
 
-        if request.method == 'POST':
+        selected_template_id = request.POST.get('template_id') or request.GET.get('template_id')
+        selected_signature_id = request.POST.get('signature_id') or request.GET.get('signature_id')
+
+        active_template = (
+            templates.filter(pk=selected_template_id).first()
+            if selected_template_id
+            else matched_template
+        )
+        active_signature = _get_signature(selected_signature_id, active_template)
+
+        render_ctx = {
+            'inquiry': inquiry,
+            'user': request.user,
+            'signature_html': active_signature.render_html() if active_signature else '',
+        }
+
+        default_subject = (
+            Template(active_template.email_subject).render(Context(render_ctx)).strip()
+            if active_template
+            else f'Re: {inquiry.get_subject_display()}'
+        )
+        default_message = (
+            Template(active_template.body_html).render(Context(render_ctx)).strip()
+            if active_template
+            else ''
+        )
+
+        if request.method == 'POST' and request.POST.get('action') != 'load_template':
             reply_subject = request.POST.get('reply_subject', '').strip()
             reply_message = request.POST.get('reply_message', '').strip()
+            reply_to_addr = (
+                active_signature.email
+                if active_signature and active_signature.email
+                else 'info@vangviengstay.com'
+            )
 
             if not reply_subject or not reply_message:
                 messages.error(request, 'Both subject and reply message are required.')
             else:
-                html_content = render_to_string(
-                    'emails/inquiry_reply.html',
-                    {
-                        'inquiry': inquiry,
-                        'reply_message': reply_message,
-                    },
-                )
+                ctx_with_reply = {
+                    **render_ctx,
+                    'reply_message': reply_message,
+                }
+                if active_template:
+                    _, html_content = active_template.render_full_html(ctx_with_reply)
+                else:
+                    html_content = render_to_string('emails/inquiry_reply.html', ctx_with_reply)
+
                 text_content = strip_tags(html_content)
 
                 email = EmailMultiAlternatives(
@@ -130,17 +203,27 @@ class InquiryAdmin(admin.ModelAdmin):
                     body=text_content,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     to=[inquiry.email],
-                    reply_to=['info@vangviengstay.com'],
+                    reply_to=[reply_to_addr],
                 )
                 email.attach_alternative(html_content, 'text/html')
 
                 try:
                     email.send(fail_silently=False)
                     inquiry.status = 'responded'
-                    inquiry.admin_reply = reply_message
+                    inquiry.customer_email_sent = True
+                    inquiry.admin_reply = strip_tags(reply_message)
                     inquiry.replied_at = timezone.now()
                     inquiry.replied_by = request.user
-                    inquiry.save(update_fields=['status', 'admin_reply', 'replied_at', 'replied_by', 'updated_at'])
+                    inquiry.save(
+                        update_fields=[
+                            'status',
+                            'customer_email_sent',
+                            'admin_reply',
+                            'replied_at',
+                            'replied_by',
+                            'updated_at',
+                        ]
+                    )
 
                     messages.success(request, f'Reply sent to {inquiry.email} and status updated to Responded.')
                     return redirect('admin:inquiry_inquiry_changelist')
@@ -152,5 +235,11 @@ class InquiryAdmin(admin.ModelAdmin):
             'title': f'Reply to {inquiry.name}',
             'inquiry': inquiry,
             'opts': self.model._meta,
+            'templates': templates,
+            'signatures': signatures,
+            'active_template': active_template,
+            'active_signature': active_signature,
+            'default_subject': default_subject,
+            'default_message': default_message,
         }
         return render(request, 'admin/inquiry/reply_form.html', context)
